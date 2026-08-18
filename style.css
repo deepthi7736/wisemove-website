@@ -265,38 +265,16 @@ header {
   white-space: nowrap;
 }
 
-.brand-mark {
-  position: relative;
+/* Official WiseMove logo */
+.brand-logo {
+  width: 34px;
+  height: 34px;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 24px;
-  height: 24px;
-
-  border-radius: 7px;
-
-  background: linear-gradient(
-    135deg,
-    var(--purple),
-    var(--purple-deep)
-  );
+  object-fit: contain;
 
   flex-shrink: 0;
-}
 
-.brand-mark::after {
-  content: "";
-
-  width: 8px;
-  height: 8px;
-
-  background: #ffffff;
-
-  border-radius: 2px;
-
-  transform: rotate(45deg);
+  display: block;
 }
 
 .nav-links {
@@ -1613,11 +1591,6 @@ footer {
     display: none;
   }
 
-  /*
-   Mobile menu.
-   JavaScript adds .mobile-open.
-  */
-
   .nav-links.mobile-open {
     position: absolute;
 
@@ -1725,9 +1698,9 @@ footer {
     font-size: 17px;
   }
 
-  .brand-mark {
-    width: 22px;
-    height: 22px;
+  .brand-logo {
+    width: 30px;
+    height: 30px;
   }
 
   .theme-toggle {
