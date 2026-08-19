@@ -1,7 +1,7 @@
 /* ==========================================================================
    WISEMOVE — MAIN SCRIPT
-   Production-safe vanilla JavaScript
-   Motion principle: MOVE → TRANSFORM → ARRIVE
+   Matches the latest index.html + style.css
+   Motion language: MOVE → TRANSFORM → ARRIVE
    ========================================================================== */
 
 (function () {
@@ -18,7 +18,7 @@
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  const hasFinePointer = window.matchMedia(
+  const finePointer = window.matchMedia(
     "(hover: hover) and (pointer: fine)"
   ).matches;
 
@@ -44,12 +44,16 @@
 
     const sunIcon = `
       <circle cx="12" cy="12" r="4"></circle>
+
       <line x1="12" y1="2" x2="12" y2="4"></line>
       <line x1="12" y1="20" x2="12" y2="22"></line>
+
       <line x1="4.93" y1="4.93" x2="6.34" y2="6.34"></line>
       <line x1="17.66" y1="17.66" x2="19.07" y2="19.07"></line>
+
       <line x1="2" y1="12" x2="4" y2="12"></line>
       <line x1="20" y1="12" x2="22" y2="12"></line>
+
       <line x1="4.93" y1="19.07" x2="6.34" y2="17.66"></line>
       <line x1="17.66" y1="6.34" x2="19.07" y2="4.93"></line>
     `;
@@ -63,20 +67,27 @@
 
     function getInitialTheme() {
       try {
-        const saved = localStorage.getItem(STORAGE_KEY);
+        const savedTheme =
+          localStorage.getItem(STORAGE_KEY);
 
-        if (saved === "dark" || saved === "light") {
-          return saved;
+        if (
+          savedTheme === "dark" ||
+          savedTheme === "light"
+        ) {
+          return savedTheme;
         }
       } catch (error) {
-        // localStorage may be unavailable.
+        // Ignore storage errors.
       }
 
       return "dark";
     }
 
     function applyTheme(theme) {
-      body.setAttribute("data-theme", theme);
+      body.setAttribute(
+        "data-theme",
+        theme
+      );
 
       icon.innerHTML =
         theme === "dark"
@@ -98,8 +109,8 @@
         themeColor.setAttribute(
           "content",
           theme === "dark"
-            ? "#0c0b11"
-            : "#f7f6f2"
+            ? "#0b0a10"
+            : "#f6f4f0"
         );
       }
 
@@ -113,59 +124,70 @@
       }
     }
 
-    applyTheme(getInitialTheme());
+    applyTheme(
+      getInitialTheme()
+    );
 
-    toggle.addEventListener("click", () => {
-      const current =
-        body.getAttribute("data-theme");
+    toggle.addEventListener(
+      "click",
+      () => {
+        const currentTheme =
+          body.getAttribute(
+            "data-theme"
+          );
 
-      applyTheme(
-        current === "dark"
-          ? "light"
-          : "dark"
-      );
-    });
+        applyTheme(
+          currentTheme === "dark"
+            ? "light"
+            : "dark"
+        );
+      }
+    );
   }
 
 
   /* ==========================================================================
-     NAVBAR SCROLL STATE
+     NAVBAR SCROLL EFFECT
      ========================================================================== */
 
-  function initNavbar() {
+  function initNavbarScroll() {
     const header =
-      document.getElementById("siteHeader");
+      document.getElementById(
+        "siteHeader"
+      );
 
     if (!header) return;
 
     let ticking = false;
 
-    function updateHeader() {
+    function update() {
       header.classList.toggle(
         "is-scrolled",
-        window.scrollY > 16
+        window.scrollY > 14
       );
 
       ticking = false;
     }
 
-    function requestUpdate() {
+    function onScroll() {
       if (ticking) return;
 
       ticking = true;
 
       requestAnimationFrame(
-        updateHeader
+        update
       );
     }
 
     window.addEventListener(
       "scroll",
-      requestUpdate,
-      { passive: true }
+      onScroll,
+      {
+        passive: true
+      }
     );
 
-    updateHeader();
+    update();
   }
 
 
@@ -175,14 +197,18 @@
 
   function initMobileNavigation() {
     const burger =
-      document.getElementById("navBurger");
+      document.getElementById(
+        "navBurger"
+      );
 
     const menu =
-      document.getElementById("mobileMenu");
+      document.getElementById(
+        "mobileMenu"
+      );
 
     if (!burger || !menu) return;
 
-    function setMenuState(open) {
+    function setMenu(open) {
       menu.classList.toggle(
         "is-open",
         open
@@ -208,13 +234,8 @@
         open
       );
 
-      document.body.style.overflow =
-        open ? "hidden" : "";
-
-      const icon = qs(
-        "span",
-        burger
-      );
+      const icon =
+        qs("span", burger);
 
       if (icon) {
         icon.textContent =
@@ -225,23 +246,25 @@
     burger.addEventListener(
       "click",
       () => {
-        const open =
+        const isOpen =
           burger.getAttribute(
             "aria-expanded"
-          ) !== "true";
+          ) === "true";
 
-        setMenuState(open);
+        setMenu(!isOpen);
       }
     );
 
-    qsa("a", menu).forEach((link) => {
-      link.addEventListener(
-        "click",
-        () => {
-          setMenuState(false);
-        }
-      );
-    });
+    qsa("a", menu).forEach(
+      (link) => {
+        link.addEventListener(
+          "click",
+          () => {
+            setMenu(false);
+          }
+        );
+      }
+    );
 
     document.addEventListener(
       "keydown",
@@ -252,7 +275,7 @@
             "aria-expanded"
           ) === "true"
         ) {
-          setMenuState(false);
+          setMenu(false);
           burger.focus();
         }
       }
@@ -267,7 +290,7 @@
             "aria-expanded"
           ) === "true"
         ) {
-          setMenuState(false);
+          setMenu(false);
         }
       }
     );
@@ -276,8 +299,6 @@
 
   /* ==========================================================================
      HERO ENTRANCE
-     Short cinematic sequence.
-     Plays once and then remains static.
      ========================================================================== */
 
   function initHeroAnimation() {
@@ -286,17 +307,19 @@
 
     if (!hero) return;
 
-    const elements =
+    const heroElements =
       qsa("[data-hero-step]", hero);
 
-    if (!elements.length) return;
+    if (!heroElements.length) return;
 
     if (reduceMotion) {
-      elements.forEach((element) => {
-        element.classList.add(
-          "is-visible"
-        );
-      });
+      heroElements.forEach(
+        (element) => {
+          element.classList.add(
+            "is-visible"
+          );
+        }
+      );
 
       hero.classList.add(
         "hero-complete"
@@ -305,63 +328,50 @@
       return;
     }
 
-    const groupedSteps = {};
-
-    elements.forEach((element) => {
-      const step =
-        Number(
-          element.dataset.heroStep
-        ) || 1;
-
-      if (!groupedSteps[step]) {
-        groupedSteps[step] = [];
-      }
-
-      groupedSteps[step].push(
-        element
-      );
-    });
-
-    const delays = {
+    const stepDelays = {
       1: 80,
-      2: 180,
-      3: 310,
-      4: 470,
-      5: 620,
-      6: 760
+      2: 190,
+      3: 340,
+      4: 500,
+      5: 660,
+      6: 820
     };
 
-    Object.keys(groupedSteps).forEach(
-      (stepKey) => {
+    heroElements.forEach(
+      (element) => {
         const step =
-          Number(stepKey);
+          Number(
+            element.dataset.heroStep
+          ) || 1;
 
         const delay =
-          delays[step] ??
-          120 * step;
+          stepDelays[step] ||
+          step * 120;
 
-        window.setTimeout(() => {
-          groupedSteps[step].forEach(
-            (element) => {
-              element.classList.add(
-                "is-visible"
-              );
-            }
-          );
-        }, delay);
+        window.setTimeout(
+          () => {
+            element.classList.add(
+              "is-visible"
+            );
+          },
+          delay
+        );
       }
     );
 
-    window.setTimeout(() => {
-      hero.classList.add(
-        "hero-complete"
-      );
-    }, 1150);
+    window.setTimeout(
+      () => {
+        hero.classList.add(
+          "hero-complete"
+        );
+      },
+      1250
+    );
   }
 
 
   /* ==========================================================================
-     STANDARD SCROLL REVEALS
+     GENERAL SCROLL REVEALS
      ========================================================================== */
 
   function initRevealAnimations() {
@@ -375,11 +385,13 @@
       reduceMotion ||
       !("IntersectionObserver" in window)
     ) {
-      targets.forEach((element) => {
-        element.classList.add(
-          "is-visible"
-        );
-      });
+      targets.forEach(
+        (target) => {
+          target.classList.add(
+            "is-visible"
+          );
+        }
+      );
 
       return;
     }
@@ -407,59 +419,62 @@
         },
         {
           threshold: 0.12,
+
           rootMargin:
-            "0px 0px -7% 0px"
+            "0px 0px -8% 0px"
         }
       );
 
-    targets.forEach((element) => {
-      observer.observe(element);
-    });
+    targets.forEach(
+      (target) => {
+        observer.observe(target);
+      }
+    );
   }
 
 
   /* ==========================================================================
      STATS COUNTERS
-     Runs once when the stat becomes visible.
      ========================================================================== */
 
   function initCounters() {
-    const counters = qsa(
-      ".stat-num[data-target]"
-    );
+    const counters =
+      qsa(
+        ".stat-num[data-target]"
+      );
 
     if (!counters.length) return;
 
-    function getCounterData(target) {
+    function parseTarget(target) {
       if (/^\d+\+$/.test(target)) {
         return {
-          value: parseInt(
-            target,
-            10
-          ),
+          value:
+            parseInt(target, 10),
+
           suffix: "+",
+
           leadingZero: false
         };
       }
 
       if (/^\d+%$/.test(target)) {
         return {
-          value: parseInt(
-            target,
-            10
-          ),
+          value:
+            parseInt(target, 10),
+
           suffix: "%",
+
           leadingZero: false
         };
       }
 
       if (/^\d+$/.test(target)) {
         return {
-          value: parseInt(
-            target,
-            10
-          ),
+          value:
+            parseInt(target, 10),
+
           suffix: "",
+
           leadingZero:
             target.length > 1 &&
             target.startsWith("0")
@@ -469,16 +484,18 @@
       return null;
     }
 
-    function animateCounter(element) {
+    function animateCounter(
+      element
+    ) {
       const target =
         element.dataset.target;
 
-      const data =
-        getCounterData(target);
+      const parsed =
+        parseTarget(target);
 
       if (
         reduceMotion ||
-        !data
+        !parsed
       ) {
         element.textContent =
           target;
@@ -509,26 +526,28 @@
 
         const current =
           Math.round(
-            data.value * eased
+            parsed.value *
+            eased
           );
 
-        let display =
+        let output =
           String(current);
 
         if (
-          data.leadingZero &&
-          display.length <
+          parsed.leadingZero &&
+          output.length <
             target.length
         ) {
-          display =
-            display.padStart(
+          output =
+            output.padStart(
               target.length,
               "0"
             );
         }
 
         element.textContent =
-          display + data.suffix;
+          output +
+          parsed.suffix;
 
         if (progress < 1) {
           requestAnimationFrame(
@@ -540,7 +559,9 @@
         }
       }
 
-      requestAnimationFrame(update);
+      requestAnimationFrame(
+        update
+      );
     }
 
     if (
@@ -579,16 +600,18 @@
         }
       );
 
-    counters.forEach((counter) => {
-      observer.observe(counter);
-    });
+    counters.forEach(
+      (counter) => {
+        observer.observe(
+          counter
+        );
+      }
+    );
   }
 
 
   /* ==========================================================================
-     HOW WE MOVE
-     Activates one process step at a time as it reaches the reading zone.
-     No connecting lines. No scroll-jacking.
+     HOW WE MOVE PROCESS
      ========================================================================== */
 
   function initProcessSteps() {
@@ -599,36 +622,43 @@
 
     if (!list) return;
 
-    const steps = qsa(
-      ".process-step",
-      list
-    );
+    const steps =
+      qsa(
+        ".process-step",
+        list
+      );
 
     if (!steps.length) return;
 
     function activateStep(
-      activeStep
+      selectedStep
     ) {
-      steps.forEach((step) => {
-        step.classList.toggle(
-          "is-active",
-          step === activeStep
-        );
-      });
+      steps.forEach(
+        (step) => {
+          step.classList.toggle(
+            "is-active",
+            step === selectedStep
+          );
+        }
+      );
     }
 
     if (
       reduceMotion ||
       !("IntersectionObserver" in window)
     ) {
-      steps.forEach((step) => {
-        step.classList.add(
-          "is-visible"
-        );
-      });
+      steps.forEach(
+        (step) => {
+          step.classList.add(
+            "is-visible"
+          );
+        }
+      );
 
       if (steps[0]) {
-        activateStep(steps[0]);
+        activateStep(
+          steps[0]
+        );
       }
 
       return;
@@ -657,7 +687,7 @@
     const activeObserver =
       new IntersectionObserver(
         (entries) => {
-          const visible =
+          const visibleEntries =
             entries
               .filter(
                 (entry) =>
@@ -669,37 +699,46 @@
                   a.intersectionRatio
               );
 
-          if (!visible.length) {
+          if (
+            !visibleEntries.length
+          ) {
             return;
           }
 
           activateStep(
-            visible[0].target
+            visibleEntries[0].target
           );
         },
         {
           threshold: [
-            0.3,
-            0.45,
-            0.6,
-            0.75
+            0.25,
+            0.4,
+            0.55,
+            0.7
           ],
+
           rootMargin:
             "-25% 0px -35% 0px"
         }
       );
 
-    steps.forEach((step) => {
-      revealObserver.observe(step);
-      activeObserver.observe(step);
-    });
+    steps.forEach(
+      (step) => {
+        revealObserver.observe(
+          step
+        );
+
+        activeObserver.observe(
+          step
+        );
+      }
+    );
   }
 
 
   /* ==========================================================================
-     SIGNATURE "MOVE" JOURNEY
+     SIGNATURE MOVE ANIMATION
      IDEA → STRATEGY → DESIGN → BUILD → PRODUCT
-     Runs once.
      ========================================================================== */
 
   function initMoveJourney() {
@@ -715,14 +754,15 @@
         "moveIndicator"
       );
 
-    const stages = qsa(
-      ".move-stage",
-      journey
-    );
-
     const arrival =
       document.getElementById(
         "moveArrival"
+      );
+
+    const stages =
+      qsa(
+        ".move-stage",
+        journey
       );
 
     if (!stages.length) return;
@@ -730,6 +770,16 @@
     let played = false;
 
     function setStage(index) {
+      const denominator =
+        Math.max(
+          stages.length - 1,
+          1
+        );
+
+      const percentage =
+        (index / denominator) *
+        100;
+
       stages.forEach(
         (stage, stageIndex) => {
           stage.classList.toggle(
@@ -744,39 +794,36 @@
         }
       );
 
+      journey.style.setProperty(
+        "--move-progress",
+        `${percentage}%`
+      );
+
+      journey.style.setProperty(
+        "--move-position",
+        `${percentage}%`
+      );
+
       if (indicator) {
-        const denominator =
-          Math.max(
-            stages.length - 1,
-            1
-          );
-
-        const percentage =
-          (index / denominator) *
-          100;
-
         indicator.style.setProperty(
           "--move-position",
-          `${percentage}%`
-        );
-
-        journey.style.setProperty(
-          "--move-progress",
           `${percentage}%`
         );
       }
     }
 
-    function finishJourney() {
-      stages.forEach((stage) => {
-        stage.classList.remove(
-          "is-current"
-        );
+    function finish() {
+      stages.forEach(
+        (stage) => {
+          stage.classList.add(
+            "is-active"
+          );
 
-        stage.classList.add(
-          "is-active"
-        );
-      });
+          stage.classList.remove(
+            "is-current"
+          );
+        }
+      );
 
       journey.classList.add(
         "is-complete"
@@ -789,7 +836,7 @@
       }
     }
 
-    function playJourney() {
+    function play() {
       if (played) return;
 
       played = true;
@@ -803,12 +850,12 @@
           stages.length - 1
         );
 
-        finishJourney();
+        finish();
 
         return;
       }
 
-      const interval = 210;
+      const interval = 230;
 
       stages.forEach(
         (stage, index) => {
@@ -822,10 +869,10 @@
       );
 
       window.setTimeout(
-        finishJourney,
+        finish,
         stages.length *
           interval +
-          180
+          200
       );
     }
 
@@ -833,7 +880,8 @@
       reduceMotion ||
       !("IntersectionObserver" in window)
     ) {
-      playJourney();
+      play();
+
       return;
     }
 
@@ -848,7 +896,7 @@
                 return;
               }
 
-              playJourney();
+              play();
 
               observer.unobserve(
                 entry.target
@@ -861,20 +909,21 @@
         }
       );
 
-    observer.observe(journey);
+    observer.observe(
+      journey
+    );
   }
 
 
   /* ==========================================================================
-     PRODUCT CASE STUDIES
-     Adds a small reveal/settle state.
-     No continuous parallax.
+     PRODUCT CASE STUDY VISUALS
      ========================================================================== */
 
   function initCaseStudies() {
-    const visuals = qsa(
-      "[data-case-visual]"
-    );
+    const visuals =
+      qsa(
+        "[data-case-visual]"
+      );
 
     if (!visuals.length) return;
 
@@ -882,11 +931,13 @@
       reduceMotion ||
       !("IntersectionObserver" in window)
     ) {
-      visuals.forEach((visual) => {
-        visual.classList.add(
-          "is-settled"
-        );
-      });
+      visuals.forEach(
+        (visual) => {
+          visual.classList.add(
+            "is-settled"
+          );
+        }
+      );
 
       return;
     }
@@ -913,48 +964,51 @@
           );
         },
         {
-          threshold: 0.25
+          threshold: 0.24
         }
       );
 
-    visuals.forEach((visual) => {
-      observer.observe(visual);
-    });
+    visuals.forEach(
+      (visual) => {
+        observer.observe(
+          visual
+        );
+      }
+    );
   }
 
 
   /* ==========================================================================
-     SUBTLE DESKTOP PRODUCT RESPONSE
-     Very small pointer movement on the hero composition only.
+     HERO POINTER DEPTH
+     Extremely subtle desktop-only movement.
      ========================================================================== */
 
   function initHeroPointerDepth() {
     if (
       reduceMotion ||
-      !hasFinePointer
+      !finePointer
     ) {
       return;
     }
 
     const composition =
-      qs(".hero-composition");
+      qs(
+        ".hero-composition"
+      );
+
+    if (!composition) return;
 
     const canvas =
       qs(
         ".studio-canvas",
-        composition || document
+        composition
       );
 
-    if (
-      !composition ||
-      !canvas
-    ) {
-      return;
-    }
+    if (!canvas) return;
 
     let frame = null;
 
-    function reset() {
+    function resetCanvas() {
       canvas.style.setProperty(
         "--depth-x",
         "0deg"
@@ -981,21 +1035,34 @@
               const rect =
                 composition.getBoundingClientRect();
 
+              if (
+                rect.width === 0 ||
+                rect.height === 0
+              ) {
+                return;
+              }
+
               const x =
-                (event.clientX -
-                  rect.left) /
+                (
+                  event.clientX -
+                  rect.left
+                ) /
                 rect.width;
 
               const y =
-                (event.clientY -
-                  rect.top) /
+                (
+                  event.clientY -
+                  rect.top
+                ) /
                 rect.height;
 
               const rotateY =
-                (x - 0.5) * 1.4;
+                (x - 0.5) *
+                1.4;
 
               const rotateX =
-                (0.5 - y) * 1.4;
+                (0.5 - y) *
+                1.4;
 
               canvas.style.setProperty(
                 "--depth-x",
@@ -1013,7 +1080,7 @@
 
     composition.addEventListener(
       "pointerleave",
-      reset
+      resetCanvas
     );
   }
 
@@ -1031,16 +1098,25 @@
     if (!list) return;
 
     const items =
-      qsa(".faq-item", list);
+      qsa(
+        ".faq-item",
+        list
+      );
 
     if (!items.length) return;
 
     function closeItem(item) {
       const button =
-        qs(".faq-q", item);
+        qs(
+          ".faq-q",
+          item
+        );
 
       const answer =
-        qs(".faq-a", item);
+        qs(
+          ".faq-a",
+          item
+        );
 
       item.classList.remove(
         "is-open"
@@ -1061,10 +1137,16 @@
 
     function openItem(item) {
       const button =
-        qs(".faq-q", item);
+        qs(
+          ".faq-q",
+          item
+        );
 
       const answer =
-        qs(".faq-a", item);
+        qs(
+          ".faq-a",
+          item
+        );
 
       item.classList.add(
         "is-open"
@@ -1083,51 +1165,61 @@
       }
     }
 
-    items.forEach((item) => {
-      const button =
-        qs(".faq-q", item);
-
-      if (!button) return;
-
-      button.addEventListener(
-        "click",
-        () => {
-          const alreadyOpen =
-            item.classList.contains(
-              "is-open"
-            );
-
-          items.forEach(
-            closeItem
+    items.forEach(
+      (item) => {
+        const button =
+          qs(
+            ".faq-q",
+            item
           );
 
-          if (!alreadyOpen) {
-            openItem(item);
+        if (!button) return;
+
+        button.addEventListener(
+          "click",
+          () => {
+            const alreadyOpen =
+              item.classList.contains(
+                "is-open"
+              );
+
+            items.forEach(
+              closeItem
+            );
+
+            if (!alreadyOpen) {
+              openItem(item);
+            }
           }
-        }
-      );
-    });
+        );
+      }
+    );
 
     window.addEventListener(
       "resize",
       () => {
-        items.forEach((item) => {
-          if (
-            !item.classList.contains(
-              "is-open"
-            )
-          ) {
-            return;
-          }
+        items.forEach(
+          (item) => {
+            if (
+              !item.classList.contains(
+                "is-open"
+              )
+            ) {
+              return;
+            }
 
-          const answer =
-            qs(".faq-a", item);
+            const answer =
+              qs(
+                ".faq-a",
+                item
+              );
 
-          if (answer) {
-            answer.style.maxHeight =
-              `${answer.scrollHeight}px`;
+            if (answer) {
+              answer.style.maxHeight =
+                `${answer.scrollHeight}px`;
+            }
           }
-        });
+        );
       }
     );
   }
@@ -1136,7 +1228,6 @@
   /* ==========================================================================
      CONTACT FORM
      Honest mailto behavior.
-     Does NOT claim that the message was sent.
      ========================================================================== */
 
   function initContactForm() {
@@ -1148,10 +1239,16 @@
     if (!form) return;
 
     const submitButton =
-      qs(".form-submit", form);
+      qs(
+        ".form-submit",
+        form
+      );
 
     const submitLabel =
-      qs(".submit-label", form);
+      qs(
+        ".submit-label",
+        form
+      );
 
     const status =
       document.getElementById(
@@ -1160,15 +1257,16 @@
 
     if (!submitButton) return;
 
-    const originalLabel =
+    const originalText =
       submitLabel
-        ? submitLabel.textContent
+        ? submitLabel.textContent.trim()
         : "Send Message";
 
     function setStatus(message) {
       if (!status) return;
 
-      status.textContent = message;
+      status.textContent =
+        message;
     }
 
     form.addEventListener(
@@ -1178,30 +1276,42 @@
 
         if (!form.checkValidity()) {
           form.reportValidity();
+
           return;
         }
 
         const name =
-          qs("#fname", form)?.value.trim() ||
-          "";
+          qs(
+            "#fname",
+            form
+          )?.value.trim() || "";
 
         const email =
-          qs("#femail", form)?.value.trim() ||
-          "";
+          qs(
+            "#femail",
+            form
+          )?.value.trim() || "";
 
         const phone =
-          qs("#fphone", form)?.value.trim() ||
-          "";
+          qs(
+            "#fphone",
+            form
+          )?.value.trim() || "";
 
         const subject =
-          qs("#fsubject", form)?.value.trim() ||
+          qs(
+            "#fsubject",
+            form
+          )?.value.trim() ||
           "WiseMove project enquiry";
 
         const message =
-          qs("#fmessage", form)?.value.trim() ||
-          "";
+          qs(
+            "#fmessage",
+            form
+          )?.value.trim() || "";
 
-        const emailBody = [
+        const body = [
           "WiseMove Website Enquiry",
           "",
           `Name: ${name}`,
@@ -1225,10 +1335,11 @@
             subject
           )}` +
           `&body=${encodeURIComponent(
-            emailBody
+            body
           )}`;
 
-        submitButton.disabled = true;
+        submitButton.disabled =
+          true;
 
         submitButton.setAttribute(
           "data-state",
@@ -1241,86 +1352,104 @@
         }
 
         setStatus(
-          "Opening your email application with the enquiry pre-filled."
+          "Opening your email application with your enquiry pre-filled."
         );
 
         window.location.href =
           mailto;
 
-        window.setTimeout(() => {
-          submitButton.disabled =
-            false;
+        window.setTimeout(
+          () => {
+            submitButton.disabled =
+              false;
 
-          submitButton.removeAttribute(
-            "data-state"
-          );
+            submitButton.removeAttribute(
+              "data-state"
+            );
 
-          if (submitLabel) {
-            submitLabel.textContent =
-              originalLabel;
-          }
+            if (submitLabel) {
+              submitLabel.textContent =
+                originalText;
+            }
 
-          setStatus(
-            "Your enquiry has not been submitted through the website. Send it from your email application to complete the enquiry."
-          );
-        }, 2200);
+            setStatus(
+              "Complete the enquiry by sending it from your email application."
+            );
+          },
+          2200
+        );
       }
     );
   }
 
 
   /* ==========================================================================
-     SMOOTH INTERNAL NAVIGATION
+     SMOOTH INTERNAL LINKS
      ========================================================================== */
 
-  function initAnchorNavigation() {
-    const links = qsa(
-      'a[href^="#"]'
-    );
+  function initInternalLinks() {
+    const links =
+      qsa(
+        'a[href^="#"]'
+      );
 
     if (!links.length) return;
 
-    links.forEach((link) => {
-      link.addEventListener(
-        "click",
-        (event) => {
-          const href =
-            link.getAttribute("href");
+    links.forEach(
+      (link) => {
+        link.addEventListener(
+          "click",
+          (event) => {
+            const href =
+              link.getAttribute(
+                "href"
+              );
 
-          if (
-            !href ||
-            href === "#"
-          ) {
+            if (
+              !href ||
+              href === "#"
+            ) {
+              event.preventDefault();
+
+              window.scrollTo({
+                top: 0,
+
+                behavior:
+                  reduceMotion
+                    ? "auto"
+                    : "smooth"
+              });
+
+              return;
+            }
+
+            let target;
+
+            try {
+              target =
+                document.querySelector(
+                  href
+                );
+            } catch (error) {
+              return;
+            }
+
+            if (!target) return;
+
             event.preventDefault();
 
-            window.scrollTo({
-              top: 0,
+            target.scrollIntoView({
               behavior:
                 reduceMotion
                   ? "auto"
-                  : "smooth"
+                  : "smooth",
+
+              block: "start"
             });
-
-            return;
           }
-
-          const target =
-            qs(href);
-
-          if (!target) return;
-
-          event.preventDefault();
-
-          target.scrollIntoView({
-            behavior:
-              reduceMotion
-                ? "auto"
-                : "smooth",
-            block: "start"
-          });
-        }
-      );
-    });
+        );
+      }
+    );
   }
 
 
@@ -1329,32 +1458,158 @@
      ========================================================================== */
 
   function initExternalLinkSafety() {
-    const externalLinks = qsa(
-      'a[target="_blank"]'
-    );
+    const externalLinks =
+      qsa(
+        'a[target="_blank"]'
+      );
 
-    externalLinks.forEach((link) => {
-      const currentRel =
-        new Set(
-          (
-            link.getAttribute(
-              "rel"
-            ) || ""
-          )
-            .split(/\s+/)
-            .filter(Boolean)
+    externalLinks.forEach(
+      (link) => {
+        const currentRel =
+          new Set(
+            (
+              link.getAttribute(
+                "rel"
+              ) || ""
+            )
+              .split(/\s+/)
+              .filter(Boolean)
+          );
+
+        currentRel.add(
+          "noopener"
         );
 
-      currentRel.add("noopener");
-      currentRel.add("noreferrer");
+        currentRel.add(
+          "noreferrer"
+        );
 
-      link.setAttribute(
-        "rel",
-        Array.from(
-          currentRel
-        ).join(" ")
+        link.setAttribute(
+          "rel",
+          Array.from(
+            currentRel
+          ).join(" ")
+        );
+      }
+    );
+  }
+
+
+  /* ==========================================================================
+     ACTIVE NAV LINK
+     Highlights section currently being viewed.
+     ========================================================================== */
+
+  function initActiveNavigation() {
+    const navLinks =
+      qsa(
+        '.nav-links a[href^="#"]'
       );
-    });
+
+    if (
+      !navLinks.length ||
+      !("IntersectionObserver" in window)
+    ) {
+      return;
+    }
+
+    const sectionMap =
+      new Map();
+
+    navLinks.forEach(
+      (link) => {
+        const href =
+          link.getAttribute(
+            "href"
+          );
+
+        if (
+          !href ||
+          href === "#"
+        ) {
+          return;
+        }
+
+        const section =
+          qs(href);
+
+        if (!section) return;
+
+        sectionMap.set(
+          section,
+          link
+        );
+      }
+    );
+
+    if (!sectionMap.size) return;
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+          const visible =
+            entries
+              .filter(
+                (entry) =>
+                  entry.isIntersecting
+              )
+              .sort(
+                (a, b) =>
+                  b.intersectionRatio -
+                  a.intersectionRatio
+              );
+
+          if (!visible.length) {
+            return;
+          }
+
+          navLinks.forEach(
+            (link) => {
+              link.classList.remove(
+                "is-active"
+              );
+
+              link.removeAttribute(
+                "aria-current"
+              );
+            }
+          );
+
+          const activeLink =
+            sectionMap.get(
+              visible[0].target
+            );
+
+          if (activeLink) {
+            activeLink.classList.add(
+              "is-active"
+            );
+
+            activeLink.setAttribute(
+              "aria-current",
+              "page"
+            );
+          }
+        },
+        {
+          threshold: [
+            0.15,
+            0.3,
+            0.5
+          ],
+
+          rootMargin:
+            "-20% 0px -55% 0px"
+        }
+      );
+
+    sectionMap.forEach(
+      (link, section) => {
+        observer.observe(
+          section
+        );
+      }
+    );
   }
 
 
@@ -1364,24 +1619,34 @@
 
   function init() {
     initTheme();
-    initNavbar();
+
+    initNavbarScroll();
+
     initMobileNavigation();
 
     initHeroAnimation();
+
     initRevealAnimations();
 
     initCounters();
+
     initProcessSteps();
+
     initMoveJourney();
+
     initCaseStudies();
 
     initHeroPointerDepth();
 
     initFAQ();
+
     initContactForm();
 
-    initAnchorNavigation();
+    initInternalLinks();
+
     initExternalLinkSafety();
+
+    initActiveNavigation();
 
     document.body.classList.add(
       "site-ready"
@@ -1396,7 +1661,9 @@
     document.addEventListener(
       "DOMContentLoaded",
       init,
-      { once: true }
+      {
+        once: true
+      }
     );
   } else {
     init();
