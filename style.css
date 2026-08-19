@@ -1,7 +1,10 @@
 /* ==========================================================================
    WISEMOVE — MAIN STYLESHEET
    Premium Product Studio
-   Motion language: MOVE → TRANSFORM → ARRIVE
+   Official WiseMove Palette:
+   #CA26D1 — Accent
+   #3D19B7 — Primary
+   #2F138F — Deep
    ========================================================================== */
 
 
@@ -10,39 +13,49 @@
    ========================================================================== */
 
 :root {
-  --purple: #6e4ef2;
-  --purple-light: #9d8cf5;
-  --purple-deep: #4f34c9;
+  /* WiseMove official brand */
+  --purple-accent: #CA26D1;
+  --purple-light: #CA26D1;
+  --purple: #3D19B7;
+  --purple-deep: #2F138F;
 
+  /* Product identities */
   --getvia: #2e9e3f;
   --vashq: #0d7fff;
 
+  /* Status */
   --success: #3ddc84;
 
+  /* Base */
   --bg: #0b0a10;
   --surface: #131218;
   --surface-2: #191821;
   --surface-3: #211f2a;
 
+  /* Typography */
   --text: #f4f2f8;
   --text-dim: #a29eb1;
   --text-faint: #777287;
 
-  --line: rgba(255, 255, 255, 0.1);
+  /* Borders */
+  --line: rgba(255, 255, 255, 0.10);
   --line-strong: rgba(255, 255, 255, 0.16);
   --line-soft: rgba(255, 255, 255, 0.05);
 
+  /* Shadows */
   --shadow-soft:
     0 24px 70px rgba(0, 0, 0, 0.28);
 
   --shadow-deep:
     0 36px 100px rgba(0, 0, 0, 0.46);
 
+  /* Radius */
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
 
+  /* Motion */
   --ease-premium:
     cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -59,24 +72,24 @@
    ========================================================================== */
 
 [data-theme="light"] {
-  --bg: #f6f4f0;
+  --bg: #f7f5f2;
   --surface: #ffffff;
-  --surface-2: #efede8;
-  --surface-3: #e7e4de;
+  --surface-2: #f0edf2;
+  --surface-3: #e8e3ec;
 
-  --text: #15131b;
-  --text-dim: #605c6d;
-  --text-faint: #898493;
+  --text: #17131c;
+  --text-dim: #61596d;
+  --text-faint: #8b8393;
 
-  --line: rgba(20, 15, 35, 0.1);
-  --line-strong: rgba(20, 15, 35, 0.16);
-  --line-soft: rgba(20, 15, 35, 0.05);
+  --line: rgba(32, 20, 45, 0.10);
+  --line-strong: rgba(32, 20, 45, 0.16);
+  --line-soft: rgba(32, 20, 45, 0.05);
 
   --shadow-soft:
-    0 24px 70px rgba(70, 55, 110, 0.1);
+    0 24px 70px rgba(61, 25, 183, 0.09);
 
   --shadow-deep:
-    0 36px 100px rgba(70, 55, 110, 0.16);
+    0 36px 100px rgba(61, 25, 183, 0.13);
 }
 
 
@@ -187,7 +200,7 @@ section {
 
 ::selection {
   background:
-    rgba(110, 78, 242, 0.34);
+    rgba(202, 38, 209, 0.30);
 
   color: var(--text);
 }
@@ -202,14 +215,14 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
   outline:
-    2px solid var(--purple-light);
+    2px solid var(--purple-accent);
 
   outline-offset: 4px;
 }
 
 
 /* ==========================================================================
-   GLOBAL REVEAL ANIMATIONS
+   GLOBAL REVEALS
    ========================================================================== */
 
 .reveal-fade,
@@ -218,9 +231,6 @@ textarea:focus-visible {
   transform: none;
   filter: none;
 }
-
-
-/* Only hide when JS successfully loads */
 
 .js .reveal-fade,
 .js .reveal-text {
@@ -258,7 +268,7 @@ textarea:focus-visible {
   align-items: center;
   gap: 10px;
 
-  color: var(--purple-light);
+  color: var(--purple-accent);
 
   font-family:
     "JetBrains Mono",
@@ -294,8 +304,9 @@ textarea:focus-visible {
   background:
     linear-gradient(
       90deg,
+      var(--purple-deep),
       var(--purple),
-      var(--purple-light)
+      var(--purple-accent)
     );
 }
 
@@ -348,7 +359,7 @@ button:hover .arrow {
 
 [data-theme="light"] .site-header {
   background:
-    rgba(246, 244, 240, 0.12);
+    rgba(247, 245, 242, 0.14);
 }
 
 .site-header.is-scrolled {
@@ -373,7 +384,6 @@ button:hover .arrow {
     rgba(0, 0, 0, 0.08);
 }
 
-
 .nav {
   min-height: 78px;
 
@@ -385,7 +395,7 @@ button:hover .arrow {
 
 
 /* ==========================================================================
-   WISEMOVE BRAND
+   BRAND
    ========================================================================== */
 
 .brand {
@@ -449,7 +459,8 @@ button:hover .arrow {
     color var(--motion-fast) ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.is-active {
   color: var(--text);
 }
 
@@ -465,7 +476,11 @@ button:hover .arrow {
   height: 1px;
 
   background:
-    var(--purple-light);
+    linear-gradient(
+      90deg,
+      var(--purple),
+      var(--purple-accent)
+    );
 
   transform:
     scaleX(0);
@@ -478,7 +493,8 @@ button:hover .arrow {
       var(--ease-premium);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.is-active::after {
   transform:
     scaleX(1);
 
@@ -537,7 +553,7 @@ button:hover .arrow {
     var(--surface-2);
 
   border-color:
-    var(--line-strong);
+    rgba(202, 38, 209, 0.45);
 }
 
 .theme-toggle svg {
@@ -577,7 +593,7 @@ button:hover .arrow {
 
   box-shadow:
     0 14px 32px
-    rgba(0, 0, 0, 0.18);
+    rgba(202, 38, 209, 0.14);
 }
 
 .nav-burger {
@@ -669,10 +685,15 @@ button:hover .arrow {
   border-radius: 14px;
 
   background:
-    var(--text);
+    linear-gradient(
+      135deg,
+      var(--purple-accent),
+      var(--purple),
+      var(--purple-deep)
+    );
 
   color:
-    var(--bg) !important;
+    #ffffff !important;
 
   display: flex;
   align-items: center;
@@ -734,21 +755,22 @@ button:hover .arrow {
   background:
     linear-gradient(
       135deg,
-      var(--purple),
-      var(--purple-deep)
+      var(--purple-accent) 0%,
+      var(--purple) 55%,
+      var(--purple-deep) 100%
     );
 
   color: #ffffff;
 
   box-shadow:
     0 18px 45px
-    rgba(110, 78, 242, 0.23);
+    rgba(61, 25, 183, 0.28);
 }
 
 .btn-primary:hover {
   box-shadow:
     0 24px 58px
-    rgba(110, 78, 242, 0.32);
+    rgba(202, 38, 209, 0.27);
 }
 
 .btn-secondary {
@@ -768,7 +790,7 @@ button:hover .arrow {
     var(--surface-2);
 
   border-color:
-    var(--line-strong);
+    rgba(202, 38, 209, 0.32);
 }
 
 
@@ -819,7 +841,7 @@ button:hover .arrow {
       transparent 92%
     );
 
-  opacity: 0.3;
+  opacity: 0.30;
 
   pointer-events: none;
 }
@@ -831,14 +853,19 @@ button:hover .arrow {
 
   background:
     radial-gradient(
-      circle at 24% 30%,
-      rgba(110, 78, 242, 0.21),
+      circle at 22% 30%,
+      rgba(202, 38, 209, 0.17),
       transparent 29%
     ),
     radial-gradient(
-      circle at 77% 43%,
-      rgba(157, 140, 245, 0.1),
-      transparent 28%
+      circle at 42% 46%,
+      rgba(61, 25, 183, 0.17),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 78% 43%,
+      rgba(47, 19, 143, 0.16),
+      transparent 30%
     );
 
   filter:
@@ -942,9 +969,10 @@ button:hover .arrow {
 .hero-line-accent {
   background:
     linear-gradient(
-      120deg,
-      var(--purple-light),
-      var(--purple)
+      110deg,
+      var(--purple-accent) 0%,
+      var(--purple) 58%,
+      var(--purple-deep) 100%
     );
 
   -webkit-background-clip:
@@ -992,9 +1020,6 @@ button:hover .arrow {
 
   font-size: 11px;
 }
-
-
-/* Hero entrance */
 
 .hero-animate {
   opacity: 1;
@@ -1084,14 +1109,13 @@ button:hover .arrow {
   background:
     radial-gradient(
       circle at 76% 8%,
-      rgba(110, 78, 242, 0.13),
+      rgba(202, 38, 209, 0.10),
       transparent 31%
     ),
-    linear-gradient(
-      115deg,
-      transparent,
-      rgba(255, 255, 255, 0.018),
-      transparent
+    radial-gradient(
+      circle at 38% 58%,
+      rgba(61, 25, 183, 0.09),
+      transparent 36%
     );
 }
 
@@ -1185,7 +1209,7 @@ button:hover .arrow {
 
 .studio-direction {
   color:
-    var(--purple-light);
+    var(--purple-accent);
 
   font-size:
     28px;
@@ -1422,6 +1446,25 @@ button:hover .arrow {
   display: block;
 }
 
+.statement-line:last-child {
+  background:
+    linear-gradient(
+      110deg,
+      var(--purple-accent),
+      var(--purple),
+      var(--purple-deep)
+    );
+
+  -webkit-background-clip:
+    text;
+
+  background-clip:
+    text;
+
+  color:
+    transparent;
+}
+
 .statement-support {
   display: grid;
 
@@ -1489,7 +1532,7 @@ button:hover .arrow {
   font-weight: 600;
 
   color:
-    var(--text);
+    var(--purple-accent);
 }
 
 .stat-label {
@@ -1633,17 +1676,23 @@ button:hover .arrow {
 .process-step.is-active
 .process-number {
   color:
-    var(--purple-light);
+    var(--purple-accent);
 }
 
 .process-label {
   color:
-    var(--purple-light);
+    var(--purple);
 
   font-size: 10px;
 
   letter-spacing:
     0.14em;
+}
+
+.process-step.is-active
+.process-label {
+  color:
+    var(--purple-accent);
 }
 
 .process-step h3 {
@@ -1690,6 +1739,13 @@ button:hover .arrow {
 
   border-bottom:
     1px solid var(--line-soft);
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(61, 25, 183, 0.08),
+      transparent 42%
+    );
 }
 
 .move-heading {
@@ -1748,8 +1804,9 @@ button:hover .arrow {
   background:
     linear-gradient(
       90deg,
+      var(--purple-deep),
       var(--purple),
-      var(--purple-light)
+      var(--purple-accent)
     );
 
   transition:
@@ -1774,7 +1831,7 @@ button:hover .arrow {
     999px;
 
   background:
-    var(--purple-light);
+    var(--purple-accent);
 
   transform:
     translate(
@@ -1784,7 +1841,9 @@ button:hover .arrow {
 
   box-shadow:
     0 0 0 7px
-    rgba(157, 140, 245, 0.12);
+    rgba(202, 38, 209, 0.12),
+    0 0 24px
+    rgba(202, 38, 209, 0.25);
 
   transition:
     left 210ms
@@ -1849,7 +1908,7 @@ button:hover .arrow {
 
 .move-stage.is-current {
   color:
-    var(--purple-light);
+    var(--purple-accent);
 
   transform:
     translateY(-2px);
@@ -2131,6 +2190,9 @@ button:hover .arrow {
   gap: 8px;
 
   font-weight: 700;
+
+  color:
+    var(--text);
 }
 
 
@@ -2258,7 +2320,7 @@ button:hover .arrow {
   background:
     radial-gradient(
       circle at 80% 20%,
-      rgba(46, 158, 63, 0.2),
+      rgba(46, 158, 63, 0.20),
       transparent 35%
     ),
     linear-gradient(
@@ -2533,12 +2595,16 @@ button:hover .arrow {
   transition:
     transform var(--motion-fast)
       var(--ease-premium),
-    background-color var(--motion-fast) ease;
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease;
 }
 
 .service-panel:hover {
   background:
     var(--surface);
+
+  border-color:
+    rgba(202, 38, 209, 0.18);
 }
 
 .service-panel-large {
@@ -2556,7 +2622,7 @@ button:hover .arrow {
 
 .service-index {
   color:
-    var(--text-faint);
+    var(--purple-accent);
 
   font-size: 9px;
 }
@@ -2594,9 +2660,9 @@ button:hover .arrow {
   pointer-events: none;
 
   color:
-    var(--text);
+    var(--purple-accent);
 
-  opacity: 0.025;
+  opacity: 0.035;
 
   font-family:
     "Space Grotesk",
@@ -2695,7 +2761,7 @@ button:hover .arrow {
 
 .technology-list span:hover {
   color:
-    var(--text);
+    var(--purple-accent);
 
   background:
     var(--surface);
@@ -2769,9 +2835,9 @@ button:hover .arrow {
   bottom: -20px;
 
   color:
-    var(--text);
+    var(--purple-accent);
 
-  opacity: 0.035;
+  opacity: 0.045;
 
   font-family:
     "Space Grotesk",
@@ -2783,7 +2849,7 @@ button:hover .arrow {
 .why-principle
 > .mono {
   color:
-    var(--purple-light);
+    var(--purple-accent);
 
   font-size: 9px;
 
@@ -2822,7 +2888,15 @@ button:hover .arrow {
     150px 0;
 
   background:
-    var(--surface);
+    linear-gradient(
+      180deg,
+      var(--surface),
+      color-mix(
+        in srgb,
+        var(--surface) 92%,
+        var(--purple-deep)
+      )
+    );
 }
 
 .collaboration-heading {
@@ -2870,7 +2944,7 @@ button:hover .arrow {
 
 .collaboration-item span {
   color:
-    var(--text-faint);
+    var(--purple-accent);
 
   font-size: 9px;
 }
@@ -2971,6 +3045,9 @@ button:hover .arrow {
 
   flex-shrink: 0;
 
+  stroke:
+    var(--purple-accent);
+
   transition:
     transform var(--motion-fast)
       var(--ease-premium);
@@ -3038,8 +3115,18 @@ button:hover .arrow {
   background:
     radial-gradient(
       circle at 50% 50%,
-      rgba(110, 78, 242, 0.23),
-      transparent 39%
+      rgba(202, 38, 209, 0.19),
+      transparent 33%
+    ),
+    radial-gradient(
+      circle at 50% 58%,
+      rgba(61, 25, 183, 0.19),
+      transparent 43%
+    ),
+    radial-gradient(
+      circle at 50% 60%,
+      rgba(47, 19, 143, 0.17),
+      transparent 56%
     );
 }
 
@@ -3080,9 +3167,10 @@ button:hover .arrow {
 .final-cta-accent {
   background:
     linear-gradient(
-      120deg,
-      var(--purple-light),
-      var(--purple)
+      110deg,
+      var(--purple-accent),
+      var(--purple),
+      var(--purple-deep)
     );
 
   -webkit-background-clip:
@@ -3151,11 +3239,6 @@ button:hover .arrow {
   gap: 56px;
 }
 
-
-/* ==========================================================================
-   CONTACT DETAILS
-   ========================================================================== */
-
 .contact-details {
   border-top:
     1px solid var(--line);
@@ -3179,7 +3262,7 @@ button:hover .arrow {
 
 .contact-label {
   color:
-    var(--text-faint);
+    var(--purple-accent);
 
   font-size: 9px;
 
@@ -3200,7 +3283,7 @@ button:hover .arrow {
 a.contact-row:hover
 .contact-value {
   color:
-    var(--purple-light);
+    var(--purple-accent);
 }
 
 .contact-arrow {
@@ -3291,11 +3374,11 @@ a.contact-row:hover
   outline: none;
 
   border-color:
-    var(--purple);
+    var(--purple-accent);
 
   box-shadow:
     0 0 0 3px
-    rgba(110, 78, 242, 0.12);
+    rgba(202, 38, 209, 0.11);
 }
 
 .form-field textarea {
@@ -3389,7 +3472,7 @@ a.contact-row:hover
   margin-bottom: 6px;
 
   color:
-    var(--text-faint);
+    var(--purple-accent);
 
   font-family:
     "JetBrains Mono",
@@ -3523,7 +3606,7 @@ a.contact-row:hover
 
 
 /* ==========================================================================
-   MOBILE NAV + TABLET
+   MOBILE / TABLET
    ========================================================================== */
 
 @media (max-width: 900px) {
@@ -3707,9 +3790,6 @@ a.contact-row:hover
     height: 36px;
   }
 
-
-  /* Hero */
-
   .hero {
     padding:
       106px 0 70px;
@@ -3778,9 +3858,6 @@ a.contact-row:hover
       1fr;
   }
 
-
-  /* Sections */
-
   .editorial-statement,
   .process-section,
   .move-section,
@@ -3806,9 +3883,6 @@ a.contact-row:hover
       );
   }
 
-
-  /* Stats */
-
   .stats-grid {
     grid-template-columns:
       1fr;
@@ -3824,9 +3898,6 @@ a.contact-row:hover
   .stat-item:last-child {
     border-bottom: 0;
   }
-
-
-  /* Process */
 
   .process-step {
     min-height: auto;
@@ -3844,9 +3915,6 @@ a.contact-row:hover
   .process-step h3 {
     font-size: 30px;
   }
-
-
-  /* Product sections */
 
   .case-study {
     padding:
@@ -3900,9 +3968,6 @@ a.contact-row:hover
       auto;
   }
 
-
-  /* Services */
-
   .services-bento {
     grid-template-columns:
       1fr;
@@ -3920,24 +3985,15 @@ a.contact-row:hover
     min-height: 210px;
   }
 
-
-  /* Technology */
-
   .technology-list {
     grid-template-columns:
       1fr;
   }
 
-
-  /* Collaboration */
-
   .collaboration-item {
     grid-template-columns:
       56px 1fr;
   }
-
-
-  /* CTA */
 
   .final-cta {
     min-height:
@@ -3955,9 +4011,6 @@ a.contact-row:hover
         88px
       );
   }
-
-
-  /* Contact */
 
   .contact-form-wrap {
     padding: 20px;
@@ -3986,9 +4039,6 @@ a.contact-row:hover
   .contact-arrow {
     display: none;
   }
-
-
-  /* Footer */
 
   .footer-main {
     grid-template-columns:
