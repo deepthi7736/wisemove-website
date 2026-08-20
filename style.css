@@ -2257,3 +2257,15 @@ footer {
   }
 
 }
+
+.product-case-vashq .case-logo {
+  background: #0D7FFF;
+  padding: 8px;
+  object-fit: contain;
+}
+
+.board-product.vashq img {
+  background: #0D7FFF;
+  padding: 6px;
+  object-fit: contain;
+}
