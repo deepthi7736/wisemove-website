@@ -1,106 +1,129 @@
 /* ==========================================================
-   WISEMOVE — HERO CLEAN BRAND PILLS
-   Add this to the END of your style.css
+   WISEMOVE — HERO BRAND PILLS
+   Append to the end of style.css
    ========================================================== */
 
-/* Remove old floating cards */
+:root {
+  --brand-pill-bg: rgba(255, 255, 255, 0.06);
+  --brand-pill-border: rgba(255, 255, 255, 0.12);
+  --brand-pill-accent: #5b8cff;
+  --brand-pill-label: #b8c1d9;
+  --brand-pill-text: #ffffff;
+  --brand-pill-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide legacy floating hero cards */
 .hv-getvia,
 .hv-vashq,
 .hv-engine,
-.hv-chip{
-    display:none !important;
+.hv-chip {
+  display: none !important;
 }
 
-/* Brand pills */
-.hero-brands{
-    position:absolute;
-    bottom:40px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    align-items:center;
-    gap:18px;
-    z-index:20;
+.hero-brands {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  transform: translateX(-50%);
 }
 
-.brand-pill{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px 20px;
-    min-width:170px;
-
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.12);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-
-    border-radius:999px;
-    text-decoration:none;
-    color:#fff;
-
-    transition:all .35s ease;
+.brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 170px;
+  padding: 14px 20px;
+  color: var(--brand-pill-text);
+  text-decoration: none;
+  background: var(--brand-pill-bg);
+  border: 1px solid var(--brand-pill-border);
+  border-radius: 999px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition:
+    transform 0.35s var(--brand-pill-ease),
+    border-color 0.35s var(--brand-pill-ease),
+    box-shadow 0.35s var(--brand-pill-ease);
 }
 
-.brand-pill img{
-    width:34px;
-    height:34px;
-    object-fit:contain;
-    flex-shrink:0;
+.brand-pill img {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
-.brand-pill div{
-    display:flex;
-    flex-direction:column;
-    line-height:1.1;
+.brand-pill > div {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
 }
 
-.brand-pill small{
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    opacity:.65;
-    color:#B8C1D9;
+.brand-pill small {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brand-pill-label);
+  opacity: 0.65;
 }
 
-.brand-pill span{
-    font-size:15px;
-    font-weight:600;
-    color:#FFFFFF;
+.brand-pill span {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--brand-pill-text);
 }
 
-.brand-pill:hover{
-    transform:translateY(-4px);
-    border-color:#5B8CFF;
-    box-shadow:
-        0 12px 30px rgba(91,140,255,.20),
-        inset 0 1px 0 rgba(255,255,255,.08);
+.brand-pill:hover,
+.brand-pill:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--brand-pill-accent);
+  box-shadow:
+    0 12px 30px rgba(91, 140, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-@media (max-width:900px){
+.brand-pill:focus-visible {
+  outline: 2px solid var(--brand-pill-accent);
+  outline-offset: 3px;
+}
 
-    .hero-brands{
-        position:relative;
-        left:auto;
-        bottom:auto;
-        transform:none;
-        justify-content:center;
-        margin-top:28px;
-        flex-wrap:wrap;
-    }
+@media (max-width: 900px) {
+  .hero-brands {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    width: auto;
+    margin-top: 28px;
+    justify-content: center;
+    flex-wrap: wrap;
+    transform: none;
+  }
 
-    .brand-pill{
-        min-width:150px;
-        padding:12px 16px;
-    }
+  .brand-pill {
+    min-width: 150px;
+    padding: 12px 16px;
+  }
 
-    .brand-pill img{
-        width:30px;
-        height:30px;
-    }
+  .brand-pill img {
+    width: 30px;
+    height: 30px;
+  }
 
-    .brand-pill span{
-        font-size:14px;
-    }
+  .brand-pill span {
+    font-size: 14px;
+  }
+}
 
+@media (prefers-reduced-motion: reduce) {
+  .brand-pill,
+  .brand-pill:hover,
+  .brand-pill:focus-visible {
+    transition: none;
+    transform: none;
+  }
 }
