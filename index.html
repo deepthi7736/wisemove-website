@@ -1,110 +1,162 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <link rel="icon" type="image/png" href="assets/favicon.png">
 
-  <title>WiseMove — Product Strategy, Design & Engineering</title>
+  <title>WiseMove Consultancy | Software Product Studio</title>
 
   <meta
     name="description"
-    content="WiseMove is a product studio building digital products, platforms and technology solutions for ambitious businesses."
+    content="WiseMove builds software products end to end — strategy, design, engineering, and support. Creators of Getvia, Vashq and ZED0."
   >
 
   <meta
-    name="keywords"
-    content="WiseMove, product studio, product development, software development, UI UX design, engineering, Getvia, Vashq, ZED0"
+    property="og:title"
+    content="WiseMove Consultancy | Software Product Studio"
   >
 
-  <meta name="theme-color" content="#0a0a0f">
+  <meta
+    property="og:description"
+    content="Product strategy, design, and engineering — built around your users, timeline, and growth goals. Creators of Getvia, Vashq and ZED0."
+  >
+
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/wisemove-logo.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet"
   >
 
-  <!-- Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Styles -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="style.css">
 
-  <script>
-    document.documentElement.classList.add("js");
-  </script>
+  <!-- ZED0 logo styling -->
+  <style>
+    .zed0-product-logo {
+      width: 190px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      margin: 8px 0 18px;
+    }
+
+    .zed0-product-logo img {
+      width: auto;
+      max-width: 190px;
+      max-height: 72px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* Dark theme = old red/dark ZED0 logo */
+    .zed0-logo-light {
+      display: none !important;
+    }
+
+    [data-theme="dark"] .zed0-logo-dark {
+      display: block !important;
+    }
+
+    [data-theme="dark"] .zed0-logo-light {
+      display: none !important;
+    }
+
+    /* Light theme = white ZED0 logo */
+    [data-theme="light"] .zed0-logo-dark {
+      display: none !important;
+    }
+
+    [data-theme="light"] .zed0-logo-light {
+      display: block !important;
+    }
+
+    @media (max-width: 640px) {
+      .zed0-product-logo {
+        width: 160px;
+        min-height: 60px;
+      }
+
+      .zed0-product-logo img {
+        max-width: 160px;
+        max-height: 60px;
+      }
+    }
+  </style>
 </head>
 
-<body>
+<body data-theme="dark">
 
   <!-- ================================================================
-       HEADER
+       NAVIGATION
        ================================================================ -->
 
   <header>
-    <nav class="nav-float">
+    <div class="nav-float">
 
-      <a href="#top" class="brand" aria-label="WiseMove Home">
+      <a href="#" class="brand" aria-label="WiseMove home">
 
-        <!-- WiseMove logo -->
         <img
           src="assets/wisemove-logo-dark.png"
-          alt="WiseMove"
           class="logo-img logo-dark"
+          alt="WiseMove"
         >
 
         <img
-          src="assets/wisemove-logo-white.png"
-          alt="WiseMove"
+          src="assets/wisemove-logo-light.png"
           class="logo-img logo-light"
+          alt="WiseMove"
         >
 
       </a>
 
-      <div class="nav-links">
-
+      <nav class="nav-links" aria-label="Primary">
         <a href="#work">Work</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
-
-      </div>
+      </nav>
 
       <div class="nav-right">
 
         <button
           class="theme-toggle"
           id="themeToggle"
-          aria-label="Toggle theme"
-          type="button"
+          aria-label="Toggle light and dark theme"
         >
-          <i data-lucide="sun"></i>
+          <svg
+            id="themeIcon"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></svg>
         </button>
 
         <a href="#contact" class="nav-cta">
           Start a Project
-          <span>→</span>
+          <span class="arrow">→</span>
         </a>
 
         <button
           class="nav-burger"
-          id="navBurger"
           aria-label="Open menu"
-          type="button"
+          aria-expanded="false"
         >
-          <i data-lucide="menu"></i>
+          ☰
         </button>
 
       </div>
-
-    </nav>
+    </div>
   </header>
 
 
@@ -115,18 +167,19 @@
   <div class="mobile-menu" id="mobileMenu">
 
     <a href="#work">Work</a>
+    <a href="#products">Products</a>
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
 
-    <a href="#contact">
-      Start a Project →
-    </a>
-
   </div>
 
 
-  <main id="top">
+  <!-- ================================================================
+       MAIN
+       ================================================================ -->
+
+  <main>
 
     <!-- ==============================================================
          HERO
@@ -134,21 +187,55 @@
 
     <section class="hero">
 
-      <div class="hero-bg">
+      <div class="hero-bg" aria-hidden="true">
 
         <div class="hero-glow hero-glow-a"></div>
         <div class="hero-glow hero-glow-b"></div>
 
         <svg
           class="hero-wave"
-          viewBox="0 0 1440 140"
+          viewBox="0 0 1600 200"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
+
           <path
-            d="M0,85 C180,40 320,120 510,86 C700,52 760,110 930,82 C1110,52 1240,105 1440,62 L1440,140 L0,140 Z"
-            fill="rgba(61,25,183,.12)"
+            d="M0,120 C300,40 500,180 800,100 C1100,20 1300,160 1600,80 L1600,200 L0,200 Z"
+            fill="url(#waveGrad)"
           ></path>
+
+          <defs>
+
+            <linearGradient
+              id="waveGrad"
+              x1="0"
+              y1="0"
+              x2="1"
+              y2="0"
+            >
+
+              <stop
+                offset="0%"
+                stop-color="#3D19B7"
+                stop-opacity="0.18"
+              >
+
+              <stop
+                offset="50%"
+                stop-color="#CA26D1"
+                stop-opacity="0.12"
+              >
+
+              <stop
+                offset="100%"
+                stop-color="#3D19B7"
+                stop-opacity="0.18"
+              >
+
+            </linearGradient>
+
+          </defs>
+
         </svg>
 
       </div>
@@ -160,11 +247,10 @@
 
         <div class="hero-copy">
 
-          <div class="status-pill reveal-fade">
+          <div class="status-pill">
             <span class="status-dot"></span>
             PRODUCT STUDIO
           </div>
-
 
           <h1>
 
@@ -173,45 +259,46 @@
             </span>
 
             <span class="reveal-line">
-              <span>
-                <span class="accent">move</span> wiser.
-              </span>
+              <span class="accent">move</span>
+              <span> wiser.</span>
             </span>
 
           </h1>
 
 
-          <p class="lede reveal-fade">
-
-            Product strategy, design, and engineering —
-            built around your users, timeline, and growth goals.
-
+          <p
+            class="lede reveal-line"
+            style="transition-delay:40ms;"
+          >
+            <span>
+              Product strategy, design, and engineering — built around
+              your users, timeline, and growth goals.
+            </span>
           </p>
 
 
-          <div class="btn-row reveal-fade">
+          <div class="btn-row">
 
-            <a href="#contact" class="btn btn-primary">
-
+            <a
+              href="tel:+919995333560"
+              class="btn btn-primary"
+            >
               Book Free Consultation
-
               <span class="arrow">→</span>
-
             </a>
 
-
-            <a href="#work" class="btn btn-outline">
-
+            <a
+              href="#work"
+              class="btn btn-outline"
+            >
               Explore Our Work
-
               <span class="arrow">↓</span>
-
             </a>
 
           </div>
 
 
-          <div class="social-proof reveal-fade">
+          <div class="social-proof">
 
             <div class="avatar-stack">
 
@@ -222,20 +309,29 @@
 
             </div>
 
-            <span class="mono">
+            <p class="mono">
               Trusted by
               <span class="accent-text">1000+</span>
               businesses
-            </span>
+            </p>
 
           </div>
 
 
-          <div class="trust-row reveal-fade">
+          <div class="trust-row mono">
 
             <span class="trust-item">
 
-              <i data-lucide="shield-check"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 2 4 5v6c0 5.5 3.5 9.7 8 11 4.5-1.3 8-5.5 8-11V5l-8-3z"></path>
+              </svg>
+
               Transparent Process
 
             </span>
@@ -244,7 +340,17 @@
 
             <span class="trust-item">
 
-              <i data-lucide="clock-3"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="9"></circle>
+                <path d="M12 7v5l3 3"></path>
+              </svg>
+
               Clear Timelines
 
             </span>
@@ -253,7 +359,18 @@
 
             <span class="trust-item">
 
-              <i data-lucide="headphones"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1v-6h3z"></path>
+                <path d="M3 19a2 2 0 0 0 2 2h1v-6H3z"></path>
+              </svg>
+
               Ongoing Support
 
             </span>
@@ -265,11 +382,15 @@
 
         <!-- HERO VISUAL -->
 
-        <div class="hero-visual reveal-fade">
+        <div
+          class="hero-visual"
+          id="heroVisual"
+        >
 
           <svg
             class="hv-lines"
-            viewBox="0 0 700 540"
+            viewBox="0 0 700 620"
+            preserveAspectRatio="none"
             aria-hidden="true"
           >
 
@@ -277,21 +398,21 @@
 
               <linearGradient
                 id="lineGrad"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="1"
               >
 
                 <stop
                   offset="0%"
-                  stop-color="#3D19B7"
-                />
+                  stop-color="#CA26D1"
+                >
 
                 <stop
                   offset="100%"
-                  stop-color="#CA26D1"
-                />
+                  stop-color="#3D19B7"
+                >
 
               </linearGradient>
 
@@ -300,62 +421,44 @@
 
             <path
               class="hv-line"
-              d="M70 210 C190 250 230 130 350 200"
-            />
+              data-delay="0"
+              d="M350,150 C350,220 350,260 350,320"
+            ></path>
 
             <path
               class="hv-line"
-              d="M350 200 C470 260 520 150 640 230"
-            />
+              data-delay="120"
+              d="M350,340 C270,320 200,290 150,260"
+            ></path>
 
             <path
               class="hv-line"
-              d="M180 430 C270 350 410 370 540 440"
-            />
+              data-delay="240"
+              d="M350,340 C440,320 500,290 540,255"
+            ></path>
+
+            <path
+              class="hv-line"
+              data-delay="360"
+              d="M350,340 C400,370 460,380 500,370"
+            ></path>
 
             <ellipse
               class="hv-orbit"
-              cx="360"
-              cy="330"
+              cx="350"
+              cy="380"
               rx="230"
-              ry="75"
-            />
-
-            <ellipse
-              class="hv-orbit"
-              cx="360"
-              cy="330"
-              rx="170"
-              ry="50"
-            />
+              ry="60"
+            ></ellipse>
 
           </svg>
 
 
-          <!-- Idea -->
-
-          <div class="hv-idea">
-
+          <div class="hv-card hv-idea">
             <span class="hv-idea-icon">💡</span>
-
-            <span>Your Idea</span>
-
+            Your Idea
           </div>
 
-
-          <!-- Central WiseMove visual -->
-
-          <div class="hv-core">
-
-            <img
-              src="assets/wisemove-symbol.png"
-              alt="WiseMove"
-            >
-
-          </div>
-
-
-          <!-- Pedestal -->
 
           <div class="hv-pedestal">
 
@@ -368,25 +471,25 @@
           </div>
 
 
-          <!-- ========================================================
-               HERO PRODUCT PILLS
+          <div class="hv-core">
 
-               IMPORTANT:
-               ZED0 appears ONCE here.
-               The image should contain only the ZED0 logo.
-               Do NOT add another "zed0" text beside it if the image
-               itself already contains the name.
-               ======================================================== -->
+            <img
+              src="assets/wisemove-icon.png"
+              alt="WiseMove"
+            >
+
+          </div>
+
+
+          <!-- HERO PRODUCT PILLS -->
 
           <div class="hero-brands">
 
-
-            <!-- GETVIA -->
-
             <a
-              href="#getvia"
+              href="https://getvia.in"
               class="brand-pill"
-              aria-label="View Getvia"
+              target="_blank"
+              rel="noopener noreferrer"
             >
 
               <img
@@ -396,8 +499,7 @@
 
               <div>
 
-                <small>LIVE PRODUCT</small>
-
+                <small>Live Product</small>
                 <span>Getvia</span>
 
               </div>
@@ -405,55 +507,42 @@
             </a>
 
 
-            <!-- VASHQ -->
-
             <a
-              href="#vashq"
+              href="https://home.vashq.com"
               class="brand-pill"
-              aria-label="View Vashq"
+              target="_blank"
+              rel="noopener noreferrer"
             >
 
               <img
-                src="assets/vashq-logo.png"
-                alt="Vashq"
+                src="assets/vashq-official-logo.png"
+                alt="VASHQ"
               >
 
               <div>
 
-                <small>LIVE PRODUCT</small>
-
-                <span>Vashq</span>
+                <small>Live Product</small>
+                <span>VASHQ</span>
 
               </div>
 
             </a>
 
 
-            <!-- ======================================================
-                 ZED0
-
-                 ONLY ONE ZED0 BRAND IMAGE + ONE PRODUCT LABEL.
-
-                 If your generated image already contains the text
-                 "ZED0", use it as the logo and don't duplicate
-                 "zed0" anywhere else.
-                 ====================================================== -->
-
             <a
-              href="#zed0"
+              href="#zed0-product"
               class="brand-pill"
-              aria-label="View ZED0"
             >
 
               <img
-                src="assets/zed0.png"
+                src="assets/zed0%20Logo%20dark.png"
                 alt="ZED0"
+                class="zed0-hero-logo"
               >
 
               <div>
 
-                <small>LIVE PRODUCT</small>
-
+                <small>Product</small>
                 <span>ZED0</span>
 
               </div>
@@ -477,19 +566,36 @@
 
       <div class="container">
 
-        <div class="stats-panel">
+        <div class="stats-panel reveal-fade">
 
           <div class="stat-item">
 
-            <i data-lucide="box"></i>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M21 8 12 3 3 8l9 5 9-5z"></path>
+              <path d="M3 8v8l9 5 9-5V8"></path>
+              <path d="M12 13v8"></path>
+
+            </svg>
 
             <div>
 
-              <span class="stat-num">03</span>
-
-              <span class="stat-label">
-                LIVE PRODUCTS
+              <span
+                class="stat-num"
+                data-target="03"
+              >
+                03
               </span>
+
+              <div class="stat-label">
+                PRODUCTS
+              </div>
 
             </div>
 
@@ -498,15 +604,39 @@
 
           <div class="stat-item">
 
-            <i data-lucide="users"></i>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+
+              <circle
+                cx="9"
+                cy="7"
+                r="4"
+              ></circle>
+
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+
+            </svg>
 
             <div>
 
-              <span class="stat-num">1000+</span>
+              <span
+                class="stat-num"
+                data-target="1000+"
+              >
+                1000+
+              </span>
 
-              <span class="stat-label">
+              <div class="stat-label">
                 BUSINESSES
-              </span>
+              </div>
 
             </div>
 
@@ -515,15 +645,32 @@
 
           <div class="stat-item">
 
-            <i data-lucide="wand-2"></i>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+
+              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+
+            </svg>
 
             <div>
 
-              <span class="stat-num">100%</span>
+              <span
+                class="stat-num"
+                data-target="100%"
+              >
+                100%
+              </span>
 
-              <span class="stat-label">
+              <div class="stat-label">
                 END-TO-END DELIVERY
-              </span>
+              </div>
 
             </div>
 
@@ -532,15 +679,32 @@
 
           <div class="stat-item">
 
-            <i data-lucide="headphones"></i>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+              <path d="M21 19a2 2 0 0 1-2 2h-1v-6h3z"></path>
+              <path d="M3 19a2 2 0 0 0 2 2h1v-6H3z"></path>
+
+            </svg>
 
             <div>
 
-              <span class="stat-num">24/7</span>
-
-              <span class="stat-label">
-                ONGOING SUPPORT
+              <span
+                class="stat-num"
+                data-target="24/7"
+              >
+                24/7
               </span>
+
+              <div class="stat-label">
+                ONGOING SUPPORT
+              </div>
 
             </div>
 
@@ -557,235 +721,265 @@
          HOW WE MOVE
          ============================================================== -->
 
-    <section class="section" id="about">
+    <section
+      class="section hwm2"
+      id="work"
+    >
 
-      <div class="container">
+      <div class="container hwm2-grid">
 
-        <div class="hwm2-grid">
+        <div class="hwm2-copy reveal-fade">
 
+          <p class="eyebrow">
+            how we move
+          </p>
 
-          <div class="hwm2-copy">
+          <h2 class="hwm2-heading">
 
-            <span class="eyebrow">
-              HOW WE MOVE
+            From idea<br>
+            to
+            <span class="accent-italic">
+              impact.
             </span>
 
-            <h2 class="hwm2-heading">
+          </h2>
 
-              From
-              <span class="accent-italic">idea</span>
-              to impact.
+          <p>
+            A structured, product-first approach — practical,
+            on-time, and aligned with your business goals.
+          </p>
 
-            </h2>
+          <a
+            href="#services"
+            class="btn btn-primary"
+          >
+            See the process
+            <span class="arrow">→</span>
+          </a>
 
-            <p>
+        </div>
 
-              We combine strategy, design, technology and
-              execution to turn ideas into products people
-              actually use.
 
-            </p>
+        <div class="hwm2-right">
+
+          <div class="hwm2-cards reveal-stagger">
+
+            <div class="hwm2-card active">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  01
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-a">
+                  🔍
+                </span>
+
+              </div>
+
+              <h4>
+                Discovery
+              </h4>
+
+              <p>
+                Understand the problem before writing code.
+              </p>
+
+            </div>
+
+
+            <span class="hwm2-arrow">→</span>
+
+
+            <div class="hwm2-card">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  02
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-b">
+                  📊
+                </span>
+
+              </div>
+
+              <h4>
+                Strategy
+              </h4>
+
+              <p>
+                Define what actually deserves to be built.
+              </p>
+
+            </div>
+
+
+            <span class="hwm2-arrow">→</span>
+
+
+            <div class="hwm2-card">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  03
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-c">
+                  ✏️
+                </span>
+
+              </div>
+
+              <h4>
+                Design
+              </h4>
+
+              <p>
+                Turn complexity into clarity.
+              </p>
+
+            </div>
+
+
+            <span class="hwm2-arrow">→</span>
+
+
+            <div class="hwm2-card">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  04
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-d">
+                  &lt;/&gt;
+                </span>
+
+              </div>
+
+              <h4>
+                Build
+              </h4>
+
+              <p>
+                Engineer for real-world use.
+              </p>
+
+            </div>
+
+
+            <span class="hwm2-arrow">→</span>
+
+
+            <div class="hwm2-card">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  05
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-e">
+                  🚀
+                </span>
+
+              </div>
+
+              <h4>
+                Launch
+              </h4>
+
+              <p>
+                Ship with confidence.
+              </p>
+
+            </div>
+
+
+            <span class="hwm2-arrow">→</span>
+
+
+            <div class="hwm2-card">
+
+              <div class="hwm2-top">
+
+                <span class="hwm2-num mono">
+                  06
+                </span>
+
+                <span class="hwm2-icon hwm2-icon-f">
+                  📈
+                </span>
+
+              </div>
+
+              <h4>
+                Scale
+              </h4>
+
+              <p>
+                Improve as the product grows.
+              </p>
+
+            </div>
 
           </div>
 
 
-          <div>
-
-            <div class="hwm2-cards reveal-stagger">
-
-
-              <div class="hwm2-card active">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">01</span>
-
-                  <span class="hwm2-icon hwm2-icon-a">
-                    ✦
-                  </span>
-
-                </div>
-
-                <h4>Discover</h4>
-
-                <p>
-                  Understand your users, business and
-                  opportunity.
-                </p>
-
-              </div>
-
-
-              <div class="hwm2-arrow">→</div>
-
-
-              <div class="hwm2-card">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">02</span>
-
-                  <span class="hwm2-icon hwm2-icon-b">
-                    ◇
-                  </span>
-
-                </div>
-
-                <h4>Strategy</h4>
-
-                <p>
-                  Define the right product direction
-                  and roadmap.
-                </p>
-
-              </div>
-
-
-              <div class="hwm2-arrow">→</div>
-
-
-              <div class="hwm2-card">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">03</span>
-
-                  <span class="hwm2-icon hwm2-icon-c">
-                    ◎
-                  </span>
-
-                </div>
-
-                <h4>Design</h4>
-
-                <p>
-                  Create intuitive experiences users
-                  love to interact with.
-                </p>
-
-              </div>
-
-
-              <div class="hwm2-arrow">→</div>
-
-
-              <div class="hwm2-card">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">04</span>
-
-                  <span class="hwm2-icon hwm2-icon-d">
-                    &lt;/&gt;
-                  </span>
-
-                </div>
-
-                <h4>Build</h4>
-
-                <p>
-                  Engineer reliable, scalable digital
-                  products.
-                </p>
-
-              </div>
-
-
-              <div class="hwm2-arrow">→</div>
-
-
-              <div class="hwm2-card">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">05</span>
-
-                  <span class="hwm2-icon hwm2-icon-e">
-                    ↗
-                  </span>
-
-                </div>
-
-                <h4>Launch</h4>
-
-                <p>
-                  Release, measure and improve with
-                  confidence.
-                </p>
-
-              </div>
-
-
-              <div class="hwm2-arrow">→</div>
-
-
-              <div class="hwm2-card">
-
-                <div class="hwm2-top">
-
-                  <span class="hwm2-num">06</span>
-
-                  <span class="hwm2-icon hwm2-icon-f">
-                    ∞
-                  </span>
-
-                </div>
-
-                <h4>Grow</h4>
-
-                <p>
-                  Continuously optimise and scale your
-                  product.
-                </p>
-
-              </div>
+          <div
+            class="hwm2-timeline"
+            id="hwm2Timeline"
+          >
+
+            <span class="hwm2-tl-label mono">
+              IDEA
+            </span>
+
+            <div class="hwm2-tl-track">
+
+              <div class="hwm2-tl-fill"></div>
+
+              <span
+                class="hwm2-tl-dot"
+                style="left:0%"
+              ></span>
+
+              <span
+                class="hwm2-tl-dot"
+                style="left:20%"
+              ></span>
+
+              <span
+                class="hwm2-tl-dot"
+                style="left:40%"
+              ></span>
+
+              <span
+                class="hwm2-tl-dot"
+                style="left:60%"
+              ></span>
+
+              <span
+                class="hwm2-tl-dot"
+                style="left:80%"
+              ></span>
 
             </div>
 
+            <span class="hwm2-tl-end mono">
 
-            <div class="hwm2-timeline reveal-fade">
-
-              <span class="hwm2-tl-label">
-
-                <span class="hwm2-tl-badge">1</span>
-
-                IDEA
-
+              <span class="hwm2-tl-badge">
+                🚀
               </span>
 
+              PRODUCT
 
-              <div class="hwm2-tl-track">
-
-                <div class="hwm2-tl-fill"></div>
-
-                <span
-                  class="hwm2-tl-dot"
-                  style="left:20%"
-                ></span>
-
-                <span
-                  class="hwm2-tl-dot"
-                  style="left:40%"
-                ></span>
-
-                <span
-                  class="hwm2-tl-dot"
-                  style="left:60%"
-                ></span>
-
-                <span
-                  class="hwm2-tl-dot"
-                  style="left:80%"
-                ></span>
-
-              </div>
-
-
-              <span class="hwm2-tl-end">
-                IMPACT
-              </span>
-
-            </div>
+            </span>
 
           </div>
 
@@ -797,26 +991,110 @@
 
 
     <!-- ==============================================================
-         WORK INTRO
+         PRODUCTS INTRO
          ============================================================== -->
 
-    <section class="bigtype-band" id="work">
+    <section
+      class="section"
+      id="products"
+      style="padding-bottom:0"
+    >
 
-      <div class="bigtype">
-        BUILT
+      <div class="container">
+
+        <div class="section-head reveal-fade">
+
+          <p class="eyebrow">
+            products
+          </p>
+
+          <h2>
+            Built by us. Used by real businesses.
+          </h2>
+
+          <p>
+            We don't just build software for clients —
+            we build products ourselves. Each product solves
+            a different real-world problem, giving us
+            first-hand experience in shipping, operating,
+            improving, and supporting software.
+          </p>
+
+        </div>
+
       </div>
 
-      <div class="bigtype-fg">
+    </section>
 
-        <span class="eyebrow">
-          OUR PRODUCTS
-        </span>
 
-        <p>
-          We don't just build software for clients.
-          We build products ourselves — learning,
-          validating and improving with every move.
-        </p>
+    <!-- ==============================================================
+         PRODUCT ECOSYSTEM PATTERN
+         ============================================================== -->
+
+    <section class="product-pattern-section">
+
+      <div class="container">
+
+        <div class="product-pattern reveal-fade">
+
+          <div class="pattern-grid"></div>
+
+          <div class="pattern-orb pattern-orb-one"></div>
+          <div class="pattern-orb pattern-orb-two"></div>
+
+
+          <div class="pattern-copy">
+
+            <p class="eyebrow">
+              WISEMOVE PRODUCT ECOSYSTEM
+            </p>
+
+            <h3>
+
+              Three products.<br>
+
+              <span>
+                Different problems. One product mindset.
+              </span>
+
+            </h3>
+
+            <p>
+              From discovering businesses, to managing
+              car wash operations, to modern car washing
+              equipment — our products are designed
+              around practical business needs.
+            </p>
+
+          </div>
+
+
+          <div class="pattern-products">
+
+            <a
+              href="#getvia-product"
+              class="pattern-node node-getvia"
+            >
+              GETVIA
+            </a>
+
+            <a
+              href="#vashq-product"
+              class="pattern-node node-vashq"
+            >
+              VASHQ
+            </a>
+
+            <a
+              href="#zed0-product"
+              class="pattern-node node-zed0"
+            >
+              ZED0
+            </a>
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -828,112 +1106,127 @@
          ============================================================== -->
 
     <section
-      class="product-showcase getvia"
-      id="getvia"
+      class="product-showcase product-card-section getvia"
+      id="getvia-product"
     >
 
-      <div class="container">
-
-        <div class="product-showcase-grid">
+      <div class="container product-showcase-grid">
 
 
-          <div class="ps-copy reveal-fade">
+        <div class="product-info reveal-fade">
 
-            <div class="ps-index">
-              01 / LIVE PRODUCT
-            </div>
+          <div class="ps-index mono">
+            01 / PRODUCT — BUILT BY WISEMOVE
+          </div>
 
-            <h2 class="ps-name">
-              Getvia
-            </h2>
 
-            <div class="ps-kicker">
-              BUSINESS DISCOVERY PLATFORM
-            </div>
+          <div class="product-logo-wrap getvia-logo-wrap">
 
-            <p class="ps-tagline">
-              Discover businesses worth knowing.
-            </p>
-
-            <p class="ps-desc">
-
-              Getvia is a modern business discovery and
-              listing platform designed to help customers
-              discover trusted businesses while giving
-              businesses a powerful digital presence.
-
-            </p>
-
-            <p class="ps-slash">
-
-              Business discovery / Premium profiles /
-              Services / Catalogue / Trust / Local visibility
-
-            </p>
-
-            <a
-              href="#contact"
-              class="ps-cta"
+            <img
+              src="assets/getvia-logo.png"
+              alt="Getvia"
             >
-
-              Explore Getvia
-
-              <span class="arrow">→</span>
-
-            </a>
 
           </div>
 
 
-          <div class="ps-visual-stack reveal-fade">
+          <h3 class="ps-name">
+            Getvia
+          </h3>
 
-            <div class="ps-glow-atmo getvia-atmo"></div>
 
-            <div class="ps-frame ps-shot-primary">
+          <p class="ps-kicker mono">
+            BUSINESS DISCOVERY PLATFORM
+          </p>
 
-              <div class="ps-frame-bar">
 
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
+          <p class="ps-tagline">
+            Connecting Businesses. Simplifying Discovery.
+          </p>
 
+
+          <p class="ps-desc">
+            A modern business discovery and listing platform
+            that helps customers discover, explore, compare,
+            and connect with trusted businesses — while
+            helping businesses establish a stronger digital presence.
+          </p>
+
+
+          <p class="ps-slash mono">
+            DISCOVERY / SEARCH / BUSINESS PROFILES / LISTINGS
+          </p>
+
+
+          <a
+            href="https://getvia.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ps-cta"
+          >
+            Explore Getvia
+            <span class="arrow">↗</span>
+          </a>
+
+        </div>
+
+
+        <div
+          class="product-art reveal-fade getvia-art"
+          aria-hidden="true"
+        >
+
+          <div class="art-grid"></div>
+
+          <div class="art-circle art-circle-one"></div>
+          <div class="art-circle art-circle-two"></div>
+
+          <div class="art-window">
+
+            <div class="art-window-top">
+
+              <span></span>
+              <span></span>
+              <span></span>
+
+            </div>
+
+
+            <div class="getvia-art-content">
+
+              <div class="fake-logo">
+                Getvia.
               </div>
 
-              <div class="ps-frame-shot">
+              <div class="fake-search"></div>
 
-                <img
-                  src="assets/getvia-preview.png"
-                  alt="Getvia platform"
-                  loading="lazy"
-                >
+              <div class="fake-line large"></div>
+
+              <div class="fake-line"></div>
+
+              <div class="fake-cards">
+
+                <span></span>
+                <span></span>
+                <span></span>
 
               </div>
 
             </div>
 
+          </div>
 
-            <div class="ps-frame ps-shot-secondary">
 
-              <div class="ps-frame-bar">
+          <div class="floating-tag tag-one">
+            DISCOVER
+          </div>
 
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
+          <div class="floating-tag tag-two">
+            CONNECT
+          </div>
 
-              </div>
-
-              <div class="ps-frame-shot">
-
-                <img
-                  src="assets/getvia-business.png"
-                  alt="Getvia business profile"
-                  loading="lazy"
-                >
-
-              </div>
-
-            </div>
-
+          <div class="floating-tag tag-three">
+            GROW
           </div>
 
         </div>
@@ -948,59 +1241,67 @@
          ============================================================== -->
 
     <section
-      class="product-showcase vashq"
-      id="vashq"
+      class="product-showcase product-card-section vashq"
+      id="vashq-product"
     >
 
-      <div class="container">
-
-        <div class="product-showcase-grid">
+      <div class="container product-showcase-grid">
 
 
-          <div class="ps-visual-stack reveal-fade">
+        <div
+          class="product-art reveal-fade vashq-art"
+          aria-hidden="true"
+        >
 
-            <div class="ps-glow-atmo vashq-atmo"></div>
+          <div class="art-grid"></div>
 
-            <div class="ps-frame ps-shot-primary">
+          <div class="art-circle art-circle-one"></div>
+          <div class="art-circle art-circle-two"></div>
 
-              <div class="ps-frame-bar">
 
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
+          <div class="dashboard-art">
 
-              </div>
+            <div class="dashboard-top">
 
-              <div class="ps-frame-shot">
+              <div class="dash-brand">
 
                 <img
-                  src="assets/vashq-preview.png"
-                  alt="Vashq platform"
-                  loading="lazy"
+                  src="assets/vashq-official-logo.png"
+                  alt=""
                 >
 
               </div>
+
+              <div class="dash-status"></div>
 
             </div>
 
 
-            <div class="ps-frame ps-shot-secondary">
+            <div class="dash-layout">
 
-              <div class="ps-frame-bar">
+              <div class="dash-sidebar">
 
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
 
               </div>
 
-              <div class="ps-frame-shot">
 
-                <img
-                  src="assets/vashq-dashboard.png"
-                  alt="Vashq dashboard"
-                  loading="lazy"
-                >
+              <div class="dash-main">
+
+                <div class="dash-heading"></div>
+
+                <div class="dash-metrics">
+
+                  <span></span>
+                  <span></span>
+                  <span></span>
+
+                </div>
+
+                <div class="dash-chart"></div>
 
               </div>
 
@@ -1009,52 +1310,75 @@
           </div>
 
 
-          <div class="ps-copy reveal-fade">
+          <div class="floating-tag tag-one">
+            JOBS
+          </div>
 
-            <div class="ps-index">
-              02 / LIVE PRODUCT
-            </div>
+          <div class="floating-tag tag-two">
+            BOOKINGS
+          </div>
 
-            <h2 class="ps-name">
-              Vashq
-            </h2>
+          <div class="floating-tag tag-three">
+            REPORTS
+          </div>
 
-            <div class="ps-kicker">
-              AUTOMOTIVE MANAGEMENT PLATFORM
-            </div>
+        </div>
 
-            <p class="ps-tagline">
-              Smarter operations for modern car care.
-            </p>
 
-            <p class="ps-desc">
+        <div class="product-info reveal-fade">
 
-              Vashq is a technology platform built to
-              simplify and manage automotive service
-              businesses, helping teams organise operations,
-              services, customers and business growth.
+          <div class="ps-index mono">
+            02 / PRODUCT — BUILT BY WISEMOVE
+          </div>
 
-            </p>
 
-            <p class="ps-slash">
+          <div class="product-logo-wrap vashq-logo-wrap">
 
-              Car care / Operations / Catalogue /
-              Customers / Loyalty / Business management
-
-            </p>
-
-            <a
-              href="#contact"
-              class="ps-cta"
+            <img
+              src="assets/vashq-official-logo.png"
+              alt="VASHQ"
             >
 
-              Explore Vashq
-
-              <span class="arrow">→</span>
-
-            </a>
-
           </div>
+
+
+          <h3 class="ps-name">
+            Vashq
+          </h3>
+
+
+          <p class="ps-kicker mono">
+            OPERATIONS SOFTWARE
+          </p>
+
+
+          <p class="ps-tagline">
+            The Operating System for Modern Car Wash Businesses.
+          </p>
+
+
+          <p class="ps-desc">
+            Vashq is a smart car wash management platform
+            designed to simplify and control daily operations —
+            customers, jobs, employees, bookings, invoices,
+            expenses, and reports, all in one system.
+          </p>
+
+
+          <p class="ps-slash mono">
+            JOBS / CUSTOMERS / EMPLOYEES / BOOKINGS / INVOICES / REPORTS
+          </p>
+
+
+          <a
+            href="https://home.vashq.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ps-cta"
+          >
+            Explore Vashq
+            <span class="arrow">↗</span>
+          </a>
 
         </div>
 
@@ -1068,136 +1392,191 @@
          ============================================================== -->
 
     <section
-      class="product-showcase"
-      id="zed0"
+      class="product-showcase product-card-section zed0"
+      id="zed0-product"
     >
 
-      <div class="container">
-
-        <div class="product-showcase-grid">
+      <div class="container product-showcase-grid">
 
 
-          <div class="ps-copy reveal-fade">
+        <!-- ZED0 INFORMATION -->
 
-            <div class="ps-index">
-              03 / LIVE PRODUCT
-            </div>
+        <div class="product-info reveal-fade">
 
-            <h2 class="ps-name">
-              ZED0
-            </h2>
+          <div class="ps-index mono">
+            03 / PRODUCT — BUILT BY WISEMOVE
+          </div>
 
-            <div class="ps-kicker">
-              SELF CARWASH
-            </div>
 
-            <p class="ps-tagline">
-              A smarter way to wash your car yourself.
-            </p>
+          <!--
+            IMPORTANT:
+            This is the ONLY ZED0 logo in this product information block.
 
-            <p class="ps-desc">
+            Dark theme:
+            zed0 Logo dark.png
 
-              ZED0 is a self-carwash concept designed to
-              make car cleaning more convenient, accessible
-              and technology-driven. Customers can take
-              control of their own carwash experience through
-              a simple and efficient self-service model.
+            Light theme:
+            zed0 Logo White.png
+          -->
 
-            </p>
+          <div
+            class="zed0-product-logo"
+            aria-label="ZED0"
+          >
 
-            <p class="ps-slash">
-
-              Self carwash / Self service / Convenience /
-              Automotive / Smart operations
-
-            </p>
-
-            <a
-              href="#contact"
-              class="ps-cta"
-              style="
-                background:linear-gradient(
-                  135deg,
-                  #555,
-                  #222
-                );
-              "
+            <img
+              src="assets/zed0%20Logo%20dark.png"
+              class="zed0-logo-dark"
+              alt="ZED0"
             >
 
-              Explore ZED0
-
-              <span class="arrow">→</span>
-
-            </a>
+            <img
+              src="assets/zed0%20Logo%20White.png"
+              class="zed0-logo-light"
+              alt="ZED0"
+            >
 
           </div>
 
 
-          <div class="ps-visual-stack reveal-fade">
+          <p class="ps-kicker mono">
+            SELF-SERVICE CAR WASH MACHINE
+          </p>
 
-            <div
-              class="ps-glow-atmo"
-              style="
-                background:rgba(255,255,255,.055);
-              "
-            ></div>
 
-            <div class="ps-frame ps-shot-primary">
+          <p class="ps-tagline">
+            Self-Service Car Washing, Made Simpler.
+          </p>
 
-              <div class="ps-frame-bar">
 
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
-                <span class="ps-frame-dot"></span>
+          <p class="ps-desc">
+            ZED0 is a self-service car wash machine designed
+            for convenient, customer-operated vehicle cleaning.
+          </p>
 
-              </div>
 
-              <div
-                class="ps-frame-shot"
-                style="
-                  display:flex;
-                  align-items:center;
-                  justify-content:center;
-                  background:
-                    radial-gradient(
-                      circle at center,
-                      rgba(255,255,255,.08),
-                      transparent 65%
-                    );
-                "
-              >
+          <p class="ps-slash mono">
+            SELF-SERVICE / CAR WASH / HARDWARE / VEHICLE CARE
+          </p>
 
-                <!--
-                  ZED0 PRODUCT IMAGE
 
-                  Change "assets/zed0.png" to the exact
-                  filename of the generated ZED0 image.
+          <a
+            href="#contact"
+            class="ps-cta"
+          >
+            Enquire About ZED0
+            <span class="arrow">→</span>
+          </a>
 
-                  This image is used only in the product
-                  showcase. The hero pill above also uses
-                  the same ZED0 branding image.
+        </div>
 
-                  Make sure the actual file exists.
-                -->
 
-                <img
-                  src="assets/zed0.png"
-                  alt="ZED0 self carwash"
-                  loading="lazy"
-                  style="
-                    width:70%;
-                    height:80%;
-                    object-fit:contain;
-                  "
-                >
+        <!-- ZED0 VISUAL -->
+
+        <div
+          class="product-art reveal-fade zed0-art"
+          aria-hidden="true"
+        >
+
+          <div class="art-grid"></div>
+
+          <div class="zed0-glow"></div>
+
+
+          <div class="machine">
+
+            <div class="machine-top"></div>
+
+
+            <div class="machine-body">
+
+              <div class="machine-screen"></div>
+
+
+              <div class="machine-panel">
+
+                <span></span>
+                <span></span>
+                <span></span>
 
               </div>
 
             </div>
 
+
+            <div
+              class="machine-brush machine-brush-left"
+            ></div>
+
+            <div
+              class="machine-brush machine-brush-right"
+            ></div>
+
+
+            <div class="machine-base"></div>
+
+          </div>
+
+
+          <div
+            class="zed0-orbit orbit-one"
+          ></div>
+
+          <div
+            class="zed0-orbit orbit-two"
+          ></div>
+
+
+          <div class="floating-tag tag-one">
+            WASH
+          </div>
+
+          <div class="floating-tag tag-two">
+            SELF-SERVICE
+          </div>
+
+          <div class="floating-tag tag-three">
+            ZED0
           </div>
 
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ==============================================================
+         BIG TYPE
+         ============================================================== -->
+
+    <section class="bigtype-band">
+
+      <div
+        class="bigtype"
+        aria-hidden="true"
+      >
+        WE OPERATE WHAT WE BUILD.
+      </div>
+
+
+      <div
+        class="container bigtype-fg reveal-fade"
+      >
+
+        <p
+          class="eyebrow"
+          style="justify-content:center"
+        >
+          wisemove
+        </p>
+
+        <p>
+          We don't just build for clients. We build products
+          we have to operate. Reliability, usability, and
+          long-term maintainability aren't optional when
+          we're responsible for what happens after launch.
+        </p>
 
       </div>
 
@@ -1217,21 +1596,19 @@
 
         <div class="section-head reveal-fade">
 
-          <span class="eyebrow">
-            CAPABILITIES
-          </span>
+          <p class="eyebrow">
+            capabilities
+          </p>
 
           <h2>
-            Everything you need to
-            <span class="accent-italic">
-              move forward.
-            </span>
+            End-to-end software delivery,
+            designed for clarity.
           </h2>
 
           <p>
-            From the first conversation to launch and
-            beyond, we bring strategy, creativity and
-            engineering together.
+            Whether you need a full product built from scratch
+            or ongoing support for something that already exists,
+            we work as an extension of your team.
           </p>
 
         </div>
@@ -1242,7 +1619,7 @@
 
           <div class="cap-group">
 
-            <div class="cap-num">
+            <div class="cap-num mono">
               01
             </div>
 
@@ -1254,9 +1631,9 @@
             <ul class="cap-list">
 
               <li>Product Strategy</li>
-              <li>Business Analysis</li>
-              <li>Market Research</li>
-              <li>Product Roadmaps</li>
+              <li>Discovery</li>
+              <li>Requirements</li>
+              <li>MVP Planning</li>
 
             </ul>
 
@@ -1265,7 +1642,7 @@
 
           <div class="cap-group">
 
-            <div class="cap-num">
+            <div class="cap-num mono">
               02
             </div>
 
@@ -1276,10 +1653,10 @@
 
             <ul class="cap-list">
 
-              <li>UI/UX Design</li>
-              <li>Design Systems</li>
+              <li>UI/UX</li>
+              <li>Product Design</li>
+              <li>Wireframes</li>
               <li>Prototyping</li>
-              <li>Brand Experience</li>
 
             </ul>
 
@@ -1288,7 +1665,7 @@
 
           <div class="cap-group">
 
-            <div class="cap-num">
+            <div class="cap-num mono">
               03
             </div>
 
@@ -1301,8 +1678,8 @@
 
               <li>Web Applications</li>
               <li>Mobile Applications</li>
-              <li>Backend Systems</li>
-              <li>Cloud & Infrastructure</li>
+              <li>Product Engineering</li>
+              <li>AI &amp; Automation</li>
 
             </ul>
 
@@ -1311,21 +1688,21 @@
 
           <div class="cap-group">
 
-            <div class="cap-num">
+            <div class="cap-num mono">
               04
             </div>
 
             <h5>
-              Growth
+              Scale
               <span class="cap-arrow">↗</span>
             </h5>
 
             <ul class="cap-list">
 
-              <li>Launch Strategy</li>
-              <li>Analytics</li>
-              <li>Optimisation</li>
-              <li>Ongoing Support</li>
+              <li>Deployment</li>
+              <li>Maintenance</li>
+              <li>Support</li>
+              <li>Performance</li>
 
             </ul>
 
@@ -1339,45 +1716,114 @@
 
 
     <!-- ==============================================================
-         TECHNOLOGY
+         WHAT WE BUILD + TECHNOLOGY
          ============================================================== -->
 
-    <section class="section">
+    <section
+      class="section reveal-fade"
+      style="padding-top:0"
+    >
 
       <div class="container">
 
-        <div class="section-head center reveal-fade">
 
-          <span class="eyebrow">
-            BUILD WITH CONFIDENCE
-          </span>
+        <div
+          class="section-head center"
+          style="margin-bottom:24px"
+        >
 
-          <h2>
-            Modern technology.
-            <br>
-            Practical engineering.
-          </h2>
-
-          <p>
-            We choose technology based on what your
-            product actually needs — not what's trending.
+          <p
+            class="eyebrow"
+            style="justify-content:center"
+          >
+            what we build
           </p>
 
         </div>
 
 
-        <div class="tech-strip reveal-stagger">
+        <div class="build-strip">
 
-          <span class="tech-pill">React</span>
-          <span class="tech-pill">Next.js</span>
-          <span class="tech-pill">JavaScript</span>
-          <span class="tech-pill">Node.js</span>
-          <span class="tech-pill">Python</span>
-          <span class="tech-pill">Supabase</span>
-          <span class="tech-pill">PostgreSQL</span>
-          <span class="tech-pill">AWS</span>
-          <span class="tech-pill">Docker</span>
-          <span class="tech-pill">Git</span>
+          <span class="build-item">
+            Web Applications
+          </span>
+
+          <span class="build-item">
+            Mobile Apps
+          </span>
+
+          <span class="build-item">
+            SaaS Platforms
+          </span>
+
+          <span class="build-item">
+            Custom Software
+          </span>
+
+          <span class="build-item">
+            AI &amp; Automation
+          </span>
+
+          <span class="build-item">
+            Business Systems
+          </span>
+
+        </div>
+
+
+        <div
+          class="section-head center"
+          style="margin:44px 0 32px"
+        >
+
+          <p
+            class="eyebrow"
+            style="justify-content:center"
+          >
+            technology
+          </p>
+
+          <h2 style="font-size:24px">
+            Technology chosen for the problem,
+            not the trend.
+          </h2>
+
+        </div>
+
+
+        <div class="tech-strip">
+
+          <span class="tech-pill">
+            React / Next.js
+          </span>
+
+          <span class="tech-pill">
+            Flutter
+          </span>
+
+          <span class="tech-pill">
+            Node.js
+          </span>
+
+          <span class="tech-pill">
+            Python
+          </span>
+
+          <span class="tech-pill">
+            PostgreSQL
+          </span>
+
+          <span class="tech-pill">
+            AWS / Cloud
+          </span>
+
+          <span class="tech-pill">
+            AI / ML APIs
+          </span>
+
+          <span class="tech-pill">
+            REST &amp; GraphQL
+          </span>
 
         </div>
 
@@ -1390,21 +1836,25 @@
          WHY WISEMOVE
          ============================================================== -->
 
-    <section class="section">
+    <section
+      class="section"
+      id="about"
+    >
 
       <div class="container">
 
         <div class="section-head reveal-fade">
 
-          <span class="eyebrow">
-            WHY WISEMOVE
-          </span>
+          <p class="why-intro mono">
+            SMALL TEAM. PRODUCT MINDSET. SERIOUS EXECUTION.
+          </p>
+
+          <p class="eyebrow">
+            why-wisemove
+          </p>
 
           <h2>
-            Built for businesses
-            <span class="accent-italic">
-              that want to move.
-            </span>
+            Why teams choose to build with us.
           </h2>
 
         </div>
@@ -1415,18 +1865,17 @@
 
           <div class="why-card">
 
-            <div class="why-bignum">
+            <span class="why-bignum">
               01
-            </div>
+            </span>
 
             <h5>
-              Product Thinking
+              Product-First Thinking
             </h5>
 
             <p>
-              We think beyond screens and features.
-              Every decision connects back to users,
-              business goals and measurable outcomes.
+              Strategy before features — every build starts
+              with your users and business outcomes.
             </p>
 
           </div>
@@ -1434,55 +1883,17 @@
 
           <div class="why-card">
 
-            <div class="why-bignum">
+            <span class="why-bignum">
               02
-            </div>
-
-            <h5>
-              One Team
-            </h5>
-
-            <p>
-              Strategy, design and engineering work
-              together instead of becoming disconnected
-              handoffs.
-            </p>
-
-          </div>
-
-
-          <div class="why-card">
-
-            <div class="why-bignum">
-              03
-            </div>
-
-            <h5>
-              Built to Scale
-            </h5>
-
-            <p>
-              We create foundations that can grow with
-              your business instead of forcing you to
-              rebuild later.
-            </p>
-
-          </div>
-
-
-          <div class="why-card">
-
-            <div class="why-bignum">
-              04
-            </div>
+            </span>
 
             <h5>
               Transparent Process
             </h5>
 
             <p>
-              Clear communication, realistic timelines
-              and visibility throughout the project.
+              Know where the project stands — clear timelines,
+              honest scoping, no surprise costs.
             </p>
 
           </div>
@@ -1490,37 +1901,17 @@
 
           <div class="why-card">
 
-            <div class="why-bignum">
-              05
-            </div>
+            <span class="why-bignum">
+              03
+            </span>
 
             <h5>
-              Real Products
+              End-to-End Delivery
             </h5>
 
             <p>
-              Our own products give us first-hand
-              experience of building, launching and
-              improving digital businesses.
-            </p>
-
-          </div>
-
-
-          <div class="why-card">
-
-            <div class="why-bignum">
-              06
-            </div>
-
-            <h5>
-              Long-Term Thinking
-            </h5>
-
-            <p>
-              Launch isn't the finish line. We design
-              systems and relationships that support
-              continued growth.
+              One team from idea to scale — from the first
+              wireframe to post-launch support.
             </p>
 
           </div>
@@ -1536,28 +1927,19 @@
          COLLABORATION
          ============================================================== -->
 
-    <section class="section">
+    <section class="section reveal-fade">
 
       <div class="container">
 
-        <div class="section-head reveal-fade">
+        <div class="section-head">
 
-          <span class="eyebrow">
-            WORK WITH US
-          </span>
+          <p class="eyebrow">
+            how-we-work-together
+          </p>
 
           <h2>
-            Bring us your
-            <span class="accent-italic">
-              next move.
-            </span>
+            Built around better collaboration.
           </h2>
-
-          <p>
-            Whether you have an idea, an existing product,
-            or a business problem that needs solving,
-            we'll help you figure out the right next step.
-          </p>
 
         </div>
 
@@ -1567,12 +1949,12 @@
 
           <div class="collab-card">
 
-            <div class="collab-num">
+            <div class="collab-num mono">
               01
             </div>
 
             <h5>
-              New Product
+              Clear communication
             </h5>
 
           </div>
@@ -1580,12 +1962,12 @@
 
           <div class="collab-card">
 
-            <div class="collab-num">
+            <div class="collab-num mono">
               02
             </div>
 
             <h5>
-              Existing Product
+              Practical decisions
             </h5>
 
           </div>
@@ -1593,12 +1975,12 @@
 
           <div class="collab-card">
 
-            <div class="collab-num">
+            <div class="collab-num mono">
               03
             </div>
 
             <h5>
-              Digital Transformation
+              Transparent timelines
             </h5>
 
           </div>
@@ -1606,12 +1988,12 @@
 
           <div class="collab-card">
 
-            <div class="collab-num">
+            <div class="collab-num mono">
               04
             </div>
 
             <h5>
-              Technology Partnership
+              Long-term support
             </h5>
 
           </div>
@@ -1627,48 +2009,69 @@
          FAQ
          ============================================================== -->
 
-    <section class="section">
+    <section class="section reveal-fade">
 
       <div class="container">
 
-        <div class="section-head reveal-fade">
+        <div class="section-head">
 
-          <span class="eyebrow">
-            FAQ
-          </span>
+          <p class="eyebrow">
+            faq
+          </p>
 
           <h2>
-            Questions,
-            <span class="accent-italic">
-              answered.
-            </span>
+            Good to know before we start.
           </h2>
 
         </div>
 
 
-        <div class="faq-list reveal-stagger">
+        <div
+          class="faq-list"
+          id="faqList"
+        >
 
 
           <div class="faq-item">
 
-            <button
-              class="faq-q"
-              type="button"
-            >
+            <button class="faq-q">
 
-              What does WiseMove do?
+              What services does WiseMove offer?
 
-              <i data-lucide="plus"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
 
             </button>
+
 
             <div class="faq-a">
 
               <p>
-                WiseMove is a product studio combining
-                strategy, UI/UX design, software engineering
-                and ongoing product support.
+                We build web and mobile applications end to end —
+                product strategy, UI/UX design, development, QA,
+                launch, and ongoing support. We also take on AI
+                integration and product consulting work.
               </p>
 
             </div>
@@ -1678,23 +2081,44 @@
 
           <div class="faq-item">
 
-            <button
-              class="faq-q"
-              type="button"
-            >
+            <button class="faq-q">
 
-              Can you build a product from scratch?
+              How long does it take to build an app?
 
-              <i data-lucide="plus"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
 
             </button>
+
 
             <div class="faq-a">
 
               <p>
-                Yes. We can help from the initial idea
-                and product strategy through design,
-                development, launch and future improvements.
+                It depends on scope. A focused MVP typically takes
+                6–10 weeks; larger, multi-feature products take longer.
+                We give you a realistic timeline after the discovery
+                phase, not before.
               </p>
 
             </div>
@@ -1704,24 +2128,43 @@
 
           <div class="faq-item">
 
-            <button
-              class="faq-q"
-              type="button"
-            >
+            <button class="faq-q">
 
-              Do you work with existing businesses?
+              Do you offer support after launch?
 
-              <i data-lucide="plus"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
 
             </button>
+
 
             <div class="faq-a">
 
               <p>
-                Yes. We can improve existing products,
-                modernise systems, add new capabilities,
-                improve user experience and support
-                digital transformation.
+                Yes. We offer ongoing maintenance, monitoring,
+                and feature updates after launch — the same way
+                we support Getvia and Vashq, our own products.
               </p>
 
             </div>
@@ -1731,23 +2174,44 @@
 
           <div class="faq-item">
 
-            <button
-              class="faq-q"
-              type="button"
-            >
+            <button class="faq-q">
 
-              What products has WiseMove built?
+              Can you build custom software for my business?
 
-              <i data-lucide="plus"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
 
             </button>
+
 
             <div class="faq-a">
 
               <p>
-                Our product ecosystem currently includes
-                Getvia, Vashq and ZED0, alongside other
-                digital solutions developed by our team.
+                Yes. Beyond Getvia, Vashq, and ZED0, we take on
+                custom builds for businesses that need software
+                tailored to their specific workflow — internal tools,
+                customer-facing apps, dashboards, and more.
               </p>
 
             </div>
@@ -1757,28 +2221,97 @@
 
           <div class="faq-item">
 
-            <button
-              class="faq-q"
-              type="button"
-            >
+            <button class="faq-q">
 
-              How can I start a project?
+              What industries do you work with?
 
-              <i data-lucide="plus"></i>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
 
             </button>
+
 
             <div class="faq-a">
 
               <p>
-                Contact us through the project form below.
-                Tell us about your business, idea or
-                challenge and we'll take it from there.
+                We've built for local business discovery and
+                service-industry operations, including car wash
+                and detailing, and take on projects across retail,
+                services, SaaS, and business operations.
               </p>
 
             </div>
 
           </div>
+
+
+          <div class="faq-item">
+
+            <button class="faq-q">
+
+              How much does a project cost?
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+
+                <line
+                  x1="12"
+                  y1="5"
+                  x2="12"
+                  y2="19"
+                ></line>
+
+                <line
+                  x1="5"
+                  y1="12"
+                  x2="19"
+                  y2="12"
+                ></line>
+
+              </svg>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+                Cost depends on scope, platform, and timeline.
+                Share your requirements through the contact
+                form and we'll give you a clear estimate after
+                an initial discovery call.
+              </p>
+
+            </div>
+
+          </div>
+
 
         </div>
 
@@ -1793,29 +2326,36 @@
 
     <section class="final-cta">
 
-      <div class="final-cta-glow"></div>
+      <div
+        class="final-cta-glow"
+        aria-hidden="true"
+      ></div>
 
       <div class="container">
 
-        <span class="eyebrow">
-          READY WHEN YOU ARE
-        </span>
+        <p
+          class="eyebrow reveal-fade"
+          style="justify-content:center;margin-bottom:18px"
+        >
+          your next move
+        </p>
 
-        <h2>
-          Let's make your next
-          <br>
-          move wiser.
+
+        <h2 class="reveal-fade">
+
+          Have an idea?<br>
+
+          Let's make the next move wiser.
+
         </h2>
+
 
         <a
           href="#contact"
-          class="btn btn-primary"
+          class="btn btn-primary reveal-fade"
         >
-
-          Start a Conversation
-
-          <span class="arrow">→</span>
-
+          Start a Project
+          <span class="arrow">↗</span>
         </a>
 
       </div>
@@ -1836,20 +2376,17 @@
 
         <div class="section-head reveal-fade">
 
-          <span class="eyebrow">
-            CONTACT
-          </span>
+          <p class="eyebrow">
+            contact
+          </p>
 
           <h2>
-            Have a project
-            <span class="accent-italic">
-              in mind?
-            </span>
+            Let's build your next product.
           </h2>
 
           <p>
-            Tell us what you're building, what you're
-            trying to solve and where you want to go.
+            Tell us what you're building — we'll get back
+            with next steps and a clear estimate.
           </p>
 
         </div>
@@ -1858,7 +2395,7 @@
         <div class="contact-wrap">
 
 
-          <!-- CONTACT INFO -->
+          <!-- CONTACT INFORMATION -->
 
           <div class="contact-info-card reveal-fade">
 
@@ -1867,9 +2404,67 @@
 
               <div class="cinfo-icon">
 
-                <i data-lucide="mail"></i>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2
+                    19.79 19.79 0 0 1-8.63-3.07
+                    19.5 19.5 0 0 1-6-6
+                    19.79 19.79 0 0 1-3.07-8.67
+                    A2 2 0 0 1 4.11 2h3a2 2 0 0 1
+                    2 1.72c.127.96.362 1.903.7 2.81
+                    a2 2 0 0 1-.45 2.11L8.09 9.91
+                    a16 16 0 0 0 6 6l1.27-1.27
+                    a2 2 0 0 1 2.11-.45
+                    c.907.338 1.85.573 2.81.7
+                    A2 2 0 0 1 22 16.92z"
+                  ></path>
+
+                </svg>
 
               </div>
+
+
+              <div>
+
+                <div class="cinfo-label">
+                  PHONE
+                </div>
+
+                <div class="cinfo-value">
+                  +91 99953 33560
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="cinfo-row">
+
+              <div class="cinfo-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+
+                  <path d="M22 6 12 13 2 6"></path>
+                  <path d="M2 6h20v12H2z"></path>
+
+                </svg>
+
+              </div>
+
 
               <div>
 
@@ -1878,7 +2473,7 @@
                 </div>
 
                 <div class="cinfo-value">
-                  hello@wisemove.in
+                  info@wisemoveconsultancy.com
                 </div>
 
               </div>
@@ -1890,41 +2485,42 @@
 
               <div class="cinfo-icon">
 
-                <i data-lucide="message-circle"></i>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+
+                  <path
+                    d="M21 10c0 7-9 13-9 13
+                    s-9-6-9-13a9 9 0 0 1
+                    18 0z"
+                  ></path>
+
+                  <circle
+                    cx="12"
+                    cy="10"
+                    r="3"
+                  ></circle>
+
+                </svg>
 
               </div>
+
 
               <div>
 
                 <div class="cinfo-label">
-                  RESPONSE
+                  ADDRESS
                 </div>
 
                 <div class="cinfo-value">
-                  We'll get back to you as soon as possible.
-                </div>
 
-              </div>
+                  15/972, Nedumkulangara Rd,<br>
+                  Athani, Kakkanad, Kerala 682030
 
-            </div>
-
-
-            <div class="cinfo-row">
-
-              <div class="cinfo-icon">
-
-                <i data-lucide="map-pin"></i>
-
-              </div>
-
-              <div>
-
-                <div class="cinfo-label">
-                  LOCATION
-                </div>
-
-                <div class="cinfo-value">
-                  India
                 </div>
 
               </div>
@@ -1933,15 +2529,17 @@
 
 
             <a
-              href="https://wa.me/"
-              class="whatsapp-link"
+              href="https://wa.me/919995333560"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
+              class="whatsapp-link"
             >
 
-              Chat with us on WhatsApp
+              Talk on WhatsApp
 
-              <span class="arrow">→</span>
+              <span class="arrow">
+                →
+              </span>
 
             </a>
 
@@ -1952,27 +2550,27 @@
 
           <div class="form-card reveal-fade">
 
-            <div class="form-note">
-              START A PROJECT / TELL US ABOUT IT
-            </div>
+            <p class="form-note">
+              // submitting opens your email app with this filled in
+              — no backend is connected yet
+            </p>
 
 
             <form id="contactForm">
+
 
               <div class="form-grid">
 
 
                 <div class="form-field">
 
-                  <label for="name">
-                    NAME
+                  <label for="fname">
+                    Your name
                   </label>
 
                   <input
+                    id="fname"
                     type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your name"
                     required
                   >
 
@@ -1981,15 +2579,13 @@
 
                 <div class="form-field">
 
-                  <label for="email">
-                    EMAIL
+                  <label for="femail">
+                    Email address
                   </label>
 
                   <input
+                    id="femail"
                     type="email"
-                    id="email"
-                    name="email"
-                    placeholder="you@example.com"
                     required
                   >
 
@@ -1998,15 +2594,13 @@
 
                 <div class="form-field">
 
-                  <label for="company">
-                    COMPANY
+                  <label for="fphone">
+                    Your phone
                   </label>
 
                   <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    placeholder="Company name"
+                    id="fphone"
+                    type="tel"
                   >
 
                 </div>
@@ -2014,15 +2608,13 @@
 
                 <div class="form-field">
 
-                  <label for="phone">
-                    PHONE
+                  <label for="fsubject">
+                    Subject
                   </label>
 
                   <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    placeholder="+91"
+                    id="fsubject"
+                    type="text"
                   >
 
                 </div>
@@ -2030,36 +2622,34 @@
 
                 <div class="form-field full">
 
-                  <label for="message">
-                    PROJECT DETAILS
+                  <label for="fmessage">
+                    Message
                   </label>
 
                   <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Tell us about your idea, business or challenge..."
+                    id="fmessage"
                     required
                   ></textarea>
 
                 </div>
 
 
-                <div class="form-field full">
-
-                  <button
-                    type="submit"
-                    class="btn btn-primary form-submit"
-                  >
-
-                    Send Project Inquiry
-
-                    <span class="arrow">→</span>
-
-                  </button>
-
-                </div>
-
               </div>
+
+
+              <button
+                type="submit"
+                class="btn btn-primary form-submit"
+              >
+
+                Send Message
+
+                <span class="arrow">
+                  →
+                </span>
+
+              </button>
+
 
             </form>
 
@@ -2082,30 +2672,27 @@
 
     <div class="container">
 
-
       <div class="footer-top">
 
 
         <div class="footer-brand-col">
 
-          <a
-            href="#top"
-            class="brand"
-          >
+          <div class="brand">
 
             <img
               src="assets/wisemove-logo-dark.png"
-              alt="WiseMove"
               class="logo-img logo-dark"
+              alt="WiseMove"
             >
 
             <img
-              src="assets/wisemove-logo-white.png"
-              alt="WiseMove"
+              src="assets/wisemove-logo-light.png"
               class="logo-img logo-light"
+              alt="WiseMove"
             >
 
-          </a>
+          </div>
+
 
           <p>
             Make every move wiser.
@@ -2120,15 +2707,19 @@
           <div class="footer-col">
 
             <h6>
-              Explore
+              Navigation
             </h6>
 
-            <a href="#work">
-              Work
+            <a href="#products">
+              Products
             </a>
 
             <a href="#services">
               Services
+            </a>
+
+            <a href="#work">
+              Process
             </a>
 
             <a href="#about">
@@ -2148,15 +2739,23 @@
               Products
             </h6>
 
-            <a href="#getvia">
-              Getvia
+            <a
+              href="https://getvia.in"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Getvia ↗
             </a>
 
-            <a href="#vashq">
-              Vashq
+            <a
+              href="https://home.vashq.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Vashq ↗
             </a>
 
-            <a href="#zed0">
+            <a href="#zed0-product">
               ZED0
             </a>
 
@@ -2166,16 +2765,19 @@
           <div class="footer-col">
 
             <h6>
-              Legal
+              Location
             </h6>
 
-            <a href="privacy-policy.html">
-              Privacy Policy
-            </a>
-
-            <a href="terms.html">
-              Terms & Conditions
-            </a>
+            <span
+              style="
+                display:block;
+                padding:6px 0;
+                font-size:13.5px;
+                color:var(--text-dim);
+              "
+            >
+              Kakkanad, Kerala, India
+            </span>
 
           </div>
 
@@ -2188,12 +2790,11 @@
       <div class="footer-bottom">
 
         <span>
-          © <span id="year"></span> WiseMove.
-          All rights reserved.
+          © 2026 wisemove consultancy — all rights reserved
         </span>
 
         <span>
-          PRODUCT / DESIGN / ENGINEERING
+          kakkanad, kerala, india
         </span>
 
       </div>
@@ -2207,412 +2808,7 @@
        JAVASCRIPT
        ================================================================ -->
 
-  <script>
-
-    /* --------------------------------------------------------------
-       LUCIDE ICONS
-       -------------------------------------------------------------- */
-
-    if (window.lucide) {
-      lucide.createIcons();
-    }
-
-
-    /* --------------------------------------------------------------
-       YEAR
-       -------------------------------------------------------------- */
-
-    const yearElement = document.getElementById("year");
-
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
-
-
-    /* --------------------------------------------------------------
-       THEME
-       -------------------------------------------------------------- */
-
-    const themeToggle =
-      document.getElementById("themeToggle");
-
-    const savedTheme =
-      localStorage.getItem("wisemove-theme");
-
-    if (savedTheme) {
-      document.documentElement.setAttribute(
-        "data-theme",
-        savedTheme
-      );
-    }
-
-
-    function updateThemeIcon() {
-
-      if (!themeToggle) return;
-
-      const currentTheme =
-        document.documentElement.getAttribute(
-          "data-theme"
-        );
-
-      themeToggle.innerHTML =
-        currentTheme === "dark"
-          ? '<i data-lucide="sun"></i>'
-          : '<i data-lucide="moon"></i>';
-
-      if (window.lucide) {
-        lucide.createIcons();
-      }
-
-    }
-
-
-    updateThemeIcon();
-
-
-    if (themeToggle) {
-
-      themeToggle.addEventListener(
-        "click",
-        function () {
-
-          const currentTheme =
-            document.documentElement.getAttribute(
-              "data-theme"
-            );
-
-          const newTheme =
-            currentTheme === "dark"
-              ? "light"
-              : "dark";
-
-          document.documentElement.setAttribute(
-            "data-theme",
-            newTheme
-          );
-
-          localStorage.setItem(
-            "wisemove-theme",
-            newTheme
-          );
-
-          updateThemeIcon();
-
-        }
-      );
-
-    }
-
-
-    /* --------------------------------------------------------------
-       MOBILE MENU
-       -------------------------------------------------------------- */
-
-    const navBurger =
-      document.getElementById("navBurger");
-
-    const mobileMenu =
-      document.getElementById("mobileMenu");
-
-
-    if (navBurger && mobileMenu) {
-
-      navBurger.addEventListener(
-        "click",
-        function () {
-
-          mobileMenu.classList.toggle("open");
-
-        }
-      );
-
-
-      mobileMenu
-        .querySelectorAll("a")
-        .forEach(function (link) {
-
-          link.addEventListener(
-            "click",
-            function () {
-
-              mobileMenu.classList.remove("open");
-
-            }
-          );
-
-        });
-
-    }
-
-
-    /* --------------------------------------------------------------
-       FAQ
-       -------------------------------------------------------------- */
-
-    document
-      .querySelectorAll(".faq-q")
-      .forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            const item =
-              button.closest(".faq-item");
-
-            const answer =
-              item.querySelector(".faq-a");
-
-            const isOpen =
-              item.classList.contains("open");
-
-
-            document
-              .querySelectorAll(".faq-item.open")
-              .forEach(function (openItem) {
-
-                if (openItem !== item) {
-
-                  openItem.classList.remove("open");
-
-                  const openAnswer =
-                    openItem.querySelector(".faq-a");
-
-                  openAnswer.style.maxHeight = null;
-
-                }
-
-              });
-
-
-            if (isOpen) {
-
-              item.classList.remove("open");
-
-              answer.style.maxHeight = null;
-
-            } else {
-
-              item.classList.add("open");
-
-              answer.style.maxHeight =
-                answer.scrollHeight + "px";
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /* --------------------------------------------------------------
-       REVEAL ANIMATIONS
-       -------------------------------------------------------------- */
-
-    const revealElements =
-      document.querySelectorAll(
-        ".reveal-fade, .reveal-line, .reveal-stagger, .hero-visual, .status-pill"
-      );
-
-
-    const revealObserver =
-      new IntersectionObserver(
-        function (entries, observer) {
-
-          entries.forEach(function (entry) {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("in");
-
-              observer.unobserve(entry.target);
-
-            }
-
-          });
-
-        },
-        {
-          threshold:0.12
-        }
-      );
-
-
-    revealElements.forEach(function (element) {
-
-      revealObserver.observe(element);
-
-    });
-
-
-    /* --------------------------------------------------------------
-       HERO IMMEDIATE REVEAL
-       -------------------------------------------------------------- */
-
-    window.addEventListener(
-      "load",
-      function () {
-
-        document
-          .querySelectorAll(".hero .reveal-line")
-          .forEach(function (element, index) {
-
-            setTimeout(
-              function () {
-                element.classList.add("in");
-              },
-              180 + index * 140
-            );
-
-          });
-
-
-        const status =
-          document.querySelector(".status-pill");
-
-        if (status) {
-
-          setTimeout(
-            function () {
-              status.classList.add("in");
-            },
-            100
-          );
-
-        }
-
-      }
-    );
-
-
-    /* --------------------------------------------------------------
-       CONTACT FORM
-       -------------------------------------------------------------- */
-
-    const contactForm =
-      document.getElementById("contactForm");
-
-
-    if (contactForm) {
-
-      contactForm.addEventListener(
-        "submit",
-        function (event) {
-
-          event.preventDefault();
-
-
-          const submitButton =
-            contactForm.querySelector(
-              ".form-submit"
-            );
-
-
-          if (!submitButton) return;
-
-
-          submitButton.dataset.state =
-            "loading";
-
-          submitButton.innerHTML =
-            "Sending...";
-
-
-          /*
-             IMPORTANT:
-
-             This currently prevents the page from refreshing,
-             but it does NOT send data to a backend.
-
-             Later you can connect this form to:
-             - Supabase
-             - Formspree
-             - EmailJS
-             - Your own API
-          */
-
-
-          setTimeout(
-            function () {
-
-              submitButton.dataset.state =
-                "success";
-
-              submitButton.innerHTML =
-                "Message Received ✓";
-
-              contactForm.reset();
-
-
-              setTimeout(
-                function () {
-
-                  submitButton.dataset.state =
-                    "";
-
-                  submitButton.innerHTML =
-                    'Send Project Inquiry <span class="arrow">→</span>';
-
-                },
-                3000
-              );
-
-            },
-            900
-          );
-
-        }
-      );
-
-    }
-
-
-    /* --------------------------------------------------------------
-       SMOOTH ANCHOR SCROLL
-       -------------------------------------------------------------- */
-
-    document
-      .querySelectorAll('a[href^="#"]')
-      .forEach(function (link) {
-
-        link.addEventListener(
-          "click",
-          function (event) {
-
-            const targetId =
-              link.getAttribute("href");
-
-            if (
-              !targetId ||
-              targetId === "#"
-            ) {
-              return;
-            }
-
-
-            const target =
-              document.querySelector(targetId);
-
-
-            if (target) {
-
-              event.preventDefault();
-
-              target.scrollIntoView({
-                behavior:"smooth",
-                block:"start"
-              });
-
-            }
-
-          }
-        );
-
-      });
-
-  </script>
+  <script src="script.js"></script>
 
 </body>
 </html>
