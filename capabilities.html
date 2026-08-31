@@ -1,1472 +1,1388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Capabilities — WiseMove</title>
-
-    <meta
-        name="description"
-        content="WiseMove brings strategy, design, engineering and product capabilities together to build digital businesses and intelligent platforms."
-    >
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg: #08080d;
-            --bg-soft: #0d0b12;
-            --card: #101017;
-            --border: rgba(255,255,255,0.10);
-            --border-light: rgba(255,255,255,0.07);
-
-            --white: #f5f3fa;
-            --text: #e8e5ef;
-            --muted: #9692a7;
-            --muted-2: #706c7e;
-
-            --purple: #9b25ff;
-            --purple-light: #c238ff;
-            --violet: #6e21ff;
-
-            --max-width: 1200px;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background:
-                radial-gradient(
-                    circle at 80% 20%,
-                    rgba(145, 24, 255, 0.12),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 20% 70%,
-                    rgba(82, 27, 180, 0.08),
-                    transparent 30%
-                ),
-                var(--bg);
-
-            color: var(--text);
-            font-family: "Manrope", sans-serif;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-        /* =========================
-           NAVIGATION
-        ========================= */
-
-        .navbar-wrap {
-            position: fixed;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 0 20px;
-        }
-
-        .navbar {
-            max-width: 1170px;
-            margin: auto;
-
-            height: 52px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 0 12px 0 22px;
-
-            background: rgba(15, 13, 20, 0.86);
-            border: 1px solid rgba(255,255,255,0.14);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Capabilities — WiseMove</title>
+  <meta
+    name="description"
+    content="WiseMove brings strategy, design, engineering and product thinking together to build scalable digital experiences."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --bg: #07070b;
+      --bg-soft: #0b0910;
+      --surface: #0e0d14;
+      --surface-2: #12101a;
+
+      --white: #f5f3fb;
+      --text: #d8d4e4;
+      --muted: #9691a7;
+      --muted-2: #706b7e;
+
+      --line: rgba(255, 255, 255, 0.10);
+      --line-soft: rgba(255, 255, 255, 0.065);
+
+      --purple: #b51cff;
+      --purple-light: #c83cff;
+      --violet: #6926ff;
+
+      --max-width: 1160px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(
+          circle at 78% 12%,
+          rgba(119, 23, 159, 0.16),
+          transparent 34%
+        ),
+        radial-gradient(
+          circle at 15% 40%,
+          rgba(81, 25, 134, 0.07),
+          transparent 30%
+        ),
+        var(--bg);
+
+      color: var(--white);
+      font-family: "Manrope", sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    /* ========================================
+       NAVIGATION
+    ======================================== */
+
+    .nav-wrap {
+      position: relative;
+      z-index: 100;
+      width: min(calc(100% - 48px), 1170px);
+      margin: 28px auto 0;
+    }
+
+    .navbar {
+      height: 58px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 32px;
+
+      background: rgba(15, 13, 20, 0.76);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 22px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      flex-shrink: 0;
+    }
+
+    .brand img {
+      width: 88px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      margin-left: auto;
+      margin-right: 30px;
+    }
+
+    .nav-links a {
+      color: #a9a4b6;
+      font-size: 14px;
+      font-weight: 600;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-btn {
+      width: 36px;
+      height: 36px;
+
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+
+      background: rgba(255, 255, 255, 0.025);
+      color: #d8d4df;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      width: 14px;
+      height: 1px;
+      background: currentColor;
+      position: relative;
+    }
+
+    .menu-btn span::before,
+    .menu-btn span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 14px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .menu-btn span::before {
+      top: -5px;
+    }
+
+    .menu-btn span::after {
+      top: 5px;
+    }
+
+    .talk-btn {
+      min-width: 118px;
+      height: 40px;
+
+      padding: 0 20px;
+
+      border-radius: 24px;
+      border: none;
+
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+
+      background: linear-gradient(
+        110deg,
+        #c126ff,
+        #7024ff
+      );
+
+      box-shadow:
+        0 0 24px rgba(147, 30, 255, 0.18);
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .talk-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 34px rgba(147, 30, 255, 0.32);
+    }
+
+    /* ========================================
+       HERO
+    ======================================== */
+
+    .hero {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+
+      min-height: 500px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 100px 0 95px;
+
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: 50px;
+
+      width: 500px;
+      height: 430px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(119, 23, 159, 0.15),
+          transparent 68%
+        );
+
+      pointer-events: none;
+      filter: blur(20px);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 930px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      color: #ce35ff;
+
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 4px;
+      height: 4px;
+
+      background: #c627ff;
+      border-radius: 50%;
+
+      box-shadow: 0 0 9px rgba(198, 39, 255, 0.8);
+    }
+
+    .hero h1 {
+      font-size: clamp(54px, 7vw, 78px);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      font-weight: 800;
+
+      max-width: 900px;
+    }
+
+    .gradient-text {
+      color: transparent;
+
+      background:
+        linear-gradient(
+          100deg,
+          #c525ff 0%,
+          #a92cff 42%,
+          #6233ff 100%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      font-style: italic;
+    }
+
+    .hero-description {
+      margin-top: 22px;
+
+      max-width: 790px;
+
+      color: #ddd9e4;
+
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    /* ========================================
+       CAPABILITIES SECTION
+    ======================================== */
+
+    .capabilities {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+
+      padding: 40px 0 120px;
+    }
+
+    .section-intro {
+      max-width: 760px;
+      margin-bottom: 46px;
+    }
+
+    .section-intro .eyebrow {
+      margin-bottom: 20px;
+    }
+
+    .section-intro h2 {
+      font-size: clamp(40px, 5vw, 56px);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
+
+    .section-intro p {
+      margin-top: 22px;
 
-            border-radius: 30px;
+      max-width: 700px;
 
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            box-shadow:
-                0 10px 35px rgba(0,0,0,0.25);
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .logo img {
-            display: block;
-            width: 88px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 38px;
-            margin-left: auto;
-            margin-right: 28px;
-        }
-
-        .nav-links a {
-            font-size: 14px;
-            font-weight: 600;
-            color: #aaa6b6;
-
-            transition:
-                color 0.25s ease,
-                transform 0.25s ease;
-        }
+      color: var(--muted);
 
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: #ffffff;
-        }
-
-        .nav-links a:hover {
-            transform: translateY(-1px);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .menu-button {
-            width: 34px;
-            height: 34px;
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    /* ========================================
+       CAPABILITY GRID
+    ======================================== */
 
-            border-radius: 50%;
+    .capability-grid {
+      width: 100%;
 
-            border: 1px solid rgba(255,255,255,0.10);
-            background: rgba(255,255,255,0.025);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
 
-            color: #c7c3cf;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
 
-            cursor: pointer;
+    .capability-card {
+      min-height: 310px;
 
-            font-size: 13px;
-        }
+      padding: 28px 26px 30px;
 
-        .talk-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-
-            min-height: 38px;
-            padding: 0 20px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
 
-            border-radius: 22px;
+      position: relative;
 
-            background:
-                linear-gradient(
-                    110deg,
-                    #a91cff,
-                    #6824e8
-                );
+      transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+    }
 
-            color: #fff;
+    .capability-card:hover {
+      background: rgba(255, 255, 255, 0.018);
+    }
 
-            font-size: 13px;
-            font-weight: 800;
+    .card-number {
+      color: #cf28ff;
 
-            box-shadow:
-                0 8px 25px rgba(129, 30, 255, 0.28);
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
+      margin-bottom: 18px;
+    }
 
-        .talk-button:hover {
-            transform: translateY(-2px);
-            box-shadow:
-                0 12px 32px rgba(129, 30, 255, 0.40);
-        }
+    .capability-card h3 {
+      font-size: 19px;
+      line-height: 1.2;
+      font-weight: 800;
 
-        /* =========================
-           HERO
-        ========================= */
+      margin-bottom: 25px;
+    }
 
-        .hero {
-            max-width: var(--max-width);
-            margin: 0 auto;
+    .arrow {
+      color: #898295;
+      font-size: 14px;
+      margin-left: 4px;
+    }
 
-            padding:
-                158px
-                24px
-                95px;
-        }
+    .service-list {
+      list-style: none;
+    }
 
-        .eyebrow {
-            display: flex;
-            align-items: center;
-            gap: 9px;
+    .service-list li {
+      padding: 11px 0;
 
-            margin-bottom: 12px;
+      border-bottom: 1px solid var(--line-soft);
 
-            color: #c02aff;
+      color: #9691a5;
 
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
-            font-weight: 500;
+      font-size: 14px;
+      line-height: 1.4;
+    }
 
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
+    .service-list li:last-child {
+      border-bottom: none;
+    }
 
-        .eyebrow::before {
-            content: "";
-            width: 4px;
-            height: 4px;
+    /* ========================================
+       TECHNOLOGY
+    ======================================== */
 
-            border-radius: 50%;
+    .technology {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
 
-            background: #d62cff;
-            box-shadow:
-                0 0 10px rgba(210, 44, 255, 0.8);
-        }
+      padding: 20px 0 125px;
+    }
 
-        .hero h1 {
-            max-width: 850px;
+    .technology-inner {
+      border-top: 1px solid var(--line);
 
-            font-size: clamp(42px, 5vw, 68px);
-            line-height: 1.04;
-            letter-spacing: -0.045em;
+      padding-top: 65px;
+    }
 
-            font-weight: 800;
+    .technology h2 {
+      max-width: 700px;
 
-            color: var(--white);
-        }
+      font-size: clamp(38px, 5vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      font-weight: 800;
+    }
 
-        .gradient-text {
-            font-style: italic;
+    .technology-description {
+      margin-top: 20px;
 
-            background:
-                linear-gradient(
-                    100deg,
-                    #d22cff 0%,
-                    #9d27ff 45%,
-                    #6427ff 100%
-                );
+      max-width: 700px;
 
-            -webkit-background-clip: text;
-            background-clip: text;
+      color: var(--muted);
 
-            color: transparent;
-        }
+      font-size: 16px;
+      line-height: 1.7;
+    }
 
-        .hero-description {
-            max-width: 760px;
+    .technology-grid {
+      margin-top: 50px;
 
-            margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
 
-            font-size: 17px;
-            line-height: 1.65;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
 
-            color: #d3cfda;
-            font-weight: 500;
-        }
+    .technology-card {
+      min-height: 190px;
 
-        /* =========================
-           CAPABILITIES
-        ========================= */
+      padding: 26px;
 
-        .capabilities-section {
-            max-width: var(--max-width);
-            margin: 0 auto;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
 
-            padding:
-                25px
-                24px
-                120px;
-        }
+    .technology-card span {
+      display: block;
 
-        .section-heading {
-            margin-bottom: 42px;
-        }
+      color: #c82cff;
 
-        .section-heading .eyebrow {
-            margin-bottom: 13px;
-        }
+      font-family: "DM Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
 
-        .section-heading h2 {
-            max-width: 720px;
+      margin-bottom: 18px;
+    }
 
-            font-size: clamp(38px, 4.5vw, 57px);
-            line-height: 1.08;
+    .technology-card h3 {
+      font-size: 18px;
+      font-weight: 800;
 
-            letter-spacing: -0.045em;
+      margin-bottom: 12px;
+    }
 
-            color: var(--white);
-            font-weight: 800;
-        }
+    .technology-card p {
+      color: var(--muted);
 
-        .section-heading p {
-            max-width: 700px;
+      font-size: 13px;
+      line-height: 1.65;
+    }
 
-            margin-top: 16px;
+    /* ========================================
+       CTA
+    ======================================== */
 
-            font-size: 16px;
-            line-height: 1.75;
+    .cta {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
 
-            color: var(--muted);
+      padding-bottom: 100px;
+    }
 
-            font-weight: 500;
-        }
+    .cta-box {
+      position: relative;
+      overflow: hidden;
 
-        /* =========================
-           CAPABILITY GRID
-        ========================= */
+      border: 1px solid var(--line);
 
-        .capability-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+      border-radius: 24px;
 
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
+      padding: 70px 60px;
 
-            background: rgba(255,255,255,0.005);
-        }
+      background:
+        radial-gradient(
+          circle at 85% 30%,
+          rgba(131, 23, 173, 0.22),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 20% 100%,
+          rgba(81, 30, 151, 0.12),
+          transparent 45%
+        ),
+        #0b0a10;
+    }
 
-        .capability-card {
-            min-height: 320px;
+    .cta-box h2 {
+      max-width: 700px;
 
-            padding: 30px 26px 28px;
+      font-size: clamp(38px, 5vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+    }
 
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+    .cta-box p {
+      max-width: 600px;
 
-            position: relative;
+      margin-top: 18px;
 
-            transition:
-                background 0.3s ease,
-                transform 0.3s ease;
-        }
+      color: var(--muted);
 
-        .capability-card:hover {
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(151, 35, 255, 0.08),
-                    rgba(255,255,255,0.015)
-                );
+      font-size: 15px;
+      line-height: 1.7;
+    }
 
-            transform: translateY(-4px);
-        }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
 
-        .capability-number {
-            display: block;
+      margin-top: 30px;
 
-            margin-bottom: 16px;
+      min-height: 46px;
+      padding: 0 25px;
 
-            color: #ce2aff;
+      border-radius: 24px;
 
-            font-family: "DM Mono", monospace;
-            font-size: 11px;
+      background: linear-gradient(
+        110deg,
+        #c126ff,
+        #7024ff
+      );
 
-            letter-spacing: 0.04em;
-        }
+      color: white;
 
-        .capability-title {
-            display: flex;
-            align-items: center;
-            gap: 7px;
+      font-size: 13px;
+      font-weight: 800;
 
-            margin-bottom: 23px;
+      box-shadow:
+        0 10px 35px rgba(111, 31, 255, 0.22);
 
-            color: #eeeaf4;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
 
-            font-size: 19px;
-            line-height: 1.3;
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 14px 42px rgba(111, 31, 255, 0.32);
+    }
 
-            font-weight: 800;
-        }
+    /* ========================================
+       FOOTER
+    ======================================== */
 
-        .capability-arrow {
-            color: #8d8998;
+    footer {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
 
-            font-size: 15px;
+      padding: 38px 0 35px;
 
-            transition:
-                color 0.25s ease,
-                transform 0.25s ease;
-        }
+      border-top: 1px solid var(--line);
 
-        .capability-card:hover .capability-arrow {
-            color: #c32cff;
-            transform: translate(2px, -2px);
-        }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        .capability-list {
-            list-style: none;
-        }
+      color: var(--muted-2);
 
-        .capability-list li {
-            padding: 11px 0;
+      font-size: 12px;
+    }
 
-            border-bottom: 1px solid var(--border-light);
+    .footer-brand {
+      display: flex;
+      align-items: center;
+    }
 
-            color: #9894a4;
+    .footer-brand img {
+      width: 82px;
+      height: auto;
+    }
 
-            font-size: 14px;
-            line-height: 1.4;
+    .footer-copy {
+      text-align: right;
+    }
 
-            font-weight: 500;
-        }
+    /* ========================================
+       MOBILE MENU
+    ======================================== */
 
-        .capability-list li:last-child {
-            border-bottom: 0;
-        }
+    .mobile-menu {
+      display: none;
 
-        /* =========================
-           TECHNOLOGY SECTION
-        ========================= */
+      position: absolute;
+      top: 68px;
+      left: 0;
+      right: 0;
 
-        .technology-section {
-            max-width: var(--max-width);
-            margin: 0 auto;
+      padding: 16px;
 
-            padding:
-                20px
-                24px
-                130px;
-        }
+      border: 1px solid var(--line);
+      border-radius: 20px;
 
-        .technology-inner {
-            padding-top: 50px;
+      background: rgba(12, 10, 17, 0.96);
 
-            border-top: 1px solid var(--border);
-        }
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
 
-        .technology-grid {
-            display: grid;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    }
 
-            grid-template-columns: 1fr 1fr;
+    .mobile-menu.open {
+      display: block;
+    }
 
-            gap: 80px;
+    .mobile-menu a {
+      display: block;
 
-            margin-top: 40px;
-        }
+      padding: 14px 12px;
 
-        .technology-copy h3 {
-            max-width: 650px;
+      color: #aaa5b5;
 
-            font-size: clamp(30px, 3.5vw, 45px);
-            line-height: 1.1;
+      border-bottom: 1px solid var(--line-soft);
 
-            letter-spacing: -0.04em;
+      font-size: 14px;
+      font-weight: 600;
+    }
 
-            color: var(--white);
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
 
-            font-weight: 800;
-        }
+    .mobile-menu a:hover,
+    .mobile-menu a.active {
+      color: white;
+    }
 
-        .technology-copy p {
-            max-width: 600px;
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
 
-            margin-top: 20px;
+    @media (max-width: 900px) {
 
-            color: var(--muted);
+      .nav-links {
+        display: none;
+      }
 
-            font-size: 15px;
-            line-height: 1.8;
-        }
+      .menu-btn {
+        display: flex;
+      }
 
-        .technology-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
+      .nav-actions {
+        gap: 9px;
+      }
 
-            border-top: 1px solid var(--border);
-            border-left: 1px solid var(--border);
-        }
+      .capability-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-        .technology-item {
-            min-height: 110px;
+      .technology-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-            display: flex;
-            align-items: center;
+      .hero {
+        padding-top: 85px;
+      }
 
-            padding: 22px;
+      .hero h1 {
+        max-width: 720px;
+      }
+    }
 
-            border-right: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
+    @media (max-width: 640px) {
 
-            color: #c3bfca;
+      .nav-wrap {
+        width: calc(100% - 28px);
+        margin-top: 14px;
+      }
 
-            font-size: 14px;
-            font-weight: 700;
+      .navbar {
+        height: 54px;
+        padding: 0 15px;
+      }
 
-            transition:
-                color 0.25s ease,
-                background 0.25s ease;
-        }
+      .brand img {
+        width: 82px;
+      }
 
-        .technology-item:hover {
-            color: #fff;
+      .talk-btn {
+        min-width: 96px;
+        height: 36px;
 
-            background:
-                rgba(151, 35, 255, 0.06);
-        }
+        padding: 0 14px;
 
-        /* =========================
-           CTA
-        ========================= */
+        font-size: 12px;
+      }
 
-        .cta-section {
-            max-width: var(--max-width);
-            margin: 0 auto;
+      .menu-btn {
+        width: 34px;
+        height: 34px;
+      }
 
-            padding:
-                0
-                24px
-                120px;
-        }
+      .hero,
+      .capabilities,
+      .technology,
+      .cta,
+      footer {
+        width: calc(100% - 32px);
+      }
 
-        .cta {
-            position: relative;
+      .hero {
+        min-height: auto;
 
-            overflow: hidden;
+        padding: 90px 0 90px;
+      }
 
-            padding: 65px;
+      .hero h1 {
+        font-size: clamp(46px, 14vw, 64px);
+      }
 
-            border: 1px solid rgba(172, 43, 255, 0.25);
-            border-radius: 22px;
+      .hero-description {
+        font-size: 14px;
+      }
 
-            background:
-                radial-gradient(
-                    circle at 85% 50%,
-                    rgba(150, 35, 255, 0.18),
-                    transparent 38%
-                ),
-                linear-gradient(
-                    120deg,
-                    rgba(255,255,255,0.035),
-                    rgba(114,28,170,0.08)
-                );
-        }
+      .capabilities {
+        padding-bottom: 90px;
+      }
 
-        .cta::before {
-            content: "";
+      .section-intro h2 {
+        font-size: 40px;
+      }
 
-            position: absolute;
+      .section-intro p {
+        font-size: 14px;
+      }
 
-            width: 250px;
-            height: 250px;
+      .capability-grid {
+        grid-template-columns: 1fr;
+      }
 
-            top: -120px;
-            right: -100px;
+      .capability-card {
+        min-height: auto;
+        padding: 26px 22px 28px;
+      }
 
-            border-radius: 50%;
+      .technology {
+        padding-bottom: 90px;
+      }
 
-            background: rgba(153, 32, 255, 0.10);
+      .technology-grid {
+        grid-template-columns: 1fr;
+      }
 
-            filter: blur(40px);
+      .cta {
+        padding-bottom: 70px;
+      }
 
-            pointer-events: none;
-        }
+      .cta-box {
+        padding: 45px 28px;
+        border-radius: 20px;
+      }
 
-        .cta-content {
-            position: relative;
-            z-index: 2;
-        }
+      .cta-box h2 {
+        font-size: 40px;
+      }
 
-        .cta h2 {
-            max-width: 700px;
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
 
-            font-size: clamp(32px, 4vw, 50px);
-            line-height: 1.08;
-
-            letter-spacing: -0.04em;
-
-            color: var(--white);
-
-            font-weight: 800;
-        }
-
-        .cta p {
-            max-width: 620px;
-
-            margin-top: 18px;
-
-            color: var(--muted);
-
-            font-size: 15px;
-            line-height: 1.75;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            margin-top: 28px;
-
-            padding: 13px 23px;
-
-            border-radius: 30px;
-
-            background:
-                linear-gradient(
-                    110deg,
-                    #a91cff,
-                    #6724e8
-                );
-
-            color: white;
-
-            font-size: 13px;
-            font-weight: 800;
-
-            box-shadow:
-                0 10px 30px rgba(127, 29, 255, 0.28);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 15px 35px rgba(127, 29, 255, 0.42);
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
-
-        footer {
-            border-top: 1px solid var(--border);
-
-            padding:
-                55px
-                24px
-                35px;
-        }
-
-        .footer-inner {
-            max-width: var(--max-width);
-            margin: auto;
-
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-
-            gap: 50px;
-        }
-
-        .footer-brand {
-            max-width: 330px;
-        }
-
-        .footer-logo {
-            width: 100px;
-            height: auto;
-
-            margin-bottom: 18px;
-        }
-
-        .footer-brand p {
-            color: var(--muted);
-
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 55px;
-        }
-
-        .footer-column h4 {
-            margin-bottom: 15px;
-
-            color: #e6e2ec;
-
-            font-size: 12px;
-            font-weight: 800;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.05em;
-        }
-
-        .footer-column a {
-            display: block;
-
-            margin-bottom: 10px;
-
-            color: #898594;
-
-            font-size: 13px;
-
-            transition: color 0.2s ease;
-        }
-
-        .footer-column a:hover {
-            color: #fff;
-        }
-
-        .copyright {
-            max-width: var(--max-width);
-            margin: 45px auto 0;
-
-            padding-top: 22px;
-
-            border-top: 1px solid var(--border-light);
-
-            color: #625f6b;
-
-            font-family: "DM Mono", monospace;
-            font-size: 10px;
-        }
-
-        /* =========================
-           MOBILE NAV
-        ========================= */
-
-        .mobile-menu {
-            display: none;
-
-            position: fixed;
-
-            top: 84px;
-            left: 20px;
-            right: 20px;
-
-            padding: 20px;
-
-            border-radius: 18px;
-
-            background: rgba(14, 12, 19, 0.97);
-            border: 1px solid var(--border);
-
-            backdrop-filter: blur(20px);
-
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: block;
-        }
-
-        .mobile-menu a {
-            display: block;
-
-            padding: 13px 8px;
-
-            color: #aaa6b5;
-
-            font-size: 14px;
-            font-weight: 600;
-
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .mobile-menu a:last-child {
-            border-bottom: 0;
-        }
-
-        /* =========================
-           RESPONSIVE
-        ========================= */
-
-        @media (max-width: 900px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .menu-button {
-                display: flex;
-            }
-
-            .capability-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .technology-grid {
-                grid-template-columns: 1fr;
-                gap: 45px;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-            }
-
-            .footer-links {
-                flex-wrap: wrap;
-            }
-        }
-
-        @media (min-width: 901px) {
-
-            .menu-button {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            .navbar-wrap {
-                top: 12px;
-                padding: 0 12px;
-            }
-
-            .navbar {
-                height: 50px;
-                padding-left: 16px;
-            }
-
-            .logo img {
-                width: 82px;
-            }
-
-            .talk-button {
-                padding: 0 15px;
-            }
-
-            .hero {
-                padding:
-                    125px
-                    20px
-                    70px;
-            }
-
-            .hero h1 {
-                font-size: 40px;
-            }
-
-            .hero-description {
-                font-size: 15px;
-            }
-
-            .capabilities-section {
-                padding:
-                    20px
-                    20px
-                    85px;
-            }
-
-            .section-heading h2 {
-                font-size: 38px;
-            }
-
-            .capability-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .capability-card {
-                min-height: auto;
-            }
-
-            .technology-section {
-                padding:
-                    20px
-                    20px
-                    90px;
-            }
-
-            .technology-list {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-section {
-                padding:
-                    0
-                    20px
-                    90px;
-            }
-
-            .cta {
-                padding: 38px 25px;
-            }
-
-            .footer-links {
-                gap: 35px;
-            }
-
-            footer {
-                padding:
-                    45px
-                    20px
-                    30px;
-            }
-        }
-    </style>
+      .footer-copy {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- =========================================
+  <div class="page">
+
+    <!-- ========================================
          NAVIGATION
-    ========================================== -->
+    ======================================== -->
 
-    <div class="navbar-wrap">
+    <div class="nav-wrap">
 
-        <nav class="navbar">
+      <nav class="navbar">
 
-            <a href="index.html" class="logo">
-                <img
-                    src="assets/wisemove-logo-dark.png"
-                    alt="WiseMove"
-                >
-            </a>
-
-            <div class="nav-links">
-
-                <a href="about.html">
-                    About
-                </a>
-
-                <a href="products.html">
-                    Products
-                </a>
-
-                <a href="capabilities.html" class="active">
-                    Capabilities
-                </a>
-
-                <a href="contact.html">
-                    Contact
-                </a>
-
-            </div>
-
-            <div class="nav-actions">
-
-                <button
-                    class="menu-button"
-                    id="menuButton"
-                    aria-label="Open navigation menu"
-                    type="button"
-                >
-                    ☰
-                </button>
-
-                <a
-                    href="contact.html"
-                    class="talk-button"
-                >
-                    Let's Talk ↗
-                </a>
-
-            </div>
-
-        </nav>
-
-    </div>
-
-
-    <!-- =========================================
-         MOBILE MENU
-    ========================================== -->
-
-    <div class="mobile-menu" id="mobileMenu">
-
-        <a href="index.html">
-            Home
+        <a href="index.html" class="brand" aria-label="WiseMove Home">
+          <img
+            src="assets/wisemove-logo-light.png"
+            alt="WiseMove"
+          >
         </a>
 
-        <a href="about.html">
+        <div class="nav-links">
+
+          <a href="about.html">
             About
-        </a>
+          </a>
 
-        <a href="products.html">
+          <a href="products.html">
             Products
-        </a>
+          </a>
 
-        <a href="capabilities.html">
+          <a href="capabilities.html" class="active">
             Capabilities
-        </a>
+          </a>
 
-        <a href="contact.html">
+          <a href="contact.html">
             Contact
-        </a>
+          </a>
+
+        </div>
+
+        <div class="nav-actions">
+
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open navigation menu"
+            type="button"
+          >
+            <span></span>
+          </button>
+
+          <a href="contact.html" class="talk-btn">
+            Let's Talk ↗
+          </a>
+
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+
+          <a href="about.html">
+            About
+          </a>
+
+          <a href="products.html">
+            Products
+          </a>
+
+          <a href="capabilities.html" class="active">
+            Capabilities
+          </a>
+
+          <a href="contact.html">
+            Contact
+          </a>
+
+        </div>
+
+      </nav>
 
     </div>
 
 
-    <!-- =========================================
+    <!-- ========================================
          HERO
-    ========================================== -->
+         IMPORTANT:
+         This is the ONLY hero heading.
+         Do not add another duplicate hero section.
+    ======================================== -->
 
     <main>
 
-        <section class="hero">
+      <section class="hero">
 
-            <div class="eyebrow">
-                Capabilities
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            Capabilities
+          </div>
+
+          <h1>
+            Built across
+            <span class="gradient-text">
+              disciplines.
+            </span>
+          </h1>
+
+          <p class="hero-description">
+            From product strategy to engineering and launch,
+            we bring the pieces together under one roof.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================================
+           CAPABILITIES
+           ONLY ONE CAPABILITIES CONTENT SECTION
+      ======================================== -->
+
+      <section class="capabilities">
+
+        <div class="section-intro">
+
+          <div class="eyebrow">
+            Capabilities
+          </div>
+
+          <h2>
+            Built across
+            <span class="gradient-text">
+              disciplines.
+            </span>
+          </h2>
+
+          <p>
+            We combine strategy, design, engineering and product
+            thinking to turn complex ideas into useful, scalable
+            digital experiences.
+          </p>
+
+        </div>
+
+
+        <div class="capability-grid">
+
+          <!-- STRATEGY -->
+
+          <article class="capability-card">
+
+            <div class="card-number">
+              01
             </div>
 
-            <h1>
-                Built across
-                <span class="gradient-text">
-                    disciplines.
-                </span>
-            </h1>
+            <h3>
+              Strategy
+              <span class="arrow">↗</span>
+            </h3>
 
-            <p class="hero-description">
-                From product strategy to engineering and launch,
-                we bring the pieces together under one roof.
-            </p>
+            <ul class="service-list">
 
-        </section>
+              <li>
+                Product discovery
+              </li>
+
+              <li>
+                Business analysis
+              </li>
+
+              <li>
+                Digital strategy
+              </li>
+
+              <li>
+                Technical planning
+              </li>
+
+            </ul>
+
+          </article>
 
 
-        <!-- =========================================
-             CAPABILITIES
-        ========================================== -->
+          <!-- DESIGN -->
 
-        <section class="capabilities-section">
+          <article class="capability-card">
 
-            <div class="section-heading">
-
-                <div class="eyebrow">
-                    Capabilities
-                </div>
-
-                <h2>
-                    Built across
-                    <span class="gradient-text">
-                        disciplines.
-                    </span>
-                </h2>
-
-                <p>
-                    We combine strategy, design, engineering and
-                    product thinking to turn complex ideas into
-                    useful, scalable digital experiences.
-                </p>
-
+            <div class="card-number">
+              02
             </div>
 
+            <h3>
+              Design
+              <span class="arrow">↗</span>
+            </h3>
 
-            <div class="capability-grid">
+            <ul class="service-list">
 
-                <!-- 01 -->
+              <li>
+                UI / UX design
+              </li>
 
-                <article class="capability-card">
+              <li>
+                Design systems
+              </li>
 
-                    <span class="capability-number">
-                        01
-                    </span>
+              <li>
+                Product interfaces
+              </li>
 
-                    <h3 class="capability-title">
-                        Strategy
-                        <span class="capability-arrow">
-                            ↗
-                        </span>
-                    </h3>
+              <li>
+                Brand experiences
+              </li>
 
-                    <ul class="capability-list">
+            </ul>
 
-                        <li>
-                            Product discovery
-                        </li>
-
-                        <li>
-                            Business analysis
-                        </li>
-
-                        <li>
-                            Digital strategy
-                        </li>
-
-                        <li>
-                            Technical planning
-                        </li>
-
-                    </ul>
-
-                </article>
+          </article>
 
 
-                <!-- 02 -->
+          <!-- ENGINEERING -->
 
-                <article class="capability-card">
+          <article class="capability-card">
 
-                    <span class="capability-number">
-                        02
-                    </span>
-
-                    <h3 class="capability-title">
-                        Design
-                        <span class="capability-arrow">
-                            ↗
-                        </span>
-                    </h3>
-
-                    <ul class="capability-list">
-
-                        <li>
-                            UI / UX design
-                        </li>
-
-                        <li>
-                            Design systems
-                        </li>
-
-                        <li>
-                            Product interfaces
-                        </li>
-
-                        <li>
-                            Brand experiences
-                        </li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- 03 -->
-
-                <article class="capability-card">
-
-                    <span class="capability-number">
-                        03
-                    </span>
-
-                    <h3 class="capability-title">
-                        Engineering
-                        <span class="capability-arrow">
-                            ↗
-                        </span>
-                    </h3>
-
-                    <ul class="capability-list">
-
-                        <li>
-                            Web applications
-                        </li>
-
-                        <li>
-                            Cloud systems
-                        </li>
-
-                        <li>
-                            APIs &amp; backend
-                        </li>
-
-                        <li>
-                            Automation
-                        </li>
-
-                    </ul>
-
-                </article>
-
-
-                <!-- 04 -->
-
-                <article class="capability-card">
-
-                    <span class="capability-number">
-                        04
-                    </span>
-
-                    <h3 class="capability-title">
-                        Products
-                        <span class="capability-arrow">
-                            ↗
-                        </span>
-                    </h3>
-
-                    <ul class="capability-list">
-
-                        <li>
-                            Digital platforms
-                        </li>
-
-                        <li>
-                            Business software
-                        </li>
-
-                        <li>
-                            Automotive solutions
-                        </li>
-
-                        <li>
-                            Hardware concepts
-                        </li>
-
-                    </ul>
-
-                </article>
-
+            <div class="card-number">
+              03
             </div>
 
-        </section>
+            <h3>
+              Engineering
+              <span class="arrow">↗</span>
+            </h3>
+
+            <ul class="service-list">
+
+              <li>
+                Web applications
+              </li>
+
+              <li>
+                Cloud systems
+              </li>
+
+              <li>
+                APIs &amp; backend
+              </li>
+
+              <li>
+                Automation
+              </li>
+
+            </ul>
+
+          </article>
 
 
-        <!-- =========================================
-             TECHNOLOGY
-        ========================================== -->
+          <!-- PRODUCTS -->
 
-        <section class="technology-section">
+          <article class="capability-card">
 
-            <div class="technology-inner">
-
-                <div class="eyebrow">
-                    Technology
-                </div>
-
-                <div class="technology-grid">
-
-                    <div class="technology-copy">
-
-                        <h3>
-                            Technology that turns
-                            ideas into working
-                            products.
-                        </h3>
-
-                        <p>
-                            Our engineering approach combines modern
-                            web technologies, cloud infrastructure,
-                            APIs, automation and scalable architecture
-                            to create products that are built for
-                            real-world use.
-                        </p>
-
-                    </div>
-
-
-                    <div class="technology-list">
-
-                        <div class="technology-item">
-                            Web &amp; Mobile
-                        </div>
-
-                        <div class="technology-item">
-                            Cloud Infrastructure
-                        </div>
-
-                        <div class="technology-item">
-                            APIs &amp; Integrations
-                        </div>
-
-                        <div class="technology-item">
-                            Automation
-                        </div>
-
-                        <div class="technology-item">
-                            Data &amp; Intelligence
-                        </div>
-
-                        <div class="technology-item">
-                            Product Platforms
-                        </div>
-
-                    </div>
-
-                </div>
-
+            <div class="card-number">
+              04
             </div>
 
-        </section>
+            <h3>
+              Products
+              <span class="arrow">↗</span>
+            </h3>
+
+            <ul class="service-list">
+
+              <li>
+                Digital platforms
+              </li>
+
+              <li>
+                Business software
+              </li>
+
+              <li>
+                Automotive solutions
+              </li>
+
+              <li>
+                Hardware concepts
+              </li>
+
+            </ul>
+
+          </article>
+
+        </div>
+
+      </section>
 
 
-        <!-- =========================================
-             CTA
-        ========================================== -->
+      <!-- ========================================
+           TECHNOLOGY
+      ======================================== -->
 
-        <section class="cta-section">
+      <section class="technology">
 
-            <div class="cta">
+        <div class="technology-inner">
 
-                <div class="cta-content">
+          <div class="eyebrow">
+            Technology
+          </div>
 
-                    <h2>
-                        Have an idea?
-                        <span class="gradient-text">
-                            Let's build it.
-                        </span>
-                    </h2>
+          <h2>
+            Technology that
+            <span class="gradient-text">
+              moves with the idea.
+            </span>
+          </h2>
 
-                    <p>
-                        Whether you are building a new digital
-                        product, improving an existing platform or
-                        exploring a new business idea, WiseMove can
-                        help turn the opportunity into something real.
-                    </p>
+          <p class="technology-description">
+            We use modern technologies and practical engineering
+            approaches to build products that are reliable,
+            scalable and ready for real-world use.
+          </p>
 
-                    <a
-                        href="contact.html"
-                        class="cta-button"
-                    >
-                        Start a conversation ↗
-                    </a>
 
-                </div>
+          <div class="technology-grid">
 
-            </div>
+            <article class="technology-card">
 
-        </section>
+              <span>
+                01 · Web
+              </span>
+
+              <h3>
+                Digital Experiences
+              </h3>
+
+              <p>
+                Responsive websites and web applications designed
+                around real users, business goals and measurable
+                outcomes.
+              </p>
+
+            </article>
+
+
+            <article class="technology-card">
+
+              <span>
+                02 · Cloud
+              </span>
+
+              <h3>
+                Cloud Systems
+              </h3>
+
+              <p>
+                Secure and scalable infrastructure that supports
+                modern products and growing digital operations.
+              </p>
+
+            </article>
+
+
+            <article class="technology-card">
+
+              <span>
+                03 · Data
+              </span>
+
+              <h3>
+                Connected Platforms
+              </h3>
+
+              <p>
+                APIs, backend systems and integrations that connect
+                products, businesses and their customers.
+              </p>
+
+            </article>
+
+
+            <article class="technology-card">
+
+              <span>
+                04 · Automation
+              </span>
+
+              <h3>
+                Smarter Operations
+              </h3>
+
+              <p>
+                Automation that reduces repetitive work and helps
+                teams operate with greater speed and consistency.
+              </p>
+
+            </article>
+
+
+            <article class="technology-card">
+
+              <span>
+                05 · Product
+              </span>
+
+              <h3>
+                Product Engineering
+              </h3>
+
+              <p>
+                From first concept to production, we turn ideas
+                into useful digital products.
+              </p>
+
+            </article>
+
+
+            <article class="technology-card">
+
+              <span>
+                06 · Scale
+              </span>
+
+              <h3>
+                Built to Grow
+              </h3>
+
+              <p>
+                Flexible foundations that allow products and
+                businesses to evolve without unnecessary complexity.
+              </p>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ========================================
+           CTA
+      ======================================== -->
+
+      <section class="cta">
+
+        <div class="cta-box">
+
+          <div class="eyebrow">
+            Let's build
+          </div>
+
+          <h2>
+            Have an idea
+            <span class="gradient-text">
+              worth moving forward?
+            </span>
+          </h2>
+
+          <p>
+            Tell us what you're building, what you're trying to
+            solve, or where you're stuck. We'll figure out the
+            right way forward together.
+          </p>
+
+          <a href="contact.html" class="cta-button">
+            Let's Talk ↗
+          </a>
+
+        </div>
+
+      </section>
 
     </main>
 
 
-    <!-- =========================================
+    <!-- ========================================
          FOOTER
-    ========================================== -->
+    ======================================== -->
 
     <footer>
 
-        <div class="footer-inner">
+      <a href="index.html" class="footer-brand">
 
-            <div class="footer-brand">
+        <img
+          src="assets/wisemove-logo-light.png"
+          alt="WiseMove"
+        >
 
-                <a href="index.html">
+      </a>
 
-                    <img
-                        src="assets/wisemove-logo-dark.png"
-                        alt="WiseMove"
-                        class="footer-logo"
-                    >
-
-                </a>
-
-                <p>
-                    Building businesses, digital products and
-                    technology that move things forward.
-                </p>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <div class="footer-column">
-
-                    <h4>
-                        Explore
-                    </h4>
-
-                    <a href="about.html">
-                        About
-                    </a>
-
-                    <a href="products.html">
-                        Products
-                    </a>
-
-                    <a href="capabilities.html">
-                        Capabilities
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h4>
-                        Connect
-                    </h4>
-
-                    <a href="contact.html">
-                        Contact
-                    </a>
-
-                    <a href="getvia.html">
-                        Getvia
-                    </a>
-
-                    <a href="vashq.html">
-                        Vashq
-                    </a>
-
-                    <a href="zed0.html">
-                        Zed0
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="copyright">
-            © 2026 WiseMove. All rights reserved.
-        </div>
+      <div class="footer-copy">
+        © 2026 WiseMove. All rights reserved.
+      </div>
 
     </footer>
 
-
-    <!-- =========================================
-         JAVASCRIPT
-    ========================================== -->
-
-    <script>
-        const menuButton = document.getElementById("menuButton");
-        const mobileMenu = document.getElementById("mobileMenu");
-
-        menuButton.addEventListener("click", function () {
-
-            mobileMenu.classList.toggle("active");
-
-            if (mobileMenu.classList.contains("active")) {
-                menuButton.textContent = "✕";
-            } else {
-                menuButton.textContent = "☰";
-            }
-
-        });
+  </div>
 
 
-        const mobileLinks =
-            mobileMenu.querySelectorAll("a");
+  <!-- ========================================
+       JAVASCRIPT
+  ======================================== -->
 
-        mobileLinks.forEach(function (link) {
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-            link.addEventListener("click", function () {
+    menuBtn.addEventListener("click", function () {
+      mobileMenu.classList.toggle("open");
+    });
 
-                mobileMenu.classList.remove("active");
+    const mobileLinks = mobileMenu.querySelectorAll("a");
 
-                menuButton.textContent = "☰";
+    mobileLinks.forEach(function (link) {
+      link.addEventListener("click", function () {
+        mobileMenu.classList.remove("open");
+      });
+    });
 
-            });
+    document.addEventListener("click", function (event) {
 
-        });
-    </script>
+      if (
+        !mobileMenu.contains(event.target) &&
+        !menuBtn.contains(event.target)
+      ) {
+        mobileMenu.classList.remove("open");
+      }
+
+    });
+  </script>
 
 </body>
 </html>
