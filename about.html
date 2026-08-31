@@ -5,12 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>About WiseMove — Building What Moves Business Forward</title>
+  <title>About &mdash; WiseMove</title>
 
-  <meta
-    name="description"
-    content="Learn about WiseMove, a software and product development company building digital platforms, business solutions and practical technology products."
-  >
+  <meta name="description" content="How WiseMove works: strategy, design, engineering and launch, brought together under one roof.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,13 +18,16 @@
   >
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
 
   <script>
     document.documentElement.classList.add("js");
   </script>
 </head>
 
+
 <body>
+
 
 <!-- =========================================================
      NAVIGATION
@@ -39,17 +39,8 @@
 
     <a href="index.html" class="brand" aria-label="WiseMove Home">
 
-      <img
-        src="assets/wisemove-logo-dark.png"
-        class="logo-img logo-dark"
-        alt="WiseMove"
-      >
-
-      <img
-        src="assets/wisemove-logo-light.png"
-        class="logo-img logo-light"
-        alt="WiseMove"
-      >
+      <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
+      <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
 
     </a>
 
@@ -58,48 +49,28 @@
 
       <a href="about.html" class="active">About</a>
 
-      <a href="products.html">
-        Products
-      </a>
+      <a href="products.html">Products</a>
 
-      <a href="capabilities.html">
-        Capabilities
-      </a>
+      <a href="capabilities.html">Capabilities</a>
 
-      <a href="contact.html">
-        Contact
-      </a>
+      <a href="contact.html">Contact</a>
 
     </div>
 
 
     <div class="nav-right">
 
-      <button
-        class="theme-toggle"
-        id="themeToggle"
-        type="button"
-        aria-label="Toggle theme"
-      >
-        ◐
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+        &#9689;
       </button>
 
-
       <a href="contact.html" class="nav-cta">
-
         Let's Talk
-        <span>↗</span>
-
+        <span>&#8599;</span>
       </a>
 
-
-      <button
-        class="nav-burger"
-        id="navBurger"
-        type="button"
-        aria-label="Open menu"
-      >
-        ☰
+      <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu">
+        &#9776;
       </button>
 
     </div>
@@ -115,105 +86,85 @@
 
 <div class="mobile-menu" id="mobileMenu">
 
-  <a href="about.html">
-    About
-  </a>
+  <a href="about.html" class="active">About</a>
 
-  <a href="products.html">
-    Products
-  </a>
+  <a href="products.html">Products</a>
 
-  <a href="capabilities.html">
-    Capabilities
-  </a>
+  <a href="capabilities.html">Capabilities</a>
 
-  <a href="contact.html">
-    Contact
-  </a>
+  <a href="contact.html">Contact</a>
 
 </div>
 
 
 <main>
 
-
 <!-- =========================================================
-     ABOUT HERO
+     PAGE HEADER
 ========================================================= -->
 
-<section class="hero about-hero">
+<section class="page-hero">
 
-  <div class="hero-bg">
-
+  <div class="page-hero-bg">
     <div class="hero-glow hero-glow-a"></div>
-
     <div class="hero-glow hero-glow-b"></div>
-
   </div>
-
 
   <div class="container">
 
-    <div class="hero-copy">
+    <span class="eyebrow">ABOUT WISEMOVE</span>
 
-      <div class="status-pill">
+    <h1 class="page-hero-title">
+      A product company built on
+      <span class="accent-italic">useful ideas.</span>
+    </h1>
 
-        <span class="status-dot"></span>
+    <p class="lede">WiseMove is a software and product development company creating digital platforms, business solutions and intelligent vehicle-care products.</p>
 
-        ABOUT WISEMOVE
+  </div>
 
+</section>
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats-band">
+
+  <div class="container">
+
+    <div class="stats-panel">
+
+      <div class="stat-item">
+        <span>&#10022;</span>
+        <div>
+          <span class="stat-num">3</span>
+          <div class="stat-label">PRODUCTS BUILT</div>
+        </div>
       </div>
 
+      <div class="stat-item">
+        <span>&#8984;</span>
+        <div>
+          <span class="stat-num">01</span>
+          <div class="stat-label">PRODUCT ENGINEERING TEAM</div>
+        </div>
+      </div>
 
-      <h1>
+      <div class="stat-item">
+        <span>&#8599;</span>
+        <div>
+          <span class="stat-num">360&deg;</span>
+          <div class="stat-label">PRODUCT THINKING</div>
+        </div>
+      </div>
 
-        Building ideas into
-
-        <span class="accent">
-          useful products.
-        </span>
-
-      </h1>
-
-
-      <p class="lede">
-
-        WiseMove is a software and product development
-        company creating digital platforms, business
-        solutions and practical technology products.
-
-      </p>
-
-
-      <div class="btn-row">
-
-        <a
-          href="products.html"
-          class="btn btn-primary"
-        >
-
-          Explore Our Products
-
-          <span class="arrow">
-            →
-          </span>
-
-        </a>
-
-
-        <a
-          href="contact.html"
-          class="btn btn-outline"
-        >
-
-          Work With Us
-
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
-
+      <div class="stat-item">
+        <span>&infin;</span>
+        <div>
+          <span class="stat-num">&infin;</span>
+          <div class="stat-label">IDEAS TO EXPLORE</div>
+        </div>
       </div>
 
     </div>
@@ -222,12 +173,11 @@
 
 </section>
 
-
 <!-- =========================================================
-     WHO WE ARE
+     HOW WE MOVE
 ========================================================= -->
 
-<section class="section">
+<section class="section" id="how-we-move">
 
   <div class="container">
 
@@ -235,51 +185,114 @@
 
       <div class="hwm2-copy">
 
-        <span class="eyebrow">
-          WHO WE ARE
-        </span>
-
+        <span class="eyebrow">HOW WE MOVE</span>
 
         <h2 class="hwm2-heading">
-
-          Technology with a
-
-          <span class="accent-italic">
-            purpose.
-          </span>
-
+          From idea to
+          <span class="accent-italic">impact.</span>
         </h2>
 
+        <p>
+          We combine strategy, design, engineering and
+          technology to turn useful ideas into products
+          people can actually use.
+        </p>
+
+        <a href="contact.html" class="btn btn-outline">
+          Start a Conversation &#8594;
+        </a>
+
       </div>
 
 
-      <div class="hwm2-copy">
+      <div>
 
-        <p>
+        <div class="hwm2-cards">
 
-          WiseMove brings together product thinking,
-          design, engineering and technology to create
-          solutions around real-world problems.
+          <article class="hwm2-card active">
 
-        </p>
+            <div class="hwm2-top">
+              <span class="hwm2-num">01</span>
+              <span class="hwm2-icon hwm2-icon-a">&#10022;</span>
+            </div>
 
+            <h4>Strategy</h4>
 
-        <p>
+            <p>Understand the problem and define the opportunity.</p>
 
-          We believe good technology should be useful,
-          understandable and built around the people
-          who use it.
-
-        </p>
+          </article>
 
 
-        <p>
+          <span class="hwm2-arrow">&#8594;</span>
 
-          From digital platforms to physical technology,
-          our focus is on turning ideas into products
-          that create practical value.
 
-        </p>
+          <article class="hwm2-card">
+
+            <div class="hwm2-top">
+              <span class="hwm2-num">02</span>
+              <span class="hwm2-icon hwm2-icon-b">&#9671;</span>
+            </div>
+
+            <h4>Design</h4>
+
+            <p>Create simple, useful and memorable experiences.</p>
+
+          </article>
+
+
+          <span class="hwm2-arrow">&#8594;</span>
+
+
+          <article class="hwm2-card">
+
+            <div class="hwm2-top">
+              <span class="hwm2-num">03</span>
+              <span class="hwm2-icon hwm2-icon-c">&#9673;</span>
+            </div>
+
+            <h4>Engineering</h4>
+
+            <p>Build reliable technology around the product.</p>
+
+          </article>
+
+
+          <span class="hwm2-arrow">&#8594;</span>
+
+
+          <article class="hwm2-card">
+
+            <div class="hwm2-top">
+              <span class="hwm2-num">04</span>
+              <span class="hwm2-icon hwm2-icon-d">&lt;/&gt;</span>
+            </div>
+
+            <h4>Launch</h4>
+
+            <p>Ship, measure, learn and continuously improve.</p>
+
+          </article>
+
+        </div>
+
+
+        <div class="hwm2-timeline">
+
+          <span class="hwm2-tl-label">
+            <span class="hwm2-tl-badge">01</span>
+            IDEA
+          </span>
+
+          <div class="hwm2-tl-track">
+            <div class="hwm2-tl-fill"></div>
+            <span class="hwm2-tl-dot" style="left:25%"></span>
+            <span class="hwm2-tl-dot" style="left:50%"></span>
+            <span class="hwm2-tl-dot" style="left:75%"></span>
+          </div>
+
+          <span class="hwm2-tl-end">IMPACT</span>
+
+        </div>
 
       </div>
 
@@ -289,68 +302,26 @@
 
 </section>
 
-
 <!-- =========================================================
-     MISSION
+     WHY WISEMOVE
 ========================================================= -->
 
-<section class="bigtype-band">
-
-  <div class="bigtype">
-    PURPOSE
-  </div>
-
-
-  <div class="bigtype-fg">
-
-    <span class="eyebrow">
-      OUR MISSION
-    </span>
-
-
-    <p>
-
-      Build thoughtful technology that solves meaningful
-      problems and moves businesses forward.
-
-    </p>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     WHAT WE BELIEVE
-========================================================= -->
-
-<section class="section">
+<section class="section" id="why">
 
   <div class="container">
 
     <div class="section-head">
 
-      <span class="eyebrow">
-        WHAT WE BELIEVE
-      </span>
-
+      <span class="eyebrow">WHY WISEMOVE</span>
 
       <h2>
-
-        Simple ideas.
-
-        <span class="accent-italic">
-          Strong execution.
-        </span>
-
+        We care about the
+        <span class="accent-italic">whole product.</span>
       </h2>
 
-
       <p>
-
-        Our approach is shaped by a few principles that
-        influence how we think, design and build.
-
+        Technology is only useful when it solves the right
+        problem and creates measurable value.
       </p>
 
     </div>
@@ -358,77 +329,46 @@
 
     <div class="why-grid">
 
-
       <article class="why-card">
 
-        <span class="why-bignum">
-          01
-        </span>
+        <span class="why-bignum">01</span>
 
-
-        <h5>
-          Start with the problem.
-        </h5>
-
+        <h5>Product-first thinking</h5>
 
         <p>
-
-          We begin by understanding the problem,
-          the people involved and the outcome that
-          needs to be achieved.
-
+          We start with the problem, users and business
+          outcome before choosing technology.
         </p>
 
       </article>
 
 
-
       <article class="why-card">
 
-        <span class="why-bignum">
-          02
-        </span>
+        <span class="why-bignum">02</span>
 
-
-        <h5>
-          Keep it useful.
-        </h5>
-
+        <h5>Built for real use</h5>
 
         <p>
-
-          We value clarity and usability over
-          unnecessary complexity. Technology should
-          make things easier.
-
+          Our products are designed around practical
+          workflows and real-world requirements.
         </p>
 
       </article>
 
 
-
       <article class="why-card">
 
-        <span class="why-bignum">
-          03
-        </span>
+        <span class="why-bignum">03</span>
 
-
-        <h5>
-          Build for the long term.
-        </h5>
-
+        <h5>Long-term thinking</h5>
 
         <p>
-
-          Products should be able to evolve.
-          We think beyond launch and consider
-          how technology can grow with its users.
-
+          We build foundations that can evolve as products,
+          businesses and customers grow.
         </p>
 
       </article>
-
 
     </div>
 
@@ -436,556 +376,53 @@
 
 </section>
 
-
 <!-- =========================================================
-     HOW WE WORK
+     WORK WITH US
 ========================================================= -->
 
-<section class="section">
+<section class="section" id="work-with-us">
 
   <div class="container">
 
     <div class="section-head">
 
-      <span class="eyebrow">
-        HOW WE WORK
-      </span>
-
+      <span class="eyebrow">WORK WITH US</span>
 
       <h2>
-
-        From idea to
-
-        <span class="accent-italic">
-          impact.
-        </span>
-
+        A better way to
+        <span class="accent-italic">build together.</span>
       </h2>
-
-
-      <p>
-
-        We combine strategy, design, engineering and
-        technology to move ideas forward.
-
-      </p>
 
     </div>
 
 
-    <div class="hwm2-cards">
+    <div class="collab-grid">
 
+      <div class="collab-card">
+        <div class="collab-num">01</div>
+        <h5>Tell us the problem.</h5>
+      </div>
 
-      <article class="hwm2-card active">
+      <div class="collab-card">
+        <div class="collab-num">02</div>
+        <h5>Define the product.</h5>
+      </div>
 
-        <div class="hwm2-top">
+      <div class="collab-card">
+        <div class="collab-num">03</div>
+        <h5>Build the solution.</h5>
+      </div>
 
-          <span class="hwm2-num">
-            01
-          </span>
-
-
-          <span class="hwm2-icon hwm2-icon-a">
-            ✦
-          </span>
-
-        </div>
-
-
-        <h4>
-          Strategy
-        </h4>
-
-
-        <p>
-
-          Understand the problem and define
-          the opportunity.
-
-        </p>
-
-      </article>
-
-
-      <span class="hwm2-arrow">
-        →
-      </span>
-
-
-      <article class="hwm2-card">
-
-        <div class="hwm2-top">
-
-          <span class="hwm2-num">
-            02
-          </span>
-
-
-          <span class="hwm2-icon hwm2-icon-b">
-            ◇
-          </span>
-
-        </div>
-
-
-        <h4>
-          Design
-        </h4>
-
-
-        <p>
-
-          Create simple, useful and memorable
-          experiences.
-
-        </p>
-
-      </article>
-
-
-      <span class="hwm2-arrow">
-        →
-      </span>
-
-
-      <article class="hwm2-card">
-
-        <div class="hwm2-top">
-
-          <span class="hwm2-num">
-            03
-          </span>
-
-
-          <span class="hwm2-icon hwm2-icon-c">
-            ◉
-          </span>
-
-        </div>
-
-
-        <h4>
-          Engineering
-        </h4>
-
-
-        <p>
-
-          Build reliable technology around
-          the product.
-
-        </p>
-
-      </article>
-
-
-      <span class="hwm2-arrow">
-        →
-      </span>
-
-
-      <article class="hwm2-card">
-
-        <div class="hwm2-top">
-
-          <span class="hwm2-num">
-            04
-          </span>
-
-
-          <span class="hwm2-icon hwm2-icon-d">
-            &lt;/&gt;
-          </span>
-
-        </div>
-
-
-        <h4>
-          Launch
-        </h4>
-
-
-        <p>
-
-          Ship, measure, learn and continuously
-          improve.
-
-        </p>
-
-      </article>
-
+      <div class="collab-card">
+        <div class="collab-num">04</div>
+        <h5>Move it forward.</h5>
+      </div>
 
     </div>
 
   </div>
 
 </section>
-
-
-<!-- =========================================================
-     OUR PRODUCTS
-========================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <span class="eyebrow">
-        WHAT WE BUILD
-      </span>
-
-
-      <h2>
-
-        Products built around
-
-        <span class="accent-italic">
-          real-world needs.
-        </span>
-
-      </h2>
-
-
-      <p>
-
-        WiseMove currently builds products across
-        business discovery, automotive operations
-        and vehicle-care technology.
-
-      </p>
-
-    </div>
-
-
-    <div class="why-grid">
-
-
-      <article class="why-card">
-
-        <span class="why-bignum">
-          01
-        </span>
-
-
-        <h5>
-          Getvia
-        </h5>
-
-
-        <p>
-
-          A business discovery platform designed
-          to help people discover trusted businesses
-          and give businesses a stronger digital presence.
-
-        </p>
-
-
-        <a
-          href="products/getvia.html"
-          class="ps-cta"
-        >
-
-          EXPLORE GETVIA
-
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
-
-      </article>
-
-
-
-      <article class="why-card">
-
-        <span class="why-bignum">
-          02
-        </span>
-
-
-        <h5>
-          Vashq
-        </h5>
-
-
-        <p>
-
-          A car wash management platform designed
-          to simplify operations, services, customers
-          and business workflows.
-
-        </p>
-
-
-        <a
-          href="products/vashq.html"
-          class="ps-cta"
-        >
-
-          EXPLORE VASHQ
-
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
-
-      </article>
-
-
-
-      <article class="why-card">
-
-        <span class="why-bignum">
-          03
-        </span>
-
-
-        <h5>
-          ZED0
-        </h5>
-
-
-        <p>
-
-          A self-service car wash machine designed
-          for convenient, customer-operated vehicle
-          cleaning.
-
-        </p>
-
-
-        <a
-          href="products/zed0.html"
-          class="ps-cta"
-        >
-
-          EXPLORE ZED0
-
-          <span class="arrow">
-            ↗
-          </span>
-
-        </a>
-
-      </article>
-
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================================================
-     CAPABILITIES
-========================================================= -->
-
-<section class="section">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <span class="eyebrow">
-        OUR CAPABILITIES
-      </span>
-
-
-      <h2>
-
-        The pieces needed to
-
-        <span class="accent-italic">
-          build well.
-        </span>
-
-      </h2>
-
-    </div>
-
-
-    <div class="cap-groups">
-
-
-      <div class="cap-group">
-
-        <div class="cap-num mono">
-          01
-        </div>
-
-
-        <h5>
-
-          Strategy
-
-          <span class="cap-arrow">
-            ↗
-          </span>
-
-        </h5>
-
-
-        <ul class="cap-list">
-
-          <li>
-            Product discovery
-          </li>
-
-          <li>
-            Business analysis
-          </li>
-
-          <li>
-            Digital strategy
-          </li>
-
-          <li>
-            Technical planning
-          </li>
-
-        </ul>
-
-      </div>
-
-
-
-      <div class="cap-group">
-
-        <div class="cap-num mono">
-          02
-        </div>
-
-
-        <h5>
-
-          Design
-
-          <span class="cap-arrow">
-            ↗
-          </span>
-
-        </h5>
-
-
-        <ul class="cap-list">
-
-          <li>
-            UI / UX design
-          </li>
-
-          <li>
-            Design systems
-          </li>
-
-          <li>
-            Product interfaces
-          </li>
-
-          <li>
-            Brand experiences
-          </li>
-
-        </ul>
-
-      </div>
-
-
-
-      <div class="cap-group">
-
-        <div class="cap-num mono">
-          03
-        </div>
-
-
-        <h5>
-
-          Engineering
-
-          <span class="cap-arrow">
-            ↗
-          </span>
-
-        </h5>
-
-
-        <ul class="cap-list">
-
-          <li>
-            Web applications
-          </li>
-
-          <li>
-            Cloud systems
-          </li>
-
-          <li>
-            APIs & backend
-          </li>
-
-          <li>
-            Automation
-          </li>
-
-        </ul>
-
-      </div>
-
-
-
-      <div class="cap-group">
-
-        <div class="cap-num mono">
-          04
-        </div>
-
-
-        <h5>
-
-          Products
-
-          <span class="cap-arrow">
-            ↗
-          </span>
-
-        </h5>
-
-
-        <ul class="cap-list">
-
-          <li>
-            Digital platforms
-          </li>
-
-          <li>
-            Business software
-          </li>
-
-          <li>
-            Automotive solutions
-          </li>
-
-          <li>
-            Hardware concepts
-          </li>
-
-        </ul>
-
-      </div>
-
-
-    </div>
-
-  </div>
-
-</section>
-
 
 <!-- =========================================================
      FINAL CTA
@@ -995,42 +432,23 @@
 
   <div class="final-cta-glow"></div>
 
-
   <div class="container">
 
-    <span class="eyebrow">
-      HAVE AN IDEA?
-    </span>
-
+    <span class="eyebrow">HAVE AN IDEA?</span>
 
     <h2>
-
       Let's build something
-
-      <span class="accent-italic">
-        worth moving.
-      </span>
-
+      <span class="accent-italic">worth moving.</span>
     </h2>
 
-
-    <a
-      href="contact.html"
-      class="btn btn-primary"
-    >
-
+    <a href="contact.html" class="btn btn-primary">
       Start a Conversation
-
-      <span class="arrow">
-        →
-      </span>
-
+      <span class="arrow">&#8594;</span>
     </a>
 
   </div>
 
 </section>
-
 
 </main>
 
@@ -1045,105 +463,52 @@
 
     <div class="footer-top">
 
-
       <div class="footer-brand-col">
 
-        <a
-          href="index.html"
-          class="brand"
-        >
+        <a href="index.html" class="brand">
 
-          <img
-            src="assets/wisemove-logo-dark.png"
-            class="logo-img logo-dark"
-            alt="WiseMove"
-          >
-
-          <img
-            src="assets/wisemove-logo-light.png"
-            class="logo-img logo-light"
-            alt="WiseMove"
-          >
+          <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
+          <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
 
         </a>
 
-
-        <p>
-          We build what moves business forward.
-        </p>
+        <p>Make every move wiser.</p>
 
       </div>
 
 
       <div class="footer-cols">
 
-
         <div class="footer-col">
 
-          <h6>
-            PRODUCTS
-          </h6>
+          <h6>PRODUCTS</h6>
 
-
-          <a href="products/getvia.html">
-            Getvia
-          </a>
-
-
-          <a href="products/vashq.html">
-            Vashq
-          </a>
-
-
-          <a href="products/zed0.html">
-            ZED0
-          </a>
+          <a href="products.html#getvia">Getvia</a>
+          <a href="products.html#vashq">Vashq</a>
+          <a href="products.html#zed0">zed0</a>
 
         </div>
 
 
         <div class="footer-col">
 
-          <h6>
-            COMPANY
-          </h6>
+          <h6>COMPANY</h6>
 
-
-          <a href="about.html">
-            About
-          </a>
-
-
-          <a href="capabilities.html">
-            Capabilities
-          </a>
-
-
-          <a href="contact.html">
-            Contact
-          </a>
+          <a href="about.html">About</a>
+          <a href="capabilities.html">Capabilities</a>
+          <a href="contact.html">Contact</a>
 
         </div>
 
 
         <div class="footer-col">
 
-          <h6>
-            LEGAL
-          </h6>
+          <h6>LEGAL</h6>
 
-
-          <a href="#">
-            Privacy Policy
-          </a>
-
-
-          <a href="#">
-            Terms of Service
-          </a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
 
         </div>
-
 
       </div>
 
@@ -1152,14 +517,9 @@
 
     <div class="footer-bottom">
 
-      <span>
-        © 2026 WiseMove. All rights reserved.
-      </span>
+      <span>&copy; 2026 WiseMove. All rights reserved.</span>
 
-
-      <span>
-        BUILT WITH PURPOSE.
-      </span>
+      <span>BUILT WITH PURPOSE.</span>
 
     </div>
 
@@ -1168,142 +528,7 @@
 </footer>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<script>
-
-document.addEventListener("DOMContentLoaded", () => {
-
-
-  /* -------------------------------------------------------
-     THEME
-  ------------------------------------------------------- */
-
-  const themeToggle =
-    document.getElementById("themeToggle");
-
-
-  const savedTheme =
-    localStorage.getItem("wisemove-theme");
-
-
-  if (savedTheme) {
-
-    document.documentElement.dataset.theme =
-      savedTheme;
-
-  }
-
-
-  themeToggle?.addEventListener("click", () => {
-
-    const current =
-      document.documentElement.dataset.theme ||
-      "dark";
-
-
-    const next =
-      current === "dark"
-        ? "light"
-        : "dark";
-
-
-    document.documentElement.dataset.theme =
-      next;
-
-
-    localStorage.setItem(
-      "wisemove-theme",
-      next
-    );
-
-  });
-
-
-
-  /* -------------------------------------------------------
-     MOBILE MENU
-  ------------------------------------------------------- */
-
-  const burger =
-    document.getElementById("navBurger");
-
-
-  const mobileMenu =
-    document.getElementById("mobileMenu");
-
-
-  burger?.addEventListener("click", () => {
-
-    mobileMenu.classList.toggle("open");
-
-  });
-
-
-  mobileMenu
-    ?.querySelectorAll("a")
-    .forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        mobileMenu.classList.remove("open");
-
-      });
-
-    });
-
-
-
-  /* -------------------------------------------------------
-     REVEAL ANIMATIONS
-  ------------------------------------------------------- */
-
-  const revealElements =
-    document.querySelectorAll(
-      ".why-card, .cap-group, .hwm2-card, .hero-copy, .status-pill"
-    );
-
-
-  if ("IntersectionObserver" in window) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-              entry.target.classList.add("in");
-
-              observer.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
-      );
-
-
-    revealElements.forEach(element => {
-
-      observer.observe(element);
-
-    });
-
-  }
-
-});
-
-</script>
+<script src="main.js"></script>
 
 </body>
 </html>
