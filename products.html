@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Products &mdash; WiseMove</title>
+  <title>Products — WiseMove</title>
 
-  <meta name="description" content="Getvia, Vashq and zed0 - products built and operated by WiseMove across business discovery, car wash management and self-service vehicle care.">
+  <meta
+    name="description"
+    content="Explore the digital products and intelligent vehicle-care solutions built by WiseMove."
+  >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,471 +20,2129 @@
     rel="stylesheet"
   >
 
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="pages.css">
+  <style>
+
+    /* =========================================================
+       RESET
+    ========================================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #09080d;
+      color: #f5f3fa;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    /* =========================================================
+       THEME
+    ========================================================= */
+
+    html[data-theme="light"] body {
+      background: #f7f6fa;
+      color: #17151d;
+    }
+
+    html[data-theme="light"] .nav-float,
+    html[data-theme="light"] .product-frame,
+    html[data-theme="light"] .product-info-card,
+    html[data-theme="light"] .footer-inner {
+      background: rgba(255,255,255,.82);
+      border-color: rgba(30,25,40,.12);
+    }
+
+    html[data-theme="light"] .nav-links a,
+    html[data-theme="light"] .product-description,
+    html[data-theme="light"] .page-description,
+    html[data-theme="light"] .footer-copy {
+      color: #676171;
+    }
+
+    html[data-theme="light"] .product-section {
+      border-color: rgba(30,25,40,.10);
+    }
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --bg: #09080d;
+      --bg-soft: #0f0d15;
+      --panel: #111018;
+      --panel-2: #15121d;
+
+      --text: #f6f4fa;
+      --muted: #9994a8;
+      --muted-2: #716c7e;
+
+      --border: rgba(255,255,255,.13);
+      --border-soft: rgba(255,255,255,.08);
+
+      --purple: #7c3cff;
+      --purple-2: #a11cff;
+      --pink: #d125d5;
+      --blue: #2678ff;
+
+      --max-width: 1240px;
+    }
+
+    /* =========================================================
+       CONTAINER
+    ========================================================= */
+
+    .container {
+      width: min(var(--max-width), calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       NAVIGATION
+    ========================================================= */
+
+    header {
+      position: relative;
+      z-index: 100;
+      padding-top: 20px;
+    }
+
+    .nav-float {
+      width: min(1170px, calc(100% - 48px));
+      min-height: 58px;
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 8px 12px 8px 22px;
+
+      border: 1px solid var(--border);
+      border-radius: 40px;
+
+      background: rgba(13,11,18,.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      position: relative;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      width: 92px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .logo-light {
+      display: none;
+    }
+
+    html[data-theme="light"] .logo-dark {
+      display: none;
+    }
+
+    html[data-theme="light"] .logo-light {
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      margin-left: auto;
+      margin-right: 40px;
+    }
+
+    .nav-links a {
+      color: #a6a1b2;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+
+      transition: .25s ease;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255,255,255,.08);
+    }
+
+    .nav-cta {
+      min-height: 38px;
+      padding: 0 20px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      border-radius: 24px;
+
+      background: linear-gradient(
+        135deg,
+        #d11ee0,
+        #6828e9
+      );
+
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(135,35,220,.3);
+    }
+
+    .nav-burger {
+      display: none;
+
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: transparent;
+      color: var(--text);
+
+      cursor: pointer;
+    }
+
+    /* =========================================================
+       MOBILE MENU
+    ========================================================= */
+
+    .mobile-menu {
+      display: none;
+
+      position: fixed;
+      z-index: 99;
+
+      top: 88px;
+      left: 20px;
+      right: 20px;
+
+      padding: 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      background: rgba(16,13,22,.96);
+      backdrop-filter: blur(20px);
+
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      padding: 14px;
+      border-radius: 12px;
+      color: #aaa5b5;
+    }
+
+    .mobile-menu a:hover {
+      background: rgba(255,255,255,.06);
+      color: white;
+    }
+
+    /* =========================================================
+       PAGE HERO
+    ========================================================= */
+
+    .page-hero {
+      min-height: 500px;
+      padding: 120px 0 90px;
+
+      position: relative;
+      overflow: hidden;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .page-hero::before {
+      content: "";
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      right: -180px;
+      top: -220px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(161,28,255,.24) 0%,
+          rgba(161,28,255,.10) 35%,
+          transparent 70%
+        );
+
+      pointer-events: none;
+    }
+
+    .page-hero::after {
+      content: "";
+      position: absolute;
+
+      width: 500px;
+      height: 500px;
+
+      left: -250px;
+      bottom: -250px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(67,38,255,.13),
+          transparent 70%
+        );
+
+      pointer-events: none;
+    }
+
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: #c42be2;
+
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #d32de2;
+      box-shadow: 0 0 12px #d32de2;
+    }
+
+    .page-title {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(48px, 6vw, 82px);
+      line-height: .98;
+      letter-spacing: -.055em;
+      font-weight: 700;
+      max-width: 900px;
+    }
+
+    .accent-italic {
+      color: #a22be4;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .page-description {
+      max-width: 730px;
+      margin-top: 26px;
+
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    /* =========================================================
+       PRODUCTS
+    ========================================================= */
+
+    .products-wrapper {
+      position: relative;
+    }
+
+    .product-section {
+      position: relative;
+
+      padding: 105px 0;
+
+      border-top: 1px solid var(--border-soft);
+
+      overflow: hidden;
+    }
+
+    .product-section:last-child {
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .product-section::before {
+      content: "";
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      right: -300px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      background: radial-gradient(
+        circle,
+        rgba(123,38,255,.12),
+        transparent 70%
+      );
+
+      pointer-events: none;
+    }
+
+    .product-section.vashq-section::before {
+      background: radial-gradient(
+        circle,
+        rgba(36,119,255,.12),
+        transparent 70%
+      );
+    }
+
+    .product-section.zed0-section::before {
+      background: radial-gradient(
+        circle,
+        rgba(230,35,35,.08),
+        transparent 70%
+      );
+    }
+
+    .product-grid {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 90px;
+    }
+
+    .product-section:nth-child(even) .product-grid {
+      grid-template-columns: 1.1fr .9fr;
+    }
+
+    .product-section:nth-child(even) .product-copy {
+      order: 2;
+    }
+
+    .product-section:nth-child(even) .product-visual {
+      order: 1;
+    }
+
+    /* =========================================================
+       PRODUCT COPY
+    ========================================================= */
+
+    .product-index {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 12px;
+      color: #8f899e;
+
+      letter-spacing: .08em;
+      margin-bottom: 18px;
+    }
+
+    .product-name {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: clamp(44px, 5vw, 72px);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin-bottom: 14px;
+    }
+
+    .product-kicker {
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 11px;
+      letter-spacing: .08em;
+
+      color: #b52ae0;
+
+      margin-bottom: 22px;
+    }
+
+    .vashq-section .product-kicker {
+      color: #438aff;
+    }
+
+    .zed0-section .product-kicker {
+      color: #d74444;
+    }
+
+    .product-tagline {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 25px;
+      font-weight: 600;
+
+      margin-bottom: 18px;
+    }
+
+    .product-description {
+      max-width: 500px;
+
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+
+      margin-bottom: 25px;
+    }
+
+    .product-tags {
+      font-family: "JetBrains Mono", monospace;
+
+      color: #777183;
+
+      font-size: 10px;
+      line-height: 1.8;
+
+      margin-bottom: 32px;
+
+      text-transform: uppercase;
+    }
+
+    .product-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 13px 20px;
+
+      border: 1px solid var(--border);
+      border-radius: 30px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: .04em;
+
+      transition: .25s ease;
+    }
+
+    .product-button:hover {
+      border-color: rgba(184,54,255,.6);
+      background: rgba(158,36,230,.08);
+      transform: translateX(4px);
+    }
+
+    /* =========================================================
+       PRODUCT VISUAL
+    ========================================================= */
+
+    .product-visual {
+      position: relative;
+      min-height: 450px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-visual::before {
+      content: "";
+      position: absolute;
+
+      width: 420px;
+      height: 420px;
+
+      border-radius: 50%;
+
+      background: radial-gradient(
+        circle,
+        rgba(171,30,225,.20),
+        transparent 67%
+      );
+
+      filter: blur(10px);
+    }
+
+    .vashq-section .product-visual::before {
+      background: radial-gradient(
+        circle,
+        rgba(29,103,255,.18),
+        transparent 67%
+      );
+    }
+
+    .zed0-section .product-visual::before {
+      background: radial-gradient(
+        circle,
+        rgba(218,38,38,.14),
+        transparent 67%
+      );
+    }
+
+    .product-frame {
+      width: 100%;
+      max-width: 590px;
+
+      position: relative;
+      z-index: 3;
+
+      padding: 8px;
+
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 20px;
+
+      background: rgba(18,16,24,.85);
+
+      box-shadow:
+        0 35px 90px rgba(0,0,0,.4),
+        0 0 80px rgba(130,20,230,.10);
+
+      transform: perspective(1200px) rotateY(-3deg);
+
+      transition: transform .5s ease, box-shadow .5s ease;
+    }
+
+    .product-frame:hover {
+      transform: perspective(1200px) rotateY(0deg) translateY(-6px);
+
+      box-shadow:
+        0 45px 110px rgba(0,0,0,.5),
+        0 0 90px rgba(130,20,230,.18);
+    }
+
+    .frame-top {
+      height: 30px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 12px;
+      gap: 6px;
+    }
+
+    .frame-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: #5f5a67;
+    }
+
+    .frame-image {
+      overflow: hidden;
+      border-radius: 13px;
+
+      background: #111;
+    }
+
+    .frame-image img {
+      width: 100%;
+      height: auto;
+
+      object-fit: cover;
+
+      transition: transform .7s ease;
+    }
+
+    .product-frame:hover .frame-image img {
+      transform: scale(1.025);
+    }
+
+    /* =========================================================
+       SECONDARY IMAGE
+    ========================================================= */
+
+    .secondary-frame {
+      position: absolute;
+
+      width: 270px;
+
+      right: -20px;
+      bottom: -50px;
+
+      z-index: 4;
+
+      padding: 6px;
+
+      border-radius: 15px;
+
+      border: 1px solid rgba(255,255,255,.13);
+
+      background: rgba(15,13,21,.9);
+
+      box-shadow: 0 25px 60px rgba(0,0,0,.5);
+
+      transform: rotate(3deg);
+
+      transition: transform .4s ease;
+    }
+
+    .secondary-frame:hover {
+      transform: rotate(0deg) translateY(-6px);
+    }
+
+    .secondary-frame img {
+      border-radius: 9px;
+    }
+
+    /* =========================================================
+       GETVIA
+    ========================================================= */
+
+    .getvia-logo {
+      width: 95px;
+      margin-bottom: 20px;
+    }
+
+    /* =========================================================
+       VASHQ
+    ========================================================= */
+
+    .vashq-logo {
+      width: 90px;
+      margin-bottom: 20px;
+    }
+
+    /* =========================================================
+       ZED0
+    ========================================================= */
+
+    .zed0-logo {
+      width: 100px;
+      height: auto;
+      margin-bottom: 20px;
+      object-fit: contain;
+    }
+
+    .zed0-main-frame {
+      max-width: 500px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255,255,255,.04),
+          rgba(8,8,11,.95)
+        );
+    }
+
+    .zed0-main-frame .frame-image {
+      min-height: 430px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(255,255,255,.04),
+          transparent 65%
+        );
+    }
+
+    .zed0-main-frame .frame-image img {
+      width: 100%;
+      max-height: 430px;
+
+      object-fit: contain;
+    }
+
+    /* =========================================================
+       PRODUCT INFO CARDS
+    ========================================================= */
+
+    .product-info-row {
+      margin-top: 75px;
+
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .product-info-card {
+      min-height: 130px;
+
+      padding: 25px;
+
+      border: 1px solid var(--border-soft);
+      border-radius: 16px;
+
+      background: rgba(17,15,23,.55);
+    }
+
+    .product-info-card span {
+      display: block;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+
+      color: #797383;
+
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    .product-info-card strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+    }
+
+    /* =========================================================
+       BOTTOM CTA
+    ========================================================= */
+
+    .products-cta {
+      position: relative;
+
+      padding: 130px 0;
+
+      text-align: center;
+
+      overflow: hidden;
+    }
+
+    .products-cta::before {
+      content: "";
+
+      position: absolute;
+
+      width: 650px;
+      height: 350px;
+
+      left: 50%;
+      top: 50%;
+
+      transform: translate(-50%,-50%);
+
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(161,30,232,.18),
+          transparent 70%
+        );
+
+      pointer-events: none;
+    }
+
+    .products-cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .products-cta h2 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: clamp(40px, 5vw, 70px);
+      line-height: 1;
+
+      letter-spacing: -.05em;
+
+      margin-bottom: 30px;
+    }
+
+    .primary-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 15px 25px;
+
+      border-radius: 30px;
+
+      background: linear-gradient(
+        135deg,
+        #c91bdc,
+        #6125dc
+      );
+
+      color: white;
+
+      font-weight: 700;
+      font-size: 13px;
+
+      box-shadow: 0 15px 45px rgba(123,26,220,.25);
+
+      transition: .25s ease;
+    }
+
+    .primary-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 55px rgba(123,26,220,.35);
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      border-top: 1px solid var(--border-soft);
+
+      padding: 70px 0 30px;
+
+      background: #08070b;
+    }
+
+    html[data-theme="light"] footer {
+      background: #efedf3;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.3fr 2fr;
+      gap: 80px;
+    }
+
+    .footer-brand p {
+      margin-top: 18px;
+
+      max-width: 270px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 30px;
+    }
+
+    .footer-column h4 {
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 10px;
+      letter-spacing: .1em;
+
+      color: #777181;
+
+      margin-bottom: 18px;
+    }
+
+    .footer-column a {
+      display: block;
+
+      color: #9c96a7;
+
+      font-size: 13px;
+
+      margin-bottom: 10px;
+
+      transition: color .2s ease;
+    }
+
+    .footer-column a:hover {
+      color: white;
+    }
+
+    html[data-theme="light"] .footer-column a:hover {
+      color: #17151d;
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-top: 1px solid var(--border-soft);
+
+      margin-top: 60px;
+      padding-top: 25px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 9px;
+      letter-spacing: .06em;
+
+      color: #686372;
+    }
+
+    /* =========================================================
+       ANIMATIONS
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+
+      transition:
+        opacity .7s ease,
+        transform .7s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+
+    @media (max-width: 1000px) {
+
+      .nav-links {
+        gap: 22px;
+        margin-right: 20px;
+      }
+
+      .product-grid,
+      .product-section:nth-child(even) .product-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+      }
+
+      .product-section:nth-child(even) .product-copy,
+      .product-section:nth-child(even) .product-visual {
+        order: initial;
+      }
+
+      .product-copy {
+        max-width: 700px;
+      }
+
+      .product-visual {
+        max-width: 700px;
+      }
+
+      .product-info-row {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .container {
+        width: min(
+          var(--max-width),
+          calc(100% - 32px)
+        );
+      }
+
+      .nav-float {
+        width: calc(100% - 24px);
+      }
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-burger {
+        display: block;
+      }
+
+      .page-hero {
+        min-height: auto;
+        padding: 90px 0 70px;
+      }
+
+      .page-title {
+        font-size: clamp(43px, 12vw, 64px);
+      }
+
+      .page-description {
+        font-size: 15px;
+      }
+
+      .product-section {
+        padding: 75px 0;
+      }
+
+      .product-name {
+        font-size: 50px;
+      }
+
+      .product-tagline {
+        font-size: 21px;
+      }
+
+      .product-visual {
+        min-height: 350px;
+      }
+
+      .product-frame {
+        transform: none;
+      }
+
+      .secondary-frame {
+        width: 190px;
+        right: -5px;
+        bottom: -35px;
+      }
+
+      .zed0-main-frame .frame-image {
+        min-height: 330px;
+      }
+
+      .zed0-main-frame .frame-image img {
+        max-height: 330px;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+
+      .logo-img {
+        width: 82px;
+      }
+
+      .theme-toggle {
+        display: none;
+      }
+
+      .product-section {
+        padding: 65px 0;
+      }
+
+      .product-visual {
+        min-height: 280px;
+      }
+
+      .secondary-frame {
+        width: 145px;
+      }
+
+      .footer-links {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
 
   <script>
     document.documentElement.classList.add("js");
   </script>
+
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
+  <!-- =========================================================
+       NAVIGATION
+  ========================================================= -->
 
-<header>
+  <header>
 
-  <nav class="nav-float">
+    <nav class="nav-float">
 
-    <a href="index.html" class="brand" aria-label="WiseMove Home">
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="WiseMove Home"
+      >
 
-      <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
-      <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
+        <img
+          src="assets/wisemove-logo-dark.png"
+          class="logo-img logo-dark"
+          alt="WiseMove"
+        >
 
-    </a>
+        <img
+          src="assets/wisemove-logo-light.png"
+          class="logo-img logo-light"
+          alt="WiseMove"
+        >
 
-
-    <div class="nav-links">
-
-      <a href="about.html">About</a>
-
-      <a href="products.html" class="active">Products</a>
-
-      <a href="capabilities.html">Capabilities</a>
-
-      <a href="contact.html">Contact</a>
-
-    </div>
-
-
-    <div class="nav-right">
-
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
-        &#9689;
-      </button>
-
-      <a href="contact.html" class="nav-cta">
-        Let's Talk
-        <span>&#8599;</span>
       </a>
 
-      <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu">
-        &#9776;
-      </button>
 
-    </div>
+      <div class="nav-links">
 
-  </nav>
-
-</header>
-
-
-<!-- =========================================================
-     MOBILE MENU
-========================================================= -->
-
-<div class="mobile-menu" id="mobileMenu">
-
-  <a href="about.html">About</a>
-
-  <a href="products.html" class="active">Products</a>
-
-  <a href="capabilities.html">Capabilities</a>
-
-  <a href="contact.html">Contact</a>
-
-</div>
-
-
-<main>
-
-<!-- =========================================================
-     PAGE HEADER
-========================================================= -->
-
-<section class="page-hero">
-
-  <div class="page-hero-bg">
-    <div class="hero-glow hero-glow-a"></div>
-    <div class="hero-glow hero-glow-b"></div>
-  </div>
-
-  <div class="container">
-
-    <span class="eyebrow">OUR PRODUCTS</span>
-
-    <h1 class="page-hero-title">
-      Products designed to
-      <span class="accent-italic">move things forward.</span>
-    </h1>
-
-    <p class="lede">Built across business discovery, automotive operations and intelligent vehicle-care infrastructure.</p>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     PRODUCTS INTRO
-========================================================= -->
-
-<section class="section" id="products-intro">
-
-  <div class="container">
-
-    <div class="section-head">
-
-      <span class="eyebrow">OUR PRODUCTS</span>
-
-      <h2>
-        Products designed to
-        <span class="accent-italic">move things forward.</span>
-      </h2>
-
-      <p>
-        WiseMove builds products across business discovery,
-        automotive operations and intelligent vehicle-care
-        infrastructure.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     GETVIA
-========================================================= -->
-
-<section class="product-showcase getvia" id="getvia">
-
-  <div class="container product-showcase-grid">
-
-    <div class="reveal-fade">
-
-      <div class="ps-index mono">01 / PRODUCT</div>
-
-      <h3 class="ps-name">Getvia</h3>
-
-      <p class="ps-kicker mono">BUSINESS DISCOVERY PLATFORM</p>
-
-      <p class="ps-tagline">Discover businesses worth knowing.</p>
-
-      <p class="ps-desc">
-        Getvia is a premium business listing and discovery
-        platform designed to help people discover trusted
-        businesses while giving businesses a stronger
-        digital presence.
-      </p>
-
-      <p class="ps-slash mono">
-        DISCOVERY / BUSINESS PROFILES /
-        SERVICES / LOCAL SEARCH
-      </p>
-
-      <a href="contact.html" class="ps-cta">
-        EXPLORE GETVIA
-        <span class="arrow">&#8599;</span>
-      </a>
-
-    </div>
-
-
-    <div class="ps-visual-stack reveal-fade">
-
-      <div class="ps-glow-atmo getvia-atmo"></div>
-
-      <div class="ps-shot-primary">
-
-        <div class="ps-frame">
-
-          <div class="ps-frame-bar">
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-          </div>
-
-          <div class="ps-frame-shot">
-            <img src="assets/getvia-hero.png" alt="Getvia platform" loading="lazy">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="ps-shot-secondary">
-
-        <div class="ps-frame">
-
-          <div class="ps-frame-shot">
-            <img src="assets/getvia-categories.png" alt="Getvia business categories" loading="lazy">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     VASHQ
-========================================================= -->
-
-<section class="product-showcase vashq" id="vashq">
-
-  <div class="container product-showcase-grid">
-
-    <div class="reveal-fade">
-
-      <div class="ps-index mono">02 / PRODUCT</div>
-
-      <h3 class="ps-name">Vashq</h3>
-
-      <p class="ps-kicker mono">CAR WASH MANAGEMENT PLATFORM</p>
-
-      <p class="ps-tagline">Run smarter. Wash better.</p>
-
-      <p class="ps-desc">
-        Vashq is a car wash management platform designed
-        to simplify operations, services, customer management,
-        catalogues and business workflows.
-      </p>
-
-      <p class="ps-slash mono">
-        AUTOMOTIVE / OPERATIONS /
-        MANAGEMENT / DIGITAL WORKFLOWS
-      </p>
-
-      <a href="contact.html" class="ps-cta">
-        EXPLORE VASHQ
-        <span class="arrow">&#8599;</span>
-      </a>
-
-    </div>
-
-
-    <div class="ps-visual-stack reveal-fade">
-
-      <div class="ps-glow-atmo vashq-atmo"></div>
-
-      <div class="ps-shot-primary">
-
-        <div class="ps-frame">
-
-          <div class="ps-frame-bar">
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-          </div>
-
-          <div class="ps-frame-shot">
-            <img src="assets/vashq-dashboard.png" alt="Vashq dashboard" loading="lazy">
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="ps-shot-secondary">
-
-        <div class="ps-frame">
-
-          <div class="ps-frame-shot">
-            <img src="assets/vashq-features.png" alt="Vashq features" loading="lazy">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     ZED0
-========================================================= -->
-
-<section class="product-showcase zed0" id="zed0">
-
-  <div class="container product-showcase-grid">
-
-    <div class="reveal-fade">
-
-      <div class="ps-index mono">03 / PRODUCT &mdash; BUILT BY WISEMOVE</div>
-
-      <h3 class="ps-name">zed0</h3>
-
-      <p class="ps-kicker mono">SELF-SERVICE CAR WASH MACHINE</p>
-
-      <p class="ps-tagline">Self-Service Car Washing, Made Simpler.</p>
-
-      <p class="ps-desc">
-        zed0 is a self-service car wash machine designed
-        for convenient, customer-operated vehicle cleaning.
-        It brings a simple and accessible car-washing
-        experience to modern vehicle-care spaces.
-      </p>
-
-      <p class="ps-slash mono">
-        SELF-SERVICE / CAR WASH /
-        HARDWARE / VEHICLE CARE
-      </p>
-
-      <span class="ps-cta zed0-cta">
-        ZED0 / SELF-SERVICE
-        <span class="arrow">&#8599;</span>
-      </span>
-
-    </div>
-
-
-    <div class="ps-visual-stack reveal-fade">
-
-      <div class="ps-glow-atmo zed0-atmo" aria-hidden="true"></div>
-
-      <div class="ps-shot-primary zed0-machine-showcase">
-
-        <div class="ps-frame zed0-frame">
-
-          <div class="ps-frame-bar">
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-            <span class="ps-frame-dot"></span>
-          </div>
-
-          <div class="ps-frame-shot zed0-machine-frame">
-            <img src="assets/zed0-machine.png" alt="zed0 self-service car wash machine" loading="lazy">
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- =========================================================
-     FINAL CTA
-========================================================= -->
-
-<section class="final-cta">
-
-  <div class="final-cta-glow"></div>
-
-  <div class="container">
-
-    <span class="eyebrow">HAVE AN IDEA?</span>
-
-    <h2>
-      Let's build something
-      <span class="accent-italic">worth moving.</span>
-    </h2>
-
-    <a href="contact.html" class="btn btn-primary">
-      Start a Conversation
-      <span class="arrow">&#8594;</span>
-    </a>
-
-  </div>
-
-</section>
-
-</main>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-  <div class="container">
-
-    <div class="footer-top">
-
-      <div class="footer-brand-col">
-
-        <a href="index.html" class="brand">
-
-          <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
-          <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
-
+        <a href="about.html">
+          About
         </a>
 
-        <p>Make every move wiser.</p>
+        <a
+          href="products.html"
+          class="active"
+        >
+          Products
+        </a>
+
+        <a href="capabilities.html">
+          Capabilities
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
 
       </div>
 
 
-      <div class="footer-cols">
+      <div class="nav-right">
 
-        <div class="footer-col">
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
 
-          <h6>PRODUCTS</h6>
+        <a
+          href="contact.html"
+          class="nav-cta"
+        >
+          Let's Talk
+          <span>↗</span>
+        </a>
 
-          <a href="products.html#getvia">Getvia</a>
-          <a href="products.html#vashq">Vashq</a>
-          <a href="products.html#zed0">zed0</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-          <h6>COMPANY</h6>
-
-          <a href="about.html">About</a>
-          <a href="capabilities.html">Capabilities</a>
-          <a href="contact.html">Contact</a>
-
-        </div>
-
-
-        <div class="footer-col">
-
-          <h6>LEGAL</h6>
-
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-
-        </div>
+        <button
+          class="nav-burger"
+          id="navBurger"
+          type="button"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
 
       </div>
 
-    </div>
+    </nav>
+
+  </header>
 
 
-    <div class="footer-bottom">
+  <!-- =========================================================
+       MOBILE MENU
+  ========================================================= -->
 
-      <span>&copy; 2026 WiseMove. All rights reserved.</span>
+  <div
+    class="mobile-menu"
+    id="mobileMenu"
+  >
 
-      <span>BUILT WITH PURPOSE.</span>
+    <a href="index.html">
+      Home
+    </a>
 
-    </div>
+    <a href="about.html">
+      About
+    </a>
+
+    <a href="products.html">
+      Products
+    </a>
+
+    <a href="capabilities.html">
+      Capabilities
+    </a>
+
+    <a href="contact.html">
+      Contact
+    </a>
 
   </div>
 
-</footer>
+
+  <main>
 
 
-<script src="main.js"></script>
+    <!-- =======================================================
+         PRODUCTS PAGE HERO
+    ======================================================= -->
+
+    <section class="page-hero">
+
+      <div class="container">
+
+        <div class="page-hero-content reveal">
+
+          <span class="eyebrow">
+            OUR PRODUCTS
+          </span>
+
+          <h1 class="page-title">
+
+            Products designed to
+
+            <span class="accent-italic">
+              move things forward.
+            </span>
+
+          </h1>
+
+          <p class="page-description">
+
+            WiseMove builds products across business discovery,
+            automotive operations and intelligent vehicle-care
+            infrastructure.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         PRODUCTS
+    ======================================================= -->
+
+    <div class="products-wrapper">
+
+
+      <!-- =====================================================
+           GETVIA
+      ===================================================== -->
+
+      <section
+        class="product-section getvia-section"
+        id="getvia"
+      >
+
+        <div class="container">
+
+          <div class="product-grid">
+
+
+            <!-- COPY -->
+
+            <div class="product-copy reveal">
+
+              <div class="product-index">
+                01 / PRODUCT
+              </div>
+
+              <img
+                src="assets/getvia-logo.png"
+                class="getvia-logo"
+                alt="Getvia"
+              >
+
+              <h2 class="product-name">
+                Getvia
+              </h2>
+
+              <div class="product-kicker">
+                BUSINESS DISCOVERY PLATFORM
+              </div>
+
+              <h3 class="product-tagline">
+                Discover businesses worth knowing.
+              </h3>
+
+              <p class="product-description">
+
+                Getvia is a premium business listing and
+                discovery platform designed to help people
+                discover trusted businesses while giving
+                businesses a stronger digital presence.
+
+              </p>
+
+              <p class="product-tags">
+
+                DISCOVERY / BUSINESS PROFILES /
+                SERVICES / LOCAL SEARCH
+
+              </p>
+
+              <a
+                href="getvia.html"
+                class="product-button"
+              >
+
+                EXPLORE GETVIA
+
+                <span>
+                  ↗
+                </span>
+
+              </a>
+
+            </div>
+
+
+            <!-- VISUAL -->
+
+            <div class="product-visual reveal">
+
+              <div class="product-frame">
+
+                <div class="frame-top">
+
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+
+                </div>
+
+                <div class="frame-image">
+
+                  <img
+                    src="assets/getvia-hero.png"
+                    alt="Getvia platform"
+                    loading="lazy"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="secondary-frame">
+
+                <img
+                  src="assets/getvia-categories.png"
+                  alt="Getvia categories"
+                  loading="lazy"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="product-info-row reveal">
+
+            <div class="product-info-card">
+
+              <span>
+                Focus
+              </span>
+
+              <strong>
+                Business Discovery
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Experience
+              </span>
+
+              <strong>
+                Premium Business Profiles
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Purpose
+              </span>
+
+              <strong>
+                Better Local Discovery
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           VASHQ
+      ===================================================== -->
+
+      <section
+        class="product-section vashq-section"
+        id="vashq"
+      >
+
+        <div class="container">
+
+          <div class="product-grid">
+
+
+            <!-- COPY -->
+
+            <div class="product-copy reveal">
+
+              <div class="product-index">
+                02 / PRODUCT
+              </div>
+
+              <img
+                src="assets/vashq-official-logo.png"
+                class="vashq-logo"
+                alt="Vashq"
+              >
+
+              <h2 class="product-name">
+                Vashq
+              </h2>
+
+              <div class="product-kicker">
+                CAR WASH MANAGEMENT PLATFORM
+              </div>
+
+              <h3 class="product-tagline">
+                Run smarter. Wash better.
+              </h3>
+
+              <p class="product-description">
+
+                Vashq is a car wash management platform
+                designed to simplify operations, services,
+                customer management, catalogues and
+                business workflows.
+
+              </p>
+
+              <p class="product-tags">
+
+                AUTOMOTIVE / OPERATIONS /
+                MANAGEMENT / DIGITAL WORKFLOWS
+
+              </p>
+
+              <a
+                href="vashq.html"
+                class="product-button"
+              >
+
+                EXPLORE VASHQ
+
+                <span>
+                  ↗
+                </span>
+
+              </a>
+
+            </div>
+
+
+            <!-- VISUAL -->
+
+            <div class="product-visual reveal">
+
+              <div class="product-frame">
+
+                <div class="frame-top">
+
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+
+                </div>
+
+                <div class="frame-image">
+
+                  <img
+                    src="assets/vashq-dashboard.png"
+                    alt="Vashq dashboard"
+                    loading="lazy"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div class="secondary-frame">
+
+                <img
+                  src="assets/vashq-features.png"
+                  alt="Vashq features"
+                  loading="lazy"
+                >
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="product-info-row reveal">
+
+            <div class="product-info-card">
+
+              <span>
+                Focus
+              </span>
+
+              <strong>
+                Car Wash Management
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Operations
+              </span>
+
+              <strong>
+                Digital Workflows
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Purpose
+              </span>
+
+              <strong>
+                Smarter Car Wash Operations
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           ZED0
+      ===================================================== -->
+
+      <section
+        class="product-section zed0-section"
+        id="zed0"
+      >
+
+        <div class="container">
+
+          <div class="product-grid">
+
+
+            <!-- COPY -->
+
+            <div class="product-copy reveal">
+
+              <div class="product-index">
+                03 / PRODUCT — BUILT BY WISEMOVE
+              </div>
+
+              <img
+                src="assets/zed0%20Logo%20dark.png"
+                class="zed0-logo"
+                alt="zed0"
+              >
+
+              <h2 class="product-name">
+                zed0
+              </h2>
+
+              <div class="product-kicker">
+                SELF-SERVICE CAR WASH MACHINE
+              </div>
+
+              <h3 class="product-tagline">
+                Self-Service Car Washing, Made Simpler.
+              </h3>
+
+              <p class="product-description">
+
+                zed0 is a self-service car wash machine
+                designed for convenient, customer-operated
+                vehicle cleaning. It brings a simple and
+                accessible car-washing experience to
+                modern vehicle-care spaces.
+
+              </p>
+
+              <p class="product-tags">
+
+                SELF-SERVICE / CAR WASH /
+                HARDWARE / VEHICLE CARE
+
+              </p>
+
+              <a
+                href="zed0.html"
+                class="product-button"
+              >
+
+                EXPLORE ZED0
+
+                <span>
+                  ↗
+                </span>
+
+              </a>
+
+            </div>
+
+
+            <!-- VISUAL -->
+
+            <div class="product-visual reveal">
+
+              <div class="product-frame zed0-main-frame">
+
+                <div class="frame-top">
+
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+                  <span class="frame-dot"></span>
+
+                </div>
+
+                <div class="frame-image">
+
+                  <img
+                    src="assets/zed0.png"
+                    alt="zed0 self-service car wash machine"
+                    loading="lazy"
+                  >
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="product-info-row reveal">
+
+            <div class="product-info-card">
+
+              <span>
+                Focus
+              </span>
+
+              <strong>
+                Self-Service Car Wash
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Product Type
+              </span>
+
+              <strong>
+                Vehicle-Care Hardware
+              </strong>
+
+            </div>
+
+            <div class="product-info-card">
+
+              <span>
+                Purpose
+              </span>
+
+              <strong>
+                Simple Customer Operation
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+
+    <!-- =======================================================
+         FINAL CTA
+    ======================================================= -->
+
+    <section class="products-cta">
+
+      <div class="container">
+
+        <div class="products-cta-content reveal">
+
+          <span class="eyebrow">
+            HAVE AN IDEA?
+          </span>
+
+          <h2>
+
+            Let's build something
+
+            <span class="accent-italic">
+              worth moving.
+            </span>
+
+          </h2>
+
+          <a
+            href="contact.html"
+            class="primary-button"
+          >
+
+            Start a Conversation
+
+            <span>
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <footer>
+
+    <div class="container">
+
+
+      <div class="footer-inner">
+
+
+        <div class="footer-brand">
+
+          <a
+            href="index.html"
+            class="brand"
+          >
+
+            <img
+              src="assets/wisemove-logo-dark.png"
+              class="logo-img logo-dark"
+              alt="WiseMove"
+            >
+
+            <img
+              src="assets/wisemove-logo-light.png"
+              class="logo-img logo-light"
+              alt="WiseMove"
+            >
+
+          </a>
+
+          <p class="footer-copy">
+            Make every move wiser.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+
+          <div class="footer-column">
+
+            <h4>
+              PRODUCTS
+            </h4>
+
+            <a href="getvia.html">
+              Getvia
+            </a>
+
+            <a href="vashq.html">
+              Vashq
+            </a>
+
+            <a href="zed0.html">
+              zed0
+            </a>
+
+          </div>
+
+
+          <div class="footer-column">
+
+            <h4>
+              COMPANY
+            </h4>
+
+            <a href="about.html">
+              About
+            </a>
+
+            <a href="capabilities.html">
+              Capabilities
+            </a>
+
+            <a href="contact.html">
+              Contact
+            </a>
+
+          </div>
+
+
+          <div class="footer-column">
+
+            <h4>
+              NAVIGATE
+            </h4>
+
+            <a href="index.html">
+              Home
+            </a>
+
+            <a href="products.html">
+              Products
+            </a>
+
+            <a href="contact.html">
+              Let's Talk
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 WiseMove. All rights reserved.
+        </span>
+
+        <span>
+          BUILT WITH PURPOSE.
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+
+      /* =======================================================
+         THEME
+      ======================================================= */
+
+      const themeToggle =
+        document.getElementById("themeToggle");
+
+      const savedTheme =
+        localStorage.getItem("wisemove-theme");
+
+      if (savedTheme) {
+
+        document.documentElement.dataset.theme =
+          savedTheme;
+
+      }
+
+
+      themeToggle?.addEventListener("click", () => {
+
+        const current =
+          document.documentElement.dataset.theme ||
+          "dark";
+
+        const next =
+          current === "dark"
+            ? "light"
+            : "dark";
+
+        document.documentElement.dataset.theme =
+          next;
+
+        localStorage.setItem(
+          "wisemove-theme",
+          next
+        );
+
+      });
+
+
+      /* =======================================================
+         MOBILE MENU
+      ======================================================= */
+
+      const burger =
+        document.getElementById("navBurger");
+
+      const mobileMenu =
+        document.getElementById("mobileMenu");
+
+      burger?.addEventListener("click", () => {
+
+        mobileMenu?.classList.toggle("open");
+
+      });
+
+
+      mobileMenu
+        ?.querySelectorAll("a")
+        .forEach(link => {
+
+          link.addEventListener("click", () => {
+
+            mobileMenu.classList.remove("open");
+
+          });
+
+        });
+
+
+      /* =======================================================
+         REVEAL ANIMATIONS
+      ======================================================= */
+
+      const revealElements =
+        document.querySelectorAll(".reveal");
+
+      if ("IntersectionObserver" in window) {
+
+        const observer =
+          new IntersectionObserver(
+            entries => {
+
+              entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                  entry.target.classList.add("in");
+
+                  observer.unobserve(
+                    entry.target
+                  );
+
+                }
+
+              });
+
+            },
+            {
+              threshold: 0.12
+            }
+          );
+
+        revealElements.forEach(element => {
+
+          observer.observe(element);
+
+        });
+
+      } else {
+
+        revealElements.forEach(element => {
+
+          element.classList.add("in");
+
+        });
+
+      }
+
+
+    });
+
+  </script>
+
 
 </body>
+
 </html>
