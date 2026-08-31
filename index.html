@@ -13,7 +13,7 @@
 
   <meta
     name="description"
-    content="WiseMove is a software and product development company building digital products, business solutions and modern technology experiences."
+    content="WiseMove is a software and product development company building digital products, software solutions and modern technology experiences for businesses."
   >
 
   <meta
@@ -21,6 +21,7 @@
     content="#09090d"
   >
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -29,7 +30,7 @@
     rel="stylesheet"
   >
 
-  <!-- IMPORTANT: CSS is in the same folder as this HTML -->
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="./style.css">
 
   <script>
@@ -48,11 +49,13 @@
 
     <nav class="nav-float">
 
+      <!-- BRAND -->
       <a
         href="index.html"
         class="brand"
         aria-label="WiseMove Home"
       >
+
         <img
           src="assets/wisemove-logo-dark.png"
           class="logo-img logo-dark"
@@ -64,9 +67,11 @@
           class="logo-img logo-light"
           alt="WiseMove"
         >
+
       </a>
 
 
+      <!-- DESKTOP NAVIGATION -->
       <div class="nav-links">
 
         <a href="about.html">
@@ -77,8 +82,8 @@
           Products
         </a>
 
-        <a href="capabilities.html">
-          Capabilities
+        <a href="services.html">
+          Services
         </a>
 
         <a href="contact.html">
@@ -88,6 +93,7 @@
       </div>
 
 
+      <!-- NAV RIGHT -->
       <div class="nav-right">
 
         <button
@@ -100,21 +106,24 @@
         </button>
 
 
-        <a
-          href="contact.html"
+        <button
           class="nav-cta"
+          type="button"
+          data-open-consultation
         >
           Let's Talk
           <span>↗</span>
-        </a>
+        </button>
 
 
+        <!-- MOBILE MENU BUTTON -->
         <button
           class="nav-burger"
           id="navBurger"
           type="button"
           aria-label="Open navigation menu"
           aria-expanded="false"
+          aria-controls="mobileMenu"
         >
           <span></span>
           <span></span>
@@ -144,21 +153,33 @@
         Products
       </a>
 
-      <a href="capabilities.html">
-        Capabilities
+      <a href="services.html">
+        Services
       </a>
 
       <a href="contact.html">
         Contact
       </a>
 
+      <button
+        type="button"
+        data-open-consultation
+      >
+        Let's Talk
+        <span>↗</span>
+      </button>
+
     </div>
 
   </header>
 
 
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
 
   <main>
+
 
     <!-- =====================================================
          HERO
@@ -169,11 +190,16 @@
       id="home"
     >
 
+      <!-- BACKGROUND -->
+
       <div class="hero-bg">
 
         <div class="hero-glow hero-glow-a"></div>
 
         <div class="hero-glow hero-glow-b"></div>
+
+
+        <!-- CURVED ANIMATED LINE -->
 
         <svg
           class="hero-wave"
@@ -181,18 +207,25 @@
           preserveAspectRatio="none"
           aria-hidden="true"
         >
+
           <path
             d="M0 110 C250 30 420 150 700 80 C980 10 1120 120 1440 35"
             fill="none"
             stroke="currentColor"
             stroke-width="1"
           />
+
         </svg>
 
       </div>
 
 
+      <!-- HERO CONTENT -->
+
       <div class="container hero-grid">
+
+
+        <!-- HERO COPY -->
 
         <div class="hero-copy">
 
@@ -227,6 +260,8 @@
           </p>
 
 
+          <!-- BUTTONS -->
+
           <div class="btn-row">
 
             <a
@@ -238,16 +273,19 @@
             </a>
 
 
-            <a
-              href="contact.html"
+            <button
+              type="button"
               class="btn btn-secondary"
+              data-open-consultation
             >
               Work With Us
               <span class="arrow">↘</span>
-            </a>
+            </button>
 
           </div>
 
+
+          <!-- HERO META -->
 
           <div class="hero-meta">
 
@@ -272,17 +310,23 @@
         </div>
 
 
-        <!-- HERO VISUAL -->
+        <!-- =================================================
+             HERO VISUAL
+        ================================================== -->
 
         <div class="hero-visual">
 
           <div class="visual-grid"></div>
 
 
+          <!-- ORBITS -->
+
           <div class="product-orbit orbit-one"></div>
 
           <div class="product-orbit orbit-two"></div>
 
+
+          <!-- MAIN PRODUCT CARD -->
 
           <div class="hero-product-card">
 
@@ -293,30 +337,43 @@
               </span>
 
               <span class="live-status">
+
                 <span></span>
+
                 BUILDING
+
               </span>
 
             </div>
 
 
+            <!-- PRODUCT SCREEN -->
+
             <div class="product-screen">
+
+              <!-- SIDEBAR -->
 
               <div class="screen-sidebar">
 
                 <span class="active"></span>
+
                 <span></span>
+
                 <span></span>
+
                 <span></span>
 
               </div>
 
+
+              <!-- SCREEN CONTENT -->
 
               <div class="screen-content">
 
                 <div class="screen-heading">
 
                   <span></span>
+
                   <span></span>
 
                 </div>
@@ -325,7 +382,9 @@
                 <div class="screen-cards">
 
                   <div></div>
+
                   <div></div>
+
                   <div></div>
 
                 </div>
@@ -339,6 +398,8 @@
 
             </div>
 
+
+            <!-- CARD FOOTER -->
 
             <div class="card-footer">
 
@@ -355,6 +416,8 @@
           </div>
 
 
+          <!-- FLOATING BUILD BADGE -->
+
           <div class="floating-badge badge-one">
 
             <strong>
@@ -367,6 +430,8 @@
 
           </div>
 
+
+          <!-- FLOATING SCALE BADGE -->
 
           <div class="floating-badge badge-two">
 
@@ -387,7 +452,6 @@
     </section>
 
 
-
     <!-- =====================================================
          INTRO
     ====================================================== -->
@@ -403,16 +467,21 @@
           </span>
 
           <h2>
+
             Technology should make
+
             <span class="accent-italic">
               business simpler.
             </span>
+
           </h2>
 
           <p>
+
             We combine product thinking, design and engineering
             to create technology that is useful, reliable and
             built for real-world needs.
+
           </p>
 
         </div>
@@ -422,13 +491,12 @@
     </section>
 
 
-
     <!-- =====================================================
          PRODUCTS
     ====================================================== -->
 
     <section
-      class="section"
+      class="section products-section"
       id="products"
     >
 
@@ -443,10 +511,13 @@
             </span>
 
             <h2>
+
               Products built with
+
               <span class="accent-italic">
                 purpose.
               </span>
+
             </h2>
 
           </div>
@@ -463,10 +534,12 @@
         </div>
 
 
+        <!-- PRODUCT CARDS -->
+
         <div class="products-grid">
 
 
-          <!-- GETVIA -->
+          <!-- PRODUCT 01 -->
 
           <article class="product-card">
 
@@ -477,20 +550,20 @@
               </span>
 
               <span class="product-type">
-                DIGITAL PLATFORM
+                DIGITAL PRODUCT
               </span>
 
             </div>
 
 
-            <div class="product-placeholder getvia-visual">
+            <div class="product-placeholder product-visual-one">
 
               <div class="visual-word">
-                GETVIA
+                WISEMOVE
               </div>
 
               <span>
-                BUSINESS DISCOVERY
+                DIGITAL PRODUCT
               </span>
 
             </div>
@@ -499,13 +572,15 @@
             <div class="product-card-body">
 
               <h3>
-                Getvia
+                Digital Products
               </h3>
 
               <p>
-                A digital business discovery platform designed
-                to help people discover businesses and services
-                through a better digital experience.
+
+                We design and build practical digital products
+                that solve real problems and create meaningful
+                experiences for users.
+
               </p>
 
 
@@ -513,7 +588,7 @@
                 href="products.html"
                 class="product-link"
               >
-                View product
+                Explore
                 <span>→</span>
               </a>
 
@@ -522,8 +597,7 @@
           </article>
 
 
-
-          <!-- VASHQ -->
+          <!-- PRODUCT 02 -->
 
           <article class="product-card">
 
@@ -534,20 +608,20 @@
               </span>
 
               <span class="product-type">
-                BUSINESS SOFTWARE
+                SOFTWARE PLATFORM
               </span>
 
             </div>
 
 
-            <div class="product-placeholder vashq-visual">
+            <div class="product-placeholder product-visual-two">
 
               <div class="visual-word">
-                VASHQ
+                BUILD
               </div>
 
               <span>
-                CAR WASH MANAGEMENT
+                SOFTWARE PLATFORM
               </span>
 
             </div>
@@ -556,13 +630,15 @@
             <div class="product-card-body">
 
               <h3>
-                Vashq
+                Software Platforms
               </h3>
 
               <p>
-                A software platform built to help car wash
-                businesses manage their operations and
-                deliver better customer experiences.
+
+                Scalable software platforms designed around
+                business workflows, customers and long-term
+                growth.
+
               </p>
 
 
@@ -570,7 +646,7 @@
                 href="products.html"
                 class="product-link"
               >
-                View product
+                Explore
                 <span>→</span>
               </a>
 
@@ -579,8 +655,7 @@
           </article>
 
 
-
-          <!-- ZED0 -->
+          <!-- PRODUCT 03 -->
 
           <article class="product-card">
 
@@ -591,20 +666,20 @@
               </span>
 
               <span class="product-type">
-                SMART HARDWARE
+                BUSINESS TECHNOLOGY
               </span>
 
             </div>
 
 
-            <div class="product-placeholder zed0-visual">
+            <div class="product-placeholder product-visual-three">
 
               <div class="visual-word">
-                ZED0
+                SCALE
               </div>
 
               <span>
-                SELF-SERVICE CAR WASH
+                BUSINESS TECHNOLOGY
               </span>
 
             </div>
@@ -613,13 +688,15 @@
             <div class="product-card-body">
 
               <h3>
-                zed0
+                Business Solutions
               </h3>
 
               <p>
-                A self-service car wash machine designed to
-                simplify the washing experience through
-                practical technology.
+
+                Technology solutions that simplify operations,
+                improve efficiency and support sustainable
+                business growth.
+
               </p>
 
 
@@ -627,7 +704,7 @@
                 href="products.html"
                 class="product-link"
               >
-                View product
+                Explore
                 <span>→</span>
               </a>
 
@@ -640,7 +717,6 @@
       </div>
 
     </section>
-
 
 
     <!-- =====================================================
@@ -654,30 +730,40 @@
 
       <div class="container">
 
+
         <div class="section-head">
 
           <span class="eyebrow">
-            CAPABILITIES
+            SERVICES
           </span>
 
           <h2>
+
             End-to-end software delivery,
+
             <span class="accent-italic">
               designed for clarity.
             </span>
+
           </h2>
 
           <p>
+
             From early product thinking to development and
             ongoing improvement, we help turn ideas into
             dependable digital products.
+
           </p>
 
         </div>
 
 
+        <!-- SERVICES GRID -->
+
         <div class="cap-grid">
 
+
+          <!-- SERVICE 01 -->
 
           <article class="cap-card">
 
@@ -690,12 +776,16 @@
             </h3>
 
             <p>
+
               Define the product, understand the users and
               turn business goals into a clear technology plan.
+
             </p>
 
           </article>
 
+
+          <!-- SERVICE 02 -->
 
           <article class="cap-card">
 
@@ -708,12 +798,16 @@
             </h3>
 
             <p>
+
               Create simple, thoughtful interfaces that make
               digital products easier and more enjoyable to use.
+
             </p>
 
           </article>
 
+
+          <!-- SERVICE 03 -->
 
           <article class="cap-card">
 
@@ -726,12 +820,16 @@
             </h3>
 
             <p>
+
               Build responsive websites, web applications and
               mobile experiences using modern technologies.
+
             </p>
 
           </article>
 
+
+          <!-- SERVICE 04 -->
 
           <article class="cap-card">
 
@@ -744,12 +842,16 @@
             </h3>
 
             <p>
+
               Build secure, scalable backend systems, APIs,
               databases and integrations.
+
             </p>
 
           </article>
 
+
+          <!-- SERVICE 05 -->
 
           <article class="cap-card">
 
@@ -762,12 +864,16 @@
             </h3>
 
             <p>
+
               Deploy, automate and maintain reliable technology
               infrastructure built for growth.
+
             </p>
 
           </article>
 
+
+          <!-- SERVICE 06 -->
 
           <article class="cap-card">
 
@@ -780,8 +886,10 @@
             </h3>
 
             <p>
+
               Continue improving, maintaining and scaling your
               product after launch.
+
             </p>
 
           </article>
@@ -791,7 +899,6 @@
       </div>
 
     </section>
-
 
 
     <!-- =====================================================
@@ -804,6 +911,7 @@
 
         <div class="tech-layout">
 
+
           <div>
 
             <span class="eyebrow">
@@ -811,18 +919,23 @@
             </span>
 
             <h2>
+
               Practical technology.
+
               <br>
 
               <span class="accent-italic">
                 Real outcomes.
               </span>
+
             </h2>
 
             <p>
+
               We choose technology based on the product and
               the problem it needs to solve — not the other
               way around.
+
             </p>
 
           </div>
@@ -830,15 +943,41 @@
 
           <div class="tech-list">
 
-            <span>HTML</span>
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>React</span>
-            <span>Node.js</span>
-            <span>Python</span>
-            <span>AWS</span>
-            <span>Supabase</span>
-            <span>Git</span>
+            <span>
+              HTML
+            </span>
+
+            <span>
+              CSS
+            </span>
+
+            <span>
+              JavaScript
+            </span>
+
+            <span>
+              React
+            </span>
+
+            <span>
+              Node.js
+            </span>
+
+            <span>
+              Python
+            </span>
+
+            <span>
+              AWS
+            </span>
+
+            <span>
+              Supabase
+            </span>
+
+            <span>
+              Git
+            </span>
 
           </div>
 
@@ -847,7 +986,6 @@
       </div>
 
     </section>
-
 
 
     <!-- =====================================================
@@ -861,6 +999,7 @@
 
       <div class="container">
 
+
         <div class="section-head">
 
           <span class="eyebrow">
@@ -868,21 +1007,29 @@
           </span>
 
           <h2>
+
             We care about the
+
             <span class="accent-italic">
               whole product.
             </span>
+
           </h2>
 
           <p>
+
             Technology is only useful when it solves the right
             problem and creates meaningful value.
+
           </p>
 
         </div>
 
 
         <div class="why-grid">
+
+
+          <!-- WHY 01 -->
 
           <article class="why-card">
 
@@ -895,12 +1042,16 @@
             </h3>
 
             <p>
+
               We start with the problem, users and business
               outcome before choosing technology.
+
             </p>
 
           </article>
 
+
+          <!-- WHY 02 -->
 
           <article class="why-card">
 
@@ -913,12 +1064,16 @@
             </h3>
 
             <p>
+
               Our products are designed around practical
               workflows and real-world requirements.
+
             </p>
 
           </article>
 
+
+          <!-- WHY 03 -->
 
           <article class="why-card">
 
@@ -931,8 +1086,10 @@
             </h3>
 
             <p>
+
               We build foundations that can evolve as products,
               businesses and customers grow.
+
             </p>
 
           </article>
@@ -944,7 +1101,6 @@
     </section>
 
 
-
     <!-- =====================================================
          PROCESS
     ====================================================== -->
@@ -953,23 +1109,28 @@
 
       <div class="container">
 
+
         <div class="section-head">
 
           <span class="eyebrow">
-            WORK WITH US
+            OUR PROCESS
           </span>
 
           <h2>
+
             A better way to
+
             <span class="accent-italic">
               build together.
             </span>
+
           </h2>
 
         </div>
 
 
         <div class="process-grid">
+
 
           <div class="process-card">
 
@@ -980,6 +1141,10 @@
             <h3>
               Tell us the problem.
             </h3>
+
+            <p>
+              We understand your goals, users and requirements.
+            </p>
 
           </div>
 
@@ -994,6 +1159,10 @@
               Define the product.
             </h3>
 
+            <p>
+              We shape the right product strategy and solution.
+            </p>
+
           </div>
 
 
@@ -1006,6 +1175,10 @@
             <h3>
               Build the solution.
             </h3>
+
+            <p>
+              Our team designs, develops and tests the product.
+            </p>
 
           </div>
 
@@ -1020,6 +1193,10 @@
               Move it forward.
             </h3>
 
+            <p>
+              We support improvement, scaling and long-term growth.
+            </p>
+
           </div>
 
         </div>
@@ -1027,7 +1204,6 @@
       </div>
 
     </section>
-
 
 
     <!-- =====================================================
@@ -1038,6 +1214,7 @@
 
       <div class="container">
 
+
         <div class="section-head">
 
           <span class="eyebrow">
@@ -1045,10 +1222,13 @@
           </span>
 
           <h2>
+
             Questions,
+
             <span class="accent-italic">
               answered.
             </span>
+
           </h2>
 
         </div>
@@ -1057,12 +1237,15 @@
         <div class="faq-list">
 
 
+          <!-- FAQ 01 -->
+
           <div class="faq-item">
 
             <button
               class="faq-q"
               type="button"
             >
+
               <span>
                 What is WiseMove?
               </span>
@@ -1077,10 +1260,12 @@
             <div class="faq-a">
 
               <p>
+
                 WiseMove is a software and product development
-                company focused on creating digital platforms,
-                business solutions and practical technology
-                products.
+                company focused on creating digital products,
+                software solutions and practical technology
+                experiences.
+
               </p>
 
             </div>
@@ -1088,6 +1273,7 @@
           </div>
 
 
+          <!-- FAQ 02 -->
 
           <div class="faq-item">
 
@@ -1095,6 +1281,7 @@
               class="faq-q"
               type="button"
             >
+
               <span>
                 What services does WiseMove offer?
               </span>
@@ -1109,10 +1296,12 @@
             <div class="faq-a">
 
               <p>
+
                 We work across product strategy, UI/UX,
                 web and application development, backend
                 systems, APIs, cloud, DevOps and ongoing
                 product support.
+
               </p>
 
             </div>
@@ -1120,6 +1309,7 @@
           </div>
 
 
+          <!-- FAQ 03 -->
 
           <div class="faq-item">
 
@@ -1127,6 +1317,7 @@
               class="faq-q"
               type="button"
             >
+
               <span>
                 Can WiseMove build custom software?
               </span>
@@ -1141,9 +1332,11 @@
             <div class="faq-a">
 
               <p>
+
                 Yes. We can work with businesses to design
                 and develop custom software, digital platforms
                 and technology solutions based on their needs.
+
               </p>
 
             </div>
@@ -1151,6 +1344,7 @@
           </div>
 
 
+          <!-- FAQ 04 -->
 
           <div class="faq-item">
 
@@ -1158,6 +1352,7 @@
               class="faq-q"
               type="button"
             >
+
               <span>
                 How can I work with WiseMove?
               </span>
@@ -1172,9 +1367,48 @@
             <div class="faq-a">
 
               <p>
-                Contact our team and tell us what you are
-                looking to build. We can discuss the problem,
-                requirements and the best way forward.
+
+                Start a consultation with our team and tell us
+                what you are looking to build. We can discuss
+                the problem, requirements and the best way
+                forward.
+
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- FAQ 05 -->
+
+          <div class="faq-item">
+
+            <button
+              class="faq-q"
+              type="button"
+            >
+
+              <span>
+                Do you work with startups and established businesses?
+              </span>
+
+              <span class="faq-icon">
+                +
+              </span>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+
+                Yes. We can work with businesses at different
+                stages, from early product ideas to existing
+                products that need improvement, scaling or
+                technical support.
+
               </p>
 
             </div>
@@ -1186,7 +1420,6 @@
       </div>
 
     </section>
-
 
 
     <!-- =====================================================
@@ -1203,35 +1436,45 @@
           HAVE AN IDEA?
         </span>
 
+
         <h2>
+
           Let's build something
+
           <span class="accent-italic">
             worth moving.
           </span>
+
         </h2>
 
+
         <p>
+
           Tell us what you're building, what problem you're
           solving or what you want to improve.
+
         </p>
 
 
-        <a
-          href="contact.html"
+        <button
+          type="button"
           class="btn btn-primary"
+          data-open-consultation
         >
+
           Start a Conversation
+
           <span class="arrow">
             →
           </span>
-        </a>
+
+        </button>
 
       </div>
 
     </section>
 
   </main>
-
 
 
   <!-- =====================================================
@@ -1244,6 +1487,8 @@
 
       <div class="footer-top">
 
+
+        <!-- FOOTER BRAND -->
 
         <div class="footer-brand-col">
 
@@ -1274,8 +1519,12 @@
         </div>
 
 
+        <!-- FOOTER LINKS -->
+
         <div class="footer-cols">
 
+
+          <!-- NAVIGATION -->
 
           <div class="footer-col">
 
@@ -1295,8 +1544,8 @@
               Products
             </a>
 
-            <a href="capabilities.html">
-              Capabilities
+            <a href="services.html">
+              Services
             </a>
 
             <a href="contact.html">
@@ -1306,26 +1555,38 @@
           </div>
 
 
+          <!-- SERVICES -->
+
           <div class="footer-col">
 
             <h6>
-              PRODUCTS
+              SERVICES
             </h6>
 
-            <a href="products.html">
-              Getvia
+            <a href="services.html">
+              Product Strategy
             </a>
 
-            <a href="products.html">
-              Vashq
+            <a href="services.html">
+              UI/UX Design
             </a>
 
-            <a href="products.html">
-              zed0
+            <a href="services.html">
+              Web &amp; App Development
+            </a>
+
+            <a href="services.html">
+              Backend &amp; APIs
+            </a>
+
+            <a href="services.html">
+              Cloud &amp; DevOps
             </a>
 
           </div>
 
+
+          <!-- COMPANY -->
 
           <div class="footer-col">
 
@@ -1337,16 +1598,25 @@
               About WiseMove
             </a>
 
-            <a href="capabilities.html">
-              Capabilities
+            <a href="products.html">
+              Products
             </a>
 
-            <a href="contact.html">
+            <a href="services.html">
+              Services
+            </a>
+
+            <a
+              href="#"
+              data-open-consultation
+            >
               Work With Us
             </a>
 
           </div>
 
+
+          <!-- LOCATION -->
 
           <div class="footer-col">
 
@@ -1365,6 +1635,8 @@
       </div>
 
 
+      <!-- FOOTER BOTTOM -->
+
       <div class="footer-bottom">
 
         <span>
@@ -1382,8 +1654,248 @@
   </footer>
 
 
+  <!-- =====================================================
+       CONSULTATION MODAL
+  ====================================================== -->
 
-  <!-- IMPORTANT: JavaScript is in the same folder -->
+  <div
+    class="consultation-modal"
+    id="consultationModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="consultation-overlay"
+      data-close-consultation
+    ></div>
+
+
+    <div
+      class="consultation-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="consultationTitle"
+    >
+
+      <!-- CLOSE BUTTON -->
+
+      <button
+        type="button"
+        class="consultation-close"
+        data-close-consultation
+        aria-label="Close consultation form"
+      >
+        ×
+      </button>
+
+
+      <!-- MODAL HEADER -->
+
+      <div class="consultation-header">
+
+        <span class="eyebrow">
+          LET'S TALK
+        </span>
+
+        <h2 id="consultationTitle">
+
+          Let's discuss your
+
+          <span class="accent-italic">
+            idea.
+          </span>
+
+        </h2>
+
+        <p>
+
+          Tell us about your project, business challenge or
+          software requirement. Our team will get back to you.
+
+        </p>
+
+      </div>
+
+
+      <!-- CONSULTATION FORM -->
+
+      <form
+        class="consultation-form"
+        id="consultationForm"
+      >
+
+        <div class="form-row">
+
+
+          <div class="form-group">
+
+            <label for="consultationName">
+              Your name *
+            </label>
+
+            <input
+              type="text"
+              id="consultationName"
+              name="name"
+              placeholder="Your name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="consultationEmail">
+              Email address *
+            </label>
+
+            <input
+              type="email"
+              id="consultationEmail"
+              name="email"
+              placeholder="you@example.com"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+
+          <div class="form-group">
+
+            <label for="consultationPhone">
+              Phone number
+            </label>
+
+            <input
+              type="tel"
+              id="consultationPhone"
+              name="phone"
+              placeholder="+91 XXXXX XXXXX"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="consultationCompany">
+              Company
+            </label>
+
+            <input
+              type="text"
+              id="consultationCompany"
+              name="company"
+              placeholder="Company name"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="consultationService">
+            What do you need?
+          </label>
+
+          <select
+            id="consultationService"
+            name="service"
+          >
+
+            <option value="">
+              Select a service
+            </option>
+
+            <option value="product-strategy">
+              Product Strategy
+            </option>
+
+            <option value="ui-ux">
+              UI/UX Design
+            </option>
+
+            <option value="web-app">
+              Web &amp; App Development
+            </option>
+
+            <option value="backend-api">
+              Backend &amp; APIs
+            </option>
+
+            <option value="cloud-devops">
+              Cloud &amp; DevOps
+            </option>
+
+            <option value="custom-software">
+              Custom Software
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="consultationMessage">
+            Tell us about your project *
+          </label>
+
+          <textarea
+            id="consultationMessage"
+            name="message"
+            rows="5"
+            placeholder="Tell us about your idea, requirements or business problem..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-primary consultation-submit"
+        >
+
+          Request Consultation
+
+          <span class="arrow">
+            →
+          </span>
+
+        </button>
+
+
+        <p
+          class="consultation-status"
+          id="consultationStatus"
+          aria-live="polite"
+        ></p>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
   <script src="./script.js"></script>
 
 </body>
