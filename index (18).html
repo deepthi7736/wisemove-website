@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WiseMove &mdash; Make Every Move Wiser.</title>
+
+  <meta name="description" content="WiseMove is a software and product development company creating digital platforms, business solutions and intelligent vehicle-care products.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
+  <style>
+    /* ZED0 hero product card - logo only, no product text */
+    .zed0-brand-pill {
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      min-width: 170px;
+    }
+
+    .zed0-brand-pill > div { display: none !important; }
+
+    .zed0-brand-pill .zed0-logo-only {
+      display: block;
+      width: 78px;
+      height: auto;
+      max-height: 34px;
+      object-fit: contain;
+      margin: auto;
+    }
+  </style>
+
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<header>
+
+  <nav class="nav-float">
+
+    <a href="index.html" class="brand" aria-label="WiseMove Home">
+
+      <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
+      <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
+
+    </a>
+
+
+    <div class="nav-links">
+
+      <a href="about.html">About</a>
+
+      <a href="products.html">Products</a>
+
+      <a href="capabilities.html">Capabilities</a>
+
+      <a href="contact.html">Contact</a>
+
+    </div>
+
+
+    <div class="nav-right">
+
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle theme">
+        &#9689;
+      </button>
+
+      <a href="contact.html" class="nav-cta">
+        Let's Talk
+        <span>&#8599;</span>
+      </a>
+
+      <button class="nav-burger" id="navBurger" type="button" aria-label="Open menu">
+        &#9776;
+      </button>
+
+    </div>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================================
+     MOBILE MENU
+========================================================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+  <a href="about.html">About</a>
+
+  <a href="products.html">Products</a>
+
+  <a href="capabilities.html">Capabilities</a>
+
+  <a href="contact.html">Contact</a>
+
+</div>
+
+
+<main>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero" id="home">
+
+  <div class="hero-bg">
+
+    <div class="hero-glow hero-glow-a"></div>
+    <div class="hero-glow hero-glow-b"></div>
+
+    <svg class="hero-wave" viewBox="0 0 1440 140" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0 110 C250 30 420 150 700 80 C980 10 1120 120 1440 35"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+        opacity=".12"
+      />
+    </svg>
+
+  </div>
+
+
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        BUILDING DIGITAL PRODUCTS
+      </div>
+
+      <h1>
+        Make every
+        <span class="accent">move</span>
+        wiser.
+      </h1>
+
+      <p class="lede">
+        Software, products and business solutions built around
+        real problems, real users and real outcomes.
+      </p>
+
+      <div class="btn-row">
+
+        <a href="products.html" class="btn btn-primary">
+          Explore Products
+          <span class="arrow">&#8594;</span>
+        </a>
+
+        <a href="contact.html" class="btn btn-outline">
+          Work With Us
+          <span class="arrow">&#8594;</span>
+        </a>
+
+      </div>
+
+      <div class="social-proof">
+
+        <div class="avatar-stack" aria-hidden="true">
+          <span class="avatar av-1"></span>
+          <span class="avatar av-2"></span>
+          <span class="avatar av-3"></span>
+          <span class="avatar av-4"></span>
+        </div>
+
+        <p class="mono">
+          <span class="accent-text">3</span>
+          products built and operated
+        </p>
+
+      </div>
+
+      <div class="trust-row">
+        <span class="trust-item">&#10003; Product Development</span>
+        <span class="trust-dot">&bull;</span>
+        <span class="trust-item">&#10003; Software Engineering</span>
+        <span class="trust-dot">&bull;</span>
+        <span class="trust-item">&#10003; Business Solutions</span>
+      </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+      <svg class="hv-lines" viewBox="0 0 700 540" aria-hidden="true">
+
+        <defs>
+          <linearGradient id="lineGrad" x1="0" x2="1">
+            <stop offset="0%" stop-color="#3D19B7" stop-opacity=".2" />
+            <stop offset="50%" stop-color="#CA26D1" stop-opacity=".9" />
+            <stop offset="100%" stop-color="#3D19B7" stop-opacity=".2" />
+          </linearGradient>
+        </defs>
+
+        <path class="hv-line" d="M80 250 C180 90 360 90 560 230" />
+        <path class="hv-line" d="M100 360 C220 220 400 210 620 330" />
+        <path class="hv-line" d="M150 100 C300 230 420 250 570 440" />
+
+        <ellipse class="hv-orbit" cx="365" cy="285" rx="245" ry="115" />
+        <ellipse class="hv-orbit" cx="365" cy="285" rx="190" ry="75" />
+
+      </svg>
+
+      <div class="hv-idea">
+        <span class="hv-idea-icon">&#10022;</span>
+        Ideas &#8594; Products
+      </div>
+
+      <div class="hv-core">
+        <img src="assets/wisemove-icon.png" alt="WiseMove">
+      </div>
+
+      <div class="hv-pedestal">
+        <div class="hv-pedestal-glow"></div>
+        <div class="hv-ring hv-ring-1"></div>
+        <div class="hv-ring hv-ring-2"></div>
+        <div class="hv-ring hv-ring-3"></div>
+      </div>
+
+
+      <div class="hero-brands">
+
+        <a href="products.html#getvia" class="brand-pill" aria-label="Getvia">
+
+          <img src="assets/getvia-logo.png" alt="Getvia">
+
+          <div>
+            <small>PRODUCT</small>
+            <span>Getvia</span>
+          </div>
+
+        </a>
+
+
+        <a href="products.html#vashq" class="brand-pill" aria-label="Vashq">
+
+          <img src="assets/vashq-official-logo.png" alt="Vashq">
+
+          <div>
+            <small>PRODUCT</small>
+            <span>Vashq</span>
+          </div>
+
+        </a>
+
+
+        <a href="products.html#zed0" class="brand-pill zed0-brand-pill" aria-label="zed0">
+          <img src="assets/zed0%20Logo%20dark.png" class="zed0-logo-only" alt="zed0">
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+     STATS
+========================================================= -->
+
+<section class="stats-band">
+
+  <div class="container">
+
+    <div class="stats-panel">
+
+      <div class="stat-item">
+        <span>&#10022;</span>
+        <div>
+          <span class="stat-num">3</span>
+          <div class="stat-label">PRODUCTS BUILT</div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <span>&#8984;</span>
+        <div>
+          <span class="stat-num">01</span>
+          <div class="stat-label">PRODUCT ENGINEERING TEAM</div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <span>&#8599;</span>
+        <div>
+          <span class="stat-num">360&deg;</span>
+          <div class="stat-label">PRODUCT THINKING</div>
+        </div>
+      </div>
+
+      <div class="stat-item">
+        <span>&infin;</span>
+        <div>
+          <span class="stat-num">&infin;</span>
+          <div class="stat-label">IDEAS TO EXPLORE</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+     BIG TYPE
+========================================================= -->
+
+<section class="bigtype-band">
+
+  <div class="bigtype">WISEMOVE</div>
+
+  <div class="bigtype-fg">
+
+    <span class="eyebrow">WHAT WE BUILD</span>
+
+    <p>
+      Digital products and physical solutions designed
+      around real-world problems.
+    </p>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+     WHY WISEMOVE
+========================================================= -->
+
+<section class="section" id="why">
+
+  <div class="container">
+
+    <div class="section-head">
+
+      <span class="eyebrow">WHY WISEMOVE</span>
+
+      <h2>
+        We care about the
+        <span class="accent-italic">whole product.</span>
+      </h2>
+
+      <p>
+        Technology is only useful when it solves the right
+        problem and creates measurable value.
+      </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+      <article class="why-card">
+
+        <span class="why-bignum">01</span>
+
+        <h5>Product-first thinking</h5>
+
+        <p>
+          We start with the problem, users and business
+          outcome before choosing technology.
+        </p>
+
+      </article>
+
+
+      <article class="why-card">
+
+        <span class="why-bignum">02</span>
+
+        <h5>Built for real use</h5>
+
+        <p>
+          Our products are designed around practical
+          workflows and real-world requirements.
+        </p>
+
+      </article>
+
+
+      <article class="why-card">
+
+        <span class="why-bignum">03</span>
+
+        <h5>Long-term thinking</h5>
+
+        <p>
+          We build foundations that can evolve as products,
+          businesses and customers grow.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="final-cta">
+
+  <div class="final-cta-glow"></div>
+
+  <div class="container">
+
+    <span class="eyebrow">HAVE AN IDEA?</span>
+
+    <h2>
+      Let's build something
+      <span class="accent-italic">worth moving.</span>
+    </h2>
+
+    <a href="contact.html" class="btn btn-primary">
+      Start a Conversation
+      <span class="arrow">&#8594;</span>
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+  <div class="container">
+
+    <div class="footer-top">
+
+      <div class="footer-brand-col">
+
+        <a href="index.html" class="brand">
+
+          <img src="assets/wisemove-logo-dark.png" class="logo-img logo-dark" alt="WiseMove">
+          <img src="assets/wisemove-logo-light.png" class="logo-img logo-light" alt="WiseMove">
+
+        </a>
+
+        <p>Make every move wiser.</p>
+
+      </div>
+
+
+      <div class="footer-cols">
+
+        <div class="footer-col">
+
+          <h6>PRODUCTS</h6>
+
+          <a href="products.html#getvia">Getvia</a>
+          <a href="products.html#vashq">Vashq</a>
+          <a href="products.html#zed0">zed0</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h6>COMPANY</h6>
+
+          <a href="about.html">About</a>
+          <a href="capabilities.html">Capabilities</a>
+          <a href="contact.html">Contact</a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+          <h6>LEGAL</h6>
+
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <span>&copy; 2026 WiseMove. All rights reserved.</span>
+
+      <span>BUILT WITH PURPOSE.</span>
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<script src="main.js"></script>
+
+</body>
+</html>
