@@ -1,921 +1,1390 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <meta
-        name="description"
-        content="WiseMove builds modern digital products, software solutions and scalable technology experiences for businesses."
-    >
+  <title>WiseMove — Make Every Move Wiser.</title>
 
-    <meta
-        name="keywords"
-        content="WiseMove, software development, web development, mobile app development, digital products, technology solutions, software company"
-    >
+  <meta
+    name="description"
+    content="WiseMove is a software and product development company building digital products, business solutions and modern technology experiences."
+  >
 
-    <meta name="author" content="WiseMove">
+  <meta
+    name="theme-color"
+    content="#09090d"
+  >
 
-    <meta name="theme-color" content="#0a0810">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <title>WiseMove — Building Digital Products That Move Businesses Forward</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- IMPORTANT: CSS is in the same folder as this HTML -->
+  <link rel="stylesheet" href="./style.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="style.css">
+  <script>
+    document.documentElement.classList.add("js");
+  </script>
 </head>
+
 
 <body>
 
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <header class="site-header">
+
+    <nav class="nav-float">
+
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="WiseMove Home"
+      >
+        <img
+          src="assets/wisemove-logo-dark.png"
+          class="logo-img logo-dark"
+          alt="WiseMove"
+        >
+
+        <img
+          src="assets/wisemove-logo-light.png"
+          class="logo-img logo-light"
+          alt="WiseMove"
+        >
+      </a>
+
+
+      <div class="nav-links">
+
+        <a href="about.html">
+          About
+        </a>
+
+        <a href="products.html">
+          Products
+        </a>
+
+        <a href="capabilities.html">
+          Capabilities
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+
+      </div>
+
+
+      <div class="nav-right">
+
+        <button
+          class="theme-toggle"
+          id="themeToggle"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+
+        <a
+          href="contact.html"
+          class="nav-cta"
+        >
+          Let's Talk
+          <span>↗</span>
+        </a>
+
+
+        <button
+          class="nav-burger"
+          id="navBurger"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+
+    </nav>
+
+
+    <!-- MOBILE MENU -->
+
+    <div
+      class="mobile-menu"
+      id="mobileMenu"
+    >
+
+      <a href="index.html">
+        Home
+      </a>
+
+      <a href="about.html">
+        About
+      </a>
+
+      <a href="products.html">
+        Products
+      </a>
+
+      <a href="capabilities.html">
+        Capabilities
+      </a>
+
+      <a href="contact.html">
+        Contact
+      </a>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
     <!-- =====================================================
-         HEADER
+         HERO
     ====================================================== -->
 
-    <header class="site-header">
+    <section
+      class="hero"
+      id="home"
+    >
 
-        <nav class="navbar">
+      <div class="hero-bg">
 
-            <!-- Logo -->
-            <a href="index.html" class="brand" aria-label="WiseMove Home">
+        <div class="hero-glow hero-glow-a"></div>
 
-                <span class="brand-mark">
-                    <span></span>
-                    <span></span>
-                </span>
+        <div class="hero-glow hero-glow-b"></div>
 
-                <span class="brand-name">
-                    WiseMove
-                </span>
+        <svg
+          class="hero-wave"
+          viewBox="0 0 1440 140"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M0 110 C250 30 420 150 700 80 C980 10 1120 120 1440 35"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          />
+        </svg>
 
+      </div>
+
+
+      <div class="container hero-grid">
+
+        <div class="hero-copy">
+
+          <div class="status-pill">
+
+            <span class="status-dot"></span>
+
+            BUILDING DIGITAL PRODUCTS
+
+          </div>
+
+
+          <h1>
+
+            Make every
+
+            <span class="accent">
+              move
+            </span>
+
+            wiser.
+
+          </h1>
+
+
+          <p class="lede">
+
+            WiseMove builds digital products, software solutions
+            and technology experiences that help businesses solve
+            real problems and move forward.
+
+          </p>
+
+
+          <div class="btn-row">
+
+            <a
+              href="products.html"
+              class="btn btn-primary"
+            >
+              Explore Products
+              <span class="arrow">→</span>
             </a>
 
 
-            <!-- Desktop Navigation -->
-            <div class="nav-links">
+            <a
+              href="contact.html"
+              class="btn btn-secondary"
+            >
+              Work With Us
+              <span class="arrow">↘</span>
+            </a>
 
-                <a href="about.html">
-                    About
-                </a>
+          </div>
 
-                <a href="products.html">
-                    Products
-                </a>
 
-                <a href="services.html">
-                    Services
-                </a>
+          <div class="hero-meta">
 
-                <a href="contact.html">
-                    Contact
-                </a>
+            <span>
+              Product Development
+            </span>
+
+            <span>•</span>
+
+            <span>
+              Software Engineering
+            </span>
+
+            <span>•</span>
+
+            <span>
+              Business Solutions
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-visual">
+
+          <div class="visual-grid"></div>
+
+
+          <div class="product-orbit orbit-one"></div>
+
+          <div class="product-orbit orbit-two"></div>
+
+
+          <div class="hero-product-card">
+
+            <div class="card-top">
+
+              <span class="mono">
+                WISEMOVE
+              </span>
+
+              <span class="live-status">
+                <span></span>
+                BUILDING
+              </span>
 
             </div>
 
 
-            <!-- Navigation Actions -->
-            <div class="nav-actions">
+            <div class="product-screen">
 
-                <button
-                    class="theme-toggle"
-                    id="themeToggle"
-                    type="button"
-                    aria-label="Toggle theme"
-                >
-                    ◐
-                </button>
+              <div class="screen-sidebar">
 
-                <a
-                    href="contact.html"
-                    class="nav-cta"
-                >
-                    Let's Talk
-                    <span>↗</span>
-                </a>
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
 
-                <button
-                    class="menu-toggle"
-                    id="menuToggle"
-                    type="button"
-                    aria-label="Open navigation menu"
-                    aria-expanded="false"
-                >
-                    <span></span>
-                    <span></span>
-                </button>
+              </div>
+
+
+              <div class="screen-content">
+
+                <div class="screen-heading">
+
+                  <span></span>
+                  <span></span>
+
+                </div>
+
+
+                <div class="screen-cards">
+
+                  <div></div>
+                  <div></div>
+                  <div></div>
+
+                </div>
+
+
+                <div class="screen-line"></div>
+
+                <div class="screen-line short"></div>
+
+              </div>
 
             </div>
 
-        </nav>
+
+            <div class="card-footer">
+
+              <span>
+                DIGITAL PRODUCT
+              </span>
+
+              <span>
+                01
+              </span>
+
+            </div>
+
+          </div>
 
 
-        <!-- Mobile Navigation -->
+          <div class="floating-badge badge-one">
 
-        <div
-            class="mobile-menu"
-            id="mobileMenu"
+            <strong>
+              Build
+            </strong>
+
+            <span>
+              Better products
+            </span>
+
+          </div>
+
+
+          <div class="floating-badge badge-two">
+
+            <strong>
+              Scale
+            </strong>
+
+            <span>
+              With confidence
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="section intro-section">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <span class="eyebrow">
+            WHAT WE DO
+          </span>
+
+          <h2>
+            Technology should make
+            <span class="accent-italic">
+              business simpler.
+            </span>
+          </h2>
+
+          <p>
+            We combine product thinking, design and engineering
+            to create technology that is useful, reliable and
+            built for real-world needs.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PRODUCTS
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="products"
+    >
+
+      <div class="container">
+
+        <div class="section-head split-head">
+
+          <div>
+
+            <span class="eyebrow">
+              OUR PRODUCTS
+            </span>
+
+            <h2>
+              Products built with
+              <span class="accent-italic">
+                purpose.
+              </span>
+            </h2>
+
+          </div>
+
+
+          <a
+            href="products.html"
+            class="text-link"
+          >
+            View all products
+            <span>↗</span>
+          </a>
+
+        </div>
+
+
+        <div class="products-grid">
+
+
+          <!-- GETVIA -->
+
+          <article class="product-card">
+
+            <div class="product-card-top">
+
+              <span class="product-number">
+                01
+              </span>
+
+              <span class="product-type">
+                DIGITAL PLATFORM
+              </span>
+
+            </div>
+
+
+            <div class="product-placeholder getvia-visual">
+
+              <div class="visual-word">
+                GETVIA
+              </div>
+
+              <span>
+                BUSINESS DISCOVERY
+              </span>
+
+            </div>
+
+
+            <div class="product-card-body">
+
+              <h3>
+                Getvia
+              </h3>
+
+              <p>
+                A digital business discovery platform designed
+                to help people discover businesses and services
+                through a better digital experience.
+              </p>
+
+
+              <a
+                href="products.html"
+                class="product-link"
+              >
+                View product
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- VASHQ -->
+
+          <article class="product-card">
+
+            <div class="product-card-top">
+
+              <span class="product-number">
+                02
+              </span>
+
+              <span class="product-type">
+                BUSINESS SOFTWARE
+              </span>
+
+            </div>
+
+
+            <div class="product-placeholder vashq-visual">
+
+              <div class="visual-word">
+                VASHQ
+              </div>
+
+              <span>
+                CAR WASH MANAGEMENT
+              </span>
+
+            </div>
+
+
+            <div class="product-card-body">
+
+              <h3>
+                Vashq
+              </h3>
+
+              <p>
+                A software platform built to help car wash
+                businesses manage their operations and
+                deliver better customer experiences.
+              </p>
+
+
+              <a
+                href="products.html"
+                class="product-link"
+              >
+                View product
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+
+          <!-- ZED0 -->
+
+          <article class="product-card">
+
+            <div class="product-card-top">
+
+              <span class="product-number">
+                03
+              </span>
+
+              <span class="product-type">
+                SMART HARDWARE
+              </span>
+
+            </div>
+
+
+            <div class="product-placeholder zed0-visual">
+
+              <div class="visual-word">
+                ZED0
+              </div>
+
+              <span>
+                SELF-SERVICE CAR WASH
+              </span>
+
+            </div>
+
+
+            <div class="product-card-body">
+
+              <h3>
+                zed0
+              </h3>
+
+              <p>
+                A self-service car wash machine designed to
+                simplify the washing experience through
+                practical technology.
+              </p>
+
+
+              <a
+                href="products.html"
+                class="product-link"
+              >
+                View product
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section
+      class="section services-section"
+      id="services"
+    >
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <span class="eyebrow">
+            CAPABILITIES
+          </span>
+
+          <h2>
+            End-to-end software delivery,
+            <span class="accent-italic">
+              designed for clarity.
+            </span>
+          </h2>
+
+          <p>
+            From early product thinking to development and
+            ongoing improvement, we help turn ideas into
+            dependable digital products.
+          </p>
+
+        </div>
+
+
+        <div class="cap-grid">
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              01
+            </span>
+
+            <h3>
+              Product Strategy
+            </h3>
+
+            <p>
+              Define the product, understand the users and
+              turn business goals into a clear technology plan.
+            </p>
+
+          </article>
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              02
+            </span>
+
+            <h3>
+              UI/UX Design
+            </h3>
+
+            <p>
+              Create simple, thoughtful interfaces that make
+              digital products easier and more enjoyable to use.
+            </p>
+
+          </article>
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              03
+            </span>
+
+            <h3>
+              Web &amp; App Development
+            </h3>
+
+            <p>
+              Build responsive websites, web applications and
+              mobile experiences using modern technologies.
+            </p>
+
+          </article>
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              04
+            </span>
+
+            <h3>
+              Backend &amp; APIs
+            </h3>
+
+            <p>
+              Build secure, scalable backend systems, APIs,
+              databases and integrations.
+            </p>
+
+          </article>
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              05
+            </span>
+
+            <h3>
+              Cloud &amp; DevOps
+            </h3>
+
+            <p>
+              Deploy, automate and maintain reliable technology
+              infrastructure built for growth.
+            </p>
+
+          </article>
+
+
+          <article class="cap-card">
+
+            <span class="cap-number">
+              06
+            </span>
+
+            <h3>
+              Ongoing Support
+            </h3>
+
+            <p>
+              Continue improving, maintaining and scaling your
+              product after launch.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         TECHNOLOGY
+    ====================================================== -->
+
+    <section class="section technology-section">
+
+      <div class="container">
+
+        <div class="tech-layout">
+
+          <div>
+
+            <span class="eyebrow">
+              HOW WE BUILD
+            </span>
+
+            <h2>
+              Practical technology.
+              <br>
+
+              <span class="accent-italic">
+                Real outcomes.
+              </span>
+            </h2>
+
+            <p>
+              We choose technology based on the product and
+              the problem it needs to solve — not the other
+              way around.
+            </p>
+
+          </div>
+
+
+          <div class="tech-list">
+
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JavaScript</span>
+            <span>React</span>
+            <span>Node.js</span>
+            <span>Python</span>
+            <span>AWS</span>
+            <span>Supabase</span>
+            <span>Git</span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WHY WISEMOVE
+    ====================================================== -->
+
+    <section
+      class="section"
+      id="about"
+    >
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <span class="eyebrow">
+            WHY WISEMOVE
+          </span>
+
+          <h2>
+            We care about the
+            <span class="accent-italic">
+              whole product.
+            </span>
+          </h2>
+
+          <p>
+            Technology is only useful when it solves the right
+            problem and creates meaningful value.
+          </p>
+
+        </div>
+
+
+        <div class="why-grid">
+
+          <article class="why-card">
+
+            <span class="why-bignum">
+              01
+            </span>
+
+            <h3>
+              Product-first thinking
+            </h3>
+
+            <p>
+              We start with the problem, users and business
+              outcome before choosing technology.
+            </p>
+
+          </article>
+
+
+          <article class="why-card">
+
+            <span class="why-bignum">
+              02
+            </span>
+
+            <h3>
+              Built for real use
+            </h3>
+
+            <p>
+              Our products are designed around practical
+              workflows and real-world requirements.
+            </p>
+
+          </article>
+
+
+          <article class="why-card">
+
+            <span class="why-bignum">
+              03
+            </span>
+
+            <h3>
+              Long-term thinking
+            </h3>
+
+            <p>
+              We build foundations that can evolve as products,
+              businesses and customers grow.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROCESS
+    ====================================================== -->
+
+    <section class="section process-section">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <span class="eyebrow">
+            WORK WITH US
+          </span>
+
+          <h2>
+            A better way to
+            <span class="accent-italic">
+              build together.
+            </span>
+          </h2>
+
+        </div>
+
+
+        <div class="process-grid">
+
+          <div class="process-card">
+
+            <span>
+              01
+            </span>
+
+            <h3>
+              Tell us the problem.
+            </h3>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <span>
+              02
+            </span>
+
+            <h3>
+              Define the product.
+            </h3>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <span>
+              03
+            </span>
+
+            <h3>
+              Build the solution.
+            </h3>
+
+          </div>
+
+
+          <div class="process-card">
+
+            <span>
+              04
+            </span>
+
+            <h3>
+              Move it forward.
+            </h3>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FAQ
+    ====================================================== -->
+
+    <section class="section faq-section">
+
+      <div class="container">
+
+        <div class="section-head">
+
+          <span class="eyebrow">
+            FAQ
+          </span>
+
+          <h2>
+            Questions,
+            <span class="accent-italic">
+              answered.
+            </span>
+          </h2>
+
+        </div>
+
+
+        <div class="faq-list">
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-q"
+              type="button"
+            >
+              <span>
+                What is WiseMove?
+              </span>
+
+              <span class="faq-icon">
+                +
+              </span>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+                WiseMove is a software and product development
+                company focused on creating digital platforms,
+                business solutions and practical technology
+                products.
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-q"
+              type="button"
+            >
+              <span>
+                What services does WiseMove offer?
+              </span>
+
+              <span class="faq-icon">
+                +
+              </span>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+                We work across product strategy, UI/UX,
+                web and application development, backend
+                systems, APIs, cloud, DevOps and ongoing
+                product support.
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-q"
+              type="button"
+            >
+              <span>
+                Can WiseMove build custom software?
+              </span>
+
+              <span class="faq-icon">
+                +
+              </span>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+                Yes. We can work with businesses to design
+                and develop custom software, digital platforms
+                and technology solutions based on their needs.
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="faq-item">
+
+            <button
+              class="faq-q"
+              type="button"
+            >
+              <span>
+                How can I work with WiseMove?
+              </span>
+
+              <span class="faq-icon">
+                +
+              </span>
+
+            </button>
+
+
+            <div class="faq-a">
+
+              <p>
+                Contact our team and tell us what you are
+                looking to build. We can discuss the problem,
+                requirements and the best way forward.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FINAL CTA
+    ====================================================== -->
+
+    <section class="final-cta">
+
+      <div class="final-cta-glow"></div>
+
+      <div class="container">
+
+        <span class="eyebrow">
+          HAVE AN IDEA?
+        </span>
+
+        <h2>
+          Let's build something
+          <span class="accent-italic">
+            worth moving.
+          </span>
+        </h2>
+
+        <p>
+          Tell us what you're building, what problem you're
+          solving or what you want to improve.
+        </p>
+
+
+        <a
+          href="contact.html"
+          class="btn btn-primary"
         >
+          Start a Conversation
+          <span class="arrow">
+            →
+          </span>
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-top">
+
+
+        <div class="footer-brand-col">
+
+          <a
+            href="index.html"
+            class="brand"
+          >
+
+            <img
+              src="assets/wisemove-logo-dark.png"
+              class="logo-img logo-dark"
+              alt="WiseMove"
+            >
+
+            <img
+              src="assets/wisemove-logo-light.png"
+              class="logo-img logo-light"
+              alt="WiseMove"
+            >
+
+          </a>
+
+
+          <p>
+            Make every move wiser.
+          </p>
+
+        </div>
+
+
+        <div class="footer-cols">
+
+
+          <div class="footer-col">
+
+            <h6>
+              NAVIGATION
+            </h6>
+
+            <a href="index.html">
+              Home
+            </a>
 
             <a href="about.html">
-                About
+              About
             </a>
 
             <a href="products.html">
-                Products
+              Products
             </a>
 
-            <a href="services.html">
-                Services
+            <a href="capabilities.html">
+              Capabilities
             </a>
 
             <a href="contact.html">
-                Contact
+              Contact
             </a>
 
-            <a
-                href="contact.html"
-                class="mobile-cta"
-            >
-                Let's Talk ↗
+          </div>
+
+
+          <div class="footer-col">
+
+            <h6>
+              PRODUCTS
+            </h6>
+
+            <a href="products.html">
+              Getvia
             </a>
 
-        </div>
+            <a href="products.html">
+              Vashq
+            </a>
 
-    </header>
+            <a href="products.html">
+              zed0
+            </a>
 
+          </div>
 
 
-    <main>
+          <div class="footer-col">
 
-        <!-- =====================================================
-             HERO
-        ====================================================== -->
+            <h6>
+              COMPANY
+            </h6>
 
-        <section class="hero">
+            <a href="about.html">
+              About WiseMove
+            </a>
 
-            <!-- Background glow -->
-            <div
-                class="hero-glow hero-glow-one"
-                aria-hidden="true"
-            ></div>
+            <a href="capabilities.html">
+              Capabilities
+            </a>
 
-            <div
-                class="hero-glow hero-glow-two"
-                aria-hidden="true"
-            ></div>
+            <a href="contact.html">
+              Work With Us
+            </a>
 
+          </div>
 
-            <div class="hero-content">
 
-                <div class="eyebrow">
-                    <span class="eyebrow-dot"></span>
-                    SOFTWARE &amp; DIGITAL PRODUCTS
-                </div>
+          <div class="footer-col">
 
+            <h6>
+              LOCATION
+            </h6>
 
-                <h1>
-                    Build smarter.
-                    <br>
-
-                    <span class="gradient-text">
-                        Move forward.
-                    </span>
-                </h1>
-
-
-                <p class="hero-description">
-                    WiseMove builds modern digital products, software
-                    solutions and technology experiences that help
-                    businesses grow, operate better and move faster.
-                </p>
-
-
-                <div class="hero-actions">
-
-                    <a
-                        href="products.html"
-                        class="primary-button"
-                    >
-                        Explore Products
-                        <span>→</span>
-                    </a>
-
-
-                    <a
-                        href="contact.html"
-                        class="secondary-button"
-                    >
-                        Work With Us
-                        <span>↘</span>
-                    </a>
-
-                </div>
-
-
-                <div class="hero-trust">
-
-                    <span>
-                        Product Development
-                    </span>
-
-                    <span class="separator">
-                        •
-                    </span>
-
-                    <span>
-                        Software Engineering
-                    </span>
-
-                    <span class="separator">
-                        •
-                    </span>
-
-                    <span>
-                        Business Solutions
-                    </span>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 HERO VISUAL
-            ================================================== -->
-
-            <div class="hero-visual">
-
-                <div class="visual-orbit orbit-one"></div>
-
-                <div class="visual-orbit orbit-two"></div>
-
-                <div class="visual-orbit orbit-three"></div>
-
-
-                <div class="visual-card visual-card-main">
-
-                    <div class="visual-card-top">
-
-                        <span class="visual-label">
-                            WISEMOVE
-                        </span>
-
-                        <span class="visual-status">
-                            ● BUILDING
-                        </span>
-
-                    </div>
-
-
-                    <div class="visual-code">
-
-                        <span class="code-line">
-                            <i>01</i>
-                            <b>digital</b>
-                            products
-                        </span>
-
-                        <span class="code-line">
-                            <i>02</i>
-                            <b>software</b>
-                            solutions
-                        </span>
-
-                        <span class="code-line">
-                            <i>03</i>
-                            <b>business</b>
-                            growth
-                        </span>
-
-                    </div>
-
-
-                    <div class="visual-progress">
-
-                        <div class="progress-info">
-
-                            <span>
-                                Product Development
-                            </span>
-
-                            <span>
-                                100%
-                            </span>
-
-                        </div>
-
-                        <div class="progress-bar">
-                            <span></span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="floating-card floating-card-one">
-
-                    <span class="floating-icon">
-                        ↗
-                    </span>
-
-                    <div>
-                        <strong>
-                            Build
-                        </strong>
-
-                        <small>
-                            Better products
-                        </small>
-                    </div>
-
-                </div>
-
-
-                <div class="floating-card floating-card-two">
-
-                    <span class="floating-icon">
-                        ✦
-                    </span>
-
-                    <div>
-                        <strong>
-                            Scale
-                        </strong>
-
-                        <small>
-                            With confidence
-                        </small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             INTRO
-        ====================================================== -->
-
-        <section class="intro section">
-
-            <div class="section-label">
-                / WHAT WE DO
-            </div>
-
-
-            <div class="intro-content">
-
-                <h2>
-                    Technology should make
-                    <span class="gradient-text">
-                        business simpler.
-                    </span>
-                </h2>
-
-
-                <p>
-                    We combine product thinking, engineering and
-                    technology to create digital experiences that
-                    solve real business problems.
-                </p>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             SERVICES PREVIEW
-        ====================================================== -->
-
-        <section class="services-preview section">
-
-            <div class="section-heading">
-
-                <div>
-                    <div class="section-label">
-                        / SERVICES
-                    </div>
-
-                    <h2>
-                        From idea to
-                        <span class="gradient-text">
-                            execution.
-                        </span>
-                    </h2>
-                </div>
-
-
-                <a
-                    href="services.html"
-                    class="text-link"
-                >
-                    View all services
-                    <span>↗</span>
-                </a>
-
-            </div>
-
-
-
-            <div class="service-grid">
-
-                <!-- Service 01 -->
-
-                <article class="service-card">
-
-                    <div class="service-number">
-                        01
-                    </div>
-
-                    <div class="service-icon">
-                        ◇
-                    </div>
-
-                    <h3>
-                        Product Development
-                    </h3>
-
-                    <p>
-                        Transform ideas into reliable, scalable
-                        digital products designed around real
-                        customer and business needs.
-                    </p>
-
-                    <a href="services.html">
-                        Explore
-                        <span>→</span>
-                    </a>
-
-                </article>
-
-
-
-                <!-- Service 02 -->
-
-                <article class="service-card">
-
-                    <div class="service-number">
-                        02
-                    </div>
-
-                    <div class="service-icon">
-                        ◫
-                    </div>
-
-                    <h3>
-                        Web &amp; App Development
-                    </h3>
-
-                    <p>
-                        Build responsive websites and applications
-                        with modern technologies, clean architecture
-                        and exceptional user experiences.
-                    </p>
-
-                    <a href="services.html">
-                        Explore
-                        <span>→</span>
-                    </a>
-
-                </article>
-
-
-
-                <!-- Service 03 -->
-
-                <article class="service-card">
-
-                    <div class="service-number">
-                        03
-                    </div>
-
-                    <div class="service-icon">
-                        ⌁
-                    </div>
-
-                    <h3>
-                        Business Solutions
-                    </h3>
-
-                    <p>
-                        Create technology solutions that streamline
-                        operations, improve efficiency and support
-                        long-term business growth.
-                    </p>
-
-                    <a href="services.html">
-                        Explore
-                        <span>→</span>
-                    </a>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             PRODUCTS
-        ====================================================== -->
-
-        <section class="products-preview section">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <div class="section-label">
-                        / OUR PRODUCTS
-                    </div>
-
-                    <h2>
-                        Products built to
-                        <span class="gradient-text">
-                            move.
-                        </span>
-                    </h2>
-
-                </div>
-
-
-                <a
-                    href="products.html"
-                    class="text-link"
-                >
-                    View products
-                    <span>↗</span>
-                </a>
-
-            </div>
-
-
-
-            <div class="product-feature">
-
-                <div class="product-copy">
-
-                    <span class="product-tag">
-                        DIGITAL PRODUCT
-                    </span>
-
-                    <h3>
-                        Technology with a
-                        <em>
-                            purpose.
-                        </em>
-                    </h3>
-
-                    <p>
-                        We design and build products that connect
-                        people, businesses and technology through
-                        simple, meaningful experiences.
-                    </p>
-
-
-                    <a
-                        href="products.html"
-                        class="primary-button"
-                    >
-                        Discover Our Products
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-
-                <div class="product-visual">
-
-                    <div class="product-window">
-
-                        <div class="window-header">
-
-                            <span></span>
-                            <span></span>
-                            <span></span>
-
-                        </div>
-
-
-                        <div class="window-content">
-
-                            <div class="window-sidebar">
-
-                                <span class="active"></span>
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
-
-
-                            <div class="window-main">
-
-                                <div class="window-heading">
-                                    <span></span>
-                                    <span></span>
-                                </div>
-
-
-                                <div class="window-grid">
-
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             WHY WISEMOVE
-        ====================================================== -->
-
-        <section class="why-section section">
-
-            <div class="section-label">
-                / WHY WISEMOVE
-            </div>
-
-
-            <div class="why-grid">
-
-                <div class="why-intro">
-
-                    <h2>
-                        We don't just
-                        <span class="gradient-text">
-                            build software.
-                        </span>
-                    </h2>
-
-                    <p>
-                        We think about the problem behind the
-                        product and the people who will use it.
-                    </p>
-
-                </div>
-
-
-                <div class="why-items">
-
-                    <div class="why-item">
-
-                        <span class="why-number">
-                            01
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Product-first thinking
-                            </h3>
-
-                            <p>
-                                Every solution starts with understanding
-                                the problem, users and business goals.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="why-item">
-
-                        <span class="why-number">
-                            02
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Modern engineering
-                            </h3>
-
-                            <p>
-                                We use modern development practices
-                                to create maintainable and scalable
-                                technology.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="why-item">
-
-                        <span class="why-number">
-                            03
-                        </span>
-
-                        <div>
-
-                            <h3>
-                                Built for growth
-                            </h3>
-
-                            <p>
-                                Our solutions are designed to evolve
-                                as your business and customers grow.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             CTA
-        ====================================================== -->
-
-        <section class="cta-section section">
-
-            <div class="cta-glow"></div>
-
-
-            <div class="cta-content">
-
-                <div class="section-label">
-                    / LET'S BUILD
-                </div>
-
-
-                <h2>
-                    Have an idea?
-                    <br>
-
-                    <span class="gradient-text">
-                        Let's move it forward.
-                    </span>
-                </h2>
-
-
-                <p>
-                    Tell us what you're building, what problem
-                    you're solving or what you want to improve.
-                </p>
-
-
-                <a
-                    href="contact.html"
-                    class="primary-button large"
-                >
-                    Start a Conversation
-                    <span>↗</span>
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="site-footer">
-
-        <div class="footer-main">
-
-            <div class="footer-brand">
-
-                <a
-                    href="index.html"
-                    class="brand"
-                >
-
-                    <span class="brand-mark">
-                        <span></span>
-                        <span></span>
-                    </span>
-
-                    <span class="brand-name">
-                        WiseMove
-                    </span>
-
-                </a>
-
-
-                <p>
-                    Building digital products and technology
-                    solutions that move businesses forward.
-                </p>
-
-            </div>
-
-
-            <div class="footer-links">
-
-                <div class="footer-column">
-
-                    <h4>
-                        Explore
-                    </h4>
-
-                    <a href="about.html">
-                        About
-                    </a>
-
-                    <a href="products.html">
-                        Products
-                    </a>
-
-                    <a href="services.html">
-                        Services
-                    </a>
-
-                    <a href="contact.html">
-                        Contact
-                    </a>
-
-                </div>
-
-
-                <div class="footer-column">
-
-                    <h4>
-                        Company
-                    </h4>
-
-                    <a href="privacy.html">
-                        Privacy Policy
-                    </a>
-
-                    <a href="terms.html">
-                        Terms
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <span>
-                © <span id="currentYear"></span> WiseMove.
-                All rights reserved.
+            <span class="footer-location">
+              Kakkanad, Kerala, India
             </span>
 
-
-            <span>
-                Software &amp; Digital Products
-            </span>
+          </div>
 
         </div>
 
-    </footer>
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 WiseMove. All rights reserved.
+        </span>
+
+        <span>
+          SOFTWARE &amp; PRODUCT DEVELOPMENT
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
 
 
 
-    <!-- Main JavaScript -->
-    <script src="script.js"></script>
+  <!-- IMPORTANT: JavaScript is in the same folder -->
+  <script src="./script.js"></script>
 
 </body>
 </html>
