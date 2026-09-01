@@ -1,59 +1,95 @@
-# WiseMove Consultancy — Website
+# WiseMove Consultancy — website
 
-Source for the WiseMove Consultancy homepage — a software product studio site built around the `wisemove` brand identity, featuring our products **Getvia** and **Vashq**.
+Static site, hosted on GitHub Pages. No build step is required to deploy: every
+`.html` file in the repo root is the real, finished file that the browser loads.
 
-**Live brand elements (do not change without updating the whole site):**
-- Wordmark: `wisemove` + diamond mark
-- Tagline: **"Make every move wiser."**
-- Supporting line: **"Transparent guidance. Clear timelines. Step-by-step support."**
-- Primary color: `#6e4ef2` (purple)
-- Dark/light theme toggle (top-right nav)
+- **Contact address used everywhere:** `info@wisemoveconsultancy.com`
+- **Phone / WhatsApp:** +91 99953 33560
+- **Live products:** [Getvia](https://getvia.in), [Vashq](https://home.vashq.com), ZED0
 
-## Project structure
+## Files
 
-```
-.
-├── index.html          → main homepage
-├── css/
-│   └── style.css       → all styling (CSS variables drive the dark/light theme)
-├── js/
-│   └── script.js       → theme toggle, FAQ accordion, scroll reveal, hero terminal animation
-├── assets/
-│   └── images/
-│       ├── getvia-logo.png
-│       └── vashq-logo.png
-└── README.md
-```
+| File | Purpose |
+| --- | --- |
+| `style.css` | The single stylesheet for the whole site. Every class used in the HTML has a rule here. |
+| `script.js` | The single script for the whole site. Loaded by every page. |
+| `build.py` | Optional dev tool that regenerates the HTML files (see below). |
+| `assets/` | Real logos, product screenshots and the ZED0 machine render. |
+| `*.html` | The pages, committed as plain static files. |
 
-## Running locally
+### Pages
 
-No build step required — it's static HTML/CSS/JS.
+**Real pages:** `index.html`, `work.html`, `services.html`, `platform.html`,
+`how-it-works.html`, `about.html`, `getvia.html`, `vashq.html`, `zed0.html`,
+`contact.html`, `privacy-policy.html`, `terms.html`, `cookie-policy.html`
+
+**Redirect stubs** kept so previously-shared links never 404:
+`privacy.html` → `privacy-policy.html`, `cookies.html` → `cookie-policy.html`,
+`products.html` → `work.html`, `capabilities.html` → `services.html`
+
+## About `build.py`
+
+Every page shares the same `<head>`, navbar, mobile drawer, contact modal and
+footer. Previously those were copy-pasted, and they had drifted apart — four
+different font stacks, four pages that never linked `style.css` at all, nav links
+pointing at pages that did not exist, and a duplicate logo in the navbar.
+
+`build.py` composes all 17 files from one shared shell so that class of bug
+cannot come back. Editing the shell in one place updates every page.
 
 ```bash
-# Option 1: just open it
-open index.html
-
-# Option 2: serve it locally (recommended, avoids any relative-path issues)
-python3 -m http.server 8000
-# then visit http://localhost:8000
+python3 build.py     # regenerates all *.html in place
 ```
 
-## Deploying with GitHub Pages
+**It is a convenience, not a dependency.** The generated `.html` files are
+committed and served directly. If you would rather hand-edit the HTML, do that
+and delete `build.py` — nothing else refers to it. Just remember that a change
+to the navbar or footer then has to be repeated on 13 pages.
 
-1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under "Build and deployment", set **Source** to `Deploy from a branch`.
-4. Choose the `main` branch and `/ (root)` folder, then **Save**.
-5. Your site will be live at `https://<username>.github.io/<repo-name>/` within a few minutes.
+## Two things worth knowing before editing
 
-To use the custom domain (`wisemoveconsultancy.com`):
-1. Add a file named `CNAME` at the repo root containing just: `wisemoveconsultancy.com`
-2. In your domain's DNS settings, point it at GitHub Pages (A records to GitHub's IPs, or a CNAME record if using a subdomain) — see [GitHub's custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site).
-3. Re-enable "Enforce HTTPS" in the Pages settings once DNS propagates.
+**1. The logo file names describe the background, not the ink colour.**
 
-## Notes for future edits
+| File | Ink | Use on |
+| --- | --- | --- |
+| `assets/wisemove-logo-light.png` | dark | light backgrounds |
+| `assets/wisemove-logo-dark.png` | white | dark backgrounds |
+| `assets/zed0 Logo White.png` | white | dark backgrounds |
+| `assets/zed0 Logo dark.png` | dark | light backgrounds |
 
-- All colors, fonts, and spacing are controlled via CSS custom properties at the top of `css/style.css` — update tokens there rather than hardcoding new values throughout.
-- Testimonials in `index.html` are currently placeholder quotes — replace with real client feedback before public launch.
-- Stats in the "stats" section (products shipped, businesses onboarded, etc.) are estimates — update with real numbers when available.
-- Additional pages (Products detail, Services detail, About, Work/Case Studies, Blog, Careers, Legal) are scoped in the project's site-structure plan but not yet built — see prior planning doc if available, or ask for them to be generated in this same structure.
+Both variants are always present in the markup; CSS shows exactly one via the
+`--logo-light` / `--logo-dark` custom properties, which flip with the theme.
+Never recreate a logo as text, CSS shapes or a hand-drawn SVG — always use the
+real file with `object-fit: contain`.
+
+**2. The header must stay above the mobile drawer.**
+`.site-header` is `z-index: 960`, `.mobile-menu` is `950`. If the drawer ever
+sits on top, the hamburger becomes unclickable and the menu cannot be closed.
+
+## Theme
+
+Dark by default, with a working light theme via the navbar toggle. The choice is
+saved to `localStorage` under `wisemove-theme`. All colours come from custom
+properties defined in `:root` and overridden under `[data-theme="light"]`.
+
+## Contact form
+
+There is no backend. Submitting the modal or the contact-page form composes a
+pre-filled email to `info@wisemoveconsultancy.com` using the visitor's own mail
+client. If a backend is added later, replace the `mailto` composer in the
+`initForms` module of `script.js`.
+
+## Accessibility and motion
+
+- Skip-to-content link is the first tab stop on every page.
+- The contact modal traps focus and closes on `Esc`, the X button, or a click on
+  the backdrop.
+- The mobile drawer is hidden at every viewport width until it is opened, and
+  closes on `Esc`, on the X, and when a link inside it is followed.
+- All animation is disabled under `prefers-reduced-motion: reduce`.
+
+## Verified
+
+Checked across 320 / 375 / 390 / 430 / 768 / 1024 / 1280 / 1440 / 1920 px on all
+13 real pages: no horizontal overflow, no JavaScript console errors, no broken
+images or links, exactly one visible logo and one visible navigation per page.

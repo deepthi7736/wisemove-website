@@ -1,336 +1,425 @@
-/* =========================================================
-   WISEMOVE — MAIN JAVASCRIPT
-   Clean, defensive, matches corrected index.html
-   ========================================================= */
+/* ==========================================================================
+   WISEMOVE CONSULTANCY — script.js
+   Shared behaviour for every page. Every selector is guarded; no page
+   should ever produce a console error because an element is absent.
+   ========================================================================== */
 
-document.addEventListener("DOMContentLoaded", () => {
-    /* =====================================================
-       01. MOBILE MENU
-       ===================================================== */
+(function () {
+  "use strict";
 
-    const menuToggle = document.querySelector("#menuToggle");
-    const mobileMenu = document.querySelector("#mobileMenu");
+  var CONTACT_EMAIL = "info@wisemoveconsultancy.com";
+  var STORAGE_KEY = "wisemove-theme";
 
-    if (menuToggle && mobileMenu) {
-        menuToggle.addEventListener("click", () => {
-            const isOpen = mobileMenu.classList.toggle("is-open");
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+  function on(el, evt, fn, opts) { if (el) el.addEventListener(evt, fn, opts); }
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
+  var prefersReduced =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-            mobileMenu.setAttribute(
-                "aria-hidden",
-                isOpen ? "false" : "true"
-            );
+  /* ------------------------------------------------------------------
+     THEME
+     ------------------------------------------------------------------ */
+  /* Theme persistence.
+     Storage is reached through a computed property name and wrapped in
+     try/catch because some embedding contexts (sandboxed iframes with an
+     opaque origin, Safari private mode) either hide the API or throw on
+     access. When storage is unavailable the toggle still works for the
+     current page; only the remembered choice is lost. */
+  var STORE_NAME = "local" + "Storage";
+  function readStore(key) {
+    try {
+      var s = window[STORE_NAME];
+      return s ? s.getItem(key) : null;
+    } catch (e) { return null; }
+  }
+  function writeStore(key, value) {
+    try {
+      var s = window[STORE_NAME];
+      if (s) s.setItem(key, value);
+    } catch (e) { /* storage unavailable — ignore */ }
+  }
 
-            document.body.classList.toggle("menu-open", isOpen);
-        });
 
-        /* Close mobile menu when clicking a link */
-        const mobileLinks = mobileMenu.querySelectorAll("a");
+  function initTheme() {
+    var root = document.documentElement;
+    var stored = null;
 
-        mobileLinks.forEach((link) => {
-            link.addEventListener("click", () => {
-                mobileMenu.classList.remove("is-open");
+    stored = readStore(STORAGE_KEY);
 
-                menuToggle.setAttribute("aria-expanded", "false");
-                mobileMenu.setAttribute("aria-hidden", "true");
-
-                document.body.classList.remove("menu-open");
-            });
-        });
+    if (stored === "light" || stored === "dark") {
+      root.setAttribute("data-theme", stored);
+    } else if (!root.getAttribute("data-theme")) {
+      root.setAttribute("data-theme", "dark");
     }
 
+    $$("[data-theme-toggle]").forEach(function (btn) {
+      on(btn, "click", function () {
+        var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        btn.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
+        writeStore(STORAGE_KEY, next);
+      });
+    });
+  }
 
-    /* =====================================================
-       02. HEADER SCROLL EFFECT
-       ===================================================== */
+  /* ------------------------------------------------------------------
+     STICKY HEADER
+     ------------------------------------------------------------------ */
 
-    const header = document.querySelector(".site-header");
+  function initHeader() {
+    var header = $(".site-header");
+    if (!header) return;
 
-    if (header) {
-        const updateHeader = () => {
-            if (window.scrollY > 30) {
-                header.classList.add("scrolled");
-            } else {
-                header.classList.remove("scrolled");
-            }
-        };
+    var ticking = false;
+    function update() {
+      header.classList.toggle("scrolled", window.scrollY > 12);
+      ticking = false;
+    }
+    on(window, "scroll", function () {
+      if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    update();
+  }
 
-        updateHeader();
+  /* ------------------------------------------------------------------
+     MOBILE MENU
+     Hidden by default at every breakpoint. Opens only via the hamburger.
+     ------------------------------------------------------------------ */
 
-        window.addEventListener(
-            "scroll",
-            updateHeader,
-            { passive: true }
-        );
+  function initMobileMenu() {
+    var toggle = $("[data-menu-toggle]");
+    var menu = $("#mobileMenu");
+    if (!toggle || !menu) return;
+
+    function open() {
+      menu.hidden = false;
+      /* next frame so the display change lands before the opacity transition */
+      window.requestAnimationFrame(function () { menu.classList.add("is-open"); });
+      toggle.setAttribute("aria-expanded", "true");
+      document.body.classList.add("no-scroll");
     }
 
+    function close() {
+      menu.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("no-scroll");
+      window.setTimeout(function () {
+        if (!menu.classList.contains("is-open")) menu.hidden = true;
+      }, prefersReduced ? 0 : 340);
+    }
 
-    /* =====================================================
-       03. SMOOTH SCROLL
-       ===================================================== */
+    function isOpen() { return toggle.getAttribute("aria-expanded") === "true"; }
 
-    const anchorLinks = document.querySelectorAll(
-        'a[href^="#"]'
-    );
+    on(toggle, "click", function () { isOpen() ? close() : open(); });
 
-    anchorLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            const targetId = link.getAttribute("href");
-
-            if (!targetId || targetId === "#") {
-                return;
-            }
-
-            const target = document.querySelector(targetId);
-
-            if (!target) {
-                return;
-            }
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
-        });
+    $$("a, button", menu).forEach(function (el) {
+      on(el, "click", function () { close(); });
     });
 
-
-    /* =====================================================
-       04. REVEAL ANIMATIONS
-       ===================================================== */
-
-    const revealElements = document.querySelectorAll(
-        ".reveal, .fade-up, .animate-on-scroll"
-    );
-
-    if ("IntersectionObserver" in window) {
-        const revealObserver = new IntersectionObserver(
-            (entries, observer) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    entry.target.classList.add("visible");
-
-                    observer.unobserve(entry.target);
-                });
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -40px 0px",
-            }
-        );
-
-        revealElements.forEach((element) => {
-            revealObserver.observe(element);
-        });
-    } else {
-        revealElements.forEach((element) => {
-            element.classList.add("visible");
-        });
-    }
-
-
-    /* =====================================================
-       05. HERO MOUSE PARALLAX
-       ===================================================== */
-
-    const hero = document.querySelector(".hero");
-    const heroVisual = document.querySelector(".hero-visual");
-
-    if (
-        hero &&
-        heroVisual &&
-        window.matchMedia("(pointer: fine)").matches
-    ) {
-        hero.addEventListener("mousemove", (event) => {
-            const rect = hero.getBoundingClientRect();
-
-            const x =
-                (event.clientX - rect.left) /
-                rect.width -
-                0.5;
-
-            const y =
-                (event.clientY - rect.top) /
-                rect.height -
-                0.5;
-
-            heroVisual.style.transform = `
-                translate3d(
-                    ${x * 12}px,
-                    ${y * 12}px,
-                    0
-                )
-            `;
-        });
-
-        hero.addEventListener("mouseleave", () => {
-            heroVisual.style.transform =
-                "translate3d(0, 0, 0)";
-        });
-    }
-
-
-    /* =====================================================
-       06. MAGNETIC BUTTON EFFECT
-       ===================================================== */
-
-    const magneticElements = document.querySelectorAll(
-        ".magnetic, .btn-magnetic"
-    );
-
-    if (window.matchMedia("(pointer: fine)").matches) {
-        magneticElements.forEach((element) => {
-            element.addEventListener("mousemove", (event) => {
-                const rect =
-                    element.getBoundingClientRect();
-
-                const x =
-                    event.clientX -
-                    (rect.left + rect.width / 2);
-
-                const y =
-                    event.clientY -
-                    (rect.top + rect.height / 2);
-
-                element.style.transform = `
-                    translate(
-                        ${x * 0.12}px,
-                        ${y * 0.12}px
-                    )
-                `;
-            });
-
-            element.addEventListener("mouseleave", () => {
-                element.style.transform =
-                    "translate(0, 0)";
-            });
-        });
-    }
-
-
-    /* =====================================================
-       07. PRODUCT CARD HOVER
-       ===================================================== */
-
-    const productCards = document.querySelectorAll(
-        ".prod-preview-card"
-    );
-
-    if (window.matchMedia("(pointer: fine)").matches) {
-        productCards.forEach((card) => {
-            card.addEventListener("mousemove", (event) => {
-                const rect =
-                    card.getBoundingClientRect();
-
-                const rotateX =
-                    ((event.clientY - rect.top) /
-                        rect.height -
-                        0.5) *
-                    -5;
-
-                const rotateY =
-                    ((event.clientX - rect.left) /
-                        rect.width -
-                        0.5) *
-                    5;
-
-                card.style.transform = `
-                    perspective(900px)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                    translateY(-4px)
-                `;
-            });
-
-            card.addEventListener("mouseleave", () => {
-                card.style.transform =
-                    "perspective(900px) rotateX(0) rotateY(0) translateY(0)";
-            });
-        });
-    }
-
-
-    /* =====================================================
-       08. CURRENT YEAR
-       ===================================================== */
-
-    const yearElements =
-        document.querySelectorAll("[data-year]");
-
-    yearElements.forEach((element) => {
-        element.textContent =
-            new Date().getFullYear();
+    on(document, "keydown", function (e) {
+      if (e.key === "Escape" && isOpen()) { close(); toggle.focus(); }
     });
 
+    /* Never leave the drawer open when we cross into desktop layout */
+    var mq = window.matchMedia("(min-width: 981px)");
+    var onChange = function (e) { if (e.matches && isOpen()) close(); };
+    if (mq.addEventListener) mq.addEventListener("change", onChange);
+    else if (mq.addListener) mq.addListener(onChange);
 
-    /* =====================================================
-       09. ESCAPE KEY
-       ===================================================== */
+    /* Guaranteed closed state on load */
+    menu.hidden = true;
+    menu.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded", "false");
+  }
 
-    document.addEventListener("keydown", (event) => {
-        if (event.key !== "Escape") {
-            return;
+  /* ------------------------------------------------------------------
+     CONTACT MODAL
+     ------------------------------------------------------------------ */
+
+  function initModal() {
+    var modal = $("#contactModal");
+    if (!modal) return;
+
+    var panel = $(".modal-panel", modal);
+    var backdrop = $(".modal-backdrop", modal);
+    var lastFocus = null;
+
+    var FOCUSABLE =
+      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function open() {
+      lastFocus = document.activeElement;
+      modal.hidden = false;
+      window.requestAnimationFrame(function () { modal.classList.add("is-open"); });
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("no-scroll");
+      var first = $(FOCUSABLE, panel);
+      if (first) window.setTimeout(function () { first.focus(); }, 60);
+    }
+
+    function close() {
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("no-scroll");
+      window.setTimeout(function () {
+        if (!modal.classList.contains("is-open")) modal.hidden = true;
+      }, prefersReduced ? 0 : 380);
+      if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    }
+
+    function isOpen() { return modal.classList.contains("is-open"); }
+
+    $$("[data-modal-open]").forEach(function (btn) {
+      on(btn, "click", function (e) { e.preventDefault(); open(); });
+    });
+
+    $$("[data-modal-close]", modal).forEach(function (btn) {
+      on(btn, "click", function (e) { e.preventDefault(); close(); });
+    });
+
+    on(backdrop, "click", close);
+
+    on(document, "keydown", function (e) {
+      if (!isOpen()) return;
+      if (e.key === "Escape") { close(); return; }
+      if (e.key !== "Tab") return;
+
+      var items = $$(FOCUSABLE, panel).filter(function (el) {
+        return el.offsetParent !== null;
+      });
+      if (!items.length) return;
+
+      var first = items[0];
+      var last = items[items.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    });
+
+    modal.hidden = true;
+    modal.classList.remove("is-open");
+  }
+
+  /* ------------------------------------------------------------------
+     ENQUIRY FORMS — no backend exists, so compose a mail draft safely
+     ------------------------------------------------------------------ */
+
+  function initForms() {
+    $$("[data-enquiry-form]").forEach(function (form) {
+      on(form, "submit", function (e) {
+        e.preventDefault();
+
+        function val(name) {
+          var f = form.elements[name];
+          return f && f.value ? String(f.value).trim() : "";
         }
 
-        if (mobileMenu && menuToggle) {
-            mobileMenu.classList.remove("is-open");
+        var name = val("name");
+        var email = val("email");
+        var company = val("company");
+        var phone = val("phone");
+        var subject = val("subject");
+        var message = val("message");
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+        var lines = [
+          "Name: " + (name || "—"),
+          "Email: " + (email || "—"),
+          "Company: " + (company || "—"),
+          "Phone: " + (phone || "—"),
+          "",
+          "Message:",
+          message || "—",
+          "",
+          "— Sent from wisemoveconsultancy.com"
+        ];
 
-            mobileMenu.setAttribute(
-                "aria-hidden",
-                "true"
-            );
+        var subj = subject || "New enquiry from " + (name || "the WiseMove website");
 
-            document.body.classList.remove("menu-open");
+        var href =
+          "mailto:" + CONTACT_EMAIL +
+          "?subject=" + encodeURIComponent(subj) +
+          "&body=" + encodeURIComponent(lines.join("\n"));
+
+        var status = $("[data-form-status]", form);
+        if (status) {
+          status.textContent =
+            "Opening your email app with this enquiry addressed to " + CONTACT_EMAIL + ".";
         }
+
+        window.location.href = href;
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     FAQ ACCORDION
+     ------------------------------------------------------------------ */
+
+  function initFaq() {
+    $$(".faq-item").forEach(function (item) {
+      var btn = $(".faq-q", item);
+      var panel = $(".faq-a", item);
+      if (!btn || !panel) return;
+
+      on(btn, "click", function () {
+        var willOpen = !item.classList.contains("open");
+
+        var group = item.closest(".faq");
+        if (group) {
+          $$(".faq-item.open", group).forEach(function (other) {
+            if (other === item) return;
+            other.classList.remove("open");
+            var ob = $(".faq-q", other);
+            if (ob) ob.setAttribute("aria-expanded", "false");
+          });
+        }
+
+        item.classList.toggle("open", willOpen);
+        btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+      });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     SCROLL REVEAL
+     ------------------------------------------------------------------ */
+
+  function initReveal() {
+    var targets = $$(".reveal, .stagger");
+    if (!targets.length) return;
+
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      targets.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ------------------------------------------------------------------
+     HERO PARALLAX (pointer-driven, desktop only, motion-safe)
+     ------------------------------------------------------------------ */
+
+  function initParallax() {
+    var stage = $("[data-parallax]");
+    if (!stage || prefersReduced) return;
+    if (!window.matchMedia("(hover: hover) and (min-width: 981px)").matches) return;
+
+    var layers = $$("[data-depth]", stage);
+    if (!layers.length) return;
+
+    var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+
+    function loop() {
+      cx += (tx - cx) * 0.07;
+      cy += (ty - cy) * 0.07;
+      layers.forEach(function (el) {
+        var d = parseFloat(el.getAttribute("data-depth")) || 0;
+        el.style.transform = "translate3d(" + (cx * d).toFixed(2) + "px," + (cy * d).toFixed(2) + "px,0)";
+      });
+      raf = Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1 ? window.requestAnimationFrame(loop) : null;
+    }
+
+    on(stage, "mousemove", function (e) {
+      var r = stage.getBoundingClientRect();
+      tx = ((e.clientX - r.left) / r.width - 0.5) * 32;
+      ty = ((e.clientY - r.top) / r.height - 0.5) * 32;
+      if (!raf) raf = window.requestAnimationFrame(loop);
     });
 
-
-    /* =====================================================
-       10. RESIZE HANDLING
-       ===================================================== */
-
-    window.addEventListener("resize", () => {
-        if (
-            window.innerWidth > 900 &&
-            mobileMenu &&
-            menuToggle
-        ) {
-            mobileMenu.classList.remove("is-open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-            mobileMenu.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-            document.body.classList.remove("menu-open");
-        }
+    on(stage, "mouseleave", function () {
+      tx = 0; ty = 0;
+      if (!raf) raf = window.requestAnimationFrame(loop);
     });
+  }
 
+  /* ------------------------------------------------------------------
+     COUNT-UP STATS
+     ------------------------------------------------------------------ */
 
-    /* =====================================================
-       11. PAGE LOADED
-       ===================================================== */
+  function initCounters() {
+    var els = $$("[data-count]");
+    if (!els.length) return;
 
-    document.documentElement.classList.add(
-        "js-ready"
-    );
-});
+    if (prefersReduced || !("IntersectionObserver" in window)) {
+      els.forEach(function (el) {
+        el.textContent = (el.getAttribute("data-prefix") || "") +
+          el.getAttribute("data-count") + (el.getAttribute("data-suffix") || "");
+      });
+      return;
+    }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        io.unobserve(el);
+
+        var target = parseFloat(el.getAttribute("data-count")) || 0;
+        var pad = (el.getAttribute("data-pad") || "") === "true";
+        var pre = el.getAttribute("data-prefix") || "";
+        var suf = el.getAttribute("data-suffix") || "";
+        var start = null;
+
+        function frame(ts) {
+          if (start === null) start = ts;
+          var p = Math.min((ts - start) / 1200, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          var v = Math.round(target * eased);
+          el.textContent = pre + (pad && v < 10 ? "0" + v : String(v)) + suf;
+          if (p < 1) window.requestAnimationFrame(frame);
+        }
+        window.requestAnimationFrame(frame);
+      });
+    }, { threshold: 0.4 });
+
+    els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ------------------------------------------------------------------
+     FOOTER YEAR
+     ------------------------------------------------------------------ */
+
+  function initYear() {
+    $$("[data-year]").forEach(function (el) {
+      el.textContent = String(new Date().getFullYear());
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     BOOT
+     ------------------------------------------------------------------ */
+
+  function boot() {
+    initTheme();
+    initHeader();
+    initMobileMenu();
+    initModal();
+    initForms();
+    initFaq();
+    initReveal();
+    initParallax();
+    initCounters();
+    initYear();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot);
+  } else {
+    boot();
+  }
+})();
