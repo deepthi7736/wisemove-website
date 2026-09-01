@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Work | WiseMove</title>
+
+    <meta
+        name="description"
+        content="Explore products and digital experiences built by WiseMove."
+    >
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =========================================
+           WORK PAGE
+        ========================================= */
+
+        .work-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 75% 15%, rgba(112, 0, 255, 0.15), transparent 30%),
+                radial-gradient(circle at 10% 45%, rgba(0, 100, 255, 0.10), transparent 30%),
+                #03030d;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        /* Background glow */
+
+        .work-page::before {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            top: 10%;
+            right: -200px;
+            background: radial-gradient(
+                circle,
+                rgba(166, 0, 255, 0.15),
+                transparent 70%
+            );
+            filter: blur(20px);
+            pointer-events: none;
+            animation: floatingGlow 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatingGlow {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(50px);
+            }
+        }
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .work-nav-wrapper {
+            padding: 18px 7%;
+            position: relative;
+            z-index: 20;
+        }
+
+        .work-nav {
+            height: 62px;
+            padding: 0 18px 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 40px;
+
+            background: rgba(7, 7, 25, 0.72);
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.25),
+                inset 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .work-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: #fff;
+            text-decoration: none;
+
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .work-logo img {
+            width: 34px;
+            height: 34px;
+            object-fit: contain;
+        }
+
+        .work-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 38px;
+        }
+
+        .work-nav-links a {
+            color: rgba(255, 255, 255, 0.78);
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        .work-nav-links a:hover,
+        .work-nav-links a.active {
+            color: #fff;
+        }
+
+        .work-nav-cta {
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            color: #fff !important;
+            font-weight: 600;
+
+            background: linear-gradient(
+                90deg,
+                #643cff,
+                #d000ff
+            );
+
+            box-shadow:
+                0 0 25px rgba(145, 0, 255, 0.35);
+        }
+
+        /* =========================================
+           HERO
+        ========================================= */
+
+        .work-hero {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            padding: 110px 30px 80px;
+
+            text-align: center;
+            position: relative;
+        }
+
+        .work-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border: 1px solid rgba(188, 55, 255, 0.45);
+            border-radius: 30px;
+
+            background: rgba(125, 0, 255, 0.08);
+
+            color: #d28cff;
+
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .work-label span {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #a855f7;
+
+            box-shadow: 0 0 12px #a855f7;
+        }
+
+        .work-hero h1 {
+            margin: 25px auto 20px;
+
+            max-width: 850px;
+
+            font-size: clamp(48px, 7vw, 88px);
+            line-height: 0.98;
+            letter-spacing: -0.055em;
+
+            font-weight: 800;
+
+            animation: fadeUp 0.8s ease 0.1s both;
+        }
+
+        .work-gradient-text {
+            background: linear-gradient(
+                90deg,
+                #763cff,
+                #c026ff,
+                #f052ff
+            );
+
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+
+            font-style: italic;
+        }
+
+        .work-hero p {
+            max-width: 650px;
+            margin: 0 auto;
+
+            color: rgba(255, 255, 255, 0.60);
+
+            font-size: 17px;
+            line-height: 1.7;
+
+            animation: fadeUp 0.8s ease 0.2s both;
+        }
+
+        /* =========================================
+           PRODUCTS
+        ========================================= */
+
+        .products-section {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            padding: 20px 30px 120px;
+        }
+
+        .products-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+        }
+
+        .products-heading h2 {
+            margin: 0;
+
+            font-size: 32px;
+            letter-spacing: -0.03em;
+        }
+
+        .products-heading p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 14px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        /* Product Card */
+
+        .product-card {
+            position: relative;
+
+            min-height: 470px;
+
+            padding: 28px;
+
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.07),
+                    rgba(255, 255, 255, 0.015)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.45s ease,
+                border-color 0.45s ease,
+                box-shadow 0.45s ease;
+
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .product-card:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        .product-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .product-card::before {
+            content: "";
+
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            top: -100px;
+            right: -80px;
+
+            background: radial-gradient(
+                circle,
+                rgba(145, 0, 255, 0.30),
+                transparent 70%
+            );
+
+            filter: blur(20px);
+
+            transition: 0.5s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+
+            border-color: rgba(171, 74, 255, 0.45);
+
+            box-shadow:
+                0 20px 70px rgba(83, 0, 150, 0.25),
+                0 0 35px rgba(115, 0, 255, 0.10);
+        }
+
+        .product-card:hover::before {
+            transform: scale(1.4);
+        }
+
+        /* Product Logo */
+
+        .product-logo {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            border-radius: 17px;
+
+            background: rgba(255, 255, 255, 0.06);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            overflow: hidden;
+        }
+
+        .product-logo img {
+            width: 80%;
+            height: 80%;
+
+            object-fit: contain;
+        }
+
+        .product-number {
+            position: absolute;
+
+            top: 28px;
+            right: 28px;
+
+            color: rgba(255, 255, 255, 0.30);
+
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .product-card h3 {
+            margin: 0 0 10px;
+
+            font-size: 28px;
+            letter-spacing: -0.03em;
+        }
+
+        .product-type {
+            display: inline-block;
+
+            margin-bottom: 20px;
+
+            color: #b76cff;
+
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .product-card p {
+            min-height: 85px;
+
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.55);
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .product-preview {
+            height: 145px;
+
+            margin-top: 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255, 255, 255, 0.05),
+                    rgba(91, 0, 150, 0.08)
+                );
+
+            overflow: hidden;
+        }
+
+        .product-preview img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            opacity: 0.82;
+
+            transition:
+                transform 0.6s ease,
+                opacity 0.6s ease;
+        }
+
+        .product-card:hover .product-preview img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .product-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            margin-top: 22px;
+
+            color: #fff;
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            transition: 0.3s ease;
+        }
+
+        .product-link span {
+            transition: transform 0.3s ease;
+        }
+
+        .product-link:hover {
+            color: #c77dff;
+        }
+
+        .product-link:hover span {
+            transform: translateX(5px);
+        }
+
+        /* =========================================
+           PROCESS STRIP
+        ========================================= */
+
+        .work-process {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            padding: 0 30px 100px;
+        }
+
+        .process-box {
+            position: relative;
+
+            padding: 45px;
+
+            border-radius: 25px;
+
+            border: 1px solid rgba(151, 72, 255, 0.20);
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(91, 0, 180, 0.12),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            overflow: hidden;
+        }
+
+        .process-box::after {
+            content: "";
+
+            position: absolute;
+
+            width: 300px;
+            height: 300px;
+
+            right: -100px;
+            bottom: -180px;
+
+            background: radial-gradient(
+                circle,
+                rgba(120, 0, 255, 0.25),
+                transparent 70%
+            );
+        }
+
+        .process-box h2 {
+            margin: 0 0 10px;
+
+            font-size: 34px;
+        }
+
+        .process-box > p {
+            margin: 0 0 35px;
+
+            color: rgba(255, 255, 255, 0.50);
+        }
+
+        .process-items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .process-item {
+            padding: 20px;
+
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .process-item small {
+            color: #a855f7;
+            font-family: monospace;
+        }
+
+        .process-item h4 {
+            margin: 12px 0 6px;
+
+            font-size: 15px;
+        }
+
+        .process-item p {
+            margin: 0;
+
+            color: rgba(255, 255, 255, 0.45);
+
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           CTA
+        ========================================= */
+
+        .work-cta {
+            padding: 80px 30px 120px;
+
+            text-align: center;
+        }
+
+        .work-cta h2 {
+            max-width: 700px;
+
+            margin: 0 auto 20px;
+
+            font-size: clamp(38px, 5vw, 60px);
+            line-height: 1.05;
+
+            letter-spacing: -0.04em;
+        }
+
+        .work-cta p {
+            max-width: 550px;
+
+            margin: 0 auto 30px;
+
+            color: rgba(255, 255, 255, 0.50);
+
+            line-height: 1.7;
+        }
+
+        .work-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 15px 25px;
+
+            border-radius: 30px;
+
+            color: #fff;
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            background: linear-gradient(
+                90deg,
+                #683cff,
+                #d100ff
+            );
+
+            box-shadow:
+                0 0 35px rgba(137, 0, 255, 0.30);
+
+            transition: 0.3s ease;
+        }
+
+        .work-cta-button:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 0 50px rgba(137, 0, 255, 0.45);
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .work-footer {
+            padding: 30px 7%;
+
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            color: rgba(255, 255, 255, 0.35);
+
+            font-size: 12px;
+        }
+
+        .work-footer a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================================
+           ANIMATIONS
+        ========================================= */
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 900px) {
+
+            .work-nav-links {
+                display: none;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-card {
+                min-height: auto;
+            }
+
+            .process-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-heading {
+                display: block;
+            }
+
+            .products-heading p {
+                margin-top: 8px;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .work-nav-wrapper {
+                padding: 12px 15px;
+            }
+
+            .work-nav {
+                height: 56px;
+            }
+
+            .work-nav-cta {
+                display: none;
+            }
+
+            .work-hero {
+                padding: 80px 20px 60px;
+            }
+
+            .work-hero h1 {
+                font-size: 48px;
+            }
+
+            .work-hero p {
+                font-size: 15px;
+            }
+
+            .products-section,
+            .work-process {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .process-box {
+                padding: 25px;
+            }
+
+            .process-items {
+                grid-template-columns: 1fr;
+            }
+
+            .work-footer {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="work-page">
+
+    <!-- =========================================
+         NAVIGATION
+    ========================================== -->
+
+    <div class="work-nav-wrapper">
+
+        <nav class="work-nav">
+
+            <a href="index.html" class="work-logo">
+
+                <!-- WiseMove logo -->
+                <img
+                    src="assets/wisemove-icon.png"
+                    alt="WiseMove"
+                >
+
+                <span>WiseMove</span>
+
+            </a>
+
+            <div class="work-nav-links">
+
+                <a href="index.html">Home</a>
+
+                <a href="work.html" class="active">Work</a>
+
+                <a href="services.html">Services</a>
+
+                <a href="about.html">About</a>
+
+                <a href="contact.html">Contact</a>
+
+            </div>
+
+            <a href="contact.html" class="work-nav-cta">
+                Start a Project →
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <!-- =========================================
+         HERO
+    ========================================== -->
+
+    <section class="work-hero">
+
+        <div class="work-label">
+            <span></span>
+            Our Work
+        </div>
+
+        <h1>
+            Products built to
+            <span class="work-gradient-text">move businesses.</span>
+        </h1>
+
+        <p>
+            We design, build and launch digital products that solve
+            real problems, create better experiences and help businesses
+            move forward.
+        </p>
+
+    </section>
+
+
+    <!-- =========================================
+         PRODUCTS
+    ========================================== -->
+
+    <section class="products-section">
+
+        <div class="products-heading">
+
+            <div>
+                <h2>Built by WiseMove.</h2>
+            </div>
+
+            <p>
+                Three products. Different problems. One approach.
+            </p>
+
+        </div>
+
+
+        <div class="products-grid">
+
+
+            <!-- =================================
+                 GETVIA
+            ================================== -->
+
+            <article class="product-card">
+
+                <div class="product-number">
+                    01
+                </div>
+
+                <div class="product-logo">
+
+                    <img
+                        src="assets/getvia-logo.png"
+                        alt="Getvia"
+                    >
+
+                </div>
+
+                <span class="product-type">
+                    Business Discovery Platform
+                </span>
+
+                <h3>
+                    Getvia
+                </h3>
+
+                <p>
+                    A modern business discovery platform designed
+                    to help people discover trusted businesses,
+                    services and professionals while giving businesses
+                    a stronger digital presence.
+                </p>
+
+                <div class="product-preview">
+
+                    <img
+                        src="assets/getvia-hero.png"
+                        alt="Getvia platform"
+                    >
+
+                </div>
+
+                <a href="#" class="product-link">
+                    Explore Getvia
+                    <span>→</span>
+                </a>
+
+            </article>
+
+
+            <!-- =================================
+                 VASHQ
+            ================================== -->
+
+            <article class="product-card">
+
+                <div class="product-number">
+                    02
+                </div>
+
+                <div class="product-logo">
+
+                    <img
+                        src="assets/vashq-official-logo.png"
+                        alt="Vashq"
+                    >
+
+                </div>
+
+                <span class="product-type">
+                    Operations Software
+                </span>
+
+                <h3>
+                    Vashq
+                </h3>
+
+                <p>
+                    A powerful operations platform built to simplify
+                    business workflows, manage services and provide
+                    businesses with a clear view of their day-to-day
+                    operations.
+                </p>
+
+                <div class="product-preview">
+
+                    <img
+                        src="assets/vashq-dashboard.png"
+                        alt="Vashq dashboard"
+                    >
+
+                </div>
+
+                <a href="#" class="product-link">
+                    Explore Vashq
+                    <span>→</span>
+                </a>
+
+            </article>
+
+
+            <!-- =================================
+                 ZED0
+            ================================== -->
+
+            <article class="product-card">
+
+                <div class="product-number">
+                    03
+                </div>
+
+                <div class="product-logo">
+
+                    <img
+                        src="assets/zed0 Logo White.png"
+                        alt="Zed0"
+                    >
+
+                </div>
+
+                <span class="product-type">
+                    Digital Product
+                </span>
+
+                <h3>
+                    Zed0
+                </h3>
+
+                <p>
+                    A digital product focused on creating simple,
+                    efficient and intuitive experiences through
+                    thoughtful technology and product design.
+                </p>
+
+                <div class="product-preview">
+
+                    <img
+                        src="assets/zed0.png"
+                        alt="Zed0 product"
+                    >
+
+                </div>
+
+                <a href="#" class="product-link">
+                    Explore Zed0
+                    <span>→</span>
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         PROCESS
+    ========================================== -->
+
+    <section class="work-process">
+
+        <div class="process-box">
+
+            <h2>
+                From idea to impact.
+            </h2>
+
+            <p>
+                Every product follows a clear path from understanding
+                the problem to launching something people can use.
+            </p>
+
+
+            <div class="process-items">
+
+                <div class="process-item">
+
+                    <small>01</small>
+
+                    <h4>
+                        Discovery
+                    </h4>
+
+                    <p>
+                        Understand the problem,
+                        users and business goals.
+                    </p>
+
+                </div>
+
+
+                <div class="process-item">
+
+                    <small>02</small>
+
+                    <h4>
+                        Strategy
+                    </h4>
+
+                    <p>
+                        Define what needs to be
+                        built and why.
+                    </p>
+
+                </div>
+
+
+                <div class="process-item">
+
+                    <small>03</small>
+
+                    <h4>
+                        Design & Build
+                    </h4>
+
+                    <p>
+                        Turn ideas into useful,
+                        scalable products.
+                    </p>
+
+                </div>
+
+
+                <div class="process-item">
+
+                    <small>04</small>
+
+                    <h4>
+                        Launch
+                    </h4>
+
+                    <p>
+                        Ship with confidence and
+                        continuously improve.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+         CTA
+    ========================================== -->
+
+    <section class="work-cta">
+
+        <h2>
+            Have an idea worth
+            <span class="work-gradient-text">building?</span>
+        </h2>
+
+        <p>
+            Let's turn your idea into a digital product that
+            people actually want to use.
+        </p>
+
+        <a href="contact.html" class="work-cta-button">
+            Start a Project →
+        </a>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="work-footer">
+
+        <span>
+            © 2026 WiseMove. All rights reserved.
+        </span>
+
+        <span>
+            Product · Design · Engineering
+        </span>
+
+    </footer>
+
+</div>
+
+
+<!-- Main JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
