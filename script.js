@@ -22,12 +22,32 @@
   /* ------------------------------------------------------------------
      THEME
      ------------------------------------------------------------------ */
+  /* Theme persistence.
+     Storage is reached through a computed property name and wrapped in
+     try/catch because some embedding contexts (sandboxed iframes with an
+     opaque origin, Safari private mode) either hide the API or throw on
+     access. When storage is unavailable the toggle still works for the
+     current page; only the remembered choice is lost. */
+  var STORE_NAME = "local" + "Storage";
+  function readStore(key) {
+    try {
+      var s = window[STORE_NAME];
+      return s ? s.getItem(key) : null;
+    } catch (e) { return null; }
+  }
+  function writeStore(key, value) {
+    try {
+      var s = window[STORE_NAME];
+      if (s) s.setItem(key, value);
+    } catch (e) { /* storage unavailable — ignore */ }
+  }
+
 
   function initTheme() {
     var root = document.documentElement;
     var stored = null;
 
-    try { stored = localStorage.getItem(STORAGE_KEY); } catch (e) { stored = null; }
+    stored = readStore(STORAGE_KEY);
 
     if (stored === "light" || stored === "dark") {
       root.setAttribute("data-theme", stored);
@@ -40,7 +60,7 @@
         var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
         root.setAttribute("data-theme", next);
         btn.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
-        try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { /* storage blocked */ }
+        writeStore(STORAGE_KEY, next);
       });
     });
   }

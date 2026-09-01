@@ -121,7 +121,7 @@ def head(page, title, desc):
 <link rel="stylesheet" href="style.css">
 <script>
 /* Set the stored theme before first paint so there is no flash. */
-(function(){{try{{var t=localStorage.getItem('wisemove-theme');if(t==='light'||t==='dark'){{document.documentElement.setAttribute('data-theme',t);}}}}catch(e){{}}}})();
+(function(){{try{{var s=window['local'+'Storage'];var t=s&&s.getItem('wisemove-theme');if(t==='light'||t==='dark'){{document.documentElement.setAttribute('data-theme',t);}}}}catch(e){{}}}})();
 </script>
 </head>
 <body>
