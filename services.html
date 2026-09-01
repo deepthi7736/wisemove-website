@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Services | WiseMove</title>
+
+    <meta
+        name="description"
+        content="WiseMove helps businesses turn ideas into digital products through strategy, design, development and technology."
+    >
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =====================================================
+           SERVICES PAGE
+        ===================================================== */
+
+        .services-page {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 75% 10%,
+                    rgba(120, 0, 255, 0.17),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 5% 45%,
+                    rgba(0, 80, 255, 0.09),
+                    transparent 28%
+                ),
+                #03030d;
+
+            color: #ffffff;
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           BACKGROUND GLOW
+        ===================================================== */
+
+        .services-page::before {
+            content: "";
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            top: 15%;
+            right: -220px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(169, 0, 255, 0.15),
+                    transparent 70%
+                );
+
+            filter: blur(25px);
+
+            pointer-events: none;
+
+            animation:
+                serviceGlow 8s ease-in-out infinite alternate;
+        }
+
+
+        @keyframes serviceGlow {
+
+            from {
+                transform: translateY(0) scale(1);
+            }
+
+            to {
+                transform: translateY(50px) scale(1.1);
+            }
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        .services-nav-wrapper {
+            padding: 18px 7%;
+
+            position: relative;
+
+            z-index: 20;
+        }
+
+
+        .services-nav {
+
+            height: 62px;
+
+            padding: 0 18px 0 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            border-radius: 40px;
+
+            background:
+                rgba(7, 7, 25, 0.72);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow:
+                0 10px 40px rgba(0, 0, 0, 0.25),
+                inset 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+
+        .services-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 18px;
+
+            font-weight: 700;
+        }
+
+
+        .services-logo img {
+
+            width: 34px;
+            height: 34px;
+
+            object-fit: contain;
+        }
+
+
+        .services-nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 38px;
+        }
+
+
+        .services-nav-links a {
+
+            color:
+                rgba(255, 255, 255, 0.75);
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.3s ease;
+        }
+
+
+        .services-nav-links a:hover,
+        .services-nav-links a.active {
+
+            color: #ffffff;
+        }
+
+
+        .services-nav-cta {
+
+            padding: 12px 20px;
+
+            border-radius: 25px;
+
+            color: #ffffff !important;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #643cff,
+                    #d000ff
+                );
+
+            box-shadow:
+                0 0 25px
+                rgba(145, 0, 255, 0.35);
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .services-hero {
+
+            max-width: 1150px;
+
+            margin: 0 auto;
+
+            padding:
+                110px 30px 80px;
+
+            text-align: center;
+
+            position: relative;
+        }
+
+
+        .services-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 14px;
+
+            border:
+                1px solid
+                rgba(188, 55, 255, 0.45);
+
+            border-radius: 30px;
+
+            background:
+                rgba(125, 0, 255, 0.08);
+
+            color: #d28cff;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.08em;
+
+            text-transform: uppercase;
+
+            animation:
+                fadeUpService 0.7s ease both;
+        }
+
+
+        .services-label span {
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #a855f7;
+
+            box-shadow:
+                0 0 12px #a855f7;
+        }
+
+
+        .services-hero h1 {
+
+            max-width: 900px;
+
+            margin:
+                25px auto 20px;
+
+            font-size:
+                clamp(48px, 7vw, 86px);
+
+            line-height: 0.98;
+
+            letter-spacing: -0.055em;
+
+            font-weight: 800;
+
+            animation:
+                fadeUpService 0.8s ease 0.1s both;
+        }
+
+
+        .services-gradient {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #763cff,
+                    #c026ff,
+                    #f052ff
+                );
+
+            -webkit-background-clip: text;
+
+            background-clip: text;
+
+            color: transparent;
+
+            font-style: italic;
+        }
+
+
+        .services-hero p {
+
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            color:
+                rgba(255, 255, 255, 0.58);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            animation:
+                fadeUpService 0.8s ease 0.2s both;
+        }
+
+
+        /* =====================================================
+           SERVICES GRID
+        ===================================================== */
+
+        .services-section {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding:
+                20px 30px 110px;
+        }
+
+
+        .services-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+
+        /* =====================================================
+           SERVICE CARD
+        ===================================================== */
+
+        .service-card {
+
+            position: relative;
+
+            min-height: 340px;
+
+            padding: 34px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.09);
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.065),
+                    rgba(255, 255, 255, 0.012)
+                );
+
+            overflow: hidden;
+
+            transition:
+                transform 0.45s ease,
+                border-color 0.45s ease,
+                box-shadow 0.45s ease;
+
+            animation:
+                fadeUpService 0.8s ease both;
+        }
+
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+
+        .service-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+
+        .service-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            top: -130px;
+            right: -100px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(144, 0, 255, 0.28),
+                    transparent 70%
+                );
+
+            filter: blur(15px);
+
+            transition:
+                transform 0.5s ease;
+        }
+
+
+        .service-card:hover {
+
+            transform:
+                translateY(-9px);
+
+            border-color:
+                rgba(171, 74, 255, 0.40);
+
+            box-shadow:
+                0 25px 70px
+                rgba(83, 0, 150, 0.20);
+        }
+
+
+        .service-card:hover::before {
+
+            transform:
+                scale(1.35);
+        }
+
+
+        /* =====================================================
+           ICON
+        ===================================================== */
+
+        .service-icon {
+
+            width: 58px;
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-bottom: 25px;
+
+            border-radius: 16px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            background:
+                rgba(255, 255, 255, 0.055);
+
+            font-size: 25px;
+
+            position: relative;
+
+            z-index: 2;
+
+            transition:
+                transform 0.4s ease;
+        }
+
+
+        .service-card:hover .service-icon {
+
+            transform:
+                translateY(-4px)
+                rotate(-4deg);
+        }
+
+
+        /* =====================================================
+           NUMBER
+        ===================================================== */
+
+        .service-number {
+
+            position: absolute;
+
+            top: 30px;
+            right: 32px;
+
+            color:
+                rgba(255, 255, 255, 0.23);
+
+            font-family: monospace;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           CARD CONTENT
+        ===================================================== */
+
+        .service-card h3 {
+
+            margin: 0 0 12px;
+
+            font-size: 27px;
+
+            letter-spacing: -0.03em;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .service-card p {
+
+            max-width: 520px;
+
+            margin: 0;
+
+            color:
+                rgba(255, 255, 255, 0.53);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* =====================================================
+           SERVICE TAGS
+        ===================================================== */
+
+        .service-tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 25px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .service-tag {
+
+            padding:
+                7px 11px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 20px;
+
+            color:
+                rgba(255, 255, 255, 0.55);
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           APPROACH SECTION
+        ===================================================== */
+
+        .approach-section {
+
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            padding:
+                0 30px 110px;
+        }
+
+
+        .approach-box {
+
+            padding: 55px;
+
+            border-radius: 26px;
+
+            border:
+                1px solid
+                rgba(151, 72, 255, 0.20);
+
+            background:
+                linear-gradient(
+                    120deg,
+                    rgba(91, 0, 180, 0.11),
+                    rgba(255, 255, 255, 0.025)
+                );
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        .approach-box::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            right: -150px;
+            bottom: -200px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(120, 0, 255, 0.25),
+                    transparent 70%
+                );
+        }
+
+
+        .approach-top {
+
+            max-width: 700px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .approach-top span {
+
+            color: #b76cff;
+
+            font-size: 12px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+        }
+
+
+        .approach-top h2 {
+
+            margin:
+                12px 0 12px;
+
+            font-size: 40px;
+
+            letter-spacing: -0.04em;
+        }
+
+
+        .approach-top p {
+
+            margin: 0;
+
+            color:
+                rgba(255, 255, 255, 0.50);
+
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           APPROACH ITEMS
+        ===================================================== */
+
+        .approach-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .approach-item {
+
+            padding: 25px;
+
+            border-radius: 17px;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+        }
+
+
+        .approach-item-number {
+
+            color: #a855f7;
+
+            font-family: monospace;
+
+            font-size: 12px;
+        }
+
+
+        .approach-item h4 {
+
+            margin:
+                15px 0 7px;
+
+            font-size: 16px;
+        }
+
+
+        .approach-item p {
+
+            margin: 0;
+
+            color:
+                rgba(255, 255, 255, 0.45);
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           CTA
+        ===================================================== */
+
+        .services-cta {
+
+            padding:
+                70px 30px 120px;
+
+            text-align: center;
+        }
+
+
+        .services-cta h2 {
+
+            max-width: 750px;
+
+            margin:
+                0 auto 20px;
+
+            font-size:
+                clamp(38px, 5vw, 60px);
+
+            line-height: 1.05;
+
+            letter-spacing: -0.045em;
+        }
+
+
+        .services-cta p {
+
+            max-width: 550px;
+
+            margin:
+                0 auto 30px;
+
+            color:
+                rgba(255, 255, 255, 0.50);
+
+            line-height: 1.7;
+        }
+
+
+        .services-cta-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                15px 25px;
+
+            border-radius: 30px;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #683cff,
+                    #d100ff
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(137, 0, 255, 0.30);
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .services-cta-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 0 50px
+                rgba(137, 0, 255, 0.45);
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .services-footer {
+
+            padding:
+                30px 7%;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            align-items: center;
+
+            color:
+                rgba(255, 255, 255, 0.35);
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           ANIMATION
+        ===================================================== */
+
+        @keyframes fadeUpService {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(25px);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        /* =====================================================
+           TABLET
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .services-nav-links {
+                display: none;
+            }
+
+
+            .services-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .approach-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 600px) {
+
+            .services-nav-wrapper {
+
+                padding:
+                    12px 15px;
+            }
+
+
+            .services-nav {
+
+                height: 56px;
+            }
+
+
+            .services-nav-cta {
+
+                display: none;
+            }
+
+
+            .services-hero {
+
+                padding:
+                    80px 20px 60px;
+            }
+
+
+            .services-hero h1 {
+
+                font-size: 48px;
+            }
+
+
+            .services-hero p {
+
+                font-size: 15px;
+            }
+
+
+            .services-section,
+            .approach-section {
+
+                padding-left: 20px;
+
+                padding-right: 20px;
+            }
+
+
+            .service-card {
+
+                padding: 28px;
+
+                min-height: auto;
+            }
+
+
+            .approach-box {
+
+                padding: 28px;
+            }
+
+
+            .approach-top h2 {
+
+                font-size: 32px;
+            }
+
+
+            .approach-grid {
+
+                grid-template-columns:
+                    1fr;
+            }
+
+
+            .services-footer {
+
+                flex-direction: column;
+
+                gap: 10px;
+
+                text-align: center;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="services-page">
+
+
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
+
+    <div class="services-nav-wrapper">
+
+        <nav class="services-nav">
+
+
+            <a
+                href="index.html"
+                class="services-logo"
+            >
+
+                <img
+                    src="assets/wisemove-icon.png"
+                    alt="WiseMove"
+                >
+
+                <span>WiseMove</span>
+
+            </a>
+
+
+            <div class="services-nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="work.html">
+                    Work
+                </a>
+
+                <a
+                    href="services.html"
+                    class="active"
+                >
+                    Services
+                </a>
+
+                <a href="about.html">
+                    About
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </div>
+
+
+            <a
+                href="contact.html"
+                class="services-nav-cta"
+            >
+                Start a Project →
+            </a>
+
+
+        </nav>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="services-hero">
+
+
+        <div class="services-label">
+
+            <span></span>
+
+            What We Do
+
+        </div>
+
+
+        <h1>
+
+            We build
+            <span class="services-gradient">
+                digital experiences.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            From strategy and product design to development
+            and launch, WiseMove helps turn ideas into useful,
+            scalable and beautiful digital products.
+
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section class="services-section">
+
+
+        <div class="services-grid">
+
+
+            <!-- =================================================
+                 SERVICE 01
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    01
+                </div>
+
+
+                <div class="service-icon">
+                    ✦
+                </div>
+
+
+                <h3>
+                    Product Strategy
+                </h3>
+
+
+                <p>
+
+                    We help transform ideas into clear product
+                    strategies by understanding your users,
+                    business goals and the problem you're trying
+                    to solve.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        Discovery
+                    </span>
+
+                    <span class="service-tag">
+                        Research
+                    </span>
+
+                    <span class="service-tag">
+                        Product Planning
+                    </span>
+
+                    <span class="service-tag">
+                        Strategy
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SERVICE 02
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    02
+                </div>
+
+
+                <div class="service-icon">
+                    ◇
+                </div>
+
+
+                <h3>
+                    UI / UX Design
+                </h3>
+
+
+                <p>
+
+                    We design intuitive interfaces and thoughtful
+                    user experiences that make digital products
+                    easier, clearer and more enjoyable to use.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        UX Design
+                    </span>
+
+                    <span class="service-tag">
+                        UI Design
+                    </span>
+
+                    <span class="service-tag">
+                        Prototyping
+                    </span>
+
+                    <span class="service-tag">
+                        Design Systems
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SERVICE 03
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    03
+                </div>
+
+
+                <div class="service-icon">
+                    &lt;/&gt;
+                </div>
+
+
+                <h3>
+                    Web Development
+                </h3>
+
+
+                <p>
+
+                    We build fast, responsive and scalable websites
+                    and web applications using modern technologies
+                    and clean development practices.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        Websites
+                    </span>
+
+                    <span class="service-tag">
+                        Web Apps
+                    </span>
+
+                    <span class="service-tag">
+                        Frontend
+                    </span>
+
+                    <span class="service-tag">
+                        Backend
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SERVICE 04
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    04
+                </div>
+
+
+                <div class="service-icon">
+                    ◎
+                </div>
+
+
+                <h3>
+                    Digital Products
+                </h3>
+
+
+                <p>
+
+                    From early concepts to production-ready
+                    platforms, we create digital products designed
+                    around real users and real business needs.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        SaaS
+                    </span>
+
+                    <span class="service-tag">
+                        Platforms
+                    </span>
+
+                    <span class="service-tag">
+                        Applications
+                    </span>
+
+                    <span class="service-tag">
+                        MVPs
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SERVICE 05
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    05
+                </div>
+
+
+                <div class="service-icon">
+                    ↗
+                </div>
+
+
+                <h3>
+                    Branding & Identity
+                </h3>
+
+
+                <p>
+
+                    We create visual identities that give businesses
+                    a clear voice and a consistent presence across
+                    their digital experiences.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        Brand Identity
+                    </span>
+
+                    <span class="service-tag">
+                        Visual Systems
+                    </span>
+
+                    <span class="service-tag">
+                        Digital Branding
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SERVICE 06
+            ================================================== -->
+
+            <article class="service-card">
+
+
+                <div class="service-number">
+                    06
+                </div>
+
+
+                <div class="service-icon">
+                    ⚡
+                </div>
+
+
+                <h3>
+                    Technology & Integration
+                </h3>
+
+
+                <p>
+
+                    We connect products with the technologies and
+                    services they need to operate efficiently,
+                    securely and at scale.
+
+                </p>
+
+
+                <div class="service-tags">
+
+                    <span class="service-tag">
+                        APIs
+                    </span>
+
+                    <span class="service-tag">
+                        Cloud
+                    </span>
+
+                    <span class="service-tag">
+                        Integrations
+                    </span>
+
+                    <span class="service-tag">
+                        Automation
+                    </span>
+
+                </div>
+
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         OUR APPROACH
+    ====================================================== -->
+
+    <section class="approach-section">
+
+
+        <div class="approach-box">
+
+
+            <div class="approach-top">
+
+                <span>
+                    Our Approach
+                </span>
+
+
+                <h2>
+                    Simple process.
+                    <br>
+                    Serious results.
+                </h2>
+
+
+                <p>
+
+                    We keep the process focused and transparent,
+                    moving from understanding the problem to
+                    building and improving the right solution.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="approach-grid">
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        01
+                    </div>
+
+                    <h4>
+                        Understand
+                    </h4>
+
+                    <p>
+
+                        We learn about your business, users,
+                        challenges and goals.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        02
+                    </div>
+
+                    <h4>
+                        Define
+                    </h4>
+
+                    <p>
+
+                        We identify what matters most and
+                        create a focused product direction.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        03
+                    </div>
+
+                    <h4>
+                        Design
+                    </h4>
+
+                    <p>
+
+                        We turn ideas into intuitive experiences
+                        and clear interfaces.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        04
+                    </div>
+
+                    <h4>
+                        Build
+                    </h4>
+
+                    <p>
+
+                        We develop the product using modern,
+                        scalable technologies.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        05
+                    </div>
+
+                    <h4>
+                        Launch
+                    </h4>
+
+                    <p>
+
+                        We help bring the product to users
+                        and make sure everything works.
+
+                    </p>
+
+                </div>
+
+
+
+                <div class="approach-item">
+
+                    <div class="approach-item-number">
+                        06
+                    </div>
+
+                    <h4>
+                        Improve
+                    </h4>
+
+                    <p>
+
+                        We continuously learn, iterate and
+                        improve the experience.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="services-cta">
+
+
+        <h2>
+
+            Have something
+            <span class="services-gradient">
+                worth building?
+            </span>
+
+        </h2>
+
+
+        <p>
+
+            Tell us what you're working on.
+            We'll help you figure out the next move.
+
+        </p>
+
+
+        <a
+            href="contact.html"
+            class="services-cta-button"
+        >
+
+            Start a Project →
+
+        </a>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="services-footer">
+
+
+        <span>
+            © 2026 WiseMove. All rights reserved.
+        </span>
+
+
+        <span>
+            Product · Design · Engineering
+        </span>
+
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- Main JavaScript -->
+<script src="script.js"></script>
+
+
+</body>
+</html>
