@@ -505,7 +505,6 @@ def p_index():
         <div class="hv-stage">
           <div class="hv-ring r1"></div>
           <div class="hv-ring r2"></div>
-          <div class="hv-orb" data-depth="0.25"></div>
           <img class="hv-mark" src="assets/wisemove-icon.png" alt="" aria-hidden="true" data-depth="0.5" width="299" height="350">
         </div>
         <div class="hv-idea" data-depth="1.1">{I['bulb']} Your idea</div>

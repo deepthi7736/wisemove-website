@@ -658,32 +658,20 @@ strong { font-weight: 700; color: var(--ink); }
   place-items: center;
 }
 
-.hv-orb {
-  width: 58%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 38% 32%, rgba(226, 79, 192, 0.55), transparent 58%),
-    radial-gradient(circle at 68% 70%, rgba(58, 27, 216, 0.65), transparent 62%),
-    var(--grad-brand);
-  filter: blur(2px);
-  opacity: 0.9;
-  animation: orb 14s ease-in-out infinite;
-  box-shadow: 0 0 120px rgba(108, 43, 242, 0.55);
-}
-
-@keyframes orb {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(0, -16px, 0) scale(1.05); }
-}
-
+/* The logo mark stands alone inside the rings — there is no coloured disc
+   behind it, so it carries the hero visual on its own. */
 .hv-mark {
   position: absolute;
-  width: 30%;
-  max-width: 190px;
+  width: 33%;
+  max-width: 200px;
   z-index: 3;
-  filter: drop-shadow(0 22px 44px rgba(0, 0, 0, 0.45));
+  filter: drop-shadow(0 26px 52px rgba(0, 0, 0, 0.5));
   animation: bob 8s ease-in-out infinite;
+}
+/* A near-black shadow reads as grime on the pale surface, so the light theme
+   uses a soft violet-tinted lift instead. */
+[data-theme="light"] .hv-mark {
+  filter: drop-shadow(0 22px 44px rgba(60, 30, 120, 0.22));
 }
 
 .hv-ring {
