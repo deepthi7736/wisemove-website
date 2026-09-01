@@ -1,11 +1,12 @@
 /* =========================================================
    WISEMOVE — MAIN STYLESHEET
-   Premium dark product-studio website
+   Premium dark product studio
+   Corrected / stable version
    ========================================================= */
 
 
 /* =========================================================
-   01. ROOT / DESIGN TOKENS
+   01. DESIGN TOKENS
    ========================================================= */
 
 :root {
@@ -30,7 +31,7 @@
     --green: #31e68c;
 
     --border: rgba(145, 120, 255, 0.20);
-    --border-light: rgba(255, 255, 255, 0.10);
+    --border-light: rgba(255, 255, 255, 0.08);
 
     --container: 1160px;
 
@@ -41,7 +42,7 @@
     --radius-pill: 999px;
 
     --shadow-purple:
-        0 0 30px rgba(116, 52, 255, 0.20);
+        0 0 40px rgba(116, 52, 255, 0.18);
 
     --shadow-button:
         0 10px 35px rgba(166, 30, 255, 0.30);
@@ -55,7 +56,9 @@
    02. RESET
    ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -63,21 +66,23 @@
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
 }
 
 body {
+    width: 100%;
     min-height: 100vh;
 
     background:
         radial-gradient(
-            circle at 78% 10%,
-            rgba(80, 30, 180, 0.15),
+            circle at 80% 10%,
+            rgba(80, 30, 180, 0.14),
             transparent 30%
         ),
         radial-gradient(
-            circle at 15% 35%,
-            rgba(50, 20, 150, 0.10),
-            transparent 28%
+            circle at 10% 35%,
+            rgba(50, 20, 150, 0.09),
+            transparent 30%
         ),
         var(--bg);
 
@@ -98,13 +103,18 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-body::selection {
+::selection {
     background: var(--purple);
-    color: white;
+    color: #fff;
 }
 
 img {
     display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+svg {
     max-width: 100%;
 }
 
@@ -126,7 +136,7 @@ button {
 
 
 /* =========================================================
-   03. GLOBAL CONTAINER
+   03. CONTAINER
    ========================================================= */
 
 .container {
@@ -140,15 +150,17 @@ button {
 
 
 /* =========================================================
-   04. HEADER / NAVIGATION
+   04. HEADER
    ========================================================= */
 
 .site-header {
     position: fixed;
 
-    top: 10px;
+    top: 12px;
     left: 0;
     right: 0;
+
+    width: 100%;
 
     z-index: 1000;
 
@@ -160,10 +172,15 @@ button {
 }
 
 
-/* Main navigation */
+/* =========================================================
+   NAV CONTAINER
+   ========================================================= */
 
 .nav-container {
-    min-height: 58px;
+    position: relative;
+
+    width: 100%;
+    min-height: 62px;
 
     padding: 7px 10px 7px 16px;
 
@@ -171,7 +188,7 @@ button {
     align-items: center;
     justify-content: space-between;
 
-    gap: 25px;
+    gap: 20px;
 
     border: 1px solid var(--border);
 
@@ -180,8 +197,8 @@ button {
     background:
         linear-gradient(
             135deg,
-            rgba(15, 16, 40, 0.90),
-            rgba(5, 6, 22, 0.82)
+            rgba(15, 16, 40, 0.94),
+            rgba(5, 6, 22, 0.90)
         );
 
     backdrop-filter: blur(22px);
@@ -191,31 +208,68 @@ button {
         0 10px 40px rgba(0, 0, 0, 0.30),
         inset 0 1px rgba(255, 255, 255, 0.05);
 
-    overflow: hidden;
+    /*
+       IMPORTANT:
+       Do NOT use overflow:hidden here.
+       It can crop logos, buttons and navigation content.
+    */
+    overflow: visible;
 }
 
 
 /* =========================================================
-   LOGO
+   05. WISEMOVE BRAND
    ========================================================= */
 
 .brand {
-    display: inline-flex;
+    position: relative;
 
+    display: inline-flex;
     align-items: center;
 
     gap: 10px;
 
-    flex-shrink: 0;
+    flex: 0 0 auto;
+
+    width: auto;
+    max-width: 190px;
 
     white-space: nowrap;
+
+    overflow: hidden;
 }
+
+
+/* Logo image inside navigation */
+
+.site-header .brand img,
+.site-header .logo img,
+.site-header .nav-logo img,
+.site-header .site-logo img {
+    display: block;
+
+    width: 135px !important;
+    height: 38px !important;
+
+    max-width: 135px !important;
+    max-height: 38px !important;
+
+    min-width: 0 !important;
+
+    object-fit: contain !important;
+    object-position: left center;
+
+    flex: 0 0 auto;
+}
+
+
+/* Brand mark if HTML uses icon */
 
 .brand-mark {
     width: 34px;
     height: 34px;
 
-    flex: 0 0 34px;
+    min-width: 34px;
 
     display: grid;
     place-items: center;
@@ -229,7 +283,7 @@ button {
             #d51ee7
         );
 
-    color: white;
+    color: #fff;
 
     font-size: 18px;
     font-weight: 800;
@@ -241,67 +295,89 @@ button {
 }
 
 .brand-name {
+    color: #fff;
+
     font-size: 16px;
     line-height: 1;
 
     font-weight: 800;
 
     letter-spacing: -0.04em;
-
-    color: white;
-}
-
-
-/* If your HTML uses an actual logo image */
-
-.brand img,
-.logo img,
-.nav-logo img,
-.site-logo img {
-    width: 135px !important;
-    max-width: 135px !important;
-
-    height: auto !important;
-    max-height: 42px !important;
-
-    object-fit: contain;
-
-    display: block;
-}
-
-
-/* Prevent logo images from becoming huge */
-
-.brand > img {
-    flex-shrink: 0;
 }
 
 
 /* =========================================================
-   NAV LINKS
+   IMPORTANT LOGO SAFETY RULES
+   ========================================================= */
+
+/*
+   These rules prevent any logo from becoming a giant
+   image because of its intrinsic dimensions.
+*/
+
+.site-header img {
+    max-width: 100%;
+}
+
+
+/* Wisemove logo */
+
+.site-header img[src*="wisemove-logo"] {
+    width: 135px !important;
+    height: 38px !important;
+
+    max-width: 135px !important;
+    max-height: 38px !important;
+
+    object-fit: contain !important;
+}
+
+
+/* Wisemove icon */
+
+.site-header img[src*="wisemove-icon"] {
+    width: 34px !important;
+    height: 34px !important;
+
+    max-width: 34px !important;
+    max-height: 34px !important;
+
+    object-fit: contain !important;
+}
+
+
+/* =========================================================
+   06. MAIN NAV
    ========================================================= */
 
 .main-nav {
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
-    gap: 34px;
+    gap: 30px;
 
     margin-left: auto;
     margin-right: auto;
+
+    flex: 0 1 auto;
+
+    min-width: 0;
 }
 
 .main-nav a {
     position: relative;
 
+    display: inline-flex;
+    align-items: center;
+
     color: var(--text-soft);
 
     font-size: 12px;
-
     font-weight: 600;
+
+    white-space: nowrap;
 
     transition:
         color var(--transition),
@@ -310,7 +386,7 @@ button {
 
 .main-nav a:hover,
 .main-nav a.active {
-    color: white;
+    color: #fff;
 
     transform: translateY(-1px);
 }
@@ -337,7 +413,8 @@ button {
 
     transform: translateX(-50%);
 
-    transition: width var(--transition);
+    transition:
+        width var(--transition);
 }
 
 .main-nav a:hover::after,
@@ -347,7 +424,7 @@ button {
 
 
 /* =========================================================
-   NAV CTA
+   07. NAV CTA
    ========================================================= */
 
 .nav-button {
@@ -356,16 +433,20 @@ button {
     align-items: center;
     justify-content: center;
 
+    flex: 0 0 auto;
+
     min-height: 40px;
 
-    padding: 0 20px;
+    padding: 0 19px;
 
     border-radius: var(--radius-pill);
 
-    color: white;
+    color: #fff;
 
     font-size: 12px;
     font-weight: 800;
+
+    white-space: nowrap;
 
     background:
         linear-gradient(
@@ -391,16 +472,17 @@ button {
 
 
 /* =========================================================
-   05. HERO
+   08. HERO
    ========================================================= */
 
 .hero {
     position: relative;
 
-    min-height: 650px;
+    width: 100%;
+    min-height: 680px;
 
-    padding-top: 145px;
-    padding-bottom: 80px;
+    padding-top: 155px;
+    padding-bottom: 90px;
 
     overflow: hidden;
 
@@ -408,19 +490,22 @@ button {
 }
 
 
-/* Hero background */
+/*
+   Controlled background glow.
+   These are CSS shapes rather than unrestricted images.
+*/
 
 .hero::before {
     content: "";
 
     position: absolute;
 
-    z-index: -3;
+    z-index: -2;
 
-    width: 700px;
-    height: 700px;
+    width: 650px;
+    height: 650px;
 
-    right: -260px;
+    right: -300px;
     top: 20px;
 
     border-radius: 50%;
@@ -428,8 +513,8 @@ button {
     background:
         radial-gradient(
             circle,
-            rgba(77, 28, 230, 0.25),
-            transparent 67%
+            rgba(77, 28, 230, 0.20),
+            transparent 68%
         );
 
     pointer-events: none;
@@ -440,12 +525,12 @@ button {
 
     position: absolute;
 
-    z-index: -4;
+    z-index: -3;
 
     width: 600px;
     height: 500px;
 
-    left: -250px;
+    left: -300px;
     top: 120px;
 
     border-radius: 50%;
@@ -453,7 +538,7 @@ button {
     background:
         radial-gradient(
             circle,
-            rgba(88, 30, 255, 0.13),
+            rgba(88, 30, 255, 0.10),
             transparent 70%
         );
 
@@ -461,33 +546,42 @@ button {
 }
 
 
-/* Hero container */
+/* =========================================================
+   HERO CONTAINER
+   ========================================================= */
 
 .hero .container {
     position: relative;
 
+    width: min(
+        var(--container),
+        calc(100% - 40px)
+    );
+
     display: grid;
 
     grid-template-columns:
-        minmax(0, 0.9fr)
-        minmax(0, 1.1fr);
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
 
     align-items: center;
 
-    gap: 45px;
+    gap: 55px;
 }
 
 
 /* =========================================================
-   HERO LEFT
+   HERO CONTENT
    ========================================================= */
 
 .hero-content {
     position: relative;
 
-    z-index: 5;
+    z-index: 10;
 
     max-width: 590px;
+
+    min-width: 0;
 }
 
 .eyebrow {
@@ -502,7 +596,6 @@ button {
     color: #c453ff;
 
     font-size: 10px;
-
     font-weight: 800;
 
     letter-spacing: 0.14em;
@@ -516,6 +609,8 @@ button {
     width: 6px;
     height: 6px;
 
+    flex: 0 0 6px;
+
     border-radius: 50%;
 
     background: var(--magenta);
@@ -525,12 +620,16 @@ button {
 }
 
 
+/* =========================================================
+   HERO HEADING
+   ========================================================= */
+
 .hero h1 {
     max-width: 650px;
 
     margin-bottom: 20px;
 
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(52px, 6vw, 78px);
@@ -547,7 +646,6 @@ button {
 
     font-style: italic;
 }
-
 
 .hero p {
     max-width: 540px;
@@ -578,7 +676,8 @@ button {
     margin-bottom: 30px;
 }
 
-.primary-button {
+.primary-button,
+.secondary-button {
     display: inline-flex;
 
     align-items: center;
@@ -592,9 +691,13 @@ button {
 
     border-radius: var(--radius-pill);
 
-    color: white;
-
     font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.primary-button {
+    color: #fff;
 
     font-weight: 800;
 
@@ -621,26 +724,12 @@ button {
 }
 
 .secondary-button {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    min-height: 44px;
-
-    padding: 0 20px;
-
     border: 1px solid rgba(142, 122, 255, 0.28);
 
-    border-radius: var(--radius-pill);
+    color: #fff;
 
-    color: white;
-
-    background: rgba(10, 12, 32, 0.55);
-
-    font-size: 12px;
+    background:
+        rgba(10, 12, 32, 0.55);
 
     font-weight: 700;
 
@@ -651,9 +740,11 @@ button {
 }
 
 .secondary-button:hover {
-    background: rgba(91, 55, 190, 0.15);
+    background:
+        rgba(91, 55, 190, 0.15);
 
-    border-color: rgba(160, 130, 255, 0.5);
+    border-color:
+        rgba(160, 130, 255, 0.5);
 
     transform: translateY(-2px);
 }
@@ -687,6 +778,9 @@ button {
 .hero-visual {
     position: relative;
 
+    width: 100%;
+    min-width: 0;
+
     min-height: 470px;
 
     display: flex;
@@ -695,16 +789,25 @@ button {
     justify-content: center;
 
     isolation: isolate;
+
+    /*
+       Important:
+       Do not allow arbitrary child images to determine
+       the size of the visual area.
+    */
+    overflow: visible;
 }
 
 
-/* Central glowing platform */
+/* =========================================================
+   HERO PLATFORM
+   ========================================================= */
 
 .hero-platform {
     position: absolute;
 
     left: 50%;
-    bottom: 25px;
+    bottom: 20px;
 
     width: 300px;
     height: 75px;
@@ -716,19 +819,21 @@ button {
     background:
         radial-gradient(
             ellipse,
-            rgba(170, 40, 255, 0.9),
-            rgba(94, 30, 255, 0.25) 45%,
+            rgba(170, 40, 255, 0.75),
+            rgba(94, 30, 255, 0.20) 45%,
             transparent 72%
         );
 
     filter: blur(5px);
 
     z-index: -1;
+
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   PRODUCT FLOATING CARDS
+   HERO PRODUCT FLOATING CARDS
    ========================================================= */
 
 .product-float {
@@ -738,7 +843,8 @@ button {
 
     padding: 12px;
 
-    border: 1px solid rgba(130, 100, 255, 0.30);
+    border:
+        1px solid rgba(130, 100, 255, 0.30);
 
     border-radius: 16px;
 
@@ -750,61 +856,53 @@ button {
         );
 
     backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 
     box-shadow:
         0 20px 55px rgba(0, 0, 0, 0.35),
         inset 0 1px rgba(255, 255, 255, 0.06);
 
-    z-index: 3;
+    z-index: 5;
 
     animation:
         floatingCard 6s ease-in-out infinite;
 }
 
 .product-float img {
-    width: 100%;
+    display: block;
 
-    height: 110px;
+    width: 100% !important;
+    height: 110px !important;
 
-    object-fit: cover;
+    max-width: 100% !important;
+    max-height: 110px !important;
+
+    object-fit: contain !important;
 
     border-radius: 10px;
 
-    background: #11142c;
+    background: transparent;
 }
 
 
-/* Prevent random assets from becoming giant */
-
-.hero img {
-    max-width: 100%;
-}
-
-.hero-visual > img {
-    width: auto !important;
-
-    max-width: 300px !important;
-
-    max-height: 330px !important;
-
-    object-fit: contain;
-}
-
-
-/* Getvia */
+/* =========================================================
+   GETVIA CARD
+   ========================================================= */
 
 .product-float.getvia,
 .getvia-card {
-    left: 4%;
-    top: 90px;
+    left: 2%;
+    top: 70px;
 }
 
 
-/* Vashq */
+/* =========================================================
+   VASHQ CARD
+   ========================================================= */
 
 .product-float.vashq,
 .vashq-card {
-    right: 0;
+    right: 2%;
     top: 185px;
 
     animation-delay: -2s;
@@ -824,27 +922,62 @@ button {
     display: grid;
     place-items: center;
 
-    z-index: 2;
+    z-index: 3;
 
     animation:
         heroSymbol 7s ease-in-out infinite;
 }
 
 .hero-symbol img {
+    display: block;
+
     width: 150px !important;
     height: 150px !important;
 
-    object-fit: contain;
+    max-width: 150px !important;
+    max-height: 150px !important;
+
+    object-fit: contain !important;
 
     filter:
         drop-shadow(
-            0 0 25px rgba(137, 42, 255, 0.75)
+            0 0 25px rgba(137, 42, 255, 0.70)
         );
 }
 
 
 /* =========================================================
-   06. STATS
+   HERO DIRECT CHILD IMAGE SAFETY
+   ========================================================= */
+
+/*
+   This is one of the most important corrections.
+
+   If index.html contains something like:
+
+   <img src="assets/zed0.png">
+
+   directly inside .hero-visual, it cannot become
+   a huge full-screen image.
+*/
+
+.hero-visual > img:not(.product-logo) {
+    display: block;
+
+    width: auto !important;
+    height: auto !important;
+
+    max-width: min(320px, 70%) !important;
+    max-height: 360px !important;
+
+    object-fit: contain !important;
+
+    flex: 0 0 auto;
+}
+
+
+/* =========================================================
+   09. STATS
    ========================================================= */
 
 .stats-section {
@@ -861,7 +994,8 @@ button {
 
     overflow: hidden;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 22px;
 
@@ -887,7 +1021,8 @@ button {
 
     gap: 15px;
 
-    border-right: 1px solid var(--border-light);
+    border-right:
+        1px solid var(--border-light);
 }
 
 .stat-item:last-child {
@@ -901,13 +1036,15 @@ button {
     display: grid;
     place-items: center;
 
+    flex: 0 0 35px;
+
     color: var(--purple-light);
 
     font-size: 20px;
 }
 
 .stat-number {
-    color: white;
+    color: #fff;
 
     font-size: 24px;
 
@@ -930,7 +1067,7 @@ button {
 
 
 /* =========================================================
-   07. PROCESS SECTION
+   10. PROCESS
    ========================================================= */
 
 .process-section {
@@ -962,7 +1099,6 @@ button {
     pointer-events: none;
 }
 
-
 .section-heading {
     max-width: 650px;
 
@@ -970,7 +1106,7 @@ button {
 }
 
 .section-heading h2 {
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(38px, 5vw, 58px);
@@ -999,7 +1135,9 @@ button {
 }
 
 
-/* Process grid */
+/* =========================================================
+   PROCESS GRID
+   ========================================================= */
 
 .process-grid {
     display: grid;
@@ -1017,7 +1155,8 @@ button {
 
     padding: 18px;
 
-    border: 1px solid rgba(117, 107, 190, 0.20);
+    border:
+        1px solid rgba(117, 107, 190, 0.20);
 
     border-radius: 14px;
 
@@ -1059,7 +1198,7 @@ button {
 .process-card h3 {
     margin-top: 18px;
 
-    color: white;
+    color: #fff;
 
     font-size: 14px;
 }
@@ -1076,7 +1215,7 @@ button {
 
 
 /* =========================================================
-   08. PRODUCTS
+   11. PRODUCTS
    ========================================================= */
 
 .products-section {
@@ -1105,7 +1244,8 @@ button {
 
     overflow: hidden;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 24px;
 
@@ -1132,15 +1272,14 @@ button {
         0 25px 70px rgba(42, 15, 110, 0.28);
 }
 
+.product-card > img:not(.product-logo) {
+    width: 100% !important;
+    height: 185px !important;
 
-/* Product image */
+    max-width: 100% !important;
+    max-height: 185px !important;
 
-.product-card img {
-    width: 100%;
-
-    height: 185px;
-
-    object-fit: contain;
+    object-fit: contain !important;
 
     border-radius: 14px;
 
@@ -1148,13 +1287,19 @@ button {
 }
 
 
-/* Product logos */
+/* =========================================================
+   PRODUCT LOGOS
+   ========================================================= */
 
 .product-card .product-logo,
 .product-logo {
-    width: 90px !important;
+    display: block;
 
+    width: 90px !important;
     height: 45px !important;
+
+    max-width: 90px !important;
+    max-height: 45px !important;
 
     object-fit: contain !important;
 
@@ -1162,7 +1307,7 @@ button {
 }
 
 .product-card .product-name {
-    color: white;
+    color: #fff;
 
     font-size: 22px;
 
@@ -1195,7 +1340,7 @@ button {
 
 
 /* =========================================================
-   09. WHY WISEMOVE
+   12. WHY WISEMOVE
    ========================================================= */
 
 .why-section {
@@ -1217,7 +1362,7 @@ button {
 .why-content h2 {
     max-width: 600px;
 
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(40px, 5vw, 60px);
@@ -1254,7 +1399,8 @@ button {
 .why-item {
     padding: 22px;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 18px;
 
@@ -1284,7 +1430,7 @@ button {
 .why-item h3 {
     margin-top: 8px;
 
-    color: white;
+    color: #fff;
 
     font-size: 17px;
 }
@@ -1299,7 +1445,7 @@ button {
 
 
 /* =========================================================
-   10. CTA
+   13. CTA
    ========================================================= */
 
 .cta-section,
@@ -1317,7 +1463,8 @@ button {
 
     text-align: center;
 
-    border: 1px solid rgba(130, 100, 255, 0.28);
+    border:
+        1px solid rgba(130, 100, 255, 0.28);
 
     border-radius: 30px;
 
@@ -1365,7 +1512,7 @@ button {
 .cta-box h2 {
     position: relative;
 
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(38px, 5vw, 60px);
@@ -1395,7 +1542,7 @@ button {
 
 
 /* =========================================================
-   11. FOOTER
+   14. FOOTER
    ========================================================= */
 
 .site-footer {
@@ -1403,7 +1550,8 @@ button {
 
     padding: 70px 0 25px;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top:
+        1px solid rgba(255, 255, 255, 0.06);
 
     background:
         linear-gradient(
@@ -1447,7 +1595,7 @@ button {
 .footer-links h4 {
     margin-bottom: 8px;
 
-    color: white;
+    color: #fff;
 
     font-size: 11px;
 
@@ -1463,11 +1611,12 @@ button {
 
     font-size: 12px;
 
-    transition: color var(--transition);
+    transition:
+        color var(--transition);
 }
 
 .footer-links a:hover {
-    color: white;
+    color: #fff;
 }
 
 .footer-bottom {
@@ -1476,9 +1625,11 @@ button {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top:
+        1px solid rgba(255, 255, 255, 0.06);
 
     color: #5e6178;
 
@@ -1487,18 +1638,22 @@ button {
 
 
 /* =========================================================
-   12. ABOUT PAGE
+   15. ABOUT / CONTACT HERO
    ========================================================= */
 
 .about-hero,
 .contact-hero {
     position: relative;
 
+    width: 100%;
+
     padding:
         180px 0
         100px;
 
     overflow: hidden;
+
+    isolation: isolate;
 }
 
 .about-hero::before,
@@ -1506,6 +1661,8 @@ button {
     content: "";
 
     position: absolute;
+
+    z-index: -1;
 
     width: 650px;
     height: 500px;
@@ -1528,11 +1685,13 @@ button {
     position: relative;
 
     max-width: 850px;
+
+    z-index: 2;
 }
 
 .about-hero h1,
 .contact-hero h1 {
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(48px, 7vw, 80px);
@@ -1564,7 +1723,7 @@ button {
 
 
 /* =========================================================
-   13. ABOUT INTRO
+   16. ABOUT INTRO
    ========================================================= */
 
 .about-intro {
@@ -1592,7 +1751,7 @@ button {
 }
 
 .about-text h2 {
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(38px, 5vw, 58px);
@@ -1622,7 +1781,7 @@ button {
 
 
 /* =========================================================
-   14. VALUES
+   17. VALUES
    ========================================================= */
 
 .values-section,
@@ -1643,7 +1802,8 @@ button {
 .brand-card {
     padding: 28px;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 20px;
 
@@ -1675,7 +1835,7 @@ button {
 .brand-card h3 {
     margin-top: 20px;
 
-    color: white;
+    color: #fff;
 
     font-size: 19px;
 }
@@ -1693,7 +1853,7 @@ button {
 
 
 /* =========================================================
-   15. BRAND CARDS
+   18. BRAND CARDS
    ========================================================= */
 
 .brands-grid {
@@ -1714,7 +1874,7 @@ button {
 
     border-radius: 15px;
 
-    color: white;
+    color: #fff;
 
     font-size: 20px;
 
@@ -1733,7 +1893,22 @@ button {
 
 
 /* =========================================================
-   16. CONTACT PAGE
+   BRAND IMAGE SAFETY
+   ========================================================= */
+
+.brand-card img {
+    width: 90px !important;
+    height: 55px !important;
+
+    max-width: 90px !important;
+    max-height: 55px !important;
+
+    object-fit: contain !important;
+}
+
+
+/* =========================================================
+   19. CONTACT
    ========================================================= */
 
 .contact-section {
@@ -1753,7 +1928,7 @@ button {
 }
 
 .contact-info h2 {
-    color: white;
+    color: #fff;
 
     font-size:
         clamp(38px, 5vw, 58px);
@@ -1798,13 +1973,15 @@ button {
     display: grid;
     place-items: center;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 12px;
 
     color: var(--purple-light);
 
-    background: rgba(20, 18, 45, 0.7);
+    background:
+        rgba(20, 18, 45, 0.7);
 }
 
 .contact-item span {
@@ -1823,20 +2000,21 @@ button {
 .contact-item p {
     margin-top: 3px;
 
-    color: white;
+    color: #fff;
 
     font-size: 13px;
 }
 
 
 /* =========================================================
-   CONTACT FORM
+   20. CONTACT FORM
    ========================================================= */
 
 .contact-form-wrapper {
     padding: 30px;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
 
     border-radius: 24px;
 
@@ -1882,13 +2060,14 @@ button {
 
     padding: 13px 15px;
 
-    border: 1px solid rgba(130, 120, 180, 0.20);
+    border:
+        1px solid rgba(130, 120, 180, 0.20);
 
     border-radius: 12px;
 
     outline: none;
 
-    color: white;
+    color: #fff;
 
     background:
         rgba(4, 6, 18, 0.75);
@@ -1935,7 +2114,7 @@ button {
 
 
 /* =========================================================
-   17. LIVE PRODUCTS BADGE
+   21. LIVE PRODUCTS
    ========================================================= */
 
 .live-products {
@@ -1954,7 +2133,8 @@ button {
 
     padding: 8px 12px;
 
-    border: 1px solid rgba(130, 120, 200, 0.22);
+    border:
+        1px solid rgba(130, 120, 200, 0.22);
 
     border-radius: var(--radius-pill);
 
@@ -1977,6 +2157,8 @@ button {
     width: 6px;
     height: 6px;
 
+    flex: 0 0 6px;
+
     border-radius: 50%;
 
     background: var(--green);
@@ -1987,7 +2169,7 @@ button {
 
 
 /* =========================================================
-   18. FLOATING ACTION BUTTON
+   22. FLOATING BUTTON
    ========================================================= */
 
 .floating-button {
@@ -2006,7 +2188,7 @@ button {
 
     border-radius: 50%;
 
-    color: white;
+    color: #fff;
 
     background:
         linear-gradient(
@@ -2023,106 +2205,116 @@ button {
 }
 
 .floating-button:hover {
-    transform: translateY(-5px) scale(1.04);
+    transform:
+        translateY(-5px)
+        scale(1.04);
 }
 
 
 /* =========================================================
-   19. GENERIC IMAGES
+   23. ALL UPLOADED LOGO SAFETY
    ========================================================= */
 
 /*
-   IMPORTANT:
-   These rules prevent your uploaded logos/images from
-   stretching and breaking the layout.
+   These rules are intentionally specific.
+   They prevent your actual logo assets from becoming
+   huge or stretched.
 */
 
+
+/* Wisemove */
+
 img[src*="wisemove-logo"] {
-    width: 135px !important;
-    height: auto !important;
-    max-height: 42px !important;
-
     object-fit: contain !important;
 }
 
-img[src*="wisemove-icon"] {
-    width: 42px !important;
-    height: 42px !important;
 
-    object-fit: contain !important;
-}
+/* Getvia */
 
 img[src*="getvia-logo"] {
-    width: 80px !important;
-    height: 45px !important;
-
-    object-fit: contain !important;
-}
-
-img[src*="vashq-official-logo"] {
-    width: 90px !important;
-    height: 45px !important;
-
-    object-fit: contain !important;
-}
-
-img[src*="zed0"] {
     width: 90px !important;
     height: 50px !important;
 
+    max-width: 90px !important;
+    max-height: 50px !important;
+
+    object-fit: contain !important;
+}
+
+
+/* Vashq */
+
+img[src*="vashq-official-logo"] {
+    width: 95px !important;
+    height: 50px !important;
+
+    max-width: 95px !important;
+    max-height: 50px !important;
+
+    object-fit: contain !important;
+}
+
+
+/* Zed0 */
+
+img[src*="zed0"] {
+    width: 95px !important;
+    height: 55px !important;
+
+    max-width: 95px !important;
+    max-height: 55px !important;
+
     object-fit: contain !important;
 }
 
 
 /* =========================================================
-   20. ANIMATIONS
+   24. DECORATIVE SHAPE SAFETY
    ========================================================= */
 
-@keyframes floatingCard {
+/*
+   If the HTML has decorative elements such as:
+   .blue-shape
+   .hero-background
+   .bg-shape
+   .background
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
+   keep them contained.
+*/
 
-    50% {
-        transform: translateY(-10px);
-    }
+.hero .blue-shape,
+.hero .bg-shape,
+.hero .hero-background,
+.hero .background {
+    position: absolute;
+
+    max-width: 100%;
+
+    pointer-events: none;
 }
 
 
-@keyframes heroSymbol {
+/*
+   Never allow a generic decorative image to become
+   a viewport-sized blue rectangle.
+*/
 
-    0%,
-    100% {
-        transform:
-            translateY(0)
-            rotate(-2deg);
-    }
+.hero > img,
+.about-hero > img,
+.contact-hero > img {
+    position: absolute;
 
-    50% {
-        transform:
-            translateY(-12px)
-            rotate(2deg);
-    }
-}
+    max-width: 100% !important;
+    max-height: 100% !important;
 
+    object-fit: contain !important;
 
-@keyframes glowPulse {
-
-    0%,
-    100% {
-        opacity: 0.55;
-    }
-
-    50% {
-        opacity: 1;
-    }
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   21. SCROLL REVEAL SUPPORT
+   25. REVEAL ANIMATION
    ========================================================= */
 
 .reveal {
@@ -2145,7 +2337,51 @@ img[src*="zed0"] {
 
 
 /* =========================================================
-   22. MOBILE NAV
+   26. ANIMATIONS
+   ========================================================= */
+
+@keyframes floatingCard {
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+@keyframes heroSymbol {
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(2deg);
+    }
+}
+
+@keyframes glowPulse {
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   27. MOBILE MENU BUTTON
    ========================================================= */
 
 .menu-toggle {
@@ -2154,30 +2390,40 @@ img[src*="zed0"] {
     width: 40px;
     height: 40px;
 
-    border: 1px solid var(--border);
+    flex: 0 0 40px;
+
+    border:
+        1px solid var(--border);
 
     border-radius: 50%;
 
-    color: white;
+    color: #fff;
 
-    background: rgba(15, 16, 40, 0.7);
+    background:
+        rgba(15, 16, 40, 0.7);
 
     cursor: pointer;
 }
 
 
 /* =========================================================
-   23. TABLET
+   28. TABLET
    ========================================================= */
 
 @media (max-width: 1000px) {
 
+    .nav-container {
+        gap: 15px;
+    }
+
     .main-nav {
-        gap: 20px;
+        gap: 18px;
     }
 
     .hero .container {
         grid-template-columns: 1fr;
+
+        gap: 40px;
     }
 
     .hero-content {
@@ -2211,15 +2457,13 @@ img[src*="zed0"] {
     }
 
     .values-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
-
 }
 
 
 /* =========================================================
-   24. MOBILE
+   29. MOBILE
    ========================================================= */
 
 @media (max-width: 720px) {
@@ -2227,13 +2471,15 @@ img[src*="zed0"] {
     .container {
         width:
             min(
-                100% - 28px,
+                calc(100% - 28px),
                 var(--container)
             );
     }
 
 
-    /* Header */
+    /* -----------------------------------------
+       HEADER
+       ----------------------------------------- */
 
     .site-header {
         top: 7px;
@@ -2244,6 +2490,23 @@ img[src*="zed0"] {
 
         padding:
             6px 8px 6px 12px;
+
+        gap: 8px;
+    }
+
+    .site-header .brand {
+        max-width: 145px;
+    }
+
+    .site-header .brand img,
+    .site-header .logo img,
+    .site-header .nav-logo img,
+    .site-header .site-logo img {
+        width: 110px !important;
+        height: 32px !important;
+
+        max-width: 110px !important;
+        max-height: 32px !important;
     }
 
     .brand-name {
@@ -2253,6 +2516,8 @@ img[src*="zed0"] {
     .brand-mark {
         width: 31px;
         height: 31px;
+
+        min-width: 31px;
 
         flex-basis: 31px;
 
@@ -2273,7 +2538,9 @@ img[src*="zed0"] {
     }
 
 
-    /* Hero */
+    /* -----------------------------------------
+       HERO
+       ----------------------------------------- */
 
     .hero {
         min-height: auto;
@@ -2313,6 +2580,8 @@ img[src*="zed0"] {
 
     .hero-visual {
         min-height: 360px;
+
+        width: 100%;
     }
 
     .product-float {
@@ -2322,20 +2591,22 @@ img[src*="zed0"] {
     }
 
     .product-float img {
-        height: 80px;
+        width: 100% !important;
+        height: 80px !important;
+
+        max-width: 100% !important;
+        max-height: 80px !important;
     }
 
     .getvia-card,
     .product-float.getvia {
         left: 0;
-
         top: 45px;
     }
 
     .vashq-card,
     .product-float.vashq {
         right: 0;
-
         top: 135px;
     }
 
@@ -2347,10 +2618,15 @@ img[src*="zed0"] {
     .hero-symbol img {
         width: 110px !important;
         height: 110px !important;
+
+        max-width: 110px !important;
+        max-height: 110px !important;
     }
 
 
-    /* Stats */
+    /* -----------------------------------------
+       STATS
+       ----------------------------------------- */
 
     .stats-section {
         padding-bottom: 60px;
@@ -2386,7 +2662,9 @@ img[src*="zed0"] {
     }
 
 
-    /* Sections */
+    /* -----------------------------------------
+       SECTIONS
+       ----------------------------------------- */
 
     .process-section,
     .products-section,
@@ -2407,7 +2685,9 @@ img[src*="zed0"] {
     }
 
 
-    /* Process */
+    /* -----------------------------------------
+       PROCESS
+       ----------------------------------------- */
 
     .process-grid {
         grid-template-columns:
@@ -2415,11 +2695,12 @@ img[src*="zed0"] {
     }
 
 
-    /* Products */
+    /* -----------------------------------------
+       PRODUCTS
+       ----------------------------------------- */
 
     .products-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .product-card {
@@ -2427,7 +2708,9 @@ img[src*="zed0"] {
     }
 
 
-    /* About */
+    /* -----------------------------------------
+       ABOUT
+       ----------------------------------------- */
 
     .about-hero,
     .contact-hero {
@@ -2443,14 +2726,15 @@ img[src*="zed0"] {
     }
 
     .about-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
         gap: 25px;
     }
 
 
-    /* Brands */
+    /* -----------------------------------------
+       BRANDS
+       ----------------------------------------- */
 
     .brands-grid {
         grid-template-columns:
@@ -2462,18 +2746,21 @@ img[src*="zed0"] {
     }
 
 
-    /* Contact */
+    /* -----------------------------------------
+       CONTACT
+       ----------------------------------------- */
 
     .contact-form-wrapper {
         padding: 20px;
     }
 
 
-    /* Footer */
+    /* -----------------------------------------
+       FOOTER
+       ----------------------------------------- */
 
     .footer-top {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
 
         gap: 35px;
     }
@@ -2487,7 +2774,9 @@ img[src*="zed0"] {
     }
 
 
-    /* Floating controls */
+    /* -----------------------------------------
+       FLOATING CONTROLS
+       ----------------------------------------- */
 
     .live-products {
         left: 12px;
@@ -2501,15 +2790,29 @@ img[src*="zed0"] {
         width: 46px;
         height: 46px;
     }
-
 }
 
 
 /* =========================================================
-   25. VERY SMALL MOBILE
+   30. VERY SMALL MOBILE
    ========================================================= */
 
 @media (max-width: 430px) {
+
+    .site-header .brand {
+        max-width: 125px;
+    }
+
+    .site-header .brand img,
+    .site-header .logo img,
+    .site-header .nav-logo img,
+    .site-header .site-logo img {
+        width: 100px !important;
+        height: 30px !important;
+
+        max-width: 100px !important;
+        max-height: 30px !important;
+    }
 
     .nav-button {
         display: none;
@@ -2528,18 +2831,15 @@ img[src*="zed0"] {
     }
 
     .process-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .brands-grid {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .stats-bar {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .stat-item,
@@ -2554,12 +2854,11 @@ img[src*="zed0"] {
     .stat-item:last-child {
         border-bottom: 0;
     }
-
 }
 
 
 /* =========================================================
-   26. ACCESSIBILITY
+   31. ACCESSIBILITY
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2569,55 +2868,86 @@ img[src*="zed0"] {
     *::after {
         scroll-behavior: auto !important;
 
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+        animation-duration:
+            0.01ms !important;
 
-        transition-duration: 0.01ms !important;
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
     }
-
 }
 
 
 /* =========================================================
-   27. SAFETY OVERRIDES
+   32. FINAL GLOBAL SAFETY
    ========================================================= */
 
 /*
-   These prevent absolutely positioned decorative elements
-   from creating the giant blue blocks visible in the broken
-   version.
+   Prevent horizontal layout explosions.
 */
 
-.hero > *,
-.about-hero > *,
-.contact-hero > * {
+html,
+body {
     max-width: 100%;
 }
 
+
+/*
+   Grid/flex children are allowed to shrink.
+*/
+
+.container,
+.hero .container,
+.nav-container,
+.hero-content,
+.hero-visual,
+.product-card,
+.value-card,
+.brand-card,
+.contact-form-wrapper {
+    min-width: 0;
+}
+
+
+/*
+   Never allow an element to create horizontal scrolling.
+*/
+
+main,
+section,
+header,
+footer {
+    max-width: 100%;
+}
+
+
+/*
+   SVGs cannot unexpectedly create huge layout areas.
+*/
+
+header svg,
 .hero svg,
-.about-hero svg,
-.contact-hero svg {
+section svg,
+footer svg {
     max-width: 100%;
 }
 
-.hero .background,
-.hero .hero-background,
-.hero .bg-shape,
-.hero .blue-shape {
-    max-width: 100%;
-    overflow: hidden;
-}
 
+/*
+   Decorative absolutely-positioned elements must not
+   participate in normal document sizing.
+*/
 
-/* Don't allow generic full-screen images */
-
-.hero img[style*="width: 100vw"],
-.hero img[style*="width:100vw"] {
-    width: auto !important;
-    max-width: 100% !important;
+.hero [class*="background"],
+.hero [class*="shape"],
+.about-hero [class*="background"],
+.contact-hero [class*="background"] {
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   END
+   END OF WISEMOVE STYLESHEET
    ========================================================= */
