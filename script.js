@@ -1,2471 +1,433 @@
 /* ==========================================================================
-   WISEMOVE CONSULTANCY — script.js
-   Shared behaviour for every page.
-   Supabase enquiry submission added.
-   ========================================================================== */
+WISEMOVE CONSULTANCY — script.js
+Shared behaviour for every page. Every selector is guarded; no page
+should ever produce a console error because an element is absent.
+========================================================================== */
 
 (function () {
-  "use strict";
+"use strict";
 
-  /* ------------------------------------------------------------------
-     WISEMOVE CONTACT
-     ------------------------------------------------------------------ */
-  var CONTACT_EMAIL = "info@wisemoveconsultancy.com";
-  var STORAGE_KEY = "wisemove-theme";
+var CONTACT_EMAIL = "info@wisemoveconsultancy.com";
+var STORAGE_KEY = "wisemove-theme";
 
-  /* ------------------------------------------------------------------
-     SUPABASE CONFIGURATION
-     
-     IMPORTANT:
-     Replace the two placeholder values below with your Supabase
-     Project URL and Publishable Key.
+function $(sel, root) { return (root || document).querySelector(sel); }
+function $$(sel, root) {
+return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+}
+function on(el, evt, fn, opts) { if (el) el.addEventListener(evt, fn, opts); }
 
-     DO NOT put a Supabase secret/service_role key here.
-     ------------------------------------------------------------------ */
+var prefersReduced =
+window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var SUPABASE_URL = /* ==========================================================================
-   WISEMOVE CONSULTANCY — script.js
-   Shared behaviour for every page.
-   Supabase enquiry submission added.
-   ========================================================================== */
+/* ------------------------------------------------------------------
+THEME
+------------------------------------------------------------------ /
+/ Theme persistence.
+Storage is reached through a computed property name and wrapped in
+try/catch because some embedding contexts (sandboxed iframes with an
+opaque origin, Safari private mode) either hide the API or throw on
+access. When storage is unavailable the toggle still works for the
+current page; only the remembered choice is lost. /
+var STORE_NAME = "local" + "Storage";
+function readStore(key) {
+try {
+var s = window[STORE_NAME];
+return s ? s.getItem(key) : null;
+} catch (e) { return null; }
+}
+function writeStore(key, value) {
+try {
+var s = window[STORE_NAME];
+if (s) s.setItem(key, value);
+} catch (e) { / storage unavailable — ignore */ }
+}
 
-(function () {
-  "use strict";
+function initTheme() {
+var root = document.documentElement;
+var stored = null;
 
-  /* ------------------------------------------------------------------
-     WISEMOVE CONTACT
-     ------------------------------------------------------------------ */
-  var CONTACT_EMAIL = "info@wisemoveconsultancy.com";
-  var STORAGE_KEY = "wisemove-theme";
+stored = readStore(STORAGE_KEY);
 
-  /* ------------------------------------------------------------------
-     SUPABASE CONFIGURATION
-     
-     IMPORTANT:
-     Replace the two placeholder values below with your Supabase
-     Project URL and Publishable Key.
+if (stored === "light" || stored === "dark") {
+  root.setAttribute("data-theme", stored);
+} else if (!root.getAttribute("data-theme")) {
+  root.setAttribute("data-theme", "dark");
+}
 
-     DO NOT put a Supabase secret/service_role key here.
-     ------------------------------------------------------------------ */
+$$("[data-theme-toggle]").forEach(function (btn) {
+  on(btn, "click", function () {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    btn.setAttribute("aria-label", next === "dark" ? "Switch to light theme" : "Switch to dark theme");
+    writeStore(STORAGE_KEY, next);
+  });
+});
 
-  var SUPABASE_URL = "//jtzhttpscenjjagkkwdmdabux.supabase.co";
-  var SUPABASE_PUBLISHABLE_KEY = "sb_publishable_bHSmN4ZBT3u9jhZhd_n";
+}
 
-  var SUPABASE_CONTACT_TABLE = "contact_submissions";
+/* ------------------------------------------------------------------
+STICKY HEADER
+------------------------------------------------------------------ */
 
+function initHeader() {
+var header = $(".site-header");
+if (!header) return;
 
-  /* ------------------------------------------------------------------
-     HELPERS
-     ------------------------------------------------------------------ */
+var ticking = false;
+function update() {
+  header.classList.toggle("scrolled", window.scrollY > 12);
+  ticking = false;
+}
+on(window, "scroll", function () {
+  if (!ticking) { window.requestAnimationFrame(update); ticking = true; }
+}, { passive: true });
+update();
 
-  function $(sel, root) {
-    return (root || document).querySelector(sel);
+}
+
+/* ------------------------------------------------------------------
+MOBILE MENU
+Hidden by default at every breakpoint. Opens only via the hamburger.
+------------------------------------------------------------------ */
+
+function initMobileMenu() {
+var toggle = $("[data-menu-toggle]");
+var menu = $("#mobileMenu");
+if (!toggle || !menu) return;
+
+function open() {
+  menu.hidden = false;
+  /* next frame so the display change lands before the opacity transition */
+  window.requestAnimationFrame(function () { menu.classList.add("is-open"); });
+  toggle.setAttribute("aria-expanded", "true");
+  document.body.classList.add("no-scroll");
+}
+
+function close() {
+  menu.classList.remove("is-open");
+  toggle.setAttribute("aria-expanded", "false");
+  document.body.classList.remove("no-scroll");
+  window.setTimeout(function () {
+    if (!menu.classList.contains("is-open")) menu.hidden = true;
+  }, prefersReduced ? 0 : 340);
+}
+
+function isOpen() { return toggle.getAttribute("aria-expanded") === "true"; }
+
+on(toggle, "click", function () { isOpen() ? close() : open(); });
+
+$$("a, button", menu).forEach(function (el) {
+  on(el, "click", function () { close(); });
+});
+
+on(document, "keydown", function (e) {
+  if (e.key === "Escape" && isOpen()) { close(); toggle.focus(); }
+});
+
+/* Never leave the drawer open when we cross into desktop layout */
+var mq = window.matchMedia("(min-width: 981px)");
+var onChange = function (e) { if (e.matches && isOpen()) close(); };
+if (mq.addEventListener) mq.addEventListener("change", onChange);
+else if (mq.addListener) mq.addListener(onChange);
+
+/* Guaranteed closed state on load */
+menu.hidden = true;
+menu.classList.remove("is-open");
+toggle.setAttribute("aria-expanded", "false");
+
+}
+
+/* ------------------------------------------------------------------
+CONTACT MODAL
+------------------------------------------------------------------ */
+
+function initModal() {
+var modal = $("#contactModal");
+if (!modal) return;
+
+var panel = $(".modal-panel", modal);
+var backdrop = $(".modal-backdrop", modal);
+var lastFocus = null;
+
+var FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+function open() {
+  lastFocus = document.activeElement;
+  modal.hidden = false;
+  window.requestAnimationFrame(function () { modal.classList.add("is-open"); });
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("no-scroll");
+  var first = $(FOCUSABLE, panel);
+  if (first) window.setTimeout(function () { first.focus(); }, 60);
+}
+
+function close() {
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("no-scroll");
+  window.setTimeout(function () {
+    if (!modal.classList.contains("is-open")) modal.hidden = true;
+  }, prefersReduced ? 0 : 380);
+  if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+}
+
+function isOpen() { return modal.classList.contains("is-open"); }
+
+$$("[data-modal-open]").forEach(function (btn) {
+  on(btn, "click", function (e) { e.preventDefault(); open(); });
+});
+
+$$("[data-modal-close]", modal).forEach(function (btn) {
+  on(btn, "click", function (e) { e.preventDefault(); close(); });
+});
+
+on(backdrop, "click", close);
+
+on(document, "keydown", function (e) {
+  if (!isOpen()) return;
+  if (e.key === "Escape") { close(); return; }
+  if (e.key !== "Tab") return;
+
+  var items = $$(FOCUSABLE, panel).filter(function (el) {
+    return el.offsetParent !== null;
+  });
+  if (!items.length) return;
+
+  var first = items[0];
+  var last = items[items.length - 1];
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault(); last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault(); first.focus();
   }
+});
 
-  function $$(sel, root) {
-    return Array.prototype.slice.call(
-      (root || document).querySelectorAll(sel)
-    );
-  }
+modal.hidden = true;
+modal.classList.remove("is-open");
 
-  function on(el, evt, fn, opts) {
-    if (el) el.addEventListener(evt, fn, opts);
-  }
+}
 
+/* ------------------------------------------------------------------
+ENQUIRY FORMS — no backend exists, so compose a mail draft safely
+------------------------------------------------------------------ */
 
-  var prefersReduced =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+function initForms() {
+$$("[data-enquiry-form]").forEach(function (form) {
+on(form, "submit", function (e) {
+e.preventDefault();
 
-
-  /* ------------------------------------------------------------------
-     THEME
-     ------------------------------------------------------------------ */
-
-  var STORE_NAME = "local" + "Storage";
-
-  function readStore(key) {
-    try {
-      var s = window[STORE_NAME];
-      return s ? s.getItem(key) : null;
-    } catch (e) {
-      return null;
+    function val(name) {
+      var f = form.elements[name];
+      return f && f.value ? String(f.value).trim() : "";
     }
-  }
 
-  function writeStore(key, value) {
-    try {
-      var s = window[STORE_NAME];
+    var name = val("name");
+    var email = val("email");
+    var company = val("company");
+    var phone = val("phone");
+    var subject = val("subject");
+    var message = val("message");
 
-      if (s) {
-        s.setItem(key, value);
-      }
-    } catch (e) {
-      /* storage unavailable — ignore */
+    var lines = [
+      "Name: " + (name || "—"),
+      "Email: " + (email || "—"),
+      "Company: " + (company || "—"),
+      "Phone: " + (phone || "—"),
+      "",
+      "Message:",
+      message || "—",
+      "",
+      "— Sent from wisemoveconsultancy.com"
+    ];
+
+    var subj = subject || "New enquiry from " + (name || "the WiseMove website");
+
+    var href =
+      "mailto:" + CONTACT_EMAIL +
+      "?subject=" + encodeURIComponent(subj) +
+      "&body=" + encodeURIComponent(lines.join("\n"));
+
+    var status = $("[data-form-status]", form);
+    if (status) {
+      status.textContent =
+        "Opening your email app with this enquiry addressed to " + CONTACT_EMAIL + ".";
     }
-  }
 
+    window.location.href = href;
+  });
+});
 
-  function initTheme() {
-    var root = document.documentElement;
-    var stored = null;
+}
 
-    stored = readStore(STORAGE_KEY);
+/* ------------------------------------------------------------------
+FAQ ACCORDION
+------------------------------------------------------------------ */
 
-    if (stored === "light" || stored === "dark") {
-      root.setAttribute("data-theme", stored);
-    } else if (!root.getAttribute("data-theme")) {
-      root.setAttribute("data-theme", "dark");
-    }
+function initFaq() {
+$$(".faq-item").forEach(function (item) {
+var btn = $(".faq-q", item);
+var panel = $(".faq-a", item);
+if (!btn || !panel) return;
 
-    $$("[data-theme-toggle]").forEach(function (btn) {
-      on(btn, "click", function () {
-        var next =
-          root.getAttribute("data-theme") === "dark"
-            ? "light"
-            : "dark";
+  on(btn, "click", function () {
+    var willOpen = !item.classList.contains("open");
 
-        root.setAttribute("data-theme", next);
-
-        btn.setAttribute(
-          "aria-label",
-          next === "dark"
-            ? "Switch to light theme"
-            : "Switch to dark theme"
-        );
-
-        writeStore(STORAGE_KEY, next);
+    var group = item.closest(".faq");
+    if (group) {
+      $$(".faq-item.open", group).forEach(function (other) {
+        if (other === item) return;
+        other.classList.remove("open");
+        var ob = $(".faq-q", other);
+        if (ob) ob.setAttribute("aria-expanded", "false");
       });
-    });
-  }
-
-
-  /* ------------------------------------------------------------------
-     STICKY HEADER
-     ------------------------------------------------------------------ */
-
-  function initHeader() {
-    var header = $(".site-header");
-
-    if (!header) return;
-
-    var ticking = false;
-
-    function update() {
-      header.classList.toggle(
-        "scrolled",
-        window.scrollY > 12
-      );
-
-      ticking = false;
     }
 
-    on(
-      window,
-      "scroll",
-      function () {
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
+    item.classList.toggle("open", willOpen);
+    btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  });
+});
 
-    update();
-  }
+}
 
+/* ------------------------------------------------------------------
+SCROLL REVEAL
+------------------------------------------------------------------ */
 
-  /* ------------------------------------------------------------------
-     MOBILE MENU
-     Hidden by default at every breakpoint.
-     Opens only via hamburger.
-     ------------------------------------------------------------------ */
+function initReveal() {
+var targets = $$(".reveal, .stagger");
+if (!targets.length) return;
 
-  function initMobileMenu() {
-    var toggle = $("[data-menu-toggle]");
-    var menu = $("#mobileMenu");
+if (prefersReduced || !("IntersectionObserver" in window)) {
+  targets.forEach(function (el) { el.classList.add("in"); });
+  return;
+}
 
-    if (!toggle || !menu) return;
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("in");
+    io.unobserve(entry.target);
+  });
+}, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
 
+targets.forEach(function (el) { io.observe(el); });
 
-    function open() {
-      menu.hidden = false;
+}
 
-      window.requestAnimationFrame(function () {
-        menu.classList.add("is-open");
-      });
+/* ------------------------------------------------------------------
+HERO PARALLAX (pointer-driven, desktop only, motion-safe)
+------------------------------------------------------------------ */
 
-      toggle.setAttribute(
-        "aria-expanded",
-        "true"
-      );
+function initParallax() {
+var stage = $("[data-parallax]");
+if (!stage || prefersReduced) return;
+if (!window.matchMedia("(hover: hover) and (min-width: 981px)").matches) return;
 
-      document.body.classList.add("no-scroll");
+var layers = $$("[data-depth]", stage);
+if (!layers.length) return;
+
+var tx = 0, ty = 0, cx = 0, cy = 0, raf = null;
+
+function loop() {
+  cx += (tx - cx) * 0.07;
+  cy += (ty - cy) * 0.07;
+  layers.forEach(function (el) {
+    var d = parseFloat(el.getAttribute("data-depth")) || 0;
+    el.style.transform = "translate3d(" + (cx * d).toFixed(2) + "px," + (cy * d).toFixed(2) + "px,0)";
+  });
+  raf = Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1 ? window.requestAnimationFrame(loop) : null;
+}
+
+on(stage, "mousemove", function (e) {
+  var r = stage.getBoundingClientRect();
+  tx = ((e.clientX - r.left) / r.width - 0.5) * 32;
+  ty = ((e.clientY - r.top) / r.height - 0.5) * 32;
+  if (!raf) raf = window.requestAnimationFrame(loop);
+});
+
+on(stage, "mouseleave", function () {
+  tx = 0; ty = 0;
+  if (!raf) raf = window.requestAnimationFrame(loop);
+});
+
+}
+
+/* ------------------------------------------------------------------
+COUNT-UP STATS
+------------------------------------------------------------------ */
+
+function initCounters() {
+var els = $$("[data-count]");
+if (!els.length) return;
+
+if (prefersReduced || !("IntersectionObserver" in window)) {
+  els.forEach(function (el) {
+    el.textContent = (el.getAttribute("data-prefix") || "") +
+      el.getAttribute("data-count") + (el.getAttribute("data-suffix") || "");
+  });
+  return;
+}
+
+var io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (!entry.isIntersecting) return;
+    var el = entry.target;
+    io.unobserve(el);
+
+    var target = parseFloat(el.getAttribute("data-count")) || 0;
+    var pad = (el.getAttribute("data-pad") || "") === "true";
+    var pre = el.getAttribute("data-prefix") || "";
+    var suf = el.getAttribute("data-suffix") || "";
+    var start = null;
+
+    function frame(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / 1200, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      var v = Math.round(target * eased);
+      el.textContent = pre + (pad && v < 10 ? "0" + v : String(v)) + suf;
+      if (p < 1) window.requestAnimationFrame(frame);
     }
-
-
-    function close() {
-      menu.classList.remove("is-open");
-
-      toggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      document.body.classList.remove("no-scroll");
-
-      window.setTimeout(
-        function () {
-          if (!menu.classList.contains("is-open")) {
-            menu.hidden = true;
-          }
-        },
-        prefersReduced ? 0 : 340
-      );
-    }
-
-
-    function isOpen() {
-      return (
-        toggle.getAttribute("aria-expanded") === "true"
-      );
-    }
-
-
-    on(toggle, "click", function () {
-      isOpen() ? close() : open();
-    });
-
-
-    $$("a, button", menu).forEach(function (el) {
-      on(el, "click", function () {
-        close();
-      });
-    });
-
-
-    on(document, "keydown", function (e) {
-      if (e.key === "Escape" && isOpen()) {
-        close();
-        toggle.focus();
-      }
-    });
-
-
-    /* Never leave drawer open when crossing into desktop */
-
-    var mq = window.matchMedia(
-      "(min-width: 981px)"
-    );
-
-    var onChange = function (e) {
-      if (e.matches && isOpen()) {
-        close();
-      }
-    };
-
-
-    if (mq.addEventListener) {
-      mq.addEventListener("change", onChange);
-    } else if (mq.addListener) {
-      mq.addListener(onChange);
-    }
-
-
-    /* Guaranteed closed state on load */
-
-    menu.hidden = true;
-
-    menu.classList.remove("is-open");
-
-    toggle.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-  }
-
-
-  /* ------------------------------------------------------------------
-     CONTACT MODAL
-     ------------------------------------------------------------------ */
-
-  function initModal() {
-    var modal = $("#contactModal");
-
-    if (!modal) return;
-
-    var panel = $(".modal-panel", modal);
-    var backdrop = $(".modal-backdrop", modal);
-    var lastFocus = null;
-
-
-    var FOCUSABLE =
-      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-
-    function open() {
-      lastFocus = document.activeElement;
-
-      modal.hidden = false;
-
-      window.requestAnimationFrame(function () {
-        modal.classList.add("is-open");
-      });
-
-      modal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-      document.body.classList.add("no-scroll");
-
-
-      var first = $(FOCUSABLE, panel);
-
-      if (first) {
-        window.setTimeout(
-          function () {
-            first.focus();
-          },
-          60
-        );
-      }
-    }
-
-
-    function close() {
-      modal.classList.remove("is-open");
-
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      document.body.classList.remove("no-scroll");
-
-
-      window.setTimeout(
-        function () {
-          if (!modal.classList.contains("is-open")) {
-            modal.hidden = true;
-          }
-        },
-        prefersReduced ? 0 : 380
-      );
-
-
-      if (
-        lastFocus &&
-        typeof lastFocus.focus === "function"
-      ) {
-        lastFocus.focus();
-      }
-    }
-
-
-    function isOpen() {
-      return modal.classList.contains("is-open");
-    }
-
-
-    $$("[data-modal-open]").forEach(function (btn) {
-      on(btn, "click", function (e) {
-        e.preventDefault();
-        open();
-      });
-    });
-
-
-    $$("[data-modal-close]", modal).forEach(
-      function (btn) {
-        on(btn, "click", function (e) {
-          e.preventDefault();
-          close();
-        });
-      }
-    );
-
-
-    on(backdrop, "click", close);
-
-
-    on(document, "keydown", function (e) {
-      if (!isOpen()) return;
-
-      if (e.key === "Escape") {
-        close();
-        return;
-      }
-
-      if (e.key !== "Tab") return;
-
-
-      var items = $$(FOCUSABLE, panel).filter(
-        function (el) {
-          return el.offsetParent !== null;
-        }
-      );
-
-
-      if (!items.length) return;
-
-
-      var first = items[0];
-      var last = items[items.length - 1];
-
-
-      if (
-        e.shiftKey &&
-        document.activeElement === first
-      ) {
-        e.preventDefault();
-        last.focus();
-
-      } else if (
-        !e.shiftKey &&
-        document.activeElement === last
-      ) {
-        e.preventDefault();
-        first.focus();
-      }
-    });
-
-
-    modal.hidden = true;
-
-    modal.classList.remove("is-open");
-  }
-
-
-  /* ------------------------------------------------------------------
-     SUPABASE ENQUIRY FORM
-     
-     This replaces the old mailto() behaviour.
-     
-     Data is inserted into:
-     contact_submissions
-     ------------------------------------------------------------------ */
-
-  function initForms() {
-    $$("[data-enquiry-form]").forEach(function (form) {
-
-      on(form, "submit", async function (e) {
-
-        e.preventDefault();
-
-
-        /* ----------------------------------------------------------
-           FORM FIELD HELPER
-           ---------------------------------------------------------- */
-
-        function val(name) {
-          var f = form.elements[name];
-
-          return f && f.value
-            ? String(f.value).trim()
-            : "";
-        }
-
-
-        /* ----------------------------------------------------------
-           READ FORM VALUES
-           ---------------------------------------------------------- */
-
-        var name = val("name");
-        var email = val("email");
-        var company = val("company");
-        var phone = val("phone");
-        var message = val("message");
-
-
-        /* ----------------------------------------------------------
-           STATUS ELEMENT
-           ---------------------------------------------------------- */
-
-        var status = $(
-          "[data-form-status]",
-          form
-        );
-
-
-        /* ----------------------------------------------------------
-           BASIC VALIDATION
-           ---------------------------------------------------------- */
-
-        if (!name) {
-          if (status) {
-            status.textContent =
-              "Please enter your name.";
-          }
-
-          return;
-        }
-
-
-        if (!email) {
-          if (status) {
-            status.textContent =
-              "Please enter your email address.";
-          }
-
-          return;
-        }
-
-
-        /* Email format validation */
-
-        var emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (!emailPattern.test(email)) {
-          if (status) {
-            status.textContent =
-              "Please enter a valid email address.";
-          }
-
-          return;
-        }
-
-
-        if (!message) {
-          if (status) {
-            status.textContent =
-              "Please enter your message.";
-          }
-
-          return;
-        }
-
-
-        /* ----------------------------------------------------------
-           CHECK SUPABASE CONFIGURATION
-           ---------------------------------------------------------- */
-
-        if (
-          !SUPABASE_URL ||
-          SUPABASE_URL ===
-            "PASTE_YOUR_SUPABASE_URL_HERE" ||
-          !SUPABASE_PUBLISHABLE_KEY ||
-          SUPABASE_PUBLISHABLE_KEY ===
-            "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE"
-        ) {
-
-          console.error(
-            "WiseMove: Supabase configuration is missing."
-          );
-
-
-          if (status) {
-            status.textContent =
-              "The enquiry service is not configured yet. Please contact us at " +
-              CONTACT_EMAIL +
-              ".";
-          }
-
-
-          return;
-        }
-
-
-        /* ----------------------------------------------------------
-           DISABLE SUBMIT BUTTON WHILE SENDING
-           ---------------------------------------------------------- */
-
-        var submitButton = $(
-          'button[type="submit"]',
-          form
-        );
-
-
-        var originalButtonHTML =
-          submitButton
-            ? submitButton.innerHTML
-            : "";
-
-
-        if (submitButton) {
-          submitButton.disabled = true;
-
-          submitButton.innerHTML =
-            "Sending...";
-        }
-
-
-        if (status) {
-          status.textContent =
-            "Sending your enquiry...";
-        }
-
-
-        /* ----------------------------------------------------------
-           PREPARE SUPABASE DATA
-           
-           contact_submissions columns:
-           
-           full_name
-           email
-           phone
-           company
-           subject
-           message
-           status
-           ---------------------------------------------------------- */
-
-        var payload = {
-          full_name: name,
-          email: email,
-          phone: phone || null,
-          company: company || null,
-          subject: "New enquiry from WiseMove website",
-          message: message,
-          status: "new"
-        };
-
-
-        /* ----------------------------------------------------------
-           SEND TO SUPABASE
-           ---------------------------------------------------------- */
-
-        try {
-
-          var response = await fetch(
-            SUPABASE_URL +
-              "/rest/v1/" +
-              SUPABASE_CONTACT_TABLE,
-            {
-              method: "POST",
-
-              headers: {
-                "apikey":
-                  SUPABASE_PUBLISHABLE_KEY,
-
-                "Authorization":
-                  "Bearer " +
-                  SUPABASE_PUBLISHABLE_KEY,
-
-                "Content-Type":
-                  "application/json",
-
-                "Prefer":
-                  "return=minimal"
-              },
-
-              body: JSON.stringify(payload)
-            }
-          );
-
-
-          /* --------------------------------------------------------
-             SUPABASE ERROR
-             -------------------------------------------------------- */
-
-          if (!response.ok) {
-
-            var errorText = "";
-
-            try {
-              errorText =
-                await response.text();
-            } catch (readError) {
-              errorText = "";
-            }
-
-
-            console.error(
-              "WiseMove Supabase error:",
-              response.status,
-              errorText
-            );
-
-
-            throw new Error(
-              "Supabase request failed: " +
-                response.status
-            );
-          }
-
-
-          /* --------------------------------------------------------
-             SUCCESS
-             -------------------------------------------------------- */
-
-          if (status) {
-            status.textContent =
-              "Thank you! Your enquiry has been sent successfully. We will get back to you soon.";
-          }
-
-
-          /* Clear the form */
-
-          form.reset();
-
-
-          /* --------------------------------------------------------
-             RESTORE BUTTON
-             -------------------------------------------------------- */
-
-          if (submitButton) {
-            submitButton.disabled = false;
-
-            submitButton.innerHTML =
-              originalButtonHTML;
-          }
-
-
-        } catch (error) {
-
-          console.error(
-            "WiseMove enquiry submission error:",
-            error
-          );
-
-
-          if (status) {
-            status.textContent =
-              "Sorry, we couldn't send your enquiry right now. Please email us at " +
-              CONTACT_EMAIL +
-              ".";
-          }
-
-
-          if (submitButton) {
-            submitButton.disabled = false;
-
-            submitButton.innerHTML =
-              originalButtonHTML;
-          }
-        }
-
-      });
-
-    });
-  }
-
-
-  /* ------------------------------------------------------------------
-     FAQ ACCORDION
-     ------------------------------------------------------------------ */
-
-  function initFaq() {
-
-    $$(".faq-item").forEach(function (item) {
-
-      var btn = $(".faq-q", item);
-      var panel = $(".faq-a", item);
-
-
-      if (!btn || !panel) return;
-
-
-      on(btn, "click", function () {
-
-        var willOpen =
-          !item.classList.contains("open");
-
-
-        var group =
-          item.closest(".faq");
-
-
-        if (group) {
-
-          $$(".faq-item.open", group).forEach(
-            function (other) {
-
-              if (other === item) return;
-
-
-              other.classList.remove("open");
-
-
-              var ob =
-                $(".faq-q", other);
-
-
-              if (ob) {
-                ob.setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
-              }
-
-            }
-          );
-
-        }
-
-
-        item.classList.toggle(
-          "open",
-          willOpen
-        );
-
-
-        btn.setAttribute(
-          "aria-expanded",
-          willOpen
-            ? "true"
-            : "false"
-        );
-
-      });
-
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     SCROLL REVEAL
-     ------------------------------------------------------------------ */
-
-  function initReveal() {
-
-    var targets =
-      $$(".reveal, .stagger");
-
-
-    if (!targets.length) return;
-
-
-    if (
-      prefersReduced ||
-      !("IntersectionObserver" in window)
-    ) {
-
-      targets.forEach(function (el) {
-        el.classList.add("in");
-      });
-
-      return;
-    }
-
-
-    var io =
-      new IntersectionObserver(
-        function (entries) {
-
-          entries.forEach(
-            function (entry) {
-
-              if (!entry.isIntersecting)
-                return;
-
-
-              entry.target.classList.add(
-                "in"
-              );
-
-
-              io.unobserve(
-                entry.target
-              );
-
-            }
-          );
-
-        },
-        {
-          rootMargin:
-            "0px 0px -8% 0px",
-
-          threshold: 0.08
-        }
-      );
-
-
-    targets.forEach(function (el) {
-      io.observe(el);
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     HERO PARALLAX
-     Pointer-driven, desktop only, motion-safe
-     ------------------------------------------------------------------ */
-
-  function initParallax() {
-
-    var stage =
-      $("[data-parallax]");
-
-
-    if (!stage || prefersReduced)
-      return;
-
-
-    if (
-      !window
-        .matchMedia(
-          "(hover: hover) and (min-width: 981px)"
-        )
-        .matches
-    ) {
-      return;
-    }
-
-
-    var layers =
-      $$("[data-depth]", stage);
-
-
-    if (!layers.length)
-      return;
-
-
-    var tx = 0;
-    var ty = 0;
-
-    var cx = 0;
-    var cy = 0;
-
-    var raf = null;
-
-
-    function loop() {
-
-      cx +=
-        (tx - cx) *
-        0.07;
-
-
-      cy +=
-        (ty - cy) *
-        0.07;
-
-
-      layers.forEach(
-        function (el) {
-
-          var d =
-            parseFloat(
-              el.getAttribute(
-                "data-depth"
-              )
-            ) || 0;
-
-
-          el.style.transform =
-            "translate3d(" +
-            (cx * d).toFixed(2) +
-            "px," +
-            (cy * d).toFixed(2) +
-            "px,0)";
-
-        }
-      );
-
-
-      raf =
-        Math.abs(tx - cx) > 0.1 ||
-        Math.abs(ty - cy) > 0.1
-          ? window.requestAnimationFrame(
-              loop
-            )
-          : null;
-    }
-
-
-    on(
-      stage,
-      "mousemove",
-      function (e) {
-
-        var r =
-          stage.getBoundingClientRect();
-
-
-        tx =
-          (
-            (e.clientX - r.left) /
-              r.width -
-            0.5
-          ) * 32;
-
-
-        ty =
-          (
-            (e.clientY - r.top) /
-              r.height -
-            0.5
-          ) * 32;
-
-
-        if (!raf) {
-          raf =
-            window.requestAnimationFrame(
-              loop
-            );
-        }
-
-      }
-    );
-
-
-    on(
-      stage,
-      "mouseleave",
-      function () {
-
-        tx = 0;
-        ty = 0;
-
-
-        if (!raf) {
-          raf =
-            window.requestAnimationFrame(
-              loop
-            );
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     COUNT-UP STATS
-     ------------------------------------------------------------------ */
-
-  function initCounters() {
-
-    var els =
-      $$("[data-count]");
-
-
-    if (!els.length)
-      return;
-
-
-    if (
-      prefersReduced ||
-      !("IntersectionObserver" in window)
-    ) {
-
-      els.forEach(
-        function (el) {
-
-          el.textContent =
-            (el.getAttribute(
-              "data-prefix"
-            ) || "") +
-
-            el.getAttribute(
-              "data-count"
-            ) +
-
-            (el.getAttribute(
-              "data-suffix"
-            ) || "");
-
-        }
-      );
-
-
-      return;
-    }
-
-
-    var io =
-      new IntersectionObserver(
-        function (entries) {
-
-          entries.forEach(
-            function (entry) {
-
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              var el =
-                entry.target;
-
-
-              io.unobserve(el);
-
-
-              var target =
-                parseFloat(
-                  el.getAttribute(
-                    "data-count"
-                  )
-                ) || 0;
-
-
-              var pad =
-                (
-                  el.getAttribute(
-                    "data-pad"
-                  ) || ""
-                ) === "true";
-
-
-              var pre =
-                el.getAttribute(
-                  "data-prefix"
-                ) || "";
-
-
-              var suf =
-                el.getAttribute(
-                  "data-suffix"
-                ) || "";
-
-
-              var start = null;
-
-
-              function frame(ts) {
-
-                if (start === null) {
-                  start = ts;
-                }
-
-
-                var p =
-                  Math.min(
-                    (ts - start) /
-                      1200,
-                    1
-                  );
-
-
-                var eased =
-                  1 -
-                  Math.pow(
-                    1 - p,
-                    3
-                  );
-
-
-                var v =
-                  Math.round(
-                    target *
-                      eased
-                  );
-
-
-                el.textContent =
-                  pre +
-                  (
-                    pad && v < 10
-                      ? "0" + v
-                      : String(v)
-                  ) +
-                  suf;
-
-
-                if (p < 1) {
-                  window.requestAnimationFrame(
-                    frame
-                  );
-                }
-
-              }
-
-
-              window.requestAnimationFrame(
-                frame
-              );
-
-            }
-          );
-
-        },
-        {
-          threshold: 0.4
-        }
-      );
-
-
-    els.forEach(function (el) {
-      io.observe(el);
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     FOOTER YEAR
-     ------------------------------------------------------------------ */
-
-  function initYear() {
-
-    $$("[data-year]").forEach(
-      function (el) {
-
-        el.textContent =
-          String(
-            new Date().getFullYear()
-          );
-
-      }
-    );
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     BOOT
-     ------------------------------------------------------------------ */
-
-  function boot() {
-
-    initTheme();
-
-    initHeader();
-
-    initMobileMenu();
-
-    initModal();
-
-    initForms();
-
-    initFaq();
-
-    initReveal();
-
-    initParallax();
-
-    initCounters();
-
-    initYear();
-
-  }
-
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      boot
-    );
-
-  } else {
-
-    boot();
-
-  }
-
-})();
-  var SUPABASE_PUBLISHABLE_KEY = 
-
-  var SUPABASE_CONTACT_TABLE = "contact_submissions";
-
-
-  /* ------------------------------------------------------------------
-     HELPERS
-     ------------------------------------------------------------------ */
-
-  function $(sel, root) {
-    return (root || document).querySelector(sel);
-  }
-
-  function $$(sel, root) {
-    return Array.prototype.slice.call(
-      (root || document).querySelectorAll(sel)
-    );
-  }
-
-  function on(el, evt, fn, opts) {
-    if (el) el.addEventListener(evt, fn, opts);
-  }
-
-
-  var prefersReduced =
-    window.matchMedia &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-
-  /* ------------------------------------------------------------------
-     THEME
-     ------------------------------------------------------------------ */
-
-  var STORE_NAME = "local" + "Storage";
-
-  function readStore(key) {
-    try {
-      var s = window[STORE_NAME];
-      return s ? s.getItem(key) : null;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function writeStore(key, value) {
-    try {
-      var s = window[STORE_NAME];
-
-      if (s) {
-        s.setItem(key, value);
-      }
-    } catch (e) {
-      /* storage unavailable — ignore */
-    }
-  }
-
-
-  function initTheme() {
-    var root = document.documentElement;
-    var stored = null;
-
-    stored = readStore(STORAGE_KEY);
-
-    if (stored === "light" || stored === "dark") {
-      root.setAttribute("data-theme", stored);
-    } else if (!root.getAttribute("data-theme")) {
-      root.setAttribute("data-theme", "dark");
-    }
-
-    $$("[data-theme-toggle]").forEach(function (btn) {
-      on(btn, "click", function () {
-        var next =
-          root.getAttribute("data-theme") === "dark"
-            ? "light"
-            : "dark";
-
-        root.setAttribute("data-theme", next);
-
-        btn.setAttribute(
-          "aria-label",
-          next === "dark"
-            ? "Switch to light theme"
-            : "Switch to dark theme"
-        );
-
-        writeStore(STORAGE_KEY, next);
-      });
-    });
-  }
-
-
-  /* ------------------------------------------------------------------
-     STICKY HEADER
-     ------------------------------------------------------------------ */
-
-  function initHeader() {
-    var header = $(".site-header");
-
-    if (!header) return;
-
-    var ticking = false;
-
-    function update() {
-      header.classList.toggle(
-        "scrolled",
-        window.scrollY > 12
-      );
-
-      ticking = false;
-    }
-
-    on(
-      window,
-      "scroll",
-      function () {
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      },
-      { passive: true }
-    );
-
-    update();
-  }
-
-
-  /* ------------------------------------------------------------------
-     MOBILE MENU
-     Hidden by default at every breakpoint.
-     Opens only via hamburger.
-     ------------------------------------------------------------------ */
-
-  function initMobileMenu() {
-    var toggle = $("[data-menu-toggle]");
-    var menu = $("#mobileMenu");
-
-    if (!toggle || !menu) return;
-
-
-    function open() {
-      menu.hidden = false;
-
-      window.requestAnimationFrame(function () {
-        menu.classList.add("is-open");
-      });
-
-      toggle.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-
-      document.body.classList.add("no-scroll");
-    }
-
-
-    function close() {
-      menu.classList.remove("is-open");
-
-      toggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      document.body.classList.remove("no-scroll");
-
-      window.setTimeout(
-        function () {
-          if (!menu.classList.contains("is-open")) {
-            menu.hidden = true;
-          }
-        },
-        prefersReduced ? 0 : 340
-      );
-    }
-
-
-    function isOpen() {
-      return (
-        toggle.getAttribute("aria-expanded") === "true"
-      );
-    }
-
-
-    on(toggle, "click", function () {
-      isOpen() ? close() : open();
-    });
-
-
-    $$("a, button", menu).forEach(function (el) {
-      on(el, "click", function () {
-        close();
-      });
-    });
-
-
-    on(document, "keydown", function (e) {
-      if (e.key === "Escape" && isOpen()) {
-        close();
-        toggle.focus();
-      }
-    });
-
-
-    /* Never leave drawer open when crossing into desktop */
-
-    var mq = window.matchMedia(
-      "(min-width: 981px)"
-    );
-
-    var onChange = function (e) {
-      if (e.matches && isOpen()) {
-        close();
-      }
-    };
-
-
-    if (mq.addEventListener) {
-      mq.addEventListener("change", onChange);
-    } else if (mq.addListener) {
-      mq.addListener(onChange);
-    }
-
-
-    /* Guaranteed closed state on load */
-
-    menu.hidden = true;
-
-    menu.classList.remove("is-open");
-
-    toggle.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-  }
-
-
-  /* ------------------------------------------------------------------
-     CONTACT MODAL
-     ------------------------------------------------------------------ */
-
-  function initModal() {
-    var modal = $("#contactModal");
-
-    if (!modal) return;
-
-    var panel = $(".modal-panel", modal);
-    var backdrop = $(".modal-backdrop", modal);
-    var lastFocus = null;
-
-
-    var FOCUSABLE =
-      'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])';
-
-
-    function open() {
-      lastFocus = document.activeElement;
-
-      modal.hidden = false;
-
-      window.requestAnimationFrame(function () {
-        modal.classList.add("is-open");
-      });
-
-      modal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-      document.body.classList.add("no-scroll");
-
-
-      var first = $(FOCUSABLE, panel);
-
-      if (first) {
-        window.setTimeout(
-          function () {
-            first.focus();
-          },
-          60
-        );
-      }
-    }
-
-
-    function close() {
-      modal.classList.remove("is-open");
-
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      document.body.classList.remove("no-scroll");
-
-
-      window.setTimeout(
-        function () {
-          if (!modal.classList.contains("is-open")) {
-            modal.hidden = true;
-          }
-        },
-        prefersReduced ? 0 : 380
-      );
-
-
-      if (
-        lastFocus &&
-        typeof lastFocus.focus === "function"
-      ) {
-        lastFocus.focus();
-      }
-    }
-
-
-    function isOpen() {
-      return modal.classList.contains("is-open");
-    }
-
-
-    $$("[data-modal-open]").forEach(function (btn) {
-      on(btn, "click", function (e) {
-        e.preventDefault();
-        open();
-      });
-    });
-
-
-    $$("[data-modal-close]", modal).forEach(
-      function (btn) {
-        on(btn, "click", function (e) {
-          e.preventDefault();
-          close();
-        });
-      }
-    );
-
-
-    on(backdrop, "click", close);
-
-
-    on(document, "keydown", function (e) {
-      if (!isOpen()) return;
-
-      if (e.key === "Escape") {
-        close();
-        return;
-      }
-
-      if (e.key !== "Tab") return;
-
-
-      var items = $$(FOCUSABLE, panel).filter(
-        function (el) {
-          return el.offsetParent !== null;
-        }
-      );
-
-
-      if (!items.length) return;
-
-
-      var first = items[0];
-      var last = items[items.length - 1];
-
-
-      if (
-        e.shiftKey &&
-        document.activeElement === first
-      ) {
-        e.preventDefault();
-        last.focus();
-
-      } else if (
-        !e.shiftKey &&
-        document.activeElement === last
-      ) {
-        e.preventDefault();
-        first.focus();
-      }
-    });
-
-
-    modal.hidden = true;
-
-    modal.classList.remove("is-open");
-  }
-
-
-  /* ------------------------------------------------------------------
-     SUPABASE ENQUIRY FORM
-     
-     This replaces the old mailto() behaviour.
-     
-     Data is inserted into:
-     contact_submissions
-     ------------------------------------------------------------------ */
-
-  function initForms() {
-    $$("[data-enquiry-form]").forEach(function (form) {
-
-      on(form, "submit", async function (e) {
-
-        e.preventDefault();
-
-
-        /* ----------------------------------------------------------
-           FORM FIELD HELPER
-           ---------------------------------------------------------- */
-
-        function val(name) {
-          var f = form.elements[name];
-
-          return f && f.value
-            ? String(f.value).trim()
-            : "";
-        }
-
-
-        /* ----------------------------------------------------------
-           READ FORM VALUES
-           ---------------------------------------------------------- */
-
-        var name = val("name");
-        var email = val("email");
-        var company = val("company");
-        var phone = val("phone");
-        var message = val("message");
-
-
-        /* ----------------------------------------------------------
-           STATUS ELEMENT
-           ---------------------------------------------------------- */
-
-        var status = $(
-          "[data-form-status]",
-          form
-        );
-
-
-        /* ----------------------------------------------------------
-           BASIC VALIDATION
-           ---------------------------------------------------------- */
-
-        if (!name) {
-          if (status) {
-            status.textContent =
-              "Please enter your name.";
-          }
-
-          return;
-        }
-
-
-        if (!email) {
-          if (status) {
-            status.textContent =
-              "Please enter your email address.";
-          }
-
-          return;
-        }
-
-
-        /* Email format validation */
-
-        var emailPattern =
-          /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-
-        if (!emailPattern.test(email)) {
-          if (status) {
-            status.textContent =
-              "Please enter a valid email address.";
-          }
-
-          return;
-        }
-
-
-        if (!message) {
-          if (status) {
-            status.textContent =
-              "Please enter your message.";
-          }
-
-          return;
-        }
-
-
-        /* ----------------------------------------------------------
-           CHECK SUPABASE CONFIGURATION
-           ---------------------------------------------------------- */
-
-        if (
-          !SUPABASE_URL ||
-          SUPABASE_URL ===
-            "PASTE_YOUR_SUPABASE_URL_HERE" ||
-          !SUPABASE_PUBLISHABLE_KEY ||
-          SUPABASE_PUBLISHABLE_KEY ===
-            "PASTE_YOUR_SUPABASE_PUBLISHABLE_KEY_HERE"
-        ) {
-
-          console.error(
-            "WiseMove: Supabase configuration is missing."
-          );
-
-
-          if (status) {
-            status.textContent =
-              "The enquiry service is not configured yet. Please contact us at " +
-              CONTACT_EMAIL +
-              ".";
-          }
-
-
-          return;
-        }
-
-
-        /* ----------------------------------------------------------
-           DISABLE SUBMIT BUTTON WHILE SENDING
-           ---------------------------------------------------------- */
-
-        var submitButton = $(
-          'button[type="submit"]',
-          form
-        );
-
-
-        var originalButtonHTML =
-          submitButton
-            ? submitButton.innerHTML
-            : "";
-
-
-        if (submitButton) {
-          submitButton.disabled = true;
-
-          submitButton.innerHTML =
-            "Sending...";
-        }
-
-
-        if (status) {
-          status.textContent =
-            "Sending your enquiry...";
-        }
-
-
-        /* ----------------------------------------------------------
-           PREPARE SUPABASE DATA
-           
-           contact_submissions columns:
-           
-           full_name
-           email
-           phone
-           company
-           subject
-           message
-           status
-           ---------------------------------------------------------- */
-
-        var payload = {
-          full_name: name,
-          email: email,
-          phone: phone || null,
-          company: company || null,
-          subject: "New enquiry from WiseMove website",
-          message: message,
-          status: "new"
-        };
-
-
-        /* ----------------------------------------------------------
-           SEND TO SUPABASE
-           ---------------------------------------------------------- */
-
-        try {
-
-          var response = await fetch(
-            SUPABASE_URL +
-              "/rest/v1/" +
-              SUPABASE_CONTACT_TABLE,
-            {
-              method: "POST",
-
-              headers: {
-                "apikey":
-                  SUPABASE_PUBLISHABLE_KEY,
-
-                "Authorization":
-                  "Bearer " +
-                  SUPABASE_PUBLISHABLE_KEY,
-
-                "Content-Type":
-                  "application/json",
-
-                "Prefer":
-                  "return=minimal"
-              },
-
-              body: JSON.stringify(payload)
-            }
-          );
-
-
-          /* --------------------------------------------------------
-             SUPABASE ERROR
-             -------------------------------------------------------- */
-
-          if (!response.ok) {
-
-            var errorText = "";
-
-            try {
-              errorText =
-                await response.text();
-            } catch (readError) {
-              errorText = "";
-            }
-
-
-            console.error(
-              "WiseMove Supabase error:",
-              response.status,
-              errorText
-            );
-
-
-            throw new Error(
-              "Supabase request failed: " +
-                response.status
-            );
-          }
-
-
-          /* --------------------------------------------------------
-             SUCCESS
-             -------------------------------------------------------- */
-
-          if (status) {
-            status.textContent =
-              "Thank you! Your enquiry has been sent successfully. We will get back to you soon.";
-          }
-
-
-          /* Clear the form */
-
-          form.reset();
-
-
-          /* --------------------------------------------------------
-             RESTORE BUTTON
-             -------------------------------------------------------- */
-
-          if (submitButton) {
-            submitButton.disabled = false;
-
-            submitButton.innerHTML =
-              originalButtonHTML;
-          }
-
-
-        } catch (error) {
-
-          console.error(
-            "WiseMove enquiry submission error:",
-            error
-          );
-
-
-          if (status) {
-            status.textContent =
-              "Sorry, we couldn't send your enquiry right now. Please email us at " +
-              CONTACT_EMAIL +
-              ".";
-          }
-
-
-          if (submitButton) {
-            submitButton.disabled = false;
-
-            submitButton.innerHTML =
-              originalButtonHTML;
-          }
-        }
-
-      });
-
-    });
-  }
-
-
-  /* ------------------------------------------------------------------
-     FAQ ACCORDION
-     ------------------------------------------------------------------ */
-
-  function initFaq() {
-
-    $$(".faq-item").forEach(function (item) {
-
-      var btn = $(".faq-q", item);
-      var panel = $(".faq-a", item);
-
-
-      if (!btn || !panel) return;
-
-
-      on(btn, "click", function () {
-
-        var willOpen =
-          !item.classList.contains("open");
-
-
-        var group =
-          item.closest(".faq");
-
-
-        if (group) {
-
-          $$(".faq-item.open", group).forEach(
-            function (other) {
-
-              if (other === item) return;
-
-
-              other.classList.remove("open");
-
-
-              var ob =
-                $(".faq-q", other);
-
-
-              if (ob) {
-                ob.setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
-              }
-
-            }
-          );
-
-        }
-
-
-        item.classList.toggle(
-          "open",
-          willOpen
-        );
-
-
-        btn.setAttribute(
-          "aria-expanded",
-          willOpen
-            ? "true"
-            : "false"
-        );
-
-      });
-
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     SCROLL REVEAL
-     ------------------------------------------------------------------ */
-
-  function initReveal() {
-
-    var targets =
-      $$(".reveal, .stagger");
-
-
-    if (!targets.length) return;
-
-
-    if (
-      prefersReduced ||
-      !("IntersectionObserver" in window)
-    ) {
-
-      targets.forEach(function (el) {
-        el.classList.add("in");
-      });
-
-      return;
-    }
-
-
-    var io =
-      new IntersectionObserver(
-        function (entries) {
-
-          entries.forEach(
-            function (entry) {
-
-              if (!entry.isIntersecting)
-                return;
-
-
-              entry.target.classList.add(
-                "in"
-              );
-
-
-              io.unobserve(
-                entry.target
-              );
-
-            }
-          );
-
-        },
-        {
-          rootMargin:
-            "0px 0px -8% 0px",
-
-          threshold: 0.08
-        }
-      );
-
-
-    targets.forEach(function (el) {
-      io.observe(el);
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     HERO PARALLAX
-     Pointer-driven, desktop only, motion-safe
-     ------------------------------------------------------------------ */
-
-  function initParallax() {
-
-    var stage =
-      $("[data-parallax]");
-
-
-    if (!stage || prefersReduced)
-      return;
-
-
-    if (
-      !window
-        .matchMedia(
-          "(hover: hover) and (min-width: 981px)"
-        )
-        .matches
-    ) {
-      return;
-    }
-
-
-    var layers =
-      $$("[data-depth]", stage);
-
-
-    if (!layers.length)
-      return;
-
-
-    var tx = 0;
-    var ty = 0;
-
-    var cx = 0;
-    var cy = 0;
-
-    var raf = null;
-
-
-    function loop() {
-
-      cx +=
-        (tx - cx) *
-        0.07;
-
-
-      cy +=
-        (ty - cy) *
-        0.07;
-
-
-      layers.forEach(
-        function (el) {
-
-          var d =
-            parseFloat(
-              el.getAttribute(
-                "data-depth"
-              )
-            ) || 0;
-
-
-          el.style.transform =
-            "translate3d(" +
-            (cx * d).toFixed(2) +
-            "px," +
-            (cy * d).toFixed(2) +
-            "px,0)";
-
-        }
-      );
-
-
-      raf =
-        Math.abs(tx - cx) > 0.1 ||
-        Math.abs(ty - cy) > 0.1
-          ? window.requestAnimationFrame(
-              loop
-            )
-          : null;
-    }
-
-
-    on(
-      stage,
-      "mousemove",
-      function (e) {
-
-        var r =
-          stage.getBoundingClientRect();
-
-
-        tx =
-          (
-            (e.clientX - r.left) /
-              r.width -
-            0.5
-          ) * 32;
-
-
-        ty =
-          (
-            (e.clientY - r.top) /
-              r.height -
-            0.5
-          ) * 32;
-
-
-        if (!raf) {
-          raf =
-            window.requestAnimationFrame(
-              loop
-            );
-        }
-
-      }
-    );
-
-
-    on(
-      stage,
-      "mouseleave",
-      function () {
-
-        tx = 0;
-        ty = 0;
-
-
-        if (!raf) {
-          raf =
-            window.requestAnimationFrame(
-              loop
-            );
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     COUNT-UP STATS
-     ------------------------------------------------------------------ */
-
-  function initCounters() {
-
-    var els =
-      $$("[data-count]");
-
-
-    if (!els.length)
-      return;
-
-
-    if (
-      prefersReduced ||
-      !("IntersectionObserver" in window)
-    ) {
-
-      els.forEach(
-        function (el) {
-
-          el.textContent =
-            (el.getAttribute(
-              "data-prefix"
-            ) || "") +
-
-            el.getAttribute(
-              "data-count"
-            ) +
-
-            (el.getAttribute(
-              "data-suffix"
-            ) || "");
-
-        }
-      );
-
-
-      return;
-    }
-
-
-    var io =
-      new IntersectionObserver(
-        function (entries) {
-
-          entries.forEach(
-            function (entry) {
-
-              if (
-                !entry.isIntersecting
-              ) {
-                return;
-              }
-
-
-              var el =
-                entry.target;
-
-
-              io.unobserve(el);
-
-
-              var target =
-                parseFloat(
-                  el.getAttribute(
-                    "data-count"
-                  )
-                ) || 0;
-
-
-              var pad =
-                (
-                  el.getAttribute(
-                    "data-pad"
-                  ) || ""
-                ) === "true";
-
-
-              var pre =
-                el.getAttribute(
-                  "data-prefix"
-                ) || "";
-
-
-              var suf =
-                el.getAttribute(
-                  "data-suffix"
-                ) || "";
-
-
-              var start = null;
-
-
-              function frame(ts) {
-
-                if (start === null) {
-                  start = ts;
-                }
-
-
-                var p =
-                  Math.min(
-                    (ts - start) /
-                      1200,
-                    1
-                  );
-
-
-                var eased =
-                  1 -
-                  Math.pow(
-                    1 - p,
-                    3
-                  );
-
-
-                var v =
-                  Math.round(
-                    target *
-                      eased
-                  );
-
-
-                el.textContent =
-                  pre +
-                  (
-                    pad && v < 10
-                      ? "0" + v
-                      : String(v)
-                  ) +
-                  suf;
-
-
-                if (p < 1) {
-                  window.requestAnimationFrame(
-                    frame
-                  );
-                }
-
-              }
-
-
-              window.requestAnimationFrame(
-                frame
-              );
-
-            }
-          );
-
-        },
-        {
-          threshold: 0.4
-        }
-      );
-
-
-    els.forEach(function (el) {
-      io.observe(el);
-    });
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     FOOTER YEAR
-     ------------------------------------------------------------------ */
-
-  function initYear() {
-
-    $$("[data-year]").forEach(
-      function (el) {
-
-        el.textContent =
-          String(
-            new Date().getFullYear()
-          );
-
-      }
-    );
-
-  }
-
-
-  /* ------------------------------------------------------------------
-     BOOT
-     ------------------------------------------------------------------ */
-
-  function boot() {
-
-    initTheme();
-
-    initHeader();
-
-    initMobileMenu();
-
-    initModal();
-
-    initForms();
-
-    initFaq();
-
-    initReveal();
-
-    initParallax();
-
-    initCounters();
-
-    initYear();
-
-  }
-
-
-  if (
-    document.readyState ===
-    "loading"
-  ) {
-
-    document.addEventListener(
-      "DOMContentLoaded",
-      boot
-    );
-
-  } else {
-
-    boot();
-
-  }
-
+    window.requestAnimationFrame(frame);
+  });
+}, { threshold: 0.4 });
+
+els.forEach(function (el) { io.observe(el); });
+
+}
+
+/* ------------------------------------------------------------------
+FOOTER YEAR
+------------------------------------------------------------------ */
+
+function initYear() {
+$$("[data-year]").forEach(function (el) {
+el.textContent = String(new Date().getFullYear());
+});
+}
+
+/* ------------------------------------------------------------------
+BOOT
+------------------------------------------------------------------ */
+
+function boot() {
+initTheme();
+initHeader();
+initMobileMenu();
+initModal();
+initForms();
+initFaq();
+initReveal();
+initParallax();
+initCounters();
+initYear();
+}
+
+if (document.readyState === "loading") {
+document.addEventListener("DOMContentLoaded", boot);
+} else {
+boot();
+}
 })();
