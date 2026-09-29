@@ -1,0 +1,324 @@
+/* ================================
+   WiseMove Admin
+   ================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #08060f;
+  color: #f5f3ff;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+p {
+  color: #aaa5bb;
+}
+
+/* Main container */
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.admin-header h1 {
+  margin-bottom: 5px;
+}
+
+.admin-header p {
+  margin: 0;
+}
+
+/* Buttons */
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #4f20ff, #c331d8);
+  color: white;
+}
+
+.btn-secondary {
+  background: #17131f;
+  color: #ddd8eb;
+  border: 1px solid #302a3c;
+}
+
+.btn-danger {
+  background: #2a1117;
+  color: #ff8f9c;
+  border: 1px solid #5a202b;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* Statistics */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: #100d17;
+  border: 1px solid #282231;
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.stat-label {
+  color: #9690a5;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+input,
+select,
+textarea {
+  background: #0e0b15;
+  color: #f5f3ff;
+  border: 1px solid #302a3c;
+  border-radius: 8px;
+  padding: 11px 13px;
+  font-size: 14px;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #7b35ff;
+}
+
+.search-input {
+  flex: 1;
+}
+
+/* Table */
+.table-card {
+  background: #100d17;
+  border: 1px solid #282231;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 1000px;
+}
+
+thead {
+  background: #15111e;
+}
+
+th {
+  text-align: left;
+  padding: 15px;
+  color: #9e98ae;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+td {
+  padding: 16px 15px;
+  border-top: 1px solid #282231;
+  font-size: 14px;
+  color: #e9e5f0;
+}
+
+tbody tr:hover {
+  background: #15111e;
+}
+
+/* Status */
+.status {
+  display: inline-flex;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-new {
+  background: #241b42;
+  color: #bca5ff;
+}
+
+.status-contacted {
+  background: #172d35;
+  color: #7bdff2;
+}
+
+.status-closed {
+  background: #202326;
+  color: #aaa;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: 7px;
+}
+
+.actions button {
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+/* Empty state */
+.empty {
+  padding: 40px;
+  text-align: center;
+  color: #8d8799;
+}
+
+/* Messages */
+.message {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.message.error {
+  background: #2a1117;
+  color: #ff9da8;
+}
+
+.message.success {
+  background: #11271b;
+  color: #91e7aa;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #100d17;
+  border: 1px solid #302a3c;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-box h2 {
+  margin-top: 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 13px;
+  color: #aaa5b5;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+}
+
+.form-group textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  body {
+    padding: 20px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar {
+    flex-direction: column;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
